@@ -5,22 +5,29 @@ import { BrainIcon } from "../../assets/SvgComponents/BrainIcon";
 import "./UserHeader.scss";
 
 export const UserHeader = () => {
-  // eslint-disable-next-line no-unused-vars
   const [avatarStatus, setAvatarStatus] = useState(false);
   // eslint-disable-next-line no-unused-vars
   const [notification, setNotification] = useState(false);
 
   return (
     <div className="userheader">
-      <div className="pseudo">
+      <div className="userheader_pseudo">
         <LogoLong />
         <span>Yoh</span>
       </div>
-      <div className="avatar-container">
-        <div className={avatarStatus ? "avatar on" : "avatar off"} />
+      <div className="userheader_avatarContainer">
+        <div
+          className={
+            avatarStatus
+              ? "userheader_avatar userheader_avatar_on"
+              : "userheader_avatar userheader_avatar_off"
+          }
+        />
       </div>
-      <div className="shortcuts">
-        <BrainIcon />
+      <div className="userheader_shortcuts">
+        <div className="userheader_icon">
+          <BrainIcon onClick={() => setAvatarStatus(!avatarStatus)} />
+        </div>
       </div>
     </div>
   );
