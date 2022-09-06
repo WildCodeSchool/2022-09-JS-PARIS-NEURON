@@ -1,0 +1,38 @@
+.userheader {
+  width: 90%;
+  height: 18%;
+  background-color: grey;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+
+  & > * {
+    width: 30%;
+    height: 90%;
+  }
+
+  & .pseudo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  & .avatar {
+    width: 33%;
+    height: 85%;
+    border-radius: 50%;
+    background-image: url("../../assets/avatarDefault.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+  }
+
+  & .on {
+    border: solid 0.3rem green;
+  }
+
+  & .off {
+    border: solid 0.3rem red;
+  }
+}
