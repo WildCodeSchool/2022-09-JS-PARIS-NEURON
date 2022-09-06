@@ -1,17 +1,17 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { UserHeader } from "./components";
+import Home from "./pages/Home";
 import "./App.scss";
 
-function App() {
+const App = () => {
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/test" element={<UserHeader />} />
+          <Route path="/" element={<Home />} />
         </Routes>
       </BrowserRouter>
     </div>
   );
-}
+};
 
 export default App;

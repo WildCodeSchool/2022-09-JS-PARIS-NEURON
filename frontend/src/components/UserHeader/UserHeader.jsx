@@ -1,24 +1,27 @@
-// eslint-disable-next-line import/no-unresolved
-// import { LogoSmall } from "@assets/SvgComponents/LogoSmall";
-// import React, { useState } from "react";
-// import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { LogoLong } from "../../assets/SvgComponents/LogoLong";
+import { BrainIcon } from "../../assets/SvgComponents/BrainIcon";
+
 import "./UserHeader.scss";
 
-// eslint-disable-next-line import/prefer-default-export
-export function UserHeader() {
-  // const [avatarStatus, setAvatarStatus] = useState(false);
-  // const [notification, setNotification] = useState(false);
-  // const [newMailInBox, setNewMailInBox] = useState(false);
+export const UserHeader = () => {
+  // eslint-disable-next-line no-unused-vars
+  const [avatarStatus, setAvatarStatus] = useState(false);
+  // eslint-disable-next-line no-unused-vars
+  const [notification, setNotification] = useState(false);
 
   return (
     <div className="userheader">
-      {/* <div className="pseudo">
-        <LogoSmall />
+      <div className="pseudo">
+        <LogoLong />
         <span>Yoh</span>
       </div>
-      <div className={avatarStatus ? "avatar on" : "avatar off"} />
-      <div className="shortcuts" />
-      <Link to="/">home</Link> */}
+      <div className="avatar-container">
+        <div className={avatarStatus ? "avatar on" : "avatar off"} />
+      </div>
+      <div className="shortcuts">
+        <BrainIcon />
+      </div>
     </div>
   );
-}
+};

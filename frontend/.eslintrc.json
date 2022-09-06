@@ -25,9 +25,12 @@
         "message": "You can only call the error() and warn() functions from the console object"
       }
     ],
+    "import/prefer-default-export": "off",
+    "react/jsx-props-no-spreading": "off",
     "react/react-in-jsx-scope": "off",
     "react/jsx-one-expression-per-line": "off",
     "react/no-unescaped-entities": "off",
+    "react/function-component-definition": "off",
     "jsx-a11y/label-has-associated-control": [
       "error",
       {
@@ -39,10 +42,10 @@
     "import/resolver": {
       "eslint-import-resolver-custom-alias": {
         "alias": {
-          "@assets": "./src/assets",
-          "@components": "./src/components",
-          "@pages": "./src/pages",
-          "@services": "./src/services"
+          "@assets/*": "./src/assets/*",
+          "@components/*": "./src/components/*",
+          "@pages/*": "./src/pages/*",
+          "@services/*": "./src/services/*"
         },
         "extensions": [".js", ".jsx"]
       }
