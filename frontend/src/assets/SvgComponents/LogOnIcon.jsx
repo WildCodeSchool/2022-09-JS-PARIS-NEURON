@@ -1,6 +1,6 @@
-import React from "react"
+import React from "react";
 
-export const LogOnIcon = props => (
+export const LogOnIcon = (props) => (
   <svg x="0px" y="0px" viewBox="0 0 169.19 184.69" {...props}>
     <style>{".st0{fill:#fff}.st1{fill:#e6007e}"}</style>
     <g id="Calque_1">
@@ -40,6 +40,4 @@ export const LogOnIcon = props => (
       />
     </g>
   </svg>
-)
-
-
+);

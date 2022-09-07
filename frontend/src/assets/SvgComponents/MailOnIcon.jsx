@@ -1,6 +1,6 @@
-import React from "react"
+import React from "react";
 
-export const MailOnIcon = props => (
+export const MailOnIcon = (props) => (
   <svg
     id="Calque_1"
     x="0px"
@@ -21,6 +21,4 @@ export const MailOnIcon = props => (
     />
     <circle cx={185.23} cy={42.03} r={42.03} fill="#e30613" />
   </svg>
-)
-
-
+);
