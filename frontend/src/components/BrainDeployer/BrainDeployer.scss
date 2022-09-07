@@ -15,7 +15,7 @@
 
     & > .first {
       visibility: visible;
-      transform: translate(-10px, -40px) rotate(1turn);
+      transform: translate(-10px, -45px) rotate(1turn);
       transition: transform 200ms ease-in-out;
     }
 
@@ -27,7 +27,7 @@
 
     & > .third {
       visibility: visible;
-      transform: translate(-10px, 40px) rotate(1turn);
+      transform: translate(-10px, 45px) rotate(1turn);
       transition: transform 400ms ease-in-out;
     }
   }
