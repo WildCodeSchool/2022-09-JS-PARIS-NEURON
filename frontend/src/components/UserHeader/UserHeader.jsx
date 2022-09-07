@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { LogoLong } from "../../assets/SvgComponents/LogoLong";
+import { Avatar } from "..";
 import { BrainIcon } from "../../assets/SvgComponents/BrainIcon";
 
 import "./UserHeader.scss";
@@ -16,13 +17,7 @@ export const UserHeader = () => {
         <span>Yoh</span>
       </div>
       <div className="userheader_avatarContainer">
-        <div
-          className={
-            avatarStatus
-              ? "userheader_avatar userheader_avatar_on"
-              : "userheader_avatar userheader_avatar_off"
-          }
-        />
+        <Avatar avatarStatus={avatarStatus} />
       </div>
       <div className="userheader_shortcuts">
         <div className="userheader_icon">
