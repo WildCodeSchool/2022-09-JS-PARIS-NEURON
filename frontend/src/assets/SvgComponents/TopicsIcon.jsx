@@ -1,7 +1,14 @@
 import React from "react";
 
 export const TopicsIcon = (props) => (
-  <svg x="0px" y="0px" viewBox="0 0 93.27 109.09" {...props}>
+  <svg
+    x="0px"
+    y="0px"
+    viewBox="0 0 93.27 109.09"
+    height={50}
+    width={50}
+    {...props}
+  >
     <style>{".st1{fill:#fff}"}</style>
     <g id="Calque_1">
       <g id="topic-icon-4.psd">

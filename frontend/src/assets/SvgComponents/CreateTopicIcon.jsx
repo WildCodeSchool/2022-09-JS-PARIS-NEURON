@@ -1,7 +1,14 @@
 import React from "react";
 
-export const CreateTopics = (props) => (
-  <svg x="0px" y="0px" viewBox="0 0 109.71 130.13" {...props}>
+export const CreateTopicIcon = (props) => (
+  <svg
+    x="0px"
+    y="0px"
+    viewBox="0 0 109.71 130.13"
+    height={50}
+    width={50}
+    {...props}
+  >
     <style>{".st0{fill:#aea59b}.st1{fill:#fff}"}</style>
     <g id="Calque_1">
       <g id="topic-icon-4.psd">

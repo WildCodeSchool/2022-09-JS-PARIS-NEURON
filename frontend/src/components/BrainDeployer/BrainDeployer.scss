@@ -1,16 +1,24 @@
 @import "../../colors.scss";
 
 .braindeployer {
-  height: 150px;
-  width: 110px;
-  border-radius: 1rem;
+  height: 100px;
+  width: 100px;
+  border-radius: 10rem 0 0 0;
   display: flex;
   justify-content: end;
-  align-items: center;
+  align-items: end;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: 10px;
 
   &:hover {
-    background-color: $warm-grey-5;
-    transition: background-color 400ms linear;
+    background-color: $dark-purple-5;
+    height: 170px;
+    width: 170px;
+    box-shadow: 0 0 10px $carbon;
+    transition: background-color 200ms linear, height 200ms linear,
+      width 200ms linear;
 
     & > svg {
       transform: scale(0.4) rotate(1turn);
@@ -19,19 +27,19 @@
 
     & > .first {
       visibility: visible;
-      transform: translate(-10px, -45px) rotate(1turn);
+      transform: translate(-10px, -85px) rotate(1turn);
       transition: transform 200ms ease-in-out;
     }
 
     & > .second {
       visibility: visible;
-      transform: translate(-60px, 0) rotate(1turn);
+      transform: translate(-55px, -60px) rotate(1turn);
       transition: transform 300ms ease-in-out;
     }
 
     & > .third {
       visibility: visible;
-      transform: translate(-10px, 45px) rotate(1turn);
+      transform: translate(-80px, -10px) rotate(1turn);
       transition: transform 400ms ease-in-out;
     }
   }

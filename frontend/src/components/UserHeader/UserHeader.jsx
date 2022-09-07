@@ -1,27 +1,25 @@
-import React, { useState } from "react";
-import { LogoLong } from "../../assets/SvgComponents/LogoLong";
-import { Avatar, BrainDeployer } from "..";
+import React from "react";
+import { MailOnIcon, NotifOnIcon } from "../../assets/SvgComponents";
+import { Avatar } from "..";
+import { useAvatarContext } from "../../context";
 
 import "./UserHeader.scss";
 
 export const UserHeader = () => {
-  const [avatarStatus, setAvatarStatus] = useState(false);
-  // eslint-disable-next-line no-unused-vars
-  const [notification, setNotification] = useState(false);
+  const { avatarStatus } = useAvatarContext();
 
   return (
     <div className="userheader">
       <div className="userheader_pseudo">
-        <LogoLong />
+        {/* <LogoLong /> */}
         <span>Yoh</span>
       </div>
       <div className="userheader_avatarContainer">
         <Avatar avatarStatus={avatarStatus} />
       </div>
       <div className="userheader_shortcuts">
-        <div className="userheader_icon">
-          <BrainDeployer onClick={() => setAvatarStatus(!avatarStatus)} />
-        </div>
+        <NotifOnIcon />
+        <MailOnIcon />
       </div>
     </div>
   );

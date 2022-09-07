@@ -19,7 +19,7 @@
   &_pseudo {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: end;
   }
 
   &_avatarContainer {
@@ -33,7 +33,7 @@
   &_shortcuts {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: flex-end;
   }
 }
