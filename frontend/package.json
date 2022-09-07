@@ -16,7 +16,8 @@
     "react-router": "^6.3.0",
     "react-router-dom": "^6.3.0",
     "sass": "^1.54.8",
-    "scss": "^0.2.4"
+    "scss": "^0.2.4",
+    "template-fullstack": "file:.."
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^1.0.7",
