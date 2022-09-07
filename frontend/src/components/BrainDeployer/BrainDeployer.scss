@@ -1,0 +1,43 @@
+@import "../../colors.scss";
+
+.braindeployer {
+  height: 100px;
+  width: 100px;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+
+  &:hover {
+    & > svg {
+      transform: scale(1.2) rotate(1turn);
+      transition: transform 300ms ease-in-out;
+    }
+
+    & > .first {
+      visibility: visible;
+      transform: translate(-10px, -45px) rotate(1turn);
+      transition: transform 200ms ease-in-out;
+    }
+
+    & > .second {
+      visibility: visible;
+      transform: translate(-60px, 0) rotate(1turn);
+      transition: transform 300ms ease-in-out;
+    }
+
+    & > .third {
+      visibility: visible;
+      transform: translate(-10px, 45px) rotate(1turn);
+      transition: transform 400ms ease-in-out;
+    }
+  }
+
+  &_circle {
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    // border-radius: 50%;
+    background-color: black;
+    visibility: hidden;
+  }
+}
