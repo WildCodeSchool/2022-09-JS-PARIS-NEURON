@@ -29,19 +29,19 @@
     & > .first {
       visibility: visible;
       transform: translate(-10px, -85px) rotate(1turn);
-      transition: transform 200ms ease-in-out;
+      transition: transform 300ms ease-in-out;
     }
 
     & > .second {
       visibility: visible;
       transform: translate(-55px, -60px) rotate(1turn);
-      transition: transform 300ms ease-in-out;
+      transition: transform 400ms ease-in-out;
     }
 
     & > .third {
       visibility: visible;
       transform: translate(-80px, -10px) rotate(1turn);
-      transition: transform 400ms ease-in-out;
+      transition: transform 500ms ease-in-out;
     }
   }
 

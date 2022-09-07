@@ -9,7 +9,7 @@ export const CreateTopicIcon = (props) => (
     width={50}
     {...props}
   >
-    <style>{".st0{fill:#aea59b}.st1{fill:#fff}"}</style>
+    <style>{".st3{fill:#aea59b}.st2{fill:#fff}"}</style>
     <g id="Calque_1">
       <g id="topic-icon-4.psd">
         <defs>
@@ -34,18 +34,18 @@ export const CreateTopicIcon = (props) => (
       </g>
     </g>
     <g id="Calque_2">
-      <path className="st0" d="M0.25 21.29H93.02V129.88H0.25z" />
+      <path className="st3" d="M0.25 21.29H93.02V129.88H0.25z" />
       <path d="M92.77 21.54v108.09H.5V21.54h92.27m.5-.5H0v109.09h93.27V21.04z" />
-      <circle className="st1" cx={24.06} cy={45.1} r={8.07} />
-      <circle className="st1" cx={24.06} cy={65} r={8.07} />
-      <circle className="st1" cx={24.06} cy={85.79} r={8.07} />
-      <circle className="st1" cx={24.06} cy={106.58} r={8.07} />
-      <path className="st1" d="M36.25 37.02H77.45V53.17H36.25z" />
-      <path className="st1" d="M36.25 56.93H77.45V73.08H36.25z" />
-      <path className="st1" d="M36.25 77.72H77.45V93.87H36.25z" />
-      <path className="st1" d="M36.25 98.51H77.45V114.66H36.25z" />
+      <circle className="st2" cx={24.06} cy={45.1} r={8.07} />
+      <circle className="st2" cx={24.06} cy={65} r={8.07} />
+      <circle className="st2" cx={24.06} cy={85.79} r={8.07} />
+      <circle className="st2" cx={24.06} cy={106.58} r={8.07} />
+      <path className="st2" d="M36.25 37.02H77.45V53.17H36.25z" />
+      <path className="st2" d="M36.25 56.93H77.45V73.08H36.25z" />
+      <path className="st2" d="M36.25 77.72H77.45V93.87H36.25z" />
+      <path className="st2" d="M36.25 98.51H77.45V114.66H36.25z" />
       <path
-        className="st0"
+        className="st3"
         d="M91.04 37.08c-10.15 0-18.41-8.26-18.41-18.41S80.89.25 91.04.25s18.41 8.26 18.41 18.41-8.25 18.42-18.41 18.42z"
       />
       <path d="M91.04.5c10.02 0 18.16 8.15 18.16 18.16s-8.15 18.16-18.16 18.16-18.16-8.15-18.16-18.16S81.03.5 91.04.5m0-.5c-10.3 0-18.66 8.36-18.66 18.66s8.36 18.66 18.66 18.66 18.66-8.36 18.66-18.66S101.35 0 91.04 0z" />

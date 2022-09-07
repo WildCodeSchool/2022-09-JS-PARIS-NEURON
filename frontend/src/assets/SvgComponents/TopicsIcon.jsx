@@ -9,7 +9,7 @@ export const TopicsIcon = (props) => (
     width={50}
     {...props}
   >
-    <style>{".st1{fill:#fff}"}</style>
+    <style>{".st2{fill:#fff}"}</style>
     <g id="Calque_1">
       <g id="topic-icon-4.psd">
         <defs>
@@ -35,14 +35,14 @@ export const TopicsIcon = (props) => (
     </g>
     <g id="Calque_2">
       <path fill="#aea59b" d="M0 0H93.27V109.09H0z" />
-      <circle className="st1" cx={24.06} cy={24.06} r={8.07} />
-      <circle className="st1" cx={24.06} cy={43.96} r={8.07} />
-      <circle className="st1" cx={24.06} cy={64.75} r={8.07} />
-      <circle className="st1" cx={24.06} cy={85.54} r={8.07} />
-      <path className="st1" d="M36.25 15.98H77.45V32.129999999999995H36.25z" />
-      <path className="st1" d="M36.25 35.89H77.45V52.04H36.25z" />
-      <path className="st1" d="M36.25 56.68H77.45V72.83H36.25z" />
-      <path className="st1" d="M36.25 77.47H77.45V93.62H36.25z" />
+      <circle className="st2" cx={24.06} cy={24.06} r={8.07} />
+      <circle className="st2" cx={24.06} cy={43.96} r={8.07} />
+      <circle className="st2" cx={24.06} cy={64.75} r={8.07} />
+      <circle className="st2" cx={24.06} cy={85.54} r={8.07} />
+      <path className="st2" d="M36.25 15.98H77.45V32.129999999999995H36.25z" />
+      <path className="st2" d="M36.25 35.89H77.45V52.04H36.25z" />
+      <path className="st2" d="M36.25 56.68H77.45V72.83H36.25z" />
+      <path className="st2" d="M36.25 77.47H77.45V93.62H36.25z" />
     </g>
   </svg>
 );
