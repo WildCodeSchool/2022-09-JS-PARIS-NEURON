@@ -17,6 +17,7 @@
   },
   "plugins": ["react", "import"],
   "rules": {
+    "jsx-a11y/control-has-associated-label": "off",
     "import/no-cycle": "off",
     "react/prop-types": "off",
     "no-console": "off",
