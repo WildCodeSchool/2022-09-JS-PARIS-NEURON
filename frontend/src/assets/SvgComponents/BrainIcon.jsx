@@ -7,8 +7,8 @@ export const BrainIcon = (props) => (
     y="0px"
     viewBox="0 0 286.6 250.57"
     xmlSpace="preserve"
-    width={30}
-    height={30}
+    width={50}
+    height={50}
     {...props}
   >
     <style>{".st1{fill:#951b81}"}</style>

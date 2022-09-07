@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { LogoLong } from "../../assets/SvgComponents/LogoLong";
-import { Avatar } from "..";
-import { BrainIcon } from "../../assets/SvgComponents/BrainIcon";
+import { Avatar, BrainDeployer } from "..";
 
 import "./UserHeader.scss";
 
@@ -21,7 +20,7 @@ export const UserHeader = () => {
       </div>
       <div className="userheader_shortcuts">
         <div className="userheader_icon">
-          <BrainIcon onClick={() => setAvatarStatus(!avatarStatus)} />
+          <BrainDeployer onClick={() => setAvatarStatus(!avatarStatus)} />
         </div>
       </div>
     </div>

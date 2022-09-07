@@ -1,29 +1,5 @@
 @import "../../colors.scss";
 
-@keyframes changetogreen {
-  from {
-    border: solid 0.1rem $warm-grey-2;
-    box-shadow: 0 0 1rem $warm-grey-2;
-  }
-
-  to {
-    border: solid 0.1rem $green-apple;
-    box-shadow: 0 0 1rem $green-apple;
-  }
-}
-
-@keyframes changetoorange {
-  from {
-    border: solid 0.1rem $warm-grey-2;
-    box-shadow: 0 0 1rem $warm-grey-2;
-  }
-
-  to {
-    border: solid 0.1rem $orange;
-    box-shadow: 0 0 1rem $orange;
-  }
-}
-
 .avatar {
   height: 160px;
   width: 160px;
@@ -34,6 +10,30 @@
   animation-duration: 1s;
   animation-iteration-count: infinite;
   animation-direction: alternate;
+
+  @keyframes changetogreen {
+    from {
+      border: solid 0.1rem $warm-grey-2;
+      box-shadow: 0 0 1rem $warm-grey-2;
+    }
+
+    to {
+      border: solid 0.1rem $green-apple;
+      box-shadow: 0 0 1rem $green-apple;
+    }
+  }
+
+  @keyframes changetoorange {
+    from {
+      border: solid 0.1rem $warm-grey-2;
+      box-shadow: 0 0 1rem $warm-grey-2;
+    }
+
+    to {
+      border: solid 0.1rem $orange;
+      box-shadow: 0 0 1rem $orange;
+    }
+  }
 
   &.on {
     animation-name: changetogreen;

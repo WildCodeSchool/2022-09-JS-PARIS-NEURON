@@ -35,15 +35,5 @@
     flex-direction: column;
     justify-content: end;
     align-items: flex-end;
-
-    > * {
-      border-radius: 50%;
-      margin-right: 0.5rem;
-
-      &:hover {
-        transform: scale(1.4) rotate(1turn);
-        transition: transform 300ms ease-in-out;
-      }
-    }
   }
 }
