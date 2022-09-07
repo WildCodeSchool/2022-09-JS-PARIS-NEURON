@@ -7,6 +7,8 @@ export const MailOnIcon = (props) => (
     y="0px"
     viewBox="0 0 228.08 186.98"
     xmlSpace="preserve"
+    height={40}
+    width={40}
     {...props}
   >
     <style>{".st0{fill:#fff}"}</style>

@@ -1,7 +1,14 @@
 import React from "react";
 
 export const LogOnIcon = (props) => (
-  <svg x="0px" y="0px" viewBox="0 0 169.19 184.69" {...props}>
+  <svg
+    x="0px"
+    y="0px"
+    viewBox="0 0 169.19 184.69"
+    height={40}
+    width={40}
+    {...props}
+  >
     <style>{".st0{fill:#fff}.st1{fill:#e6007e}"}</style>
     <g id="Calque_1">
       <path
