@@ -12,6 +12,7 @@
   bottom: 0;
   padding: 10px;
 
+  &.touched,
   &:hover {
     background-color: $dark-purple-5;
     height: 170px;
