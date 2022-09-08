@@ -44,7 +44,7 @@ export const CardList = () => {
             <img
               width="100%"
               src="https://www.abyssproject.net/wp-content/uploads/2014/06/panda-4-google.jpg"
-              alt=""
+              alt="bla"
             />
           </Carousel.Item>
         ))}
