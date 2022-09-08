@@ -15,8 +15,9 @@ export const BrainDeployer = () => {
   const [touched, setTouched] = useState(false);
 
   return (
-    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/interactive-supports-focus
     <div
+      role="button"
       className={!touched ? "braindeployer" : "braindeployer touched"}
       onClick={() => setTouched(!touched)}
     >
