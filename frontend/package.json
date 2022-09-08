@@ -10,8 +10,8 @@
     "fix": "prettier --write . && eslint --fix --ext .jsx ."
   },
   "resolutions": {
-    "**/react": "17.0.2",
-    "**/react-dom": "17.0.2"
+    "**/react": "18.1.0",
+    "**/react-dom": "18.1.0"
   },
   "dependencies": {
     "@fusioncharts/powercharts": "^3.19.0",
