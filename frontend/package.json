@@ -9,6 +9,10 @@
     "lint": "echo '----- Checking Frontend...' && prettier --debug-check . && eslint --ext .jsx . && echo '----- Done!'",
     "fix": "prettier --write . && eslint --fix --ext .jsx ."
   },
+  "resolutions": {
+    "**/react": "17.0.2",
+    "**/react-dom": "17.0.2"
+  },
   "dependencies": {
     "@fusioncharts/powercharts": "^3.19.0",
     "fusioncharts": "^3.19.0",
