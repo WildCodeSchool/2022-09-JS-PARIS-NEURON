@@ -10,9 +10,12 @@
     "fix": "prettier --write . && eslint --fix --ext .jsx ."
   },
   "dependencies": {
+    "@fusioncharts/powercharts": "^3.19.0",
+    "fusioncharts": "^3.19.0",
     "prop-types": "^15.8.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
+    "react-fusioncharts": "^4.0.0",
     "react-router": "^6.3.0",
     "react-router-dom": "^6.3.0",
     "sass": "^1.54.8",
