@@ -19,7 +19,7 @@
   &_pseudo {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: end;
   }
 
   &_avatarContainer {
@@ -30,67 +30,10 @@
     align-items: center;
   }
 
-  &_avatar {
-    height: 160px;
-    width: 160px;
-    border-radius: 50%;
-    background-image: url("../../assets/avatarDefaultv2.svg");
-    background-repeat: no-repeat;
-    background-position: center;
-
-    @keyframes changetogreen {
-      from {
-        border: solid 0.1rem $warm-grey-2;
-        box-shadow: 0 0 1rem $warm-grey-2;
-      }
-
-      to {
-        border: solid 0.1rem $green-apple;
-        box-shadow: 0 0 1rem $green-apple;
-      }
-    }
-
-    &_on {
-      animation-duration: 1s;
-      animation-name: changetogreen;
-      animation-iteration-count: infinite;
-      animation-direction: alternate;
-    }
-
-    @keyframes changetoorange {
-      from {
-        border: solid 0.1rem $warm-grey-2;
-        box-shadow: 0 0 1rem $warm-grey-2;
-      }
-
-      to {
-        border: solid 0.1rem $orange;
-        box-shadow: 0 0 1rem $orange;
-      }
-    }
-
-    &_off {
-      animation-duration: 1s;
-      animation-name: changetoorange;
-      animation-iteration-count: infinite;
-      animation-direction: alternate;
-    }
-  }
-
   &_shortcuts {
     display: flex;
     flex-direction: column;
-    justify-content: end;
+    justify-content: space-between;
     align-items: flex-end;
-
-    > * {
-      border-radius: 50%;
-      margin-right: 0.5rem;
-
-      &:hover {
-        transform: scale(1.4) rotate(1turn);
-        transition: transform 300ms ease-in-out;
-      }
-    }
   }
 }

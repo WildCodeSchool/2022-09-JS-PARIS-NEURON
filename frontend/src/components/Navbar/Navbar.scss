@@ -1,0 +1,15 @@
+@import "../../colors.scss";
+
+.navbar {
+  position: fixed;
+  bottom: 1%;
+  height: 10%;
+  width: 98%;
+  background-color: $warm-grey-2;
+  border-radius: 0.3rem;
+  box-shadow: 0 0 10px $carbon;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 80px 5px 5px;
+}

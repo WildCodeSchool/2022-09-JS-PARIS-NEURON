@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { UserHeader } from "../components";
+import { UserHeader, Navbar } from "../components";
 import { MobilChart } from "../components/Charts/MobilChart";
 import { DesktopChart } from "../components/Charts/DesktopChart";
 import "./Home.scss";
@@ -14,6 +14,7 @@ export default function Home() {
     <div className="Home">
       <UserHeader />
       {windowWidth < 376 ? <MobilChart /> : <DesktopChart />}
+      <Navbar />
     </div>
   );
 }
