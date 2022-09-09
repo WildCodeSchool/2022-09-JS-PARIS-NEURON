@@ -2,8 +2,7 @@
 import React from "react";
 import { Avatar } from "@components/";
 import { MailOnIcon, NotifOnIcon } from "@assets";
-import { useAvatarContext } from "@context";
-
+import { useAvatarContext } from "@contexts";
 import "./UserHeader.scss";
 
 export const UserHeader = () => {

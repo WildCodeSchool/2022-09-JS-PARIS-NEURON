@@ -1,5 +1,5 @@
 import React from "react";
-import { useAvatarContext } from "@context";
+import { useAvatarContext } from "@contexts";
 
 import "./Avatar.scss";
 

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { BrainIcon, LogOnIcon, MailOnIcon, NotifOnIcon } from "@assets";
-import { useAvatarContext } from "@context";
-
+import { useAvatarContext } from "@contexts";
 import "./BrainDeployer.scss";
 
 export const BrainDeployer = () => {

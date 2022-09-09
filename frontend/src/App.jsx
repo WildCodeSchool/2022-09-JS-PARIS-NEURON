@@ -1,8 +1,8 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { AvatarContext } from "@contexts/";
-import Home from "@pages/";
+import { AvatarContext } from "@contexts";
+import Home from "./pages/Home";
 import "./App.scss";
 
 const App = () => {
