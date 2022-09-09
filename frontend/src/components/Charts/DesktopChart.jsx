@@ -58,6 +58,8 @@ export const DesktopChart = () => {
         yAxisName: "NB. of topics (MMbbl)", // Set the y-axis name
         numberSuffix: "NB",
         theme: "candy", // Set the theme for your chart
+        bgColor: "#e0ded8",
+        showBorder: "0",
       },
       // Chart Data - from step 2
       data: chartData,
