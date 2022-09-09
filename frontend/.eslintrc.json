@@ -17,6 +17,7 @@
   },
   "plugins": ["react", "import"],
   "rules": {
+    "import/no-unresolved": "off",
     "jsx-a11y/control-has-associated-label": "off",
     "import/no-cycle": "off",
     "react/prop-types": "off",
@@ -45,10 +46,11 @@
     "import/resolver": {
       "eslint-import-resolver-custom-alias": {
         "alias": {
-          "@assets/*": "./src/assets/*",
-          "@components/*": "./src/components/*",
-          "@pages/*": "./src/pages/*",
-          "@services/*": "./src/services/*"
+          "@assets": "./src/assets",
+          "@components": "./src/components",
+          "@pages": "./src/pages",
+          "@services": "./src/services",
+          "@context": "./src/context"
         },
         "extensions": [".js", ".jsx"]
       }

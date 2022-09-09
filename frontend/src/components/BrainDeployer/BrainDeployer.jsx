@@ -1,11 +1,6 @@
 import React, { useState } from "react";
-import {
-  BrainIcon,
-  LogOnIcon,
-  MailOnIcon,
-  NotifOnIcon,
-} from "../../assets/SvgComponents";
-import { useAvatarContext } from "../../context";
+import { BrainIcon, LogOnIcon, MailOnIcon, NotifOnIcon } from "@assets";
+import { useAvatarContext } from "@context";
 
 import "./BrainDeployer.scss";
 

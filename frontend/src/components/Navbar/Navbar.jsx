@@ -1,11 +1,11 @@
 import React from "react";
-import { BrainDeployer } from "..";
+import { BrainDeployer } from "@components/";
 import {
   CreateTopicIcon,
   LogoLong,
   TopicsIcon,
   UserProfileIcon,
-} from "../../assets/SvgComponents";
+} from "@assets";
 
 import "./Navbar.scss";
 

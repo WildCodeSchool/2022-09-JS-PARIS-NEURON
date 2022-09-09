@@ -5,7 +5,7 @@ import {
   MobilChart,
   DesktopChart,
   CardList,
-} from "../components";
+} from "@components/";
 import "./Home.scss";
 
 export default function Home() {

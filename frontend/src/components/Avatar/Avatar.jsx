@@ -1,5 +1,5 @@
 import React from "react";
-import { useAvatarContext } from "../../context";
+import { useAvatarContext } from "@context";
 
 import "./Avatar.scss";
 
@@ -14,7 +14,7 @@ export const Avatar = () => {
     >
       <img
         className="avatar-content"
-        src="\src\assets\avatarDefaultv2.svg"
+        src="\src\assets\images\avatarDefaultv2.svg"
         alt="Avatar"
       />
     </div>

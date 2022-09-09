@@ -1,9 +1,9 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AvatarContext } from "./context";
 import Home from "./pages/Home";
 import "./App.scss";
-import { AvatarContext } from "./context";
 
 const App = () => {
   const [avatarStatus, setAvatarStatus] = useState(false);

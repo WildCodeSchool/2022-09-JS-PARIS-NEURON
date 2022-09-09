@@ -1,7 +1,8 @@
+/* eslint-disable import/no-unresolved */
 import React from "react";
-import { MailOnIcon, NotifOnIcon } from "../../assets/SvgComponents";
-import { Avatar } from "..";
-import { useAvatarContext } from "../../context";
+import { Avatar } from "@components/";
+import { MailOnIcon, NotifOnIcon } from "@assets";
+import { useAvatarContext } from "@context";
 
 import "./UserHeader.scss";
 
