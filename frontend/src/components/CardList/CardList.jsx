@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Carousel from "react-grid-carousel";
-import { NeuronCard } from "../NeuronCard/NeuronCard";
+import { NeuronCard } from "..";
 import "./CardList.scss";
 
 export const CardList = () => {

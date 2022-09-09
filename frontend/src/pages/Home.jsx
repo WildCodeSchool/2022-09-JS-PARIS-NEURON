@@ -1,8 +1,11 @@
 import { useState } from "react";
-import { UserHeader, Navbar } from "../components";
-import { MobilChart } from "../components/Charts/MobilChart";
-import { DesktopChart } from "../components/Charts/DesktopChart";
-import { CardList } from "../components/CardList/CardList";
+import {
+  UserHeader,
+  Navbar,
+  MobilChart,
+  DesktopChart,
+  CardList,
+} from "../components";
 import "./Home.scss";
 
 export default function Home() {
