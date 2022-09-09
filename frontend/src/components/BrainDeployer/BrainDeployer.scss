@@ -1,8 +1,8 @@
 @import "../../colors.scss";
 
 .braindeployer {
-  height: 100px;
-  width: 100px;
+  height: 80px;
+  width: 80px;
   border-radius: 10rem 0 0 0;
   display: flex;
   justify-content: end;
@@ -11,6 +11,8 @@
   right: 0;
   bottom: 0;
   padding: 10px;
+  z-index: 20;
+  cursor: pointer;
 
   &.touched,
   &:hover {

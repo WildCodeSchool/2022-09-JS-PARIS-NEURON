@@ -11,6 +11,14 @@ export const Avatar = () => {
     <div
       className={avatarStatus ? "avatar on" : "avatar off"}
       onClick={() => setAvatarStatus(!avatarStatus)}
-    />
+    >
+      <img
+        className="avatar-content"
+        src="\src\assets\avatarDefaultv2.svg"
+        alt="Avatar"
+        width="100%"
+        height="100%"
+      />
+    </div>
   );
 };
