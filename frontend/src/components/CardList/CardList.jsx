@@ -38,7 +38,7 @@ export const CardList = () => {
 
   return (
     <div className="carousel">
-      <Carousel responsiveLayout={neuronList} mobileBreakpoint={0}>
+      <Carousel responsiveLayout={neuronList} mobileBreakpoint={0} showDots>
         {neurons.map((neuron) => (
           <Carousel.Item key={neuron}>
             <div className="item">

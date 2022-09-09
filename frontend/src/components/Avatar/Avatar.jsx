@@ -16,8 +16,6 @@ export const Avatar = () => {
         className="avatar-content"
         src="\src\assets\avatarDefaultv2.svg"
         alt="Avatar"
-        width="100%"
-        height="100%"
       />
     </div>
   );
