@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Carousel from "react-grid-carousel";
-
+import { NeuronCard } from "../NeuronCard/NeuronCard";
 import "./CardList.scss";
 
 export const CardList = () => {
@@ -41,11 +41,9 @@ export const CardList = () => {
       <Carousel responsiveLayout={neuronList} mobileBreakpoint={0}>
         {neurons.map((neuron) => (
           <Carousel.Item key={neuron}>
-            <img
-              width="100%"
-              src="https://www.abyssproject.net/wp-content/uploads/2014/06/panda-4-google.jpg"
-              alt="bla"
-            />
+            <div className="item">
+              <NeuronCard />
+            </div>
           </Carousel.Item>
         ))}
       </Carousel>

@@ -1,7 +1,7 @@
 @import "../../colors.scss";
 
 .userheader {
-  width: 100%;
+  width: 370px;
   height: 18%;
   background-color: $warm-grey-2;
   display: flex;
@@ -12,7 +12,6 @@
   border-radius: 0.3rem;
   box-shadow: 0 0 10px $carbon;
   > * {
-    width: 30%;
     height: 90%;
   }
 
@@ -23,7 +22,6 @@
   }
 
   &_avatarContainer {
-    width: 53%;
     height: 150%;
     display: flex;
     justify-content: center;
@@ -35,5 +33,11 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-end;
+  }
+}
+
+@media (min-width: 768px) {
+  .userheader {
+    align-self: flex-end;
   }
 }

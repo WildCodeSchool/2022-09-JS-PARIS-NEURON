@@ -1,0 +1,10 @@
+@import "../../colors.scss";
+
+.NeuronCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  height: 100%;
+  width: 100%;
+}
