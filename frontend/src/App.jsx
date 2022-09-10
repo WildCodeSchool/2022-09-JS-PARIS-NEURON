@@ -2,7 +2,8 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AvatarContext } from "@contexts";
-import Home from "./pages/Home";
+import Home from "@pages/Home/Home";
+import Topics from "@pages/Topics/Topics";
 import "./App.scss";
 
 const App = () => {
@@ -13,6 +14,7 @@ const App = () => {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/topics" element={<Topics />} />
           </Routes>
         </BrowserRouter>
       </AvatarContext.Provider>

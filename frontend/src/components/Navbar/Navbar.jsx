@@ -8,13 +8,18 @@ import {
 } from "@assets";
 
 import "./Navbar.scss";
+import { Link } from "react-router-dom";
 
 export const Navbar = () => {
   return (
     <div className="navbar">
-      <LogoLong />
+      <Link to="/">
+        <LogoLong />
+      </Link>
       <UserProfileIcon />
-      <TopicsIcon />
+      <Link to="/topics">
+        <TopicsIcon />
+      </Link>
       <CreateTopicIcon />
       <BrainDeployer />
     </div>

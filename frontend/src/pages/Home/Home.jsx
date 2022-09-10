@@ -8,7 +8,7 @@ import {
 } from "@components/";
 import "./Home.scss";
 
-export default function Home() {
+const Home = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   window.addEventListener("resize", () => {
     setWindowWidth(window.innerWidth);
@@ -22,4 +22,6 @@ export default function Home() {
       <Navbar />
     </div>
   );
-}
+};
+
+export default Home;
