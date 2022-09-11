@@ -8,12 +8,17 @@ export const BrainDeployer = () => {
 
   const [touched, setTouched] = useState(false);
 
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  window.addEventListener("resize", () => {
+    setWindowWidth(window.innerWidth);
+  });
+
   return (
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/interactive-supports-focus
     <div
       role="button"
       className={!touched ? "braindeployer" : "braindeployer touched"}
-      onClick={() => setTouched(!touched)}
+      onClick={() => (windowWidth < 1440 ? setTouched(!touched) : null)}
     >
       <BrainIcon />
       <div className="braindeployer_circle first">

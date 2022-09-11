@@ -17,4 +17,7 @@ export default defineConfig({
       "@contexts": path.resolve(__dirname, "src/contexts"),
     },
   },
+  build: {
+    chunkSizeWarningLimit: 4000,
+  },
 });

@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 
 export const Navbar = () => {
   return (
-    <div className="navbar">
+    <nav className="navbar">
       <Link to="/">
         <LogoLong />
       </Link>
@@ -22,6 +22,6 @@ export const Navbar = () => {
       </Link>
       <CreateTopicIcon />
       <BrainDeployer />
-    </div>
+    </nav>
   );
 };

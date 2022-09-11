@@ -1,3 +1,5 @@
+@import "../../colors.scss";
+
 .Home {
   display: flex;
   flex-direction: column;
@@ -5,4 +7,17 @@
   align-items: center;
   height: 100%;
   width: 100%;
+
+  @keyframes extend {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  animation-duration: 1s;
+  animation-name: extend;
 }
