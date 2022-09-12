@@ -1,10 +1,9 @@
 import React from "react";
 
-export const TopicCard=() => {
-
-return (
+export const TopicCard = () => {
+  return (
     <div>
-        <p>HEllo</p>
+      <p>HEllo</p>
     </div>
-)
-}
+  );
+};

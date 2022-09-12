@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { TopicCard } from "@components/TopicCard/TopicCard";
 import Carousel from "react-grid-carousel";
 import "./TopicsDisplay.scss";
-import { CardList } from "..";
 
 export const TopicsDisplay = () => {
   const [Topics, setTopics] = useState([]);
@@ -52,26 +51,28 @@ export const TopicsDisplay = () => {
   return (
     <div className="categories">
       {categories.map((category) => {
-        <div className="category">
-          <span>{category.name}</span>
-          <Carousel
-            cols={10}
-            rows={1}
-            gap={10}
-            responsiveLayout={TopicsList}
-            mobileBreakpoint={0}
-            showDots
-          >
-            <Carousel.Item key={Topics.id}>
-              {Topics.filter( topic => {
-                topic.category === category.name;
-              }).map((topic) => {
-                <TopicCard topic ={topic} />;
+        return (
+          <div className="category" key={category.id}>
+            <span>{category.name}</span>
+            <Carousel
+              cols={10}
+              rows={1}
+              gap={10}
+              responsiveLayout={TopicsList}
+              mobileBreakpoint={0}
+              showDots
+            >
+              {Topics.filter((topic) =>topic.category === category.name).map((topic) => {
+                return (
+                  <Carousel.Item key={topic.id}>
+                    <TopicCard topic={topic} />;
+                  </Carousel.Item>
+                );
               })}
-            </Carousel.Item>
-          </Carousel>
-        </div>;
+            </Carousel>
+          </div>
+        );
       })}
     </div>
   );
-};
+    }
