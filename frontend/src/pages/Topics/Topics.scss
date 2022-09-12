@@ -1,1 +1,24 @@
 @import "../../colors.scss";
+
+.test {
+  height: 80%;
+  width: 100%;
+
+  .topic {
+    height: 40%;
+    width: 100%;
+    border: solid 1rem $carbon;
+    .markdown {
+      max-width: 100%;
+      img {
+        width: 100%;
+      }
+    }
+  }
+
+  .editor {
+    height: 40%;
+    width: 100%;
+    border: solid 1rem $carbon;
+  }
+}

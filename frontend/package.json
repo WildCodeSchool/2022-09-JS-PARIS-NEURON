@@ -17,6 +17,7 @@
     "react-dom": "^18.0.0",
     "react-fusioncharts": "^4.0.0",
     "react-grid-carousel": "^1.0.1",
+    "react-markdown": "^8.0.3",
     "react-router": "^6.3.0",
     "react-router-dom": "^6.3.0",
     "sass": "^1.54.8",
