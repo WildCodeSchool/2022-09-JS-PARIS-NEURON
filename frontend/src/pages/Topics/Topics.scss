@@ -1,24 +1,31 @@
 @import "../../colors.scss";
 
-.test {
-  height: 80%;
+.topics {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
   width: 100%;
 
-  .topic {
-    height: 40%;
+  &_content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 88%;
     width: 100%;
-    border: solid 1rem $carbon;
-    .markdown {
-      max-width: 100%;
-      img {
-        width: 100%;
-      }
+  }
+
+  @keyframes extend {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
     }
   }
 
-  .editor {
-    height: 40%;
-    width: 100%;
-    border: solid 1rem $carbon;
-  }
+  animation-duration: 1s;
+  animation-name: extend;
 }

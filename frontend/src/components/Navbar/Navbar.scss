@@ -1,10 +1,9 @@
 @import "../../colors.scss";
 
 .navbar {
-  position: fixed;
   bottom: 1%;
   height: 10%;
-  width: 98%;
+  width: 100%;
   background-color: $warm-grey-2;
   border-radius: 0.3rem;
   box-shadow: 0 0 10px $carbon;

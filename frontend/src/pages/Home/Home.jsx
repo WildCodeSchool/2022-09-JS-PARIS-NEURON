@@ -15,10 +15,12 @@ const Home = () => {
   });
 
   return (
-    <div className="Home">
-      <UserHeader />
-      {windowWidth < 376 ? <MobilChart /> : <DesktopChart />}
-      <CardList />
+    <div className="home">
+      <div className="home_content">
+        <UserHeader />
+        {windowWidth < 376 ? <MobilChart /> : <DesktopChart />}
+        <CardList />
+      </div>
       <Navbar />
     </div>
   );

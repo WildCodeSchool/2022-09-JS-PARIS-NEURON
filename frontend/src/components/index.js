@@ -6,3 +6,4 @@ export { CardList } from "./CardList/CardList";
 export { DesktopChart } from "./Charts/DesktopChart";
 export { MobilChart } from "./Charts/MobilChart";
 export { NeuronCard } from "./NeuronCard/NeuronCard";
+export { Markdown } from "./Markdown/Markdown";

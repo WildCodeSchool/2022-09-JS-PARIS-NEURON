@@ -1,22 +1,12 @@
-import React, { useState } from "react";
-import { Navbar } from "@components/";
-import ReactMarkdown from "react-markdown";
+import React from "react";
+import { Markdown, Navbar } from "@components/";
+import "./Topics.scss";
 
 export const Topics = () => {
-  const [input, setInput] = useState("");
-
   return (
-    <div className="Topics">
-      <div className="test">
-        <div className="topic">
-          <ReactMarkdown className="markdown">{input}</ReactMarkdown>
-        </div>
-        <input
-          type="text"
-          className="editor"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-        />
+    <div className="topics">
+      <div className="topics_content">
+        <Markdown />
       </div>
       <Navbar />
     </div>
