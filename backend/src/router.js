@@ -10,4 +10,9 @@ router.put("/items/:id", itemControllers.edit);
 router.post("/items", itemControllers.add);
 router.delete("/items/:id", itemControllers.destroy);
 
+const neuronControllers = require("./controllers/neuronControllers");
+
+router.get("/users", neuronControllers.getUsers);
+router.get("/categories", neuronControllers.getCategories);
+
 module.exports = router;
