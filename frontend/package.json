@@ -12,6 +12,7 @@
   "dependencies": {
     "@fusioncharts/powercharts": "^3.19.0",
     "fusioncharts": "^3.19.0",
+    "highlight.js": "^11.6.0",
     "prop-types": "^15.8.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
@@ -20,9 +21,16 @@
     "react-markdown": "^8.0.3",
     "react-router": "^6.3.0",
     "react-router-dom": "^6.3.0",
+    "react-syntax-highlighter": "^15.5.0",
+    "read": "^1.0.7",
+    "rehype": "^12.0.1",
+    "rehype-highlight": "^5.0.2",
+    "remark-highlight.js": "^7.0.1",
     "sass": "^1.54.8",
     "scss": "^0.2.4",
-    "template-fullstack": "file:.."
+    "template-fullstack": "file:..",
+    "to-vfile": "^7.2.3",
+    "unified": "^10.1.2"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^1.0.7",

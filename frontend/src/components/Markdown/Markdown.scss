@@ -13,6 +13,15 @@
     padding: 0.5rem;
     margin-bottom: 4%;
 
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      text-indent: 1rem;
+    }
+
     img {
       width: 100%;
     }
@@ -30,7 +39,8 @@
       width: 100%;
       padding: 0.3rem;
       font-size: 90%;
-      background-color: $cool-grey-3;
+      background-color: $dark-purple-7;
+      color: inherit;
       overflow-y: scroll;
     }
 
