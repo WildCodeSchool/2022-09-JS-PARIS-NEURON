@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@fusioncharts/powercharts": "^3.19.0",
+    "axios": "^0.27.2",
     "fusioncharts": "^3.19.0",
     "highlight.js": "^11.6.0",
     "prop-types": "^15.8.1",
@@ -30,7 +31,8 @@
     "scss": "^0.2.4",
     "template-fullstack": "file:..",
     "to-vfile": "^7.2.3",
-    "unified": "^10.1.2"
+    "unified": "^10.1.2",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^1.0.7",
