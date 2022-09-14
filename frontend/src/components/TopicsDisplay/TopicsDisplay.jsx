@@ -62,17 +62,19 @@ export const TopicsDisplay = () => {
               mobileBreakpoint={0}
               showDots
             >
-              {Topics.filter((topic) =>topic.category === category.name).map((topic) => {
-                return (
-                  <Carousel.Item key={topic.id}>
-                    <TopicCard topic={topic} />;
-                  </Carousel.Item>
-                );
-              })}
+              {Topics.filter((topic) => topic.category === category.name).map(
+                (topic) => {
+                  return (
+                    <Carousel.Item key={topic.id}>
+                      <TopicCard topic={topic} />;
+                    </Carousel.Item>
+                  );
+                }
+              )}
             </Carousel>
           </div>
         );
       })}
     </div>
   );
-    }
+};
