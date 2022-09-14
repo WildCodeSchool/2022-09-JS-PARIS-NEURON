@@ -14,5 +14,6 @@ const neuronControllers = require("./controllers/neuronControllers");
 
 router.get("/users", neuronControllers.getUsers);
 router.get("/categories", neuronControllers.getCategories);
+router.post("/users", neuronControllers.createUser);
 
 module.exports = router;
