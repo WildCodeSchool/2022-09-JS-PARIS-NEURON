@@ -4,9 +4,9 @@ require("dotenv").config();
 
 const hashingOptions = {
   type: argon2.argon2id,
-  memoryCost: 2 ** 16,  /* Coût en mémoire, */
-  timeCost: 5, /* utilisation CPU, */
-  parallelism: 1, /* nombre de tâche en parallèle*/
+  memoryCost: 2 ** 16 /* Coût en mémoire, */,
+  timeCost: 5 /* utilisation CPU, */,
+  parallelism: 1 /* nombre de tâche en parallèle */,
 };
 
 const hashPassword = (req, res, next) => {
