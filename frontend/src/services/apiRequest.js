@@ -1,12 +1,12 @@
 import axios from "axios";
 
-const register = (inputs) => {
+const register = (username, password, mail, chatId) => {
   axios
     .post("http://localhost:5000/users", {
-      username: inputs.username,
-      password: inputs.password,
-      mail: inputs.mail,
-      chat_id: inputs.chatId,
+      username,
+      password,
+      mail,
+      chat_id: chatId,
     })
     .then((res) => console.warn(res));
 };

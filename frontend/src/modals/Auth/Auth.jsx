@@ -24,20 +24,23 @@ export const Auth = ({ show, hide }) => {
     <div className="auth">
       <div className="auth_button">
         <form action="" onSubmit={(e) => handleRegister(e)}>
-         <label htmlFor="username">Username</label>
-          <input id="username"
+          <label htmlFor="username">Username</label>
+          <input
+            id="username"
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
-         <label htmlFor="password">Password</label>
-          <input id="password"
+          <label htmlFor="password">Password</label>
+          <input
+            id="password"
             type="text"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-         <label htmlFor="mail">Mail</label>
-          <input id="mail"
+          <label htmlFor="mail">Mail</label>
+          <input
+            id="mail"
             type="text"
             value={mail}
             onChange={(e) => setMail(e.target.value)}
