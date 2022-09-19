@@ -15,6 +15,7 @@ export default defineConfig({
       "@pages": path.resolve(__dirname, "src/pages"),
       "@services": path.resolve(__dirname, "src/services"),
       "@contexts": path.resolve(__dirname, "src/contexts"),
+      "@modals": path.resolve(__dirname, "src/modals"),
     },
   },
   build: {
