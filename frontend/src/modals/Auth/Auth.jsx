@@ -11,37 +11,33 @@ export const Auth = ({ show, hide }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [mail, setMail] = useState("");
-
-  const [inputs, setInputs] = useState({});
+  const chatId = uuidv4();
 
   const handleRegister = (e) => {
     e.preventDefault();
-    hide();
-    setInputs({
-      username,
-      password,
-      mail,
-      chatId: uuidv4(),
-    });
-    register(inputs);
+    register(username, password, mail, chatId);
     setAvatarStatus(!avatarStatus);
+    hide();
   };
 
   return show ? (
     <div className="auth">
       <div className="auth_button">
         <form action="" onSubmit={(e) => handleRegister(e)}>
-          <input
+         <label htmlFor="username">Username</label>
+          <input id="username"
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
-          <input
+         <label htmlFor="password">Password</label>
+          <input id="password"
             type="text"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <input
+         <label htmlFor="mail">Mail</label>
+          <input id="mail"
             type="text"
             value={mail}
             onChange={(e) => setMail(e.target.value)}
