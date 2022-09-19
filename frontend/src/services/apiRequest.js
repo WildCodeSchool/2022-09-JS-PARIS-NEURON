@@ -11,4 +11,13 @@ const register = (username, password, mail, chatId) => {
     .then((res) => console.warn(res));
 };
 
-export { register };
+const login = (mail, password) => {
+  axios
+    .post(`http://localhost:5000/login`, {
+      mail,
+      password,
+    })
+    .then((res) => console.warn(res));
+};
+
+export { register, login };
