@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { TopicCard } from "@components/TopicCard/TopicCard";
 import Carousel from "react-grid-carousel";
+
 import "./TopicsDisplay.scss";
 
 export const TopicsDisplay = () => {
@@ -66,7 +67,7 @@ export const TopicsDisplay = () => {
                 (topic) => {
                   return (
                     <Carousel.Item key={topic.id}>
-                      <TopicCard topic={topic} />;
+                      <TopicCard topic={topic} />
                     </Carousel.Item>
                   );
                 }
