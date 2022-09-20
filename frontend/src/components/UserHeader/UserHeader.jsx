@@ -8,7 +8,7 @@ export const UserHeader = () => {
   const { avatarStatus, setAvatarStatus } = useAvatarContext();
 
   return (
-    <div className="userheader">
+    <header className="userheader">
       <div className="userheader_pseudo">
         {/* <LogoLong /> */}
         <span>Yoh</span>
@@ -20,6 +20,6 @@ export const UserHeader = () => {
         <NotifOnIcon />
         <MailOnIcon />
       </div>
-    </div>
+    </header>
   );
 };
