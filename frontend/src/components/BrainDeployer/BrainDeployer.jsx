@@ -6,6 +6,7 @@ import { Auth } from "@modals";
 import useModal from "@services/useModal";
 
 import "./BrainDeployer.scss";
+import { Link } from "react-router-dom";
 
 export const BrainDeployer = () => {
   const [touched, setTouched] = useState(false);
@@ -29,7 +30,9 @@ export const BrainDeployer = () => {
           <LogOnIcon onClick={() => toggle()} />
         </div>
         <div className="braindeployer_circle second">
-          <MailOnIcon />
+          <Link to="/createmail">
+            <MailOnIcon />
+          </Link>
         </div>
         <div className="braindeployer_circle third">
           <NotifOnIcon />

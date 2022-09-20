@@ -1,10 +1,11 @@
 import React from "react";
 import { Navbar } from "@components/";
-import "./Topics.scss";
 
-export const Topics = () => {
+import "./CreateMail.scss";
+
+export const CreateMail = () => {
   return (
-    <div className="topics">
+    <div className="createmail">
       <Navbar />
     </div>
   );

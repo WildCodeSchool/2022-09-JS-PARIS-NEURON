@@ -16,11 +16,15 @@ export const Navbar = () => {
       <Link to="/">
         <LogoLong />
       </Link>
-      <UserProfileIcon />
+      <Link to="/userprofile">
+        <UserProfileIcon />
+      </Link>
       <Link to="/topics">
         <TopicsIcon />
       </Link>
-      <CreateTopicIcon />
+      <Link to="/createtopics">
+        <CreateTopicIcon />
+      </Link>
       <BrainDeployer />
     </nav>
   );

@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `neuron`.`topics` (
   `content` MEDIUMTEXT NOT NULL,
   `summary` VARCHAR(255) NOT NULL,
   `chat_id` VARCHAR(45) NOT NULL,
-  `date` DATE NOT NULL,
+  `date_day` DATE NOT NULL,
   `categories_id` INT NOT NULL,
   `users_id` INT NOT NULL,
   PRIMARY KEY (`id`, `categories_id`, `users_id`),

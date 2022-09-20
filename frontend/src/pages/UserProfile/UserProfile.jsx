@@ -1,10 +1,11 @@
 import React from "react";
 import { Navbar } from "@components/";
-import "./Topics.scss";
 
-export const Topics = () => {
+import "./UserProfile.scss";
+
+export const UserProfile = () => {
   return (
-    <div className="topics">
+    <div className="userprofile">
       <Navbar />
     </div>
   );
