@@ -33,8 +33,12 @@ export const Auth = ({ show, hide }) => {
   return show ? (
     <div className="auth">
       <div className="auth_button">
+      <div className="auth_button_close">
+      <button type="button"  onClick={()=> hide()}>X</button>
+      </div>
+      <div className="auth_form">
         <form
-          className="registerForm"
+          className="auth_form_register auth_form_single"
           action=""
           onSubmit={(e) => handleRegister(e)}
         >
@@ -60,10 +64,10 @@ export const Auth = ({ show, hide }) => {
             onChange={(e) => setMail(e.target.value)}
           />
           <button type="submit" className="register">
-            register
+            Register
           </button>
         </form>
-        <form className="loginForm" action="" onSubmit={(e) => handleLogin(e)}>
+        <form className="auth_form_login auth_form_single" action="" onSubmit={(e) => handleLogin(e)}>
           <label htmlFor="loginMail">Mail</label>
           <input
             id="loginMail"
@@ -79,9 +83,10 @@ export const Auth = ({ show, hide }) => {
             onChange={(e) => setLoginPassword(e.target.value)}
           />
           <button type="submit" className="login">
-            login
+            Login
           </button>
         </form>
+        </div>
       </div>
     </div>
   ) : null;
