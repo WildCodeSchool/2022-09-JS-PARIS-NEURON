@@ -5,7 +5,7 @@ import "./TopicCard.scss";
 export const TopicCard = () => {
   return (
     <div>
-      <p>HEllo</p>
+      <p>HEllO THERE !</p>
     </div>
   );
 };
