@@ -4,11 +4,11 @@ import {
   Navbar,
   MobilChart,
   DesktopChart,
-  CardList,
+  NeuronList,
 } from "@components/";
 import "./Home.scss";
 
-const Home = () => {
+export const Home = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   window.addEventListener("resize", () => {
     setWindowWidth(window.innerWidth);
@@ -19,11 +19,9 @@ const Home = () => {
       <div className="home_content">
         <UserHeader />
         {windowWidth < 376 ? <MobilChart /> : <DesktopChart />}
-        <CardList />
+        <NeuronList />
       </div>
       <Navbar />
     </div>
   );
 };
-
-export default Home;

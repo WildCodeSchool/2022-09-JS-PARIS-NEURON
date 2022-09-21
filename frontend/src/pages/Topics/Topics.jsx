@@ -1,13 +1,13 @@
 import React from "react";
-import { Markdown, Navbar } from "@components/";
+// import { TopicsDisplay } from "@components/TopicsDisplay/TopicsDisplay";
+import { Navbar, TopicsDisplay } from "@components/";
+
 import "./Topics.scss";
 
 export const Topics = () => {
   return (
     <div className="topics">
-      <div className="topics_content">
-        <Markdown />
-      </div>
+      <TopicsDisplay />
       <Navbar />
     </div>
   );

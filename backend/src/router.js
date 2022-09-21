@@ -1,8 +1,9 @@
 const express = require("express");
 // const { app } = require("./app");
-const neuronControllers = require("./controllers/neuronControllers");
-const { hashPassword, verifyPassword } = require("./auth");
-const { validateUser } = require("./validators");
+const usersControllers = require("./controllers/usersControllers");
+const topicsControllers = require("./controllers/topicsControllers");
+const { hashPassword, verifyPassword } = require("./middlewares/auth");
+const { validateUser } = require("./middlewares/validators");
 
 const router = express.Router();
 
@@ -14,12 +15,12 @@ const router = express.Router();
 // router.post("/items", itemControllers.add);
 // router.delete("/items/:id", itemControllers.destroy);
 
-router.get("/users", neuronControllers.getUsers);
-router.post("/users", validateUser, hashPassword, neuronControllers.createUser);
-router.get("/categories", neuronControllers.getCategories);
+router.get("/users", usersControllers.getUsers);
+router.post("/users", validateUser, hashPassword, usersControllers.createUser);
+router.get("/categories", topicsControllers.getCategories);
 router.post(
   "/login",
-  neuronControllers.getUserByEmailWithPasswordAndPassToNext,
+  usersControllers.getUserByEmailWithPasswordAndPassToNext,
   verifyPassword
 );
 
