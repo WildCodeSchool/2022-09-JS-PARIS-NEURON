@@ -1,26 +1,25 @@
 import React from "react";
-import { MailOnIcon, NotifOnIcon } from "../../assets/SvgComponents";
-import { Avatar } from "..";
-import { useAvatarContext } from "../../context";
-
+import { Avatar } from "@components/";
+import { MailOnIcon, NotifOnIcon } from "@assets";
+import { useAvatarContext } from "@contexts";
 import "./UserHeader.scss";
 
 export const UserHeader = () => {
-  const { avatarStatus } = useAvatarContext();
+  const { avatarStatus, setAvatarStatus } = useAvatarContext();
 
   return (
-    <div className="userheader">
+    <header className="userheader">
       <div className="userheader_pseudo">
         {/* <LogoLong /> */}
         <span>Yoh</span>
       </div>
       <div className="userheader_avatarContainer">
-        <Avatar avatarStatus={avatarStatus} />
+        <Avatar onClick={() => setAvatarStatus(!avatarStatus)} />
       </div>
       <div className="userheader_shortcuts">
         <NotifOnIcon />
         <MailOnIcon />
       </div>
-    </div>
+    </header>
   );
 };

@@ -12,4 +12,10 @@
   justify-content: space-between;
   align-items: center;
   padding: 5px 80px 5px 5px;
+  z-index: 11;
+
+  > a:hover {
+    transform: scale(1.1);
+    transition: transform 200ms ease;
+  }
 }

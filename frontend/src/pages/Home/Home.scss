@@ -1,0 +1,31 @@
+@import "../../colors.scss";
+
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+
+  &_content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 88%;
+    width: 100%;
+  }
+
+  @keyframes extend {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  animation-duration: 1s;
+  animation-name: extend;
+}
