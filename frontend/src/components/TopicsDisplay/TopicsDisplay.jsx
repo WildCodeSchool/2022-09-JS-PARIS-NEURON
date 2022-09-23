@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useEffect, useState } from "react";
-import { TopicCard } from "@components/TopicCard/TopicCard";
+import { TopicCard, Search } from "@components";
 import Carousel from "react-grid-carousel";
 
 import "./TopicsDisplay.scss";
@@ -15,125 +15,125 @@ export const TopicsDisplay = () => {
     setTopics([
       {
         id: 1,
-        category: "issues",
+        category: "besoin d'aide",
       },
       {
         id: 2,
-        category: "issues",
+        category: "besoin d'aide",
       },
       {
         id: 3,
-        category: "issues",
+        category: "besoin d'aide",
       },
       {
         id: 4,
-        category: "projects",
+        category: "projets",
       },
       {
         id: 5,
-        category: "projects",
+        category: "projets",
       },
       {
         id: 6,
-        category: "learning",
+        category: "apprentissage",
       },
       {
         id: 7,
-        category: "learning",
+        category: "apprentissage",
       },
       {
         id: 8,
-        category: "learning",
+        category: "apprentissage",
       },
       {
         id: 9,
-        category: "learning",
+        category: "apprentissage",
       },
       {
         id: 10,
-        category: "watch",
+        category: "veille",
       },
       {
         id: 11,
-        category: "watch",
+        category: "veille",
       },
       {
         id: 12,
-        category: "misc",
+        category: "divers",
       },
       {
         id: 13,
-        category: "issues",
+        category: "besoin d'aide",
       },
       {
         id: 14,
-        category: "issues",
+        category: "besoin d'aide",
       },
       {
         id: 15,
-        category: "issues",
+        category: "besoin d'aide",
       },
       {
         id: 16,
-        category: "projects",
+        category: "projets",
       },
       {
         id: 17,
-        category: "projects",
+        category: "projets",
       },
       {
         id: 18,
-        category: "learning",
+        category: "apprentissage",
       },
       {
         id: 19,
-        category: "learning",
+        category: "apprentissage",
       },
       {
         id: 20,
-        category: "learning",
+        category: "apprentissage",
       },
       {
         id: 21,
-        category: "learning",
+        category: "apprentissage",
       },
       {
         id: 22,
-        category: "watch",
+        category: "veille",
       },
       {
         id: 23,
-        category: "watch",
+        category: "veille",
       },
       {
         id: 24,
-        category: "misc",
+        category: "divers",
       },
     ]);
     setCategories([
       {
         id: 1,
-        name: "issues",
+        name: "besoin d'aide",
         open: true,
       },
       {
         id: 2,
-        name: "projects",
+        name: "projets",
         open: false,
       },
       {
         id: 3,
-        name: "learning",
+        name: "apprentissage",
         open: false,
       },
       {
         id: 4,
-        name: "watch",
+        name: "veille",
         open: false,
       },
       {
         id: 5,
-        name: "misc",
+        name: "divers",
         open: false,
       },
     ]);
@@ -172,7 +172,7 @@ export const TopicsDisplay = () => {
               rows={1}
               gap={10}
               responsiveLayout={TopicsList}
-              mobileBreakpoint={0}
+              mobileBreakpoint={376}
               showDots
             >
               {Topics.filter((topic) => topic.category === category.name).map(
@@ -190,7 +190,9 @@ export const TopicsDisplay = () => {
           </div>
         );
       })}
-      <div className="test">bla</div>
+      <div className="filter">
+        <Search placeholder="rechercher un topic" />
+      </div>
     </div>
   );
 };

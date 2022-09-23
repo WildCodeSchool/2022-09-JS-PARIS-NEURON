@@ -1,0 +1,19 @@
+@import "../../colors.scss";
+
+.search {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10%;
+
+  &_text {
+    background-color: $cool-grey-1;
+    border-radius: 0.5rem 0 0 0.5rem;
+  }
+
+  &_send {
+    background-color: $dark-purple-5;
+    border-radius: 0 0.5rem 0.5rem 0;
+  }
+}
