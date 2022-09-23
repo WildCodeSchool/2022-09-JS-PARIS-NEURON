@@ -1,1 +1,51 @@
 @import "../../colors.scss";
+
+.categories {
+  height: 88%;
+  width: 100%;
+
+  &_category {
+    height: 5%;
+    width: 100%;
+
+    &_open {
+      height: 55%;
+      transition: height 300ms ease-in-out;
+      > *:not(.categories_category_name) {
+        visibility: visible;
+        opacity: 1;
+        transition: opacity 200ms linear 300ms, visibility 0ms linear 300ms;
+      }
+
+      > div {
+        margin-bottom: 10%;
+      }
+    }
+
+    &_close {
+      height: 5%;
+      transition: height 300ms ease-in-out;
+      > *:not(.categories_category_name) {
+        visibility: hidden;
+        opacity: 0;
+      }
+    }
+
+    &_name {
+      width: 100%;
+      padding: 1%;
+      background-color: $dark-purple-1;
+      color: $warm-grey-1;
+    }
+
+    &_content {
+      padding: 0.5rem;
+    }
+  }
+
+  .test {
+    height: 25%;
+    width: 100%;
+    background-color: $carbon;
+  }
+}

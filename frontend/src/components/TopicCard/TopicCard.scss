@@ -1,1 +1,21 @@
 @import "../../colors.scss";
+
+.topicCard {
+  height: 210px;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $warm-grey-4;
+
+  * {
+    background-color: $dark-purple-5;
+  }
+
+  &_description {
+    margin-top: 0.5rem;
+    height: 80%;
+    overflow: scroll;
+  }
+}
