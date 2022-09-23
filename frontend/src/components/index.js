@@ -9,3 +9,4 @@ export { NeuronCard } from "./NeuronCard/NeuronCard";
 export { Markdown } from "./Markdown/Markdown";
 export { TopicsDisplay } from "./TopicsDisplay/TopicsDisplay";
 export { TopicCard } from "./TopicCard/TopicCard";
+// export { TagsFavorites } from "./TagsFavorites/TagsFavorites";

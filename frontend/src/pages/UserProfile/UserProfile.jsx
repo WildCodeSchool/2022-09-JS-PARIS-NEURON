@@ -6,6 +6,7 @@ import "./UserProfile.scss";
 export const UserProfile = () => {
   return (
     <div className="userprofile">
+      {/* <TagsFavorites /> */}
       <Navbar />
     </div>
   );

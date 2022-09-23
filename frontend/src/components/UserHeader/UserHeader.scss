@@ -36,8 +36,9 @@
   }
 }
 
-// @media (min-width: 768px) {
-//   .userheader {
-//     align-self: flex-end;
-//   }
-// }
+@media (min-width: 768px) {
+  .userheader {
+    align-self: flex-end;
+    width: 375px;
+  }
+}
