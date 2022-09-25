@@ -212,11 +212,10 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `neuron`;
-INSERT INTO `neuron`.`categories` (`id`, `name`) VALUES (DEFAULT, 'issues');
-INSERT INTO `neuron`.`categories` (`id`, `name`) VALUES (DEFAULT, 'projects');
-INSERT INTO `neuron`.`categories` (`id`, `name`) VALUES (DEFAULT, 'learning');
-INSERT INTO `neuron`.`categories` (`id`, `name`) VALUES (DEFAULT, 'watch');
-INSERT INTO `neuron`.`categories` (`id`, `name`) VALUES (DEFAULT, 'misc');
+INSERT INTO `neuron`.`categories` (`id`, `name`) VALUES (DEFAULT, 'problèmes');
+INSERT INTO `neuron`.`categories` (`id`, `name`) VALUES (DEFAULT, 'projets');
+INSERT INTO `neuron`.`categories` (`id`, `name`) VALUES (DEFAULT, 'apprentissage');
+INSERT INTO `neuron`.`categories` (`id`, `name`) VALUES (DEFAULT, 'veille');
+INSERT INTO `neuron`.`categories` (`id`, `name`) VALUES (DEFAULT, 'divers');
 
 COMMIT;
-
