@@ -1,0 +1,15 @@
+.privatemessage {
+  display: flex;
+
+  &_header {
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+  }
+  &_avatarsender {
+    height: 150px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+}
