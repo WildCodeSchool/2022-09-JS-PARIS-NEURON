@@ -6,7 +6,7 @@ import "./UserProfile.scss";
 export const UserProfile = () => {
   return (
     <div className="userprofile">
-      <DisplayPrivateMessage/>
+      <DisplayPrivateMessage />
       {/* <TagsFavorites /> */}
       <Navbar />
     </div>
