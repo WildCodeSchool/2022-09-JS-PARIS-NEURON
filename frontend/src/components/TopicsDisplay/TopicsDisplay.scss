@@ -41,6 +41,10 @@
     &_content {
       padding: 0.5rem;
     }
+    &_missing {
+      display: flex;
+      justify-content: center;
+    }
   }
 
   &_filter {

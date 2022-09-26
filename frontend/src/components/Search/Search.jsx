@@ -1,18 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 
 import "./Search.scss";
 
-export const Search = ({ placeholder, setContent, handleSearch }) => {
-  const [input, setInput] = useState("");
-
-  const handleChange = (e) => {
-    e.preventDefault();
-    setInput(e.target.value);
-  };
-
+export const Search = ({ placeholder, handleChange, handleSearch, value }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
-    setContent(input);
     handleSearch();
   };
 
@@ -22,7 +14,7 @@ export const Search = ({ placeholder, setContent, handleSearch }) => {
         className="search_text"
         type="text"
         placeholder={placeholder}
-        value={input}
+        value={value}
         onChange={(e) => handleChange(e)}
       />
       <button className="search_send" type="submit">

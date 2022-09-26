@@ -23,9 +23,15 @@ export const TopicsDisplay = () => {
     getTopics(setTopics);
   }, []);
 
+  const handleChange = (e) => {
+    setSearchTag(e.target.value);
+  };
+
   const handleSearch = () => {
+    setTopicsByTags([]);
     getTopicsByTags(searchTag, setTopicsByTags);
-    setOpen(6);
+    console.warn(topicsByTags.length);
+    setOpen(0);
   };
 
   const handleSwitch = (category) => {
@@ -92,21 +98,22 @@ export const TopicsDisplay = () => {
       <div className="categories_filter">
         <Search
           placeholder="rechercher un topic"
-          setContent={setSearchTag}
+          handleChange={handleChange}
           handleSearch={handleSearch}
+          value={searchTag}
         />
       </div>
       <div className="categories_showByTags">
-        <Carousel
-          cols={10}
-          rows={1}
-          gap={10}
-          responsiveLayout={TopicsList}
-          mobileBreakpoint={376}
-          showDots
-        >
-          {topicsByTags.length ? (
-            topicsByTags.map((topic) => {
+        {topicsByTags.length ? (
+          <Carousel
+            cols={10}
+            rows={1}
+            gap={10}
+            responsiveLayout={TopicsList}
+            mobileBreakpoint={376}
+            showDots
+          >
+            {topicsByTags.map((topic) => {
               return (
                 <Carousel.Item key={topic.id}>
                   <div className="categories_category_content">
@@ -119,11 +126,13 @@ export const TopicsDisplay = () => {
                   </div>
                 </Carousel.Item>
               );
-            })
-          ) : (
-            <span>not found</span>
-          )}
-        </Carousel>
+            })}
+          </Carousel>
+        ) : (
+          <div className="categories_category_missing">
+            <span>rien pour le moment...</span>
+          </div>
+        )}
       </div>
     </div>
   );
