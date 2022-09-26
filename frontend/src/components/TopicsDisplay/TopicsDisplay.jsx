@@ -24,7 +24,7 @@ export const TopicsDisplay = () => {
   }, []);
 
   const handleSearch = () => {
-    getTopicsByTags(setTopicsByTags);
+    getTopicsByTags(searchTag, setTopicsByTags);
     setOpen(6);
   };
 
@@ -32,9 +32,6 @@ export const TopicsDisplay = () => {
     setTopicsByTags([]);
     setOpen(category.id);
   };
-
-  // faire quelque chose de searchTage en attendant de raccrocher les wagons
-  console.warn(searchTag);
 
   const TopicsList = [
     {
@@ -95,7 +92,7 @@ export const TopicsDisplay = () => {
       <div className="categories_filter">
         <Search
           placeholder="rechercher un topic"
-          content={setSearchTag}
+          setContent={setSearchTag}
           handleSearch={handleSearch}
         />
       </div>
@@ -108,20 +105,24 @@ export const TopicsDisplay = () => {
           mobileBreakpoint={376}
           showDots
         >
-          {topicsByTags.map((topic) => {
-            return (
-              <Carousel.Item key={topic.id}>
-                <div className="categories_category_content">
-                  <TopicCard
-                    title={topic.title}
-                    summary={topic.summary}
-                    date={topic.date}
-                    tag={topic.name}
-                  />
-                </div>
-              </Carousel.Item>
-            );
-          })}
+          {topicsByTags.length ? (
+            topicsByTags.map((topic) => {
+              return (
+                <Carousel.Item key={topic.id}>
+                  <div className="categories_category_content">
+                    <TopicCard
+                      title={topic.title}
+                      summary={topic.summary}
+                      date={topic.date}
+                      tag={topic.name}
+                    />
+                  </div>
+                </Carousel.Item>
+              );
+            })
+          ) : (
+            <span>not found</span>
+          )}
         </Carousel>
       </div>
     </div>

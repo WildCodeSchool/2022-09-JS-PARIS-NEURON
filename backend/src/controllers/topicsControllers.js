@@ -27,12 +27,19 @@ const getTopics = (req, res) => {
 };
 
 const getTopicsByTags = (req, res) => {
+  const { tag } = req.query;
+
   neuron
     .query(
-      `SELECT *, DATE_FORMAT(date, "%d/%m/%Y") AS date FROM topics_has_tags JOIN topics ON topics.id=topics_has_tags.topics_id JOIN tags ON tags.id=topics_has_tags.tags_id ORDER BY date`
+      `SELECT *, DATE_FORMAT(date, "%d/%m/%Y") AS date FROM topics_has_tags AS tht JOIN topics ON topics.id=tht.topics_id JOIN tags ON tags.id=tht.tags_id WHERE name=? ORDER BY date`,
+      [tag]
     )
     .then(([topics]) => {
-      res.status(201).json(topics);
+      if (topics[0] != null) {
+        res.status(201).json(topics);
+      } else {
+        res.status(404).send("Not Found");
+      }
     })
     .catch((err) => {
       console.error(err);

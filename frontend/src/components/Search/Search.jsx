@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import "./Search.scss";
 
-export const Search = ({ placeholder, setSearchTag, handleSearch }) => {
+export const Search = ({ placeholder, setContent, handleSearch }) => {
   const [input, setInput] = useState("");
 
   const handleChange = (e) => {
@@ -12,9 +12,8 @@ export const Search = ({ placeholder, setSearchTag, handleSearch }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setContent(input);
     handleSearch();
-    setSearchTag(input);
-    setInput("");
   };
 
   return (
