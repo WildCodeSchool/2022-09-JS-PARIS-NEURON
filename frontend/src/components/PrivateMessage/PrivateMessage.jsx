@@ -26,9 +26,6 @@ export const PrivateMessage = ({ username, subject, content }) => {
       >
         {/* {input} */}
       </ReactMarkdown>
-      <button type="submit" className="privatemessage_buttonsend">
-        Send
-      </button>
     </div>
   );
 };

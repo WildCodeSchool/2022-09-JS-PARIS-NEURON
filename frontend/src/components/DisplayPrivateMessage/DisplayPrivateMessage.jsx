@@ -20,13 +20,12 @@ export const DisplayPrivateMessage = () => {
           object={PrivateMessage.subject}
         />
       </div>
-      <input type="search" id="searchbar_emails" />
+
       <Search
         placeholder="Search email "
         setContent={setSearchEmailByUsernameOrByDate}
         handleSearch={handleSearch}
       />
-      <button type="submit">Search</button>
     </div>
   );
 };
