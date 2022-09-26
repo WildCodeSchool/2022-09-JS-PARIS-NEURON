@@ -30,7 +30,6 @@ export const TopicsDisplay = () => {
   const handleSearch = () => {
     setTopicsByTags([]);
     getTopicsByTags(searchTag, setTopicsByTags);
-    console.warn(topicsByTags.length);
     setOpen(0);
   };
 
@@ -104,7 +103,7 @@ export const TopicsDisplay = () => {
         />
       </div>
       <div className="categories_showByTags">
-        {topicsByTags.length ? (
+        {(topicsByTags.length && (
           <Carousel
             cols={10}
             rows={1}
@@ -128,11 +127,18 @@ export const TopicsDisplay = () => {
               );
             })}
           </Carousel>
-        ) : (
-          <div className="categories_category_missing">
-            <span>rien pour le moment...</span>
-          </div>
-        )}
+        )) ||
+          (!topicsByTags.length && (
+            <div
+              className={
+                !open
+                  ? "categories_category_missing_visible"
+                  : "categories_category_missing_hidden"
+              }
+            >
+              <span>rien pour le moment...</span>
+            </div>
+          ))}
       </div>
     </div>
   );
