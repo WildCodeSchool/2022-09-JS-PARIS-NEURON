@@ -1,17 +1,18 @@
-import React from "react";
-import { PrivateMessage, Avatar } from "@components";
-// import { getEmail } from "@services/apiRequest";
+import React, { useState, useEffect } from "react";
+import { PrivateMessage, Avatar, Search } from "@components";
+import { getEmail } from "@services/apiRequest";
 
 export const DisplayPrivateMessage = () => {
-  // const [searchEmail, setSearchEmail] = useState([]);
-  // useEffect(() => {
-  //   getEmail();
-  // }, []);
+  const [searchEmail, setSearchEmailByUsernameOrByDate] = useState([]);
+  useEffect(() => {
+    getEmail(setSearchEmailByUsernameOrByDate);
+  }, []);
+
+  const handleSearch = () => {
+    getEmail(searchEmail, setSearchEmailByUsernameOrByDate);
+  };
   return (
     <div>
-      <input type="search" id="searchbar_emails" />
-
-      <button type="submit">Search</button>
       <div className="emails_container">
         <Avatar />
         <PrivateMessage
@@ -19,6 +20,13 @@ export const DisplayPrivateMessage = () => {
           object={PrivateMessage.subject}
         />
       </div>
+      <input type="search" id="searchbar_emails" />
+      <Search
+        placeholder="Search email "
+        setContent={setSearchEmailByUsernameOrByDate}
+        handleSearch={handleSearch}
+      />
+      <button type="submit">Search</button>
     </div>
   );
 };
