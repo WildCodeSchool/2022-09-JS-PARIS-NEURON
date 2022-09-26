@@ -1,17 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { PrivateMessage } from "@components";
-import { getEmail } from "@services/apiRequest";
-import { Avatar } from "@components";
+import React from "react";
+import { PrivateMessage, Avatar } from "@components";
+// import { getEmail } from "@services/apiRequest";
 
 export const DisplayPrivateMessage = () => {
-  const [searchEmail, setSearchEmail] = useState([]);
-  useEffect(() => {
-    getEmail();
-  }, []);
+  // const [searchEmail, setSearchEmail] = useState([]);
+  // useEffect(() => {
+  //   getEmail();
+  // }, []);
   return (
     <div>
       <input type="search" id="searchbar_emails" />
-      
+
       <button type="submit">Search</button>
       <div className="emails_container">
         <Avatar />
