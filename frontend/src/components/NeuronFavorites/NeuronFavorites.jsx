@@ -5,6 +5,7 @@ import "./NeuronFavorites.scss";
 
 export const NeuronFavorites = () => {
   const [neurons, setNeurons] = useState([]);
+  // const [searchUser, setSearchUser] = useState("");
 
   useEffect(() => {
     setNeurons([
@@ -37,24 +38,34 @@ export const NeuronFavorites = () => {
   ];
 
   return (
-    <div className="carousel">
-      <Carousel
-        cols={10}
-        rows={1}
-        gap={10}
-        responsiveLayout={neuronFavList}
-        mobileBreakpoint={0}
-        showDots
-      >
-        {neurons.map((neuron) => (
-          <Carousel.Item key={neuron}>
-            <div className="item">
-              <NeuronCard />
-              <span className="item_pseudo">pseudo</span>
-            </div>
-          </Carousel.Item>
-        ))}
-      </Carousel>
-    </div>
+    <>
+      <div className="users_filter">
+        {/* <Search
+          placeholder="rechercher un topic"
+          content={setSearchUser}
+          handleSearch={handleSearch}
+        /> */}
+      </div>
+
+      <div className="carousel">
+        <Carousel
+          cols={10}
+          rows={1}
+          gap={10}
+          responsiveLayout={neuronFavList}
+          mobileBreakpoint={0}
+          showDots
+        >
+          {neurons.map((neuron) => (
+            <Carousel.Item key={neuron}>
+              <div className="item">
+                <NeuronCard />
+                <span className="item_pseudo">pseudo</span>
+              </div>
+            </Carousel.Item>
+          ))}
+        </Carousel>
+      </div>
+    </>
   );
 };
