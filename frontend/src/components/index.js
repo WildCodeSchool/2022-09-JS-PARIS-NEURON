@@ -10,3 +10,5 @@ export { Markdown } from "./Markdown/Markdown";
 export { TopicsDisplay } from "./TopicsDisplay/TopicsDisplay";
 export { TopicCard } from "./TopicCard/TopicCard";
 export { Search } from "./Search/Search";
+export { DisplayPrivateMessage } from "./DisplayPrivateMessage/DisplayPrivateMessage";
+export { PrivateMessage } from "./PrivateMessage/PrivateMessage";
