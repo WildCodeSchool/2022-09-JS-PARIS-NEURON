@@ -17,7 +17,9 @@ const login = (mail, password) => {
       mail,
       password,
     })
-    .then((res) => console.warn(res));
+    .then(({ res }) => {
+      sessionStorage.setItem("token", res.token);
+    });
 };
 
 const getCategories = (setState) => {
