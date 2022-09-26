@@ -32,8 +32,8 @@ const getTopics = (setState) => {
   });
 };
 
-const getTopicsByTags = (setState) => {
-  axios.get("http://localhost:5000/topicsbytags").then((res) => {
+const getTopicsByTags = (tag, setState) => {
+  axios.get(`http://localhost:5000/topicsbytags?tag=${tag}`).then((res) => {
     setState(res.data);
   });
 };
