@@ -56,13 +56,17 @@ const verifyPassword = (req, res) => {
 const verifyToken = (req, res, next) => {
   try {
     const { cookies, headers } = req;
+
     console.warn(req);
-    console.warn(req.cookies);
+
+    console.warn("headers token:", headers["x-xsrf-token"]);
+    console.warn("cookies: ", req.cookies);
+
     if (!cookies || !cookies.token) {
       return res.status(401).json({ message: "Missing token in cookie" });
     }
 
-    const { token } = cookies;
+    const { token } = cookies.token;
 
     if (!headers || !headers["x-xsrf-token"]) {
       return res.status(401).json({ message: "Missing XSRF token in headers" });
@@ -70,9 +74,9 @@ const verifyToken = (req, res, next) => {
 
     const xsrfToken = headers["x-xsrf-token"];
 
-    req.payload = jwt.verify(token, process.env.JWT_SECRET);
+    const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
 
-    if (xsrfToken !== token.xsrfToken) {
+    if (xsrfToken !== decodedToken.xsrfToken) {
       return res.status(401).json({ message: "Bad xsrf token" });
     }
 
