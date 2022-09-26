@@ -2,7 +2,7 @@ const { neuron } = require("../../neuron");
 
 const getUsers = (req, res) => {
   neuron
-    .query(`select * from users`)
+    .query(`SELECT * FROM users`)
     .then(([users]) => {
       res.status(201).json(users);
     })
@@ -29,11 +29,11 @@ const createUser = (req, res) => {
     });
 };
 
-const getUserByEmailWithPasswordAndPassToNext = (req, res, next) => {
+const registerWithMailAndPassword = (req, res, next) => {
   const { mail } = req.body;
 
   neuron
-    .query("select * from users where mail = ?", [mail])
+    .query("SELECT * FROM users WHERE mail = ?", [mail])
     .then(([users]) => {
       if (users[0] != null) {
         // eslint-disable-next-line prefer-destructuring
@@ -52,5 +52,5 @@ const getUserByEmailWithPasswordAndPassToNext = (req, res, next) => {
 module.exports = {
   getUsers,
   createUser,
-  getUserByEmailWithPasswordAndPassToNext,
+  registerWithMailAndPassword,
 };
