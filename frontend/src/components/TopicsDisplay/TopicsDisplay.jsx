@@ -23,7 +23,12 @@ export const TopicsDisplay = () => {
     getTopics(setTopics);
   }, []);
 
+  const handleChange = (e) => {
+    setSearchTag(e.target.value);
+  };
+
   const handleSearch = () => {
+    setTopicsByTags([]);
     getTopicsByTags(searchTag, setTopicsByTags);
     setOpen(0);
   };
@@ -92,8 +97,9 @@ export const TopicsDisplay = () => {
       <div className="categories_filter">
         <Search
           placeholder="rechercher un topic"
-          setContent={setSearchTag}
+          handleChange={handleChange}
           handleSearch={handleSearch}
+          value={searchTag}
         />
       </div>
       <div className="categories_showByTags">
