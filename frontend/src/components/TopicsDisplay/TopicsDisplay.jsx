@@ -25,7 +25,7 @@ export const TopicsDisplay = () => {
 
   const handleSearch = () => {
     getTopicsByTags(searchTag, setTopicsByTags);
-    setOpen(6);
+    setOpen(0);
   };
 
   const handleSwitch = (category) => {
@@ -97,16 +97,16 @@ export const TopicsDisplay = () => {
         />
       </div>
       <div className="categories_showByTags">
-        <Carousel
-          cols={10}
-          rows={1}
-          gap={10}
-          responsiveLayout={TopicsList}
-          mobileBreakpoint={376}
-          showDots
-        >
-          {topicsByTags.length ? (
-            topicsByTags.map((topic) => {
+        {(topicsByTags.length && (
+          <Carousel
+            cols={10}
+            rows={1}
+            gap={10}
+            responsiveLayout={TopicsList}
+            mobileBreakpoint={376}
+            showDots
+          >
+            {topicsByTags.map((topic) => {
               return (
                 <Carousel.Item key={topic.id}>
                   <div className="categories_category_content">
@@ -119,11 +119,20 @@ export const TopicsDisplay = () => {
                   </div>
                 </Carousel.Item>
               );
-            })
-          ) : (
-            <span>not found</span>
-          )}
-        </Carousel>
+            })}
+          </Carousel>
+        )) ||
+          (!topicsByTags.length && (
+            <div
+              className={
+                !open
+                  ? "categories_category_missing_visible"
+                  : "categories_category_missing_hidden"
+              }
+            >
+              <span>rien pour le moment...</span>
+            </div>
+          ))}
       </div>
     </div>
   );
