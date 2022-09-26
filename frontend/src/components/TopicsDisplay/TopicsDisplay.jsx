@@ -1,143 +1,40 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useEffect, useState } from "react";
-import { TopicCard } from "@components/TopicCard/TopicCard";
+import { TopicCard, Search } from "@components";
 import Carousel from "react-grid-carousel";
+import {
+  getCategories,
+  getTopics,
+  getTopicsByTags,
+} from "@services/apiRequest";
 
 import "./TopicsDisplay.scss";
 
 export const TopicsDisplay = () => {
-  const [Topics, setTopics] = useState([]);
+  const [topics, setTopics] = useState([]);
+  const [topicsByTags, setTopicsByTags] = useState([]);
+  const [searchTag, setSearchTag] = useState("");
   const [categories, setCategories] = useState([]);
   const [open, setOpen] = useState(1);
 
   useEffect(() => {
-    setTopics([
-      {
-        id: 1,
-        category: "issues",
-      },
-      {
-        id: 2,
-        category: "issues",
-      },
-      {
-        id: 3,
-        category: "issues",
-      },
-      {
-        id: 4,
-        category: "projects",
-      },
-      {
-        id: 5,
-        category: "projects",
-      },
-      {
-        id: 6,
-        category: "learning",
-      },
-      {
-        id: 7,
-        category: "learning",
-      },
-      {
-        id: 8,
-        category: "learning",
-      },
-      {
-        id: 9,
-        category: "learning",
-      },
-      {
-        id: 10,
-        category: "watch",
-      },
-      {
-        id: 11,
-        category: "watch",
-      },
-      {
-        id: 12,
-        category: "misc",
-      },
-      {
-        id: 13,
-        category: "issues",
-      },
-      {
-        id: 14,
-        category: "issues",
-      },
-      {
-        id: 15,
-        category: "issues",
-      },
-      {
-        id: 16,
-        category: "projects",
-      },
-      {
-        id: 17,
-        category: "projects",
-      },
-      {
-        id: 18,
-        category: "learning",
-      },
-      {
-        id: 19,
-        category: "learning",
-      },
-      {
-        id: 20,
-        category: "learning",
-      },
-      {
-        id: 21,
-        category: "learning",
-      },
-      {
-        id: 22,
-        category: "watch",
-      },
-      {
-        id: 23,
-        category: "watch",
-      },
-      {
-        id: 24,
-        category: "misc",
-      },
-    ]);
-    setCategories([
-      {
-        id: 1,
-        name: "issues",
-        open: true,
-      },
-      {
-        id: 2,
-        name: "projects",
-        open: false,
-      },
-      {
-        id: 3,
-        name: "learning",
-        open: false,
-      },
-      {
-        id: 4,
-        name: "watch",
-        open: false,
-      },
-      {
-        id: 5,
-        name: "misc",
-        open: false,
-      },
-    ]);
+    getCategories(setCategories);
+    getTopics(setTopics);
   }, []);
+
+  const handleSearch = () => {
+    getTopicsByTags(setTopicsByTags);
+    setOpen(6);
+  };
+
+  const handleSwitch = (category) => {
+    setTopicsByTags([]);
+    setOpen(category.id);
+  };
+
+  // faire quelque chose de searchTage en attendant de raccrocher les wagons
+  console.warn(searchTag);
 
   const TopicsList = [
     {
@@ -163,7 +60,7 @@ export const TopicsDisplay = () => {
           >
             <div
               className="categories_category_name"
-              onClick={() => setOpen(category.id)}
+              onClick={() => handleSwitch(category)}
             >
               {category.name}
             </div>
@@ -172,25 +69,61 @@ export const TopicsDisplay = () => {
               rows={1}
               gap={10}
               responsiveLayout={TopicsList}
-              mobileBreakpoint={0}
+              mobileBreakpoint={376}
               showDots
             >
-              {Topics.filter((topic) => topic.category === category.name).map(
-                (topic) => {
+              {topics
+                .filter((topic) => topic.categories_id === category.id)
+                .map((topic) => {
                   return (
                     <Carousel.Item key={topic.id}>
                       <div className="categories_category_content">
-                        <TopicCard id={topic.id} />
+                        <TopicCard
+                          title={topic.title}
+                          summary={topic.summary}
+                          date={topic.date}
+                          tag={topic.name}
+                        />
                       </div>
                     </Carousel.Item>
                   );
-                }
-              )}
+                })}
             </Carousel>
           </div>
         );
       })}
-      <div className="test">bla</div>
+      <div className="categories_filter">
+        <Search
+          placeholder="rechercher un topic"
+          content={setSearchTag}
+          handleSearch={handleSearch}
+        />
+      </div>
+      <div className="categories_showByTags">
+        <Carousel
+          cols={10}
+          rows={1}
+          gap={10}
+          responsiveLayout={TopicsList}
+          mobileBreakpoint={376}
+          showDots
+        >
+          {topicsByTags.map((topic) => {
+            return (
+              <Carousel.Item key={topic.id}>
+                <div className="categories_category_content">
+                  <TopicCard
+                    title={topic.title}
+                    summary={topic.summary}
+                    date={topic.date}
+                    tag={topic.name}
+                  />
+                </div>
+              </Carousel.Item>
+            );
+          })}
+        </Carousel>
+      </div>
     </div>
   );
 };

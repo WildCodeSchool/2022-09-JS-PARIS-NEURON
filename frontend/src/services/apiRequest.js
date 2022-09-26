@@ -20,4 +20,22 @@ const login = (mail, password) => {
     .then((res) => console.warn(res));
 };
 
-export { register, login };
+const getCategories = (setState) => {
+  axios.get("http://localhost:5000/categories").then((res) => {
+    setState(res.data);
+  });
+};
+
+const getTopics = (setState) => {
+  axios.get("http://localhost:5000/topics").then((res) => {
+    setState(res.data);
+  });
+};
+
+const getTopicsByTags = (setState) => {
+  axios.get("http://localhost:5000/topicsbytags").then((res) => {
+    setState(res.data);
+  });
+};
+
+export { register, login, getTopics, getCategories, getTopicsByTags };

@@ -15,14 +15,16 @@ const router = express.Router();
 // router.post("/items", itemControllers.add);
 // router.delete("/items/:id", itemControllers.destroy);
 
-router.get("/users", usersControllers.getUsers);
 router.post("/users", validateUser, hashPassword, usersControllers.createUser);
-router.get("/categories", topicsControllers.getCategories);
 router.post(
   "/login",
-  usersControllers.getUserByEmailWithPasswordAndPassToNext,
+  usersControllers.registerWithMailAndPassword,
   verifyPassword
 );
+router.get("/users", usersControllers.getUsers);
+router.get("/categories", topicsControllers.getCategories);
+router.get("/topics", topicsControllers.getTopics);
+router.get("/topicsbytags", topicsControllers.getTopicsByTags);
 
 // app.use(verifyToken);
 
