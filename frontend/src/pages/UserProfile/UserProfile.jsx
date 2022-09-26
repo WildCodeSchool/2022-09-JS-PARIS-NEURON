@@ -7,7 +7,6 @@ export const UserProfile = () => {
   return (
     <div className="userprofile">
       <DisplayPrivateMessage />
-      {/* <TagsFavorites /> */}
       <Navbar />
     </div>
   );

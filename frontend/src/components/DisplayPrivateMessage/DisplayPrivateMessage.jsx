@@ -1,5 +1,5 @@
 import React from "react";
-import { PrivateMessage } from "@components";
+// import { PrivateMessage } from "@components";
 
 export const DisplayPrivateMessage = () => {
   return (
@@ -7,7 +7,10 @@ export const DisplayPrivateMessage = () => {
       <input type="search" id="searchbar_emails" />
       <button type="submit">Search</button>
       <div className="emails_container">
-        <PrivateMessage />
+        {/* <PrivateMessage
+          username={username.PrivateMessage}
+          object={subject.PrivateMessage}
+        /> */}
       </div>
     </div>
   );

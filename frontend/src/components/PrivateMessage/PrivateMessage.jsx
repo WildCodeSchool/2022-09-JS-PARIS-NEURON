@@ -1,37 +1,31 @@
 import React from "react";
-import { Avatar, Markdown } from "@components";
+import { Avatar } from "@components";
+import ReactMarkdown from "react-markdown";
+import rehypeHighlight from "rehype-highlight";
 
-export const PrivateMessage = () => {
-  const Emails = [
-    {
-      id: 1,
-      username: "Fufu",
-      subject: "Test1",
-      content:
-        "Hi sweetlove ! How are you ? im fed up about all of this piece of shit can you help me about this problem please?",
-    },
-  ];
+export const PrivateMessage = ({ username, subject, content }) => {
   return (
     <div className="privatemessage">
-      {Emails.map((Email) => (
-        <div key={Email}>
-          <div className="privatemessage_header">
-            <div className="privatemessage_avatarsender">
-              {" "}
-              <Avatar />
-            </div>
+      <div>
+        <div className="privatemessage_header">
+          <div className="privatemessage_avatarsender">
+            {" "}
+            <Avatar />
+          </div>
 
-            <span className="privatemessage_pseudosender">
-              {Email.username}
-            </span>
-            <span className="privatemessage_subject">{Email.subject}</span>
-          </div>
-          <div className="privatemessage_content">
-            <p className="content">{Email.content}</p>
-          </div>
+          <span className="privatemessage_pseudosender">{username}</span>
+          <span className="privatemessage_subject">{subject}</span>
         </div>
-      ))}
-      <Markdown />
+        <div className="privatemessage_content">
+          <p className="content">{content}</p>
+        </div>
+      </div>
+      <ReactMarkdown
+        className="markdown"
+        rehypePlugins={[[rehypeHighlight, { ignoreMissing: true }]]}
+      >
+        {/* {input} */}
+      </ReactMarkdown>
       <button type="submit" className="privatemessage_buttonsend">
         Send
       </button>
