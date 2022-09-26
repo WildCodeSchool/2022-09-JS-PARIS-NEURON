@@ -11,13 +11,14 @@ export const Auth = ({ show, hide }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [mail, setMail] = useState("");
-  const chatId = uuidv4();
+  const [chatId, setChatId] = useState("");
 
   const [loginMail, setLoginMail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
 
   const handleRegister = (e) => {
     e.preventDefault();
+    setChatId(uuidv4());
     register(username, password, mail, chatId);
     setAvatarStatus(!avatarStatus);
     hide();
@@ -32,64 +33,88 @@ export const Auth = ({ show, hide }) => {
 
   return show ? (
     <div className="auth">
-      <div className="auth_button">
-        <div className="auth_button_close">
-          <button type="button" onClick={() => hide()}>
-            X
+      <div className="auth_content">
+        <div className="auth_content_close">
+          <button
+            className="auth_content_close_button"
+            type="button"
+            onClick={() => hide()}
+          >
+            retour
           </button>
         </div>
-        <div className="auth_form">
+        <div className="auth_content_form">
           <form
-            className="auth_form_register auth_form_single"
+            className="auth_content_form_register auth_content_form_single"
             action=""
             onSubmit={(e) => handleRegister(e)}
           >
-            <label htmlFor="username">Username</label>
+            <label htmlFor="username">
+              pseudo<span>*</span>{" "}
+            </label>
             <input
               id="username"
               type="text"
+              required
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
-            <label htmlFor="password">Password</label>
-            <input
-              id="password"
-              type="text"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <label htmlFor="mail">Mail</label>
+            <label htmlFor="mail">
+              adresse mail<span>*</span>{" "}
+            </label>
             <input
               id="mail"
-              type="text"
+              type="email"
+              required
               value={mail}
               onChange={(e) => setMail(e.target.value)}
             />
-            <button type="submit" className="register">
-              Register
+            <label htmlFor="password">
+              mot de passe<span>*</span>{" "}
+            </label>
+            <input
+              id="password"
+              type="password"
+              required
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <button
+              className="auth_content_form_single_submit register"
+              type="submit"
+            >
+              créer un compte
             </button>
           </form>
+          <hr />
           <form
-            className="auth_form_login auth_form_single"
+            className="auth_content_form_login auth_content_form_single"
             action=""
             onSubmit={(e) => handleLogin(e)}
           >
-            <label htmlFor="loginMail">Mail</label>
+            <label htmlFor="loginMail">
+              adresse mail<span>*</span>{" "}
+            </label>
             <input
               id="loginMail"
-              type="text"
+              type="email"
+              required
               value={loginMail}
               onChange={(e) => setLoginMail(e.target.value)}
             />
-            <label htmlFor="loginPassword">Password</label>
+            <label htmlFor="loginPassword">
+              mot de passe<span>*</span>{" "}
+            </label>
             <input
               id="loginPassword"
-              type="text"
-              value={loginPassword}
+              type="password"
+              required
               onChange={(e) => setLoginPassword(e.target.value)}
             />
-            <button type="submit" className="login">
-              Login
+            <button
+              className="auth_content_form_single_submit login"
+              type="submit"
+            >
+              se connecter
             </button>
           </form>
         </div>
