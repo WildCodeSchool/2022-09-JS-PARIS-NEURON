@@ -17,8 +17,9 @@ const login = (mail, password) => {
       mail,
       password,
     })
-    .then(({ res }) => {
-      sessionStorage.setItem("token", res.token);
+    .then(({ data }) => {
+      console.warn(data);
+      sessionStorage.setItem("token", data.xsrfToken);
     });
 };
 

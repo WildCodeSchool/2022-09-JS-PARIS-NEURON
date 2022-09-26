@@ -15,7 +15,7 @@ const getCategories = (req, res) => {
 const getTopics = (req, res) => {
   neuron
     .query(
-      `SELECT *, DATE_FORMAT(date, "%d/%m/%Y") AS date FROM topics ORDER BY date`
+      `SELECT *, DATE_FORMAT(date, "%d/%m/%Y") AS date FROM topics ORDER BY date DESC`
     )
     .then(([topics]) => {
       res.status(201).json(topics);
@@ -31,7 +31,7 @@ const getTopicsByTags = (req, res) => {
 
   neuron
     .query(
-      `SELECT *, DATE_FORMAT(date, "%d/%m/%Y") AS date FROM topics_has_tags AS tht JOIN topics ON topics.id=tht.topics_id JOIN tags ON tags.id=tht.tags_id WHERE name=? ORDER BY date`,
+      `SELECT *, DATE_FORMAT(date, "%d/%m/%Y") AS date FROM topics_has_tags AS tht JOIN topics ON topics.id=tht.topics_id JOIN tags ON tags.id=tht.tags_id WHERE name=? ORDER BY date DESC`,
       [tag]
     )
     .then(([topics]) => {
@@ -47,4 +47,22 @@ const getTopicsByTags = (req, res) => {
     });
 };
 
-module.exports = { getCategories, getTopics, getTopicsByTags };
+const createTopic = (req, res) => {
+  const { title, topic, summary, chat_id, date, categories_id, users_id } =
+    req.body;
+
+  neuron
+    .query(
+      `INSERT INTO topics(title, topic, summary, chat_id, date, categories_id, users_id) VALUES (?, ?, ?, ?, ?, ?, ?)`,
+      [title, topic, summary, chat_id, date, categories_id, users_id]
+    )
+    .then(() => {
+      res.sendStatus(201);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Error saving the topic");
+    });
+};
+
+module.exports = { getCategories, getTopics, getTopicsByTags, createTopic };
