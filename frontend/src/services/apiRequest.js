@@ -38,4 +38,10 @@ const getTopicsByTags = (setState) => {
   });
 };
 
+const getEmail = (setState) => {
+  axios.get("http://localhost:5000/email").then((res) => {
+    setState(res.data);
+});
+};
+
 export { register, login, getTopics, getCategories, getTopicsByTags };
