@@ -2,7 +2,11 @@ const express = require("express");
 // const { app } = require("./app");
 const usersControllers = require("./controllers/usersControllers");
 const topicsControllers = require("./controllers/topicsControllers");
-const { hashPassword, verifyPassword } = require("./middlewares/auth");
+const {
+  hashPassword,
+  verifyPassword,
+  verifyToken,
+} = require("./middlewares/auth");
 const { validateUser } = require("./middlewares/validators");
 
 const router = express.Router();
@@ -16,16 +20,14 @@ const router = express.Router();
 // router.delete("/items/:id", itemControllers.destroy);
 
 router.post("/users", validateUser, hashPassword, usersControllers.createUser);
-router.post(
-  "/login",
-  usersControllers.registerWithMailAndPassword,
-  verifyPassword
-);
+router.post("/login", usersControllers.registerWithMail, verifyPassword);
 router.get("/users", usersControllers.getUsers);
 router.get("/categories", topicsControllers.getCategories);
 router.get("/topics", topicsControllers.getTopics);
 router.get("/topicsbytags", topicsControllers.getTopicsByTags);
 
-// app.use(verifyToken);
+router.use(verifyToken);
+
+router.post("/topics", topicsControllers.createTopic);
 
 module.exports = router;
