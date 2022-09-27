@@ -17,7 +17,10 @@ const login = (mail, password) => {
       mail,
       password,
     })
-    .then((res) => console.warn(res));
+    .then(({ data }) => {
+      console.warn(data);
+      sessionStorage.setItem("token", data.xsrfToken);
+    });
 };
 
 const getCategories = (setState) => {

@@ -29,7 +29,7 @@ const createUser = (req, res) => {
     });
 };
 
-const registerWithMailAndPassword = (req, res, next) => {
+const registerWithMail = (req, res, next) => {
   const { mail } = req.body;
 
   neuron
@@ -52,5 +52,5 @@ const registerWithMailAndPassword = (req, res, next) => {
 module.exports = {
   getUsers,
   createUser,
-  registerWithMailAndPassword,
+  registerWithMail,
 };
