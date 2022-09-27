@@ -14,7 +14,6 @@ export const DisplayPrivateMessage = () => {
   return (
     <div>
       <div className="emails_container">
-        <Avatar />
         <PrivateMessage
           username={PrivateMessage.username}
           object={PrivateMessage.subject}
