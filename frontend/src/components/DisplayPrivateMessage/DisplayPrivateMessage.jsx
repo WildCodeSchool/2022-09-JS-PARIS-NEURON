@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { PrivateMessage, Avatar, Search } from "@components";
+import { PrivateMessage, Search } from "@components";
 import { getEmail } from "@services/apiRequest";
 
 export const DisplayPrivateMessage = () => {
