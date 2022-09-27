@@ -40,7 +40,6 @@ const verifyPassword = (req, res) => {
           httpOnly: true,
           // secure: true,
           maxAge: 3600000,
-          path: "/topics",
         });
         res.send({ xsrfToken, user: req.user });
       } else {
@@ -60,6 +59,7 @@ const verifyToken = (req, res, next) => {
     console.warn("req: ", req);
     console.warn("cookies: ", req.cookies);
     console.warn("headers token", req.headers["x-xsrf-token"]);
+    console.warn("headers: ", req.headers);
 
     if (!cookies || !cookies.token) {
       return res.status(401).json({ message: "Missing token in cookie" });

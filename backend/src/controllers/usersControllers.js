@@ -53,7 +53,7 @@ const logout = (req, res) => {
   const { token } = req.body;
 
   neuron
-    .query("INSERT INTO blacklist(token) VALUE ?", [token])
+    .query("INSERT INTO blacklist(token) VALUE (?)", [token])
     .then(([result]) => {
       res.status(201).json(result);
     })
