@@ -1,52 +1,47 @@
--- DROP TABLE IF EXISTS `neuron`.`users`;
+DROP TABLE IF EXISTS `users`;
 
-CREATE TABLE IF NOT EXISTS `neuron`.`users` (
+CREATE TABLE IF NOT EXISTS `users` (
     `id` INT NOT NULL AUTO_INCREMENT,
-    `name` VARCHAR(45) NOT NULL,
+    `username` VARCHAR(45) NOT NULL,
     PRIMARY KEY (`id`));
-    ENGINE = InnoDB;
+ 
 
-    -- DROP TABLE IF EXISTS `neuron`.`private_messages` ;
+    DROP TABLE IF EXISTS `privatemessages` ;
 
-CREATE TABLE IF NOT EXISTS `neuron`.`private_messages` (
+CREATE TABLE IF NOT EXISTS `privatemessages` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(70) NOT NULL,
   `sender` VARCHAR(70) NOT NULL,
   `receiver` VARCHAR(70) NOT NULL,
   `subject` VARCHAR(70) NOT NULL,
   `content` MEDIUMTEXT NOT NULL,
-  `message_status` TINYINT(1) NOT NULL COMMENT 'true: message sent\nfalse: message received',
   PRIMARY KEY (`id`));
-ENGINE = InnoDB;
 
 
-INSERT INTO `users` (
-    `name`,
-  )
-VALUES (
-    `test`,
-  );
+INSERT INTO 
+`test`.`users` (`username`)
+VALUES 
+('alien');
  
-  INSERT INTO `users` (
-    `name`,
- )
-VALUES (
-    `test2`,
-);
+INSERT INTO 
+`test`.`users` (`username`)
+VALUES ('alien2');
 
- INSERT INTO `privatemessages` (
- `name`,
+ INSERT INTO 
+ `test`.`privatemessages` (
+ `username`,
  `sender`,
  `receiver`,
  `subject`,
- `content`,
+ `content`
  )
- VALUES  (
-    `test`,
-    `test2`,
-    `test`,
-    `TEST MAIL`,
-    `Test about Mail from db to see something`,
+ VALUES  
+ (
+    'test',
+    'test2',
+    'test',
+    'TEST MAIL',
+    'Test about Mail from db to see something'
  );
 
 
