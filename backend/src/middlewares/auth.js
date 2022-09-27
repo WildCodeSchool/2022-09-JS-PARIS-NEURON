@@ -57,6 +57,9 @@ const verifyPassword = (req, res) => {
 const verifyToken = (req, res, next) => {
   try {
     const { cookies, headers } = req;
+    console.warn("req: ", req);
+    console.warn("cookies: ", req.cookies);
+    console.warn("headers token", req.headers["x-xsrf-token"]);
 
     if (!cookies || !cookies.token) {
       return res.status(401).json({ message: "Missing token in cookie" });

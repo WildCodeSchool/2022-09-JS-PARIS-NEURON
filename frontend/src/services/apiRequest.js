@@ -19,8 +19,21 @@ const login = (mail, password) => {
     })
     .then(({ data }) => {
       console.warn(data);
-      sessionStorage.setItem("token", data.xsrfToken);
+      localStorage.setItem("token", data.xsrfToken);
     });
+};
+
+const logout = (token) => {
+  axios
+    .post(
+      "http://localhost:5000/logout",
+      { token },
+      {
+        credentials: true,
+        "x-xsrf-token": `${token}`,
+      }
+    )
+    .then((res) => console.warn(res));
 };
 
 const getCategories = (setState) => {
@@ -41,4 +54,4 @@ const getTopicsByTags = (tag, setState) => {
   });
 };
 
-export { register, login, getTopics, getCategories, getTopicsByTags };
+export { register, login, getTopics, getCategories, getTopicsByTags, logout };

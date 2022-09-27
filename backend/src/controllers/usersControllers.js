@@ -49,8 +49,23 @@ const registerWithMail = (req, res, next) => {
     });
 };
 
+const logout = (req, res) => {
+  const { token } = req.body;
+
+  neuron
+    .query("INSERT INTO blacklist(token) VALUE ?", [token])
+    .then(([result]) => {
+      res.status(201).json(result);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 module.exports = {
   getUsers,
   createUser,
   registerWithMail,
+  logout,
 };
