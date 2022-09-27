@@ -17,7 +17,10 @@ const login = (mail, password) => {
       mail,
       password,
     })
-    .then((res) => console.warn(res));
+    .then(({ data }) => {
+      console.warn(data);
+      sessionStorage.setItem("token", data.xsrfToken);
+    });
 };
 
 const getCategories = (setState) => {
@@ -32,8 +35,8 @@ const getTopics = (setState) => {
   });
 };
 
-const getTopicsByTags = (setState) => {
-  axios.get("http://localhost:5000/topicsbytags").then((res) => {
+const getTopicsByTags = (tag, setState) => {
+  axios.get(`http://localhost:5000/topicsbytags?tag=${tag}`).then((res) => {
     setState(res.data);
   });
 };

@@ -23,18 +23,20 @@ export const TopicsDisplay = () => {
     getTopics(setTopics);
   }, []);
 
+  const handleChange = (e) => {
+    setSearchTag(e.target.value);
+  };
+
   const handleSearch = () => {
-    getTopicsByTags(setTopicsByTags);
-    setOpen(6);
+    setTopicsByTags([]);
+    getTopicsByTags(searchTag, setTopicsByTags);
+    setOpen(0);
   };
 
   const handleSwitch = (category) => {
     setTopicsByTags([]);
     setOpen(category.id);
   };
-
-  // faire quelque chose de searchTage en attendant de raccrocher les wagons
-  console.warn(searchTag);
 
   const TopicsList = [
     {
@@ -95,34 +97,48 @@ export const TopicsDisplay = () => {
       <div className="categories_filter">
         <Search
           placeholder="rechercher un topic"
-          content={setSearchTag}
+          handleChange={handleChange}
           handleSearch={handleSearch}
+          value={searchTag}
         />
       </div>
       <div className="categories_showByTags">
-        <Carousel
-          cols={10}
-          rows={1}
-          gap={10}
-          responsiveLayout={TopicsList}
-          mobileBreakpoint={376}
-          showDots
-        >
-          {topicsByTags.map((topic) => {
-            return (
-              <Carousel.Item key={topic.id}>
-                <div className="categories_category_content">
-                  <TopicCard
-                    title={topic.title}
-                    summary={topic.summary}
-                    date={topic.date}
-                    tag={topic.name}
-                  />
-                </div>
-              </Carousel.Item>
-            );
-          })}
-        </Carousel>
+        {(topicsByTags.length && (
+          <Carousel
+            cols={10}
+            rows={1}
+            gap={10}
+            responsiveLayout={TopicsList}
+            mobileBreakpoint={376}
+            showDots
+          >
+            {topicsByTags.map((topic) => {
+              return (
+                <Carousel.Item key={topic.id}>
+                  <div className="categories_category_content">
+                    <TopicCard
+                      title={topic.title}
+                      summary={topic.summary}
+                      date={topic.date}
+                      tag={topic.name}
+                    />
+                  </div>
+                </Carousel.Item>
+              );
+            })}
+          </Carousel>
+        )) ||
+          (!topicsByTags.length && (
+            <div
+              className={
+                !open
+                  ? "categories_category_missing_visible"
+                  : "categories_category_missing_hidden"
+              }
+            >
+              <span>rien pour le moment...</span>
+            </div>
+          ))}
       </div>
     </div>
   );

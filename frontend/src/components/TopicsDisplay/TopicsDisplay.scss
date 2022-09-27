@@ -41,6 +41,20 @@
     &_content {
       padding: 0.5rem;
     }
+
+    &_missing {
+      &_visible {
+        display: flex;
+        justify-content: center;
+        visibility: visible;
+      }
+
+      &_hidden {
+        display: flex;
+        justify-content: center;
+        visibility: hidden;
+      }
+    }
   }
 
   &_filter {
