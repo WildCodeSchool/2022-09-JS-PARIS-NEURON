@@ -1,18 +1,18 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { register, login, logout } from "@services/apiRequest";
-import { AvatarContext } from "@contexts/AvatarContext";
 
 import "./Auth.scss";
 
 export const Auth = ({ show, hide }) => {
-  const { setAvatarStatus } = useContext(AvatarContext);
-
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [mail, setMail] = useState("");
   const [chatId, setChatId] = useState("");
 
+  useEffect(() => {
+    setChatId(uuidv4());
+  }, []);
   const [loginMail, setLoginMail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
 
@@ -31,14 +31,6 @@ export const Auth = ({ show, hide }) => {
     logout(localStorage.getItem("token"));
     hide();
   };
-
-  useEffect(() => {
-    if (localStorage.getItem("token")) {
-      setAvatarStatus(true);
-    } else {
-      setAvatarStatus(false);
-    }
-  }, [hide]);
 
   return show ? (
     <div className="auth">
