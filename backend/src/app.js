@@ -7,17 +7,18 @@ const router = require("./router");
 
 const app = express();
 
+app.use(cookies());
+
 // use some application-level middlewares
 app.use(
   cors({
+    credentials: true,
     origin: process.env.FRONTEND_URL ?? "http://localhost:3000",
     optionsSuccessStatus: 200,
   })
 );
 
 app.use(express.json());
-
-app.use(cookies());
 
 // Serve the public folder for public resources
 app.use(express.static(path.join(__dirname, "../public")));

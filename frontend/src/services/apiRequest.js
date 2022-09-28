@@ -13,13 +13,35 @@ const register = (username, password, mail, chatId) => {
 
 const login = (mail, password) => {
   axios
-    .post(`http://localhost:5000/login`, {
-      mail,
-      password,
-    })
+    .post(
+      `http://localhost:5000/login`,
+      {
+        mail,
+        password,
+      },
+      { withCredentials: true }
+    )
     .then(({ data }) => {
       console.warn(data);
-      sessionStorage.setItem("token", data.xsrfToken);
+      localStorage.setItem("token", data.xsrfToken);
+    });
+};
+
+const logout = (token) => {
+  axios
+    .post(
+      "http://localhost:5000/logout",
+      { token: `${token}` },
+      {
+        withCredentials: true,
+        headers: {
+          "x-xsrf-token": `${token}`,
+        },
+      }
+    )
+    .then((res) => {
+      console.warn(res);
+      localStorage.removeItem("token");
     });
 };
 
@@ -47,4 +69,5 @@ const getEmail = (setState) => {
   });
 };
 
-export { register, login, getTopics, getCategories, getTopicsByTags, getEmail };
+export { register, login, getTopics, getCategories, getTopicsByTags, getEmail, logout};
+

@@ -30,5 +30,6 @@ router.get("/user/privatemessagelist", privatemessageControllers.getEmail);
 router.use(verifyToken);
 
 router.post("/topics", topicsControllers.createTopic);
+router.post("/logout", usersControllers.logout);
 
 module.exports = router;

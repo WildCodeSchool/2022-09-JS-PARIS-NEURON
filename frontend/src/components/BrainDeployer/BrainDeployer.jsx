@@ -18,6 +18,10 @@ export const BrainDeployer = () => {
     setWindowWidth(window.innerWidth);
   });
 
+  const handleToggle = () => {
+    toggle();
+  };
+
   return (
     <>
       <div
@@ -27,7 +31,7 @@ export const BrainDeployer = () => {
       >
         <BrainIcon />
         <div className="braindeployer_circle first">
-          <LogOnIcon onClick={() => toggle()} />
+          <LogOnIcon onClick={() => handleToggle()} />
         </div>
         <div className="braindeployer_circle second">
           <Link to="/createmail">
@@ -42,3 +46,5 @@ export const BrainDeployer = () => {
     </>
   );
 };
+
+// tenter avec deuxième modale pour déco
