@@ -2,6 +2,7 @@ const express = require("express");
 // const { app } = require("./app");
 const usersControllers = require("./controllers/usersControllers");
 const topicsControllers = require("./controllers/topicsControllers");
+const privatemessageControllers = require ("./controllers/privatemessageControllers");
 const {
   hashPassword,
   verifyPassword,
@@ -25,7 +26,7 @@ router.get("/users", usersControllers.getUsers);
 router.get("/categories", topicsControllers.getCategories);
 router.get("/topics", topicsControllers.getTopics);
 router.get("/topicsbytags", topicsControllers.getTopicsByTags);
-
+router.get("/user/privatemessagelist", privatemessageControllers.getEmail)
 router.use(verifyToken);
 
 router.post("/topics", topicsControllers.createTopic);

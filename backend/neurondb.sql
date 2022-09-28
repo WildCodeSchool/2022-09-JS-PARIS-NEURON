@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `neuron`.`topics` (
   `topic` LONGTEXT NOT NULL,
   `summary` VARCHAR(255) NOT NULL,
   `chat_id` VARCHAR(45) NOT NULL,
-  `date` DATE NOT NULL,
+  `date_topic` DATE NOT NULL,
   `categories_id` INT NOT NULL,
   `users_id` INT NOT NULL,
   PRIMARY KEY (`id`),
@@ -103,7 +103,7 @@ DROP TABLE IF EXISTS `neuron`.`comments` ;
 
 CREATE TABLE IF NOT EXISTS `neuron`.`comments` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `username` VARCHAR(70) NOT NULL,
+  `username_comment` VARCHAR(70) NOT NULL,
   `comment` MEDIUMTEXT NOT NULL,
   `date_hour` DATETIME NOT NULL,
   `topics_id` INT NOT NULL,
@@ -131,9 +131,10 @@ DROP TABLE IF EXISTS `neuron`.`private_messages` ;
 
 CREATE TABLE IF NOT EXISTS `neuron`.`private_messages` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `username` VARCHAR(70) NOT NULL,
+  `username_pm` VARCHAR(70) NOT NULL,
   `sender` VARCHAR(70) NOT NULL,
   `receiver` VARCHAR(70) NOT NULL,
+  `date_pm` DATE NOT NULL,
   `subject` VARCHAR(70) NOT NULL,
   `content` MEDIUMTEXT NOT NULL,
   `message_status` TINYINT(1) NOT NULL COMMENT 'true: message sent\nfalse: message received',

@@ -1,47 +1,54 @@
-DROP TABLE IF EXISTS `users`;
-
-CREATE TABLE IF NOT EXISTS `users` (
-    `id` INT NOT NULL AUTO_INCREMENT,
-    `username` VARCHAR(45) NOT NULL,
-    PRIMARY KEY (`id`));
- 
-
-    DROP TABLE IF EXISTS `privatemessages` ;
-
-CREATE TABLE IF NOT EXISTS `privatemessages` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `username` VARCHAR(70) NOT NULL,
-  `sender` VARCHAR(70) NOT NULL,
-  `receiver` VARCHAR(70) NOT NULL,
-  `subject` VARCHAR(70) NOT NULL,
-  `content` MEDIUMTEXT NOT NULL,
-  PRIMARY KEY (`id`));
-
-
 INSERT INTO 
-`test`.`users` (`username`)
+`neuron`.`users` 
+(`username_users`,
+`hashedpassword`,
+`mail`,
+`role`,
+`status`,
+`chat_id`)
 VALUES 
-('alien');
+('alien',
+'bla',
+'alien@test.net',
+'user',
+'1',
+'123457');
+
  
 INSERT INTO 
-`test`.`users` (`username`)
-VALUES ('alien2');
+`neuron`.`users` 
+(`username_users`,
+`hashedpassword`,
+`mail`,
+`role`,
+`status`,
+`chat_id`)
+VALUES 
+('alien2',
+'bla2',
+'alien2@test.net',
+'user',
+'1',
+'875421');
 
  INSERT INTO 
- `test`.`privatemessages` (
- `username`,
+ `neuron`.`private_messages` 
+ ( `username_pm`,
  `sender`,
  `receiver`,
+ `date_pm`,
  `subject`,
- `content`
+ `content`,
+ `message_status`
  )
  VALUES  
- (
-    'test',
+ ('test',
     'test2',
     'test',
+    '2022-09-27',
     'TEST MAIL',
-    'Test about Mail from db to see something'
+    'Test about Mail from db to see something',
+    '0'
  );
 
 
