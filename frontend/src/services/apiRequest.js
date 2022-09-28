@@ -28,6 +28,8 @@ const login = (mail, password) => {
 };
 
 const logout = (token) => {
+  localStorage.removeItem("token");
+
   axios
     .post(
       "http://localhost:5000/logout",
@@ -41,7 +43,6 @@ const logout = (token) => {
     )
     .then((res) => {
       console.warn(res);
-      localStorage.removeItem("token");
     });
 };
 
