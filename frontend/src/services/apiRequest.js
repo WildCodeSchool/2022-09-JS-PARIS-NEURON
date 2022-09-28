@@ -69,5 +69,12 @@ const getEmail = (setState) => {
   });
 };
 
-export { register, login, getTopics, getCategories, getTopicsByTags, getEmail, logout};
-
+export {
+  register,
+  login,
+  getTopics,
+  getCategories,
+  getTopicsByTags,
+  getEmail,
+  logout,
+};
