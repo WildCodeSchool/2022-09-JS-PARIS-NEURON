@@ -15,6 +15,7 @@ export const Search = ({ placeholder, handleChange, handleSearch, value }) => {
         type="text"
         placeholder={placeholder}
         value={value}
+        required
         onChange={(e) => handleChange(e)}
       />
       <button className="search_send" type="submit">

@@ -29,5 +29,6 @@ router.get("/topicsbytags", topicsControllers.getTopicsByTags);
 router.use(verifyToken);
 
 router.post("/topics", topicsControllers.createTopic);
+router.post("/logout", usersControllers.logout);
 
 module.exports = router;
