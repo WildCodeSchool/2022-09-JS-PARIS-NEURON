@@ -1,13 +1,15 @@
 .privatemessage {
   display: flex;
+  height: 100%;
 
   &_header {
     display: flex;
     flex-direction: column;
     width: 95%;
+    height: 20%;
   }
   &_avatarsender {
-    height: 150px;
+    height: 100%;
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;

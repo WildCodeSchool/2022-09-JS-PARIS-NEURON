@@ -6,7 +6,7 @@ import rehypeHighlight from "rehype-highlight";
 export const PrivateMessage = ({ username, subject, content }) => {
   return (
     <div className="privatemessage">
-      <div>
+      
         <div className="privatemessage_header">
           <div className="privatemessage_avatarsender">
             {" "}
@@ -19,7 +19,7 @@ export const PrivateMessage = ({ username, subject, content }) => {
         <div className="privatemessage_content">
           <p className="content">{content}</p>
         </div>
-      </div>
+      
       <ReactMarkdown
         className="markdown"
         rehypePlugins={[[rehypeHighlight, { ignoreMissing: true }]]}
