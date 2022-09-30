@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import "./TagsFavorites.scss";
 
 export const TagsFavorites = () => {
-  const [setTags] = useState([]);
+  const [tag, setTags] = useState([]);
 
   useEffect(() => {
     setTags([
@@ -36,7 +36,7 @@ export const TagsFavorites = () => {
       loop: true,
     },
   ];
-
+console.warn(tag);
   return (
     <div className="carousel">
       <Carousel
@@ -48,7 +48,7 @@ export const TagsFavorites = () => {
         showDots
       >
         {tagsList.map((tag) => (
-          <Carousel.Item key={tagsList}>
+          <Carousel.Item key={tag}>
             <div className="item">{tag.name}</div>
           </Carousel.Item>
         ))}
