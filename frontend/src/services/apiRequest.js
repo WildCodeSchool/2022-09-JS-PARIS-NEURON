@@ -63,4 +63,9 @@ const getTopicsByTags = (tag, setState) => {
   });
 };
 
+// const getTabs = (setState) => {
+//   axios.get("http://localhost:5000/tabs").then((res) => {
+//     setState(res.data);
+//   });
+
 export { register, login, getTopics, getCategories, getTopicsByTags, logout };
