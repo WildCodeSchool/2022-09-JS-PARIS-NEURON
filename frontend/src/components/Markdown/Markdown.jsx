@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import ReactMarkdown from "react-markdown";
 import rehypeHighlight from "rehype-highlight";
 
@@ -6,9 +6,7 @@ import "highlight.js/styles/github.css";
 
 import "./Markdown.scss";
 
-export const Markdown = () => {
-  const [input, setInput] = useState("");
-
+export const Markdown = ({ input, setInput }) => {
   const handleChange = (e) => {
     e.preventDefault();
     setInput(e.target.value);
@@ -27,6 +25,8 @@ export const Markdown = () => {
       <textarea
         type="text"
         className="editor"
+        placeholder="..."
+        required
         value={input}
         onChange={(e) => handleChange(e)}
       />
