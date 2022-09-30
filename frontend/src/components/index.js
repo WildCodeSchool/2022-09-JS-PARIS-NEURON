@@ -10,3 +10,4 @@ export { Markdown } from "./Markdown/Markdown";
 export { TopicsDisplay } from "./TopicsDisplay/TopicsDisplay";
 export { TopicCard } from "./TopicCard/TopicCard";
 export { TagsFavorites } from "./TagsFavorites/TagsFavorites";
+export { Search } from "./Search/Search";

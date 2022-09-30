@@ -1,51 +1,50 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useEffect, useState } from "react";
-import { TopicCard } from "@components/TopicCard/TopicCard";
+import { TopicCard, Search } from "@components";
 import Carousel from "react-grid-carousel";
+import {
+  getCategories,
+  getTopics,
+  getTopicsByTags,
+} from "@services/apiRequest";
 
 import "./TopicsDisplay.scss";
 
 export const TopicsDisplay = () => {
-  const [Topics, setTopics] = useState([]);
+  const [topics, setTopics] = useState([]);
+  const [topicsByTags, setTopicsByTags] = useState([]);
+  const [searchTag, setSearchTag] = useState("");
+  const [categories, setCategories] = useState([]);
+  const [open, setOpen] = useState(1);
 
   useEffect(() => {
-    setTopics([
-      {
-        id: 1,
-        category: "Watch",
-      },
-      {
-        id: 2,
-        category: "Learning",
-      },
-      {
-        id: 3,
-        category: "Watch",
-      },
-    ]);
+    getCategories(setCategories);
+    getTopics(setTopics);
   }, []);
+
+  const handleChange = (e) => {
+    setSearchTag(e.target.value);
+  };
+
+  const handleSearch = () => {
+    setTopicsByTags([]);
+    getTopicsByTags(searchTag, setTopicsByTags);
+    setOpen(0);
+  };
+
+  const handleSwitch = (category) => {
+    setTopicsByTags([]);
+    setOpen(category.id);
+  };
 
   const TopicsList = [
     {
       breakpoint: 767,
-      cols: 4,
-      rows: 2,
-      gap: 2,
+      cols: 2,
+      rows: 1,
+      gap: 5,
       loop: true,
-    },
-  ];
-
-  const categories = [
-    {
-      id: 1,
-      name: "Watch",
-    },
-    {
-      id: 2,
-      name: "Learning",
-    },
-    {
-      id: 3,
-      name: "Projects",
     },
   ];
 
@@ -53,29 +52,94 @@ export const TopicsDisplay = () => {
     <div className="categories">
       {categories.map((category) => {
         return (
-          <div className="category" key={category.id}>
-            <span>{category.name}</span>
+          <div
+            className={
+              open === category.id
+                ? `categories_category_open`
+                : `categories_category_close`
+            }
+            key={category.id}
+          >
+            <div
+              className="categories_category_name"
+              onClick={() => handleSwitch(category)}
+            >
+              {category.name}
+            </div>
             <Carousel
               cols={10}
               rows={1}
               gap={10}
               responsiveLayout={TopicsList}
-              mobileBreakpoint={0}
+              mobileBreakpoint={376}
               showDots
             >
-              {Topics.filter((topic) => topic.category === category.name).map(
-                (topic) => {
+              {topics
+                .filter((topic) => topic.categories_id === category.id)
+                .map((topic) => {
                   return (
                     <Carousel.Item key={topic.id}>
-                      <TopicCard topic={topic} />
+                      <div className="categories_category_content">
+                        <TopicCard
+                          title={topic.title}
+                          summary={topic.summary}
+                          date={topic.date}
+                          tag={topic.name}
+                        />
+                      </div>
                     </Carousel.Item>
                   );
-                }
-              )}
+                })}
             </Carousel>
           </div>
         );
       })}
+      <div className="categories_filter">
+        <Search
+          placeholder="rechercher un topic"
+          handleChange={handleChange}
+          handleSearch={handleSearch}
+          value={searchTag}
+        />
+      </div>
+      <div className="categories_showByTags">
+        {(topicsByTags.length && (
+          <Carousel
+            cols={10}
+            rows={1}
+            gap={10}
+            responsiveLayout={TopicsList}
+            mobileBreakpoint={376}
+            showDots
+          >
+            {topicsByTags.map((topic) => {
+              return (
+                <Carousel.Item key={topic.id}>
+                  <div className="categories_category_content">
+                    <TopicCard
+                      title={topic.title}
+                      summary={topic.summary}
+                      date={topic.date}
+                      tag={topic.name}
+                    />
+                  </div>
+                </Carousel.Item>
+              );
+            })}
+          </Carousel>
+        )) ||
+          (!topicsByTags.length && (
+            <div
+              className={
+                !open
+                  ? "categories_category_missing_visible"
+                  : "categories_category_missing_hidden"
+              }
+            >
+              <span>rien pour le moment...</span>
+            </div>
+          ))}
+      </div>
     </div>
   );
 };

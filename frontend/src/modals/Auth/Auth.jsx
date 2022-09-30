@@ -1,99 +1,146 @@
-import React, { useContext, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { AvatarContext } from "@contexts/AvatarContext";
-import { register, login } from "@services/apiRequest";
+import { register, login, logout } from "@services/apiRequest";
 
 import "./Auth.scss";
 
 export const Auth = ({ show, hide }) => {
-  const { avatarStatus, setAvatarStatus } = useContext(AvatarContext);
-
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [mail, setMail] = useState("");
-  const chatId = uuidv4();
+  const [chatId, setChatId] = useState("");
 
+  useEffect(() => {
+    setChatId(uuidv4());
+  }, []);
   const [loginMail, setLoginMail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
 
-  const handleRegister = (e) => {
-    e.preventDefault();
+  const handleRegister = () => {
+    setChatId(uuidv4());
     register(username, password, mail, chatId);
-    setAvatarStatus(!avatarStatus);
     hide();
   };
 
-  const handleLogin = (e) => {
-    e.preventDefault();
+  const handleLogin = () => {
     login(loginMail, loginPassword);
-    setAvatarStatus(!avatarStatus);
+    hide();
+  };
+
+  const handleLogOut = () => {
+    logout(localStorage.getItem("token"));
     hide();
   };
 
   return show ? (
     <div className="auth">
-      <div className="auth_button">
-        <div className="auth_button_close">
-          <button type="button" onClick={() => hide()}>
-            X
+      {!localStorage.getItem("token") ? (
+        <div className="auth_content">
+          <div className="auth_content_close">
+            <button
+              className="auth_content_close_button"
+              type="button"
+              onClick={() => hide()}
+            >
+              retour
+            </button>
+          </div>
+          <div className="auth_content_form">
+            <form
+              className="auth_content_form_register auth_content_form_single"
+              action=""
+              onSubmit={() => handleRegister()}
+            >
+              <label htmlFor="username">
+                pseudo<span>*</span>{" "}
+              </label>
+              <input
+                id="username"
+                type="text"
+                required
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+              <label htmlFor="mail">
+                adresse mail<span>*</span>{" "}
+              </label>
+              <input
+                id="mail"
+                type="email"
+                required
+                value={mail}
+                onChange={(e) => setMail(e.target.value)}
+              />
+              <label htmlFor="password">
+                mot de passe<span>*</span>{" "}
+              </label>
+              <input
+                id="password"
+                type="password"
+                required
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <button
+                className="auth_content_form_single_submit register"
+                type="submit"
+              >
+                créer un compte
+              </button>
+            </form>
+            <hr />
+            <form
+              className="auth_content_form_login auth_content_form_single"
+              action=""
+              onSubmit={() => handleLogin()}
+            >
+              <label htmlFor="loginMail">
+                adresse mail<span>*</span>{" "}
+              </label>
+              <input
+                id="loginMail"
+                type="email"
+                required
+                value={loginMail}
+                onChange={(e) => setLoginMail(e.target.value)}
+              />
+              <label htmlFor="loginPassword">
+                mot de passe<span>*</span>{" "}
+              </label>
+              <input
+                id="loginPassword"
+                type="password"
+                required
+                onChange={(e) => setLoginPassword(e.target.value)}
+              />
+              <button
+                className="auth_content_form_single_submit login"
+                type="submit"
+              >
+                se connecter
+              </button>
+            </form>
+          </div>
+        </div>
+      ) : (
+        <div className="auth_content_logout">
+          <div className="auth_content_close">
+            <button
+              className="auth_content_close_button"
+              type="button"
+              onClick={() => hide()}
+            >
+              retour
+            </button>
+          </div>
+          <button
+            className="auth_content_logout_submit"
+            type="button"
+            onClick={() => handleLogOut()}
+          >
+            se déconnecter
           </button>
         </div>
-        <div className="auth_form">
-          <form
-            className="auth_form_register auth_form_single"
-            action=""
-            onSubmit={(e) => handleRegister(e)}
-          >
-            <label htmlFor="username">Username</label>
-            <input
-              id="username"
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-            <label htmlFor="password">Password</label>
-            <input
-              id="password"
-              type="text"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <label htmlFor="mail">Mail</label>
-            <input
-              id="mail"
-              type="text"
-              value={mail}
-              onChange={(e) => setMail(e.target.value)}
-            />
-            <button type="submit" className="register">
-              Register
-            </button>
-          </form>
-          <form
-            className="auth_form_login auth_form_single"
-            action=""
-            onSubmit={(e) => handleLogin(e)}
-          >
-            <label htmlFor="loginMail">Mail</label>
-            <input
-              id="loginMail"
-              type="text"
-              value={loginMail}
-              onChange={(e) => setLoginMail(e.target.value)}
-            />
-            <label htmlFor="loginPassword">Password</label>
-            <input
-              id="loginPassword"
-              type="text"
-              value={loginPassword}
-              onChange={(e) => setLoginPassword(e.target.value)}
-            />
-            <button type="submit" className="login">
-              Login
-            </button>
-          </form>
-        </div>
-      </div>
+      )}
     </div>
   ) : null;
 };

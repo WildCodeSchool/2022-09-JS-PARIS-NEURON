@@ -1,12 +1,13 @@
 const argon2 = require("argon2");
 const jwt = require("jsonwebtoken");
+const crypto = require("crypto");
 require("dotenv").config();
 
 const hashingOptions = {
   type: argon2.argon2id,
   memoryCost: 2 ** 16 /* Coût en mémoire, */,
   timeCost: 5 /* utilisation CPU, */,
-  parallelism: 1 /* nombre de tâche en parallèle */,
+  parallelism: 1 /* nombre de tâches en parallèle */,
 };
 
 const hashPassword = (req, res, next) => {
@@ -28,12 +29,19 @@ const verifyPassword = (req, res) => {
     .verify(req.user.hashedpassword, req.body.password)
     .then((isVerified) => {
       if (isVerified) {
-        const payload = { sub: req.user.id };
+        const xsrfToken = crypto.randomBytes(64).toString("hex");
+        const payload = { mail: req.user.mail, xsrfToken };
         const token = jwt.sign(payload, process.env.JWT_SECRET, {
           expiresIn: "1h",
         });
         delete req.user.hashedpassword;
-        res.send({ token, user: req.user });
+        console.warn("token: ", token, "xsrfToken: ", xsrfToken);
+        res.cookie("token", token, {
+          httpOnly: true,
+          // secure: true,
+          maxAge: 3600000,
+        });
+        res.send({ xsrfToken, user: req.user });
       } else {
         res.sendStatus(401);
       }
@@ -44,18 +52,37 @@ const verifyPassword = (req, res) => {
     });
 };
 
+// eslint-disable-next-line consistent-return
 const verifyToken = (req, res, next) => {
   try {
-    const authorizationHeader = req.get("Authorization");
+    const { cookies, headers } = req;
+    console.warn("req: ", req);
+    console.warn("cookies: ", req.cookies);
+    console.warn("headers token", req.headers["x-xsrf-token"]);
+    console.warn("headers: ", req.headers);
 
-    if (authorizationHeader == null) {
-      throw new Error("Authorization header is missing");
+    if (!cookies || !cookies.token) {
+      return res.status(401).json({ message: "Missing token in cookie" });
     }
-    const [type, token] = authorizationHeader.split(" ");
-    if (type !== "Bearer") {
-      throw new Error("Authorization header has not the 'Bearer' type");
+
+    const { token } = cookies;
+
+    console.warn("cookies: ", token);
+
+    if (!headers || !headers["x-xsrf-token"]) {
+      return res.status(401).json({ message: "Missing XSRF token in headers" });
     }
-    req.payload = jwt.verify(token, process.env.JWT_SECRET);
+
+    const xsrfToken = headers["x-xsrf-token"];
+
+    console.warn("headers token:", xsrfToken);
+
+    const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+
+    if (xsrfToken !== decodedToken.xsrfToken) {
+      return res.status(401).json({ message: "Bad xsrf token" });
+    }
+
     next();
   } catch (err) {
     console.error(err);
