@@ -36,7 +36,7 @@ export const TagsFavorites = () => {
       loop: true,
     },
   ];
-console.warn(tag);
+  console.warn(tag);
   return (
     <div className="carousel">
       <Carousel
@@ -47,9 +47,9 @@ console.warn(tag);
         mobileBreakpoint={0}
         showDots
       >
-        {tagsList.map((tag) => (
+        {tagsList.map((tags) => (
           <Carousel.Item key={tag}>
-            <div className="item">{tag.name}</div>
+            <div className="item">{tags.name}</div>
           </Carousel.Item>
         ))}
       </Carousel>
