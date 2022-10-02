@@ -48,13 +48,13 @@ const getTopicsByTags = (req, res) => {
 };
 
 const createTopic = (req, res) => {
-  const { title, topic, summary, chat_id, date, categories_id, users_id } =
+  const { title, topic, summary, chat_id, date, categories_id, tag, users_id } =
     req.body;
 
   neuron
     .query(
-      `INSERT INTO topics(title, topic, summary, chat_id, date, categories_id, users_id) VALUES (?, ?, ?, ?, ?, ?, ?)`,
-      [title, topic, summary, chat_id, date, categories_id, users_id]
+      `INSERT INTO topics(title, topic, summary, chat_id, date, categories_id, tag, users_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+      [title, topic, summary, chat_id, date, categories_id, tag, users_id]
     )
     .then(() => {
       res.sendStatus(201);
@@ -66,3 +66,5 @@ const createTopic = (req, res) => {
 };
 
 module.exports = { getCategories, getTopics, getTopicsByTags, createTopic };
+
+// modifier table tags et ajouter join
