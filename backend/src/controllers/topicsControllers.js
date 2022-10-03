@@ -50,8 +50,16 @@ const getTopicsByTags = (req, res) => {
 };
 
 const createTopic = (req, res) => {
-  const { title, topic, summary, chat_id, date, categories_id, users_id, tag } =
-    req.body;
+  const {
+    title,
+    topic,
+    summary,
+    chat_id,
+    date,
+    categories_id,
+    users_id,
+    tags,
+  } = req.body;
 
   neuron
     .query(
@@ -59,37 +67,37 @@ const createTopic = (req, res) => {
       [title, topic, summary, chat_id, date, categories_id, users_id]
     )
     .then(() => {
+      let promise = new Promise((resolve) => {
+        resolve("foo");
+      });
+      tags.map((tag) => {
+        promise = promise.then(() => {
+          return neuron.query(
+            `INSERT INTO tags (tag) SELECT (?) WHERE NOT EXISTS ( SELECT * FROM tags WHERE (tag=?) ) `,
+            [tag, tag]
+          );
+        });
+      });
+    })
+    .then(() => {
+      let promise2 = new Promise((resolve) => {
+        resolve("foo");
+      });
+      tags.map((tag) => {
+        promise2 = promise2.then(() => {
+          return neuron.query(
+            `INSERT INTO topics_has_tags (topics_id, tags_id) SELECT topics.id, tags.id FROM topics, tags WHERE topics.title=? AND tags.tag=? `,
+            [title, tag]
+          );
+        });
+      });
+    })
+    .then(() => {
       res.status(201);
     })
     .catch((err) => {
       console.error(err);
       res.status(500).send("Error saving the topic");
-    });
-
-  neuron
-    .query(
-      `INSERT INTO tags (tag) SELECT (?) WHERE NOT EXISTS ( SELECT * FROM tags WHERE (tag=?) ) `,
-      [tag, tag]
-    )
-    .then(() => {
-      res.status(201);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Error saving the tag");
-    });
-
-  neuron
-    .query(
-      `INSERT INTO topics_has_tags (topics_id, tags_id) VALUES ((SELECT id FROM topics WHERE title LIKE ?), (SELECT id FROM tags WHERE tag LIKE ?)) `,
-      [title, tag]
-    )
-    .then(() => {
-      res.status(201);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Error saving in topics_has_tags");
     });
 };
 

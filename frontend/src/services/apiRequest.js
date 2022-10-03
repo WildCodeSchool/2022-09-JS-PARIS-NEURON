@@ -73,7 +73,7 @@ const postTopic = (
   date,
   category,
   userId,
-  tag
+  tags
 ) => {
   axios
     .post(
@@ -86,7 +86,7 @@ const postTopic = (
         date,
         categories_id: category,
         users_id: userId,
-        tag,
+        tags,
       },
       {
         withCredentials: true,
