@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Navbar, Markdown } from "@components/";
 import { postTopic } from "@services/apiRequest";
 import { v4 as uuidv4 } from "uuid";
+import { useNavigate } from "react-router";
 
 import "./CreateTopics.scss";
 
@@ -17,11 +18,16 @@ export const CreateTopics = () => {
   const [tags, setTags] = useState([]);
   const [userId, setUserId] = useState(0);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     setToken(localStorage.getItem("token"));
     setChatId(uuidv4());
     const today = new Date();
-    setDate(`${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`);
+    setDate(
+      `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`
+    );
+    setUserId(1);
   }, []);
 
   const handleChangeTitle = (e) => {
@@ -40,7 +46,7 @@ export const CreateTopics = () => {
   };
 
   const handleHadTag = () => {
-    setTags([...tags, `#${singleTag}`]);
+    setTags([...tags, singleTag]);
     setSingleTag("");
   };
 
@@ -51,18 +57,20 @@ export const CreateTopics = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setSummary(topic.slice(0, 255));
-    setUserId(1);
-    postTopic(
-      token,
-      title,
-      topic,
-      summary,
-      chatId,
-      date,
-      categorieId,
-      tags,
-      userId
+    tags.map((tag) =>
+      postTopic(
+        token,
+        title,
+        topic,
+        summary,
+        chatId,
+        date,
+        categorieId,
+        userId,
+        tag
+      )
     );
+    navigate("/topics");
   };
 
   console.warn("title: ", title);

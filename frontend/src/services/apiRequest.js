@@ -72,8 +72,8 @@ const postTopic = (
   chatId,
   date,
   category,
-  tags,
-  userId
+  userId,
+  tag
 ) => {
   axios
     .post(
@@ -85,8 +85,8 @@ const postTopic = (
         chat_id: chatId,
         date,
         categories_id: category,
-        tag: tags,
-        user_id: userId,
+        users_id: userId,
+        tag,
       },
       {
         withCredentials: true,

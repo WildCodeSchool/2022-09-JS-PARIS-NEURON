@@ -29,6 +29,7 @@ export const TopicsDisplay = () => {
 
   const handleSearch = () => {
     setTopicsByTags([]);
+    console.warn(searchTag);
     getTopicsByTags(searchTag, setTopicsByTags);
     setOpen(0);
   };

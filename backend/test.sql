@@ -18,7 +18,7 @@ VALUES
   );
 
 INSERT INTO
-  `neuron`.`tags` (`name`)
+  `neuron`.`tags` (`tag`)
 VALUES
   ('test');
 
