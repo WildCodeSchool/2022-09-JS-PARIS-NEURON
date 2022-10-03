@@ -45,9 +45,9 @@ export const NeuronFavorites = () => {
   return (
     <div className="carousel">
       <Carousel
-        cols={10}
-        rows={1}
-        gap={10}
+        cols={5}
+        rows={4}
+        gap={5}
         responsiveLayout={neuronFavList}
         mobileBreakpoint={0}
         showDots

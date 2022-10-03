@@ -1,161 +1,133 @@
 // /* eslint-disable jsx-a11y/no-static-element-interactions */
 // /* eslint-disable jsx-a11y/click-events-have-key-events */
-// import React, { useEffect, useState } from "react";
-// import { Search } from "@components";
+import React, { useState } from "react";
+import { Search, NeuronFavorites } from "@components";
 // import Carousel from "react-grid-carousel";
 
-// import "./TopicsDisplay.scss";
+import "./ProfilDisplay.scss";
+import { MailOnIcon } from "@assets/MailOnIcon";
 
-// export const ProfilDisplay = () => {
-//   const [topics, setTopics] = useState([]);
-//   const [topicsByTags, setTopicsByTags] = useState([]);
-//   const [searchTag, setSearchTag] = useState("");
-//   const [tabs, setTabs] = useState([]);
-//   const [open, setOpen] = useState(1);
+export const ProfilDisplay = () => {
+  const [toggleState, setToggleState] = useState(1);
+  const toggleTab = (index) => {
+    setToggleState(index);
+  };
 
-//   useEffect(() => {
-//     getTabs(setTabs);
-//     getTopics(setTopics);
-//   }, []);
+  //   const TopicsList = [
+  //     {
+  //       breakpoint: 767,
+  //       cols: 2,
+  //       rows: 1,
+  //       gap: 5,
+  //       loop: true,
+  //     },
+  //   ];
 
-//   const handleChange = (e) => {
-//     setSearchTag(e.target.value);
-//   };
+  //   const TabsList = [
+  //     {
+  //       id: 1,
+  //       tab: "Neurons Favoris",
+  //     },
+  //     {
+  //       id: 2,
+  //       tab: "Topics Favoris",
+  //     },
+  //     {
+  //       id: 3,
+  //       tab: "Tags Favoris",
+  //     },
+  //     {
+  //       id: 4,
+  //       tab: "Messagerie",
+  //     },
+  //     {
+  //       id: 5,
+  //       tab: "Paramètres",
+  //     },
+  //   ];
 
-//   const handleSearch = () => {
-//     setTopicsByTags([]);
-//     getTopicsByTags(searchTag, setTopicsByTags);
-//     setOpen(0);
-//   };
+  return (
+    <div className="tabs_display">
+      <div className="tabs_display__tabs">
+        <button
+          type="button"
+          className={toggleState === 1 ? "tabs active-tabs" : "tabs"}
+          onClick={() => toggleTab(1)}
+        >
+          Neurons
+        </button>
 
-//   const handleSwitch = (category) => {
-//     setTopicsByTags([]);
-//     setOpen(category.id);
-//   };
+        <button
+          type="button"
+          className={toggleState === 2 ? "tabs active-tabs" : "tabs"}
+          onClick={() => toggleTab(2)}
+        >
+          Topics
+        </button>
+        <button
+          type="button"
+          className={toggleState === 3 ? "tabs active-tabs" : "tabs"}
+          onClick={() => toggleTab(3)}
+        >
+          Tags
+        </button>
+        <button
+          type="button"
+          className={toggleState === 4 ? "tabs active-tabs" : "tabs"}
+          onClick={() => toggleTab(4)}
+        >
+          <MailOnIcon />
+        </button>
+        <button
+          className={toggleState === 5 ? "tabs active-tabs" : "tabs"}
+          onClick={() => toggleTab(5)}
+        >
+          Paramètres
+        </button>
+      </div>
 
-//   const TopicsList = [
-//     {
-//       breakpoint: 767,
-//       cols: 2,
-//       rows: 1,
-//       gap: 5,
-//       loop: true,
-//     },
-//   ];
+      <div className="content-tabs">
+        <div
+          className={toggleState === 1 ? "content  active-content" : "content"}
+        >
+          <h2>Mes neurons</h2>
+          <NeuronFavorites />
+        </div>
 
-//   const TabsList = [
-//     {
-//       id: 1,
-//       tab: "Neurons Favoris",
-//     },
-//     {
-//       id: 2,
-//       tab: "Topics Favoris",
-//     },
-//     {
-//       id: 3,
-//       tab: "Tags Favoris",
-//     },
-//     {
-//       id: 4,
-//       tab: "Messagerie",
-//     },
-//     {
-//       id: 5,
-//       tab: "Paramètres",
-//     },
-//   ];
+        <div
+          className={toggleState === 2 ? "content  active-content" : "content"}
+        >
+          <h2>Content 2</h2>
+          <hr />
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente
+            voluptatum qui adipisci.
+          </p>
+        </div>
 
-//   return (
-//     <div className="tabs">
-//       {TabsList.map((tab) => {
-//         return (
-//           <div
-//             className={
-//               open === tab.id ? `tab_category_open` : `tab_category_close`
-//             }
-//             key={tab.id}
-//           >
-//             <div
-//               className="tab_category_name"
-//               onClick={() => handleSwitch(tab)}
-//             >
-//               {tab.name}
-//             </div>
-//             <Carousel
-//               cols={10}
-//               rows={1}
-//               gap={10}
-//               responsiveLayout={TabsList}
-//               mobileBreakpoint={376}
-//               showDots
-//             >
-//               {topics
-//                 .filter((topic) => topic.categories_id === category.id)
-//                 .map((topic) => {
-//                   return (
-//                     <Carousel.Item key={topic.id}>
-//                       <div className="categories_category_content">
-//                         <TopicCard
-//                           title={topic.title}
-//                           summary={topic.summary}
-//                           date={topic.date}
-//                           tag={topic.name}
-//                         />
-//                       </div>
-//                     </Carousel.Item>
-//                   );
-//                 })}
-//             </Carousel>
-//           </div>
-//         );
-//       })}
-//       <div className="categories_filter">
-//         <Search
-//           placeholder="rechercher un topic"
-//           handleChange={handleChange}
-//           handleSearch={handleSearch}
-//           value={searchTag}
-//         />
-//       </div>
-//       <div className="categories_showByTags">
-//         {(topicsByTags.length && (
-//           <Carousel
-//             cols={10}
-//             rows={1}
-//             gap={10}
-//             responsiveLayout={TopicsList}
-//             mobileBreakpoint={376}
-//             showDots
-//           >
-//             {topicsByTags.map((topic) => {
-//               return (
-//                 <Carousel.Item key={topic.id}>
-//                   <div className="categories_category_content">
-//                     <TopicCard
-//                       title={topic.title}
-//                       summary={topic.summary}
-//                       date={topic.date}
-//                       tag={topic.name}
-//                     />
-//                   </div>
-//                 </Carousel.Item>
-//               );
-//             })}
-//           </Carousel>
-//         )) ||
-//           (!topicsByTags.length && (
-//             <div
-//               className={
-//                 !open
-//                   ? "categories_category_missing_visible"
-//                   : "categories_category_missing_hidden"
-//               }
-//             >
-//               <span>rien pour le moment...</span>
-//             </div>
-//           ))}
-//       </div>
-//     </div>
-//   );
-// };
+        <div
+          className={toggleState === 3 ? "content  active-content" : "content"}
+        >
+          <h2>Content 3</h2>
+          <hr />
+          <p />
+        </div>
+        <div
+          className={toggleState === 4 ? "content  active-content" : "content"}
+        >
+          <h2>Content 4</h2>
+          <hr />
+          <p />
+        </div>
+        <div
+          className={toggleState === 5 ? "content  active-content" : "content"}
+        >
+          <h2>Content 5</h2>
+          <hr />
+          <p />
+        </div>
+      </div>
+      <Search />
+    </div>
+  );
+};
