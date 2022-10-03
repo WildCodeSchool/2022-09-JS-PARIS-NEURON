@@ -79,6 +79,7 @@ export const ProfilDisplay = () => {
           <MailOnIcon />
         </button>
         <button
+          type="button"
           className={toggleState === 5 ? "tabs active-tabs" : "tabs"}
           onClick={() => toggleTab(5)}
         >
