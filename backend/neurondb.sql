@@ -103,7 +103,7 @@ DROP TABLE IF EXISTS `neuron`.`comments` ;
 
 CREATE TABLE IF NOT EXISTS `neuron`.`comments` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `username` VARCHAR(70) NOT NULL,
+  `username_comments` VARCHAR(70) NOT NULL,
   `comment` MEDIUMTEXT NOT NULL,
   `date_hour` DATETIME NOT NULL,
   `topics_id` INT NOT NULL,
@@ -131,7 +131,7 @@ DROP TABLE IF EXISTS `neuron`.`private_messages` ;
 
 CREATE TABLE IF NOT EXISTS `neuron`.`private_messages` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `username` VARCHAR(70) NOT NULL,
+  `username_pm` VARCHAR(70) NOT NULL,
   `sender` VARCHAR(70) NOT NULL,
   `receiver` VARCHAR(70) NOT NULL,
   `subject` VARCHAR(70) NOT NULL,

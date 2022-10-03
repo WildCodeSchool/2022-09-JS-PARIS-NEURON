@@ -63,9 +63,32 @@ const logout = (req, res) => {
     });
 };
 
+// const { mail } = req.body;
+
+// neuron
+//   .query("SELECT * FROM users WHERE mail = ?", [mail])
+//   .then(([users]) => {
+//     if (users[0] != null) {
+//       // eslint-disable-next-line prefer-destructuring
+//       req.user = users[0];
+//       next();
+//     } else {
+//       res.sendStatus(401);
+//     }
+//   })
+
+// const getTag = (req, res) => {
+//   const { tag } = req.body;
+
+//   neuron.query(
+//     "SELECT * FROM tags JOIN users ON users.id = tags.users_id JOIN comments ON users_id = tags.users_id JOIN topics_has_tags ON tags_id = tags.id JOIN topics_has_tags ON topics_has_tags ON topics_id=tags.id "
+//   );
+// };
+
 module.exports = {
   getUsers,
   createUser,
   registerWithMail,
   logout,
+  // getTag
 };
