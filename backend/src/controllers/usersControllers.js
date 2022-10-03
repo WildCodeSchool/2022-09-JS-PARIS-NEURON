@@ -17,7 +17,7 @@ const createUser = (req, res) => {
 
   neuron
     .query(
-      "INSERT INTO users(username, hashedpassword, mail, role, status, chat_id) VALUES (?, ?, ?, 'user', false, ?)",
+      "INSERT INTO users (username, hashedpassword, mail, role, status, chat_id) VALUES (?, ?, ?, 'user', false, ?)",
       [username, hashedpassword, mail, chat_id]
     )
     .then(([result]) => {

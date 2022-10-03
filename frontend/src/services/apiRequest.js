@@ -64,9 +64,46 @@ const getTopicsByTags = (tag, setState) => {
   });
 };
 
-// const getTabs = (setState) => {
-//   axios.get("http://localhost:5000/tabs").then((res) => {
-//     setState(res.data);
-//   });
+const postTopic = (
+  token,
+  title,
+  topic,
+  summary,
+  chatId,
+  date,
+  category,
+  userId,
+  tag
+) => {
+  axios
+    .post(
+      `http://localhost:5000/topics`,
+      {
+        title,
+        topic,
+        summary,
+        chat_id: chatId,
+        date,
+        categories_id: category,
+        users_id: userId,
+        tag,
+      },
+      {
+        withCredentials: true,
+        headers: {
+          "x-xsrf-token": `${token}`,
+        },
+      }
+    )
+    .then((res) => console.warn(res));
+};
 
-export { register, login, getTopics, getCategories, getTopicsByTags, logout };
+export {
+  register,
+  login,
+  getTopics,
+  getCategories,
+  getTopicsByTags,
+  logout,
+  postTopic,
+};
