@@ -17,7 +17,7 @@ const getCategories = (req, res) => {
 const getTopics = (req, res) => {
   neuron
     .query(
-      `SELECT *, DATE_FORMAT(date, "%d/%m/%Y") AS date FROM topics_has_tags AS tht JOIN topics ON topics.id=tht.topics_id JOIN tags ON tags.id=tht.tags_id ORDER BY topics.id DESC`
+      `SELECT *, DATE_FORMAT(date, "%d/%m/%Y") AS date FROM topics_has_tags AS tht JOIN topics ON topics.id=tht.topics_id JOIN tags ON tags.id=tht.tags_id GROUP BY topics.id ORDER BY topics.id DESC`
     )
     .then(([topics]) => {
       res.status(201).json(topics);
