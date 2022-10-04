@@ -1,7 +1,7 @@
 // /* eslint-disable jsx-a11y/no-static-element-interactions */
 // /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState } from "react";
-import { Search, NeuronFavorites } from "@components";
+import { Search, NeuronFavorites, TopicCard } from "@components";
 
 import "./ProfilDisplay.scss";
 
@@ -10,16 +10,6 @@ export const ProfilDisplay = () => {
   const toggleTab = (index) => {
     setToggleState(index);
   };
-
-  //   const TopicsList = [
-  //     {
-  //       breakpoint: 767,
-  //       cols: 2,
-  //       rows: 1,
-  //       gap: 5,
-  //       loop: true,
-  //     },
-  //   ];
 
   //   const TabsList = [
   //     {
@@ -91,6 +81,7 @@ export const ProfilDisplay = () => {
           className={toggleState === 1 ? "content  active-content" : "content"}
         >
           <h2>Mes neurons</h2>
+          <hr />
           <NeuronFavorites />
         </div>
 
@@ -99,10 +90,7 @@ export const ProfilDisplay = () => {
         >
           <h2>Mes Topics</h2>
           <hr />
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente
-            voluptatum qui adipisci.
-          </p>
+          <TopicCard />
           <hr />
           <Search />
         </div>
