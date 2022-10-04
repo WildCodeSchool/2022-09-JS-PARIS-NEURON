@@ -20,7 +20,7 @@ const hashPassword = (req, res, next) => {
     })
     .catch((err) => {
       console.error(err);
-      res.sendStatus(500);
+      res.status(500);
     });
 };
 
@@ -32,16 +32,15 @@ const verifyPassword = (req, res) => {
         const xsrfToken = crypto.randomBytes(64).toString("hex");
         const payload = { mail: req.user.mail, xsrfToken };
         const token = jwt.sign(payload, process.env.JWT_SECRET, {
-          expiresIn: "1h",
+          expiresIn: "24h",
         });
         delete req.user.hashedpassword;
-        console.warn("token: ", token, "xsrfToken: ", xsrfToken);
         res.cookie("token", token, {
           httpOnly: true,
           // secure: true,
-          maxAge: 3600000,
+          maxAge: 24 * 60 * 60 * 1000,
         });
-        res.send({ xsrfToken, user: req.user });
+        res.send({ xsrfToken, user: req.user, message: "connecté" });
       } else {
         res.sendStatus(401);
       }
@@ -56,10 +55,6 @@ const verifyPassword = (req, res) => {
 const verifyToken = (req, res, next) => {
   try {
     const { cookies, headers } = req;
-    // // console.warn("req: ", req);
-    // console.warn("cookies: ", req.cookies);
-    // console.warn("headers token", req.headers["x-xsrf-token"]);
-    // console.warn("headers: ", req.headers);
 
     if (!cookies || !cookies.token) {
       return res.status(401).json({ message: "Missing token in cookie" });
@@ -67,15 +62,11 @@ const verifyToken = (req, res, next) => {
 
     const { token } = cookies;
 
-    // console.warn("cookies: ", token);
-
     if (!headers || !headers["x-xsrf-token"]) {
       return res.status(401).json({ message: "Missing XSRF token in headers" });
     }
 
     const xsrfToken = headers["x-xsrf-token"];
-
-    // console.warn("headers token:", xsrfToken);
 
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
 

@@ -20,12 +20,12 @@ const createUser = (req, res) => {
       "INSERT INTO users (username, hashedpassword, mail, role, status, chat_id) VALUES (?, ?, ?, 'user', false, ?)",
       [username, hashedpassword, mail, chat_id]
     )
-    .then(([result]) => {
-      res.location(`/api/users/${result.insertId}`).sendStatus(201);
+    .then(() => {
+      res.status(201).json("neuron créé");
     })
     .catch((err) => {
       console.error(err);
-      res.status(500).send("Error saving the user");
+      res.status(500).send("informations erronées");
     });
 };
 
@@ -40,7 +40,7 @@ const registerWithMail = (req, res, next) => {
         req.user = users[0];
         next();
       } else {
-        res.sendStatus(401);
+        res.status(401).json("erreur email ou mot de passe");
       }
     })
     .catch((err) => {
@@ -54,8 +54,8 @@ const logout = (req, res) => {
 
   neuron
     .query("INSERT INTO blacklist(token) VALUE (?)", [token])
-    .then(([result]) => {
-      res.status(201).json(result);
+    .then(() => {
+      res.status(201).json("deconnecté");
     })
     .catch((err) => {
       console.error(err);
