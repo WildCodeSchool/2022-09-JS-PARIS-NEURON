@@ -2,10 +2,8 @@
 // /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState } from "react";
 import { Search, NeuronFavorites } from "@components";
-// import Carousel from "react-grid-carousel";
 
 import "./ProfilDisplay.scss";
-import { MailOnIcon } from "@assets/MailOnIcon";
 
 export const ProfilDisplay = () => {
   const [toggleState, setToggleState] = useState(1);
@@ -76,7 +74,8 @@ export const ProfilDisplay = () => {
           className={toggleState === 4 ? "tabs active-tabs" : "tabs"}
           onClick={() => toggleTab(4)}
         >
-          <MailOnIcon />
+          Messagerie
+          {/* <MailOnIcon /> */}
         </button>
         <button
           type="button"
@@ -98,27 +97,33 @@ export const ProfilDisplay = () => {
         <div
           className={toggleState === 2 ? "content  active-content" : "content"}
         >
-          <h2>Content 2</h2>
+          <h2>Mes Topics</h2>
           <hr />
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente
             voluptatum qui adipisci.
           </p>
+          <hr />
+          <Search />
         </div>
 
         <div
           className={toggleState === 3 ? "content  active-content" : "content"}
         >
-          <h2>Content 3</h2>
+          <h2>Mes Tags</h2>
           <hr />
           <p />
+          <Search />
         </div>
         <div
           className={toggleState === 4 ? "content  active-content" : "content"}
         >
           <h2>Content 4</h2>
           <hr />
-          <p />
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente
+            voluptatum qui adipisci.
+          </p>
         </div>
         <div
           className={toggleState === 5 ? "content  active-content" : "content"}
@@ -128,7 +133,6 @@ export const ProfilDisplay = () => {
           <p />
         </div>
       </div>
-      <Search />
     </div>
   );
 };
