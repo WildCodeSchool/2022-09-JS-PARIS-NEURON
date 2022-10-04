@@ -70,6 +70,12 @@ const getTopicsByTags = (tag, setState) => {
   });
 };
 
+const getTopicById = (id, setState) => {
+  axios.get(`http://localhost:5000/topic?id=${id}`).then((res) => {
+    setState(res.data[0]);
+  });
+};
+
 const postTopic = (
   token,
   title,
@@ -109,6 +115,7 @@ export {
   login,
   getTopics,
   getCategories,
+  getTopicById,
   getTopicsByTags,
   logout,
   postTopic,

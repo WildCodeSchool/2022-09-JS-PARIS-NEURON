@@ -14,19 +14,96 @@
     align-items: center;
     height: 88%;
     width: 100%;
-    overflow-y: scroll;
-  }
 
-  @keyframes extend {
-    from {
-      opacity: 0;
+    @keyframes extend {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
     }
 
-    to {
-      opacity: 1;
+    animation-duration: 0.5s;
+    animation-name: extend;
+
+    &_header {
+      width: 100%;
+      padding: 1rem;
+      background-color: $dark-purple-5;
+      border-radius: 0.3rem;
+      box-shadow: 0 0 10px $carbon;
+
+      &_bottom {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+
+        &_left {
+          display: flex;
+          align-items: flex-end;
+        }
+
+        &_right {
+          display: flex;
+          flex-direction: column;
+        }
+      }
+    }
+
+    .markdown {
+      height: 100%;
+      width: 100%;
+      border-radius: 0.5rem;
+      white-space: pre-line;
+      overflow-y: scroll;
+      padding: 0.5rem;
+      margin-top: 1rem;
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        text-indent: 1rem;
+      }
+
+      img {
+        width: 100%;
+      }
+
+      p {
+        width: 100%;
+        text-align: justify;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        overflow-x: scroll;
+      }
+
+      code {
+        display: block;
+        width: 100%;
+        padding: 0.3rem;
+        font-size: 90%;
+        background-color: $dark-purple-7;
+        color: inherit;
+        overflow-y: scroll;
+      }
+
+      blockquote {
+        width: 100%;
+        background-color: $warm-grey-2;
+        color: $cool-grey-1;
+        padding: 0.2rem 1rem;
+        border-radius: 0.5rem;
+
+        &::before,
+        &::after {
+          content: "``";
+        }
+      }
     }
   }
-
-  animation-duration: 0.5s;
-  animation-name: extend;
 }

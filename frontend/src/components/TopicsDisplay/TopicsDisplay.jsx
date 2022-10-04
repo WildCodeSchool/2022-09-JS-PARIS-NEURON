@@ -49,6 +49,8 @@ export const TopicsDisplay = () => {
     },
   ];
 
+  console.warn(topics);
+
   return (
     <div className="categories">
       {categories.map((category) => {
@@ -85,7 +87,7 @@ export const TopicsDisplay = () => {
                           title={topic.title}
                           summary={topic.summary}
                           date={topic.date}
-                          id={topic.id}
+                          id={topic.topics_id}
                         />
                       </div>
                     </Carousel.Item>
@@ -121,7 +123,7 @@ export const TopicsDisplay = () => {
                       title={topic.title}
                       summary={topic.summary}
                       date={topic.date}
-                      id={topic.id}
+                      id={topic.topics_id}
                     />
                   </div>
                 </Carousel.Item>
