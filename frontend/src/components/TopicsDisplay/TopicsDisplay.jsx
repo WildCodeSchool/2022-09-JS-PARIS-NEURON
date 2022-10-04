@@ -29,7 +29,6 @@ export const TopicsDisplay = () => {
 
   const handleSearch = () => {
     setTopicsByTags([]);
-    console.warn(searchTag);
     getTopicsByTags(searchTag, setTopicsByTags);
     setOpen(0);
   };
@@ -48,8 +47,6 @@ export const TopicsDisplay = () => {
       loop: true,
     },
   ];
-
-  console.warn(topics);
 
   return (
     <div className="categories">

@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import "./TopicCard.scss";
 
 export const TopicCard = ({ title, summary, date, id }) => {
-  console.warn(id);
   return (
     <div className="topicCard">
       <div className="topicCard_title">{title}</div>

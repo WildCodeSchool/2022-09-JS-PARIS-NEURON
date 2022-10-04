@@ -30,6 +30,12 @@ export const CreateTopics = () => {
     setUserId(1);
   }, []);
 
+  useEffect(() => {
+    setSummary(topic.slice(0, 255));
+  }, [topic]);
+
+  console.warn(summary);
+
   const handleChangeTitle = (e) => {
     e.preventDefault();
     setTitle(e.target.value);
@@ -56,7 +62,6 @@ export const CreateTopics = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSummary(topic.slice(0, 255));
     postTopic(
       token,
       title,
@@ -70,15 +75,6 @@ export const CreateTopics = () => {
     );
     navigate("/topics");
   };
-
-  console.warn("title: ", title);
-  console.warn("topic: ", topic);
-  console.warn("summary: ", summary);
-  console.warn("chatId", chatId);
-  console.warn("date: ", date);
-  console.warn("categorieId: ", categorieId);
-  console.warn("tags: ", tags);
-  console.warn("userId: ", userId);
 
   return (
     <div className="createtopics">
