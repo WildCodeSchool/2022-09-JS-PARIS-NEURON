@@ -1,6 +1,5 @@
 const { neuron } = require("../../neuron");
 
-
 const getUsers = (req, res) => {
   neuron
     .query(`SELECT * FROM users`)
@@ -29,7 +28,6 @@ const createUser = (req, res) => {
       res.status(500).send("informations erronées");
     });
 };
-
 
 const registerWithMail = (req, res, next) => {
   const { mail } = req.body;
@@ -70,5 +68,4 @@ module.exports = {
   createUser,
   registerWithMail,
   logout,
-
 };
