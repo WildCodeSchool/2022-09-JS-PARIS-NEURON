@@ -29,6 +29,7 @@ export const TopicsDisplay = () => {
 
   const handleSearch = () => {
     setTopicsByTags([]);
+    console.warn(searchTag);
     getTopicsByTags(searchTag, setTopicsByTags);
     setOpen(0);
   };
@@ -84,7 +85,7 @@ export const TopicsDisplay = () => {
                           title={topic.title}
                           summary={topic.summary}
                           date={topic.date}
-                          tag={topic.name}
+                          // tag={topic.tag}
                         />
                       </div>
                     </Carousel.Item>
@@ -120,7 +121,7 @@ export const TopicsDisplay = () => {
                       title={topic.title}
                       summary={topic.summary}
                       date={topic.date}
-                      tag={topic.name}
+                      // tag={topic.tag}
                     />
                   </div>
                 </Carousel.Item>
