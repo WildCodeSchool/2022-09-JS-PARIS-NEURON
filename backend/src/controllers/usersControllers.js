@@ -1,10 +1,5 @@
 const { neuron } = require("../../neuron");
 
-/**
- * Créer un getUserByEmail function
- * Créer un saveUserSettings function
- *
- */
 
 const getUsers = (req, res) => {
   neuron
@@ -35,21 +30,6 @@ const createUser = (req, res) => {
     });
 };
 
-// const getUserByEmail = (email) => {
-//   let user;
-
-//   return neuron
-//     .query("SELECT * FROM users WHERE mail = ?", [email])
-//     .then(([users]) => {
-//       if (users[0] != null) {
-//         // eslint-disable-next-line prefer-destructuring
-//         // req.user = users[0];
-//         user = users[0];
-//         return user;
-//       }
-//       return null;
-//     });
-// };
 
 const registerWithMail = (req, res, next) => {
   const { mail } = req.body;
@@ -90,5 +70,5 @@ module.exports = {
   createUser,
   registerWithMail,
   logout,
-  // getUserByEmail,
+
 };
