@@ -25,6 +25,7 @@ router.get("/users", usersControllers.getUsers);
 router.get("/categories", topicsControllers.getCategories);
 router.get("/topics", topicsControllers.getTopics);
 router.get("/topicsbytags", topicsControllers.getTopicsByTags);
+router.get("/topic", topicsControllers.getTopicById);
 
 router.use(verifyToken);
 

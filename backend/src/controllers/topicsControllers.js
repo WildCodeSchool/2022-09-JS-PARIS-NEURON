@@ -49,6 +49,23 @@ const getTopicsByTags = (req, res) => {
     });
 };
 
+const getTopicById = (req, res) => {
+  const { id } = req.query;
+
+  neuron
+    .query(
+      `SELECT *, DATE_FORMAT(date, "%d/%m/%Y") AS date FROM topics WHERE id=?`,
+      [id]
+    )
+    .then(([topic]) => {
+      if (topic[0] != null) {
+        res.status(201).json(topic);
+      } else {
+        res.status(404).send("Not Found");
+      }
+    });
+};
+
 const createTopic = (req, res) => {
   const {
     title,
@@ -103,4 +120,10 @@ const createTopic = (req, res) => {
     });
 };
 
-module.exports = { getCategories, getTopics, getTopicsByTags, createTopic };
+module.exports = {
+  getCategories,
+  getTopics,
+  getTopicById,
+  getTopicsByTags,
+  createTopic,
+};
