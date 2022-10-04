@@ -2,7 +2,14 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AvatarContext } from "@contexts";
-import { Home, Topics, CreateTopics, UserProfile, CreateMail } from "@pages";
+import {
+  Home,
+  Topics,
+  SingleTopic,
+  CreateTopics,
+  UserProfile,
+  CreateMail,
+} from "@pages";
 
 import "./App.scss";
 
@@ -15,6 +22,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/topics" element={<Topics />} />
+            <Route path="/topic/:id" element={<SingleTopic />} />
             <Route path="/createtopics" element={<CreateTopics />} />
             <Route path="/userprofile" element={<UserProfile />} />
             <Route path="/createmail" element={<CreateMail />} />
