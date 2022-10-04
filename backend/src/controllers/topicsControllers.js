@@ -28,14 +28,16 @@ const getTopics = (req, res) => {
     });
 };
 
-const getTopicsByTags = (req, res) => {
-  const { tag } = req.query;
+const getTopicsByTitle = (req, res) => {
+  const { string } = req.query;
+  const newQuery = `SELECT *, DATE_FORMAT(date, "%d/%m/%Y") AS date FROM topics WHERE title LIKE '%${string.replaceAll(
+    " ",
+    "%' OR title LIKE '%"
+  )}%' ORDER BY id DESC`;
+  console.warn(newQuery);
 
   neuron
-    .query(
-      `SELECT *, DATE_FORMAT(date, "%d/%m/%Y") AS date FROM topics_has_tags AS tht JOIN topics ON topics.id=tht.topics_id JOIN tags ON tags.id=tht.tags_id WHERE tag=? ORDER BY topics.id DESC`,
-      [tag]
-    )
+    .query(newQuery)
     .then(([topics]) => {
       if (topics[0] != null) {
         res.status(201).json(topics);
@@ -124,6 +126,6 @@ module.exports = {
   getCategories,
   getTopics,
   getTopicById,
-  getTopicsByTags,
+  getTopicsByTitle,
   createTopic,
 };
