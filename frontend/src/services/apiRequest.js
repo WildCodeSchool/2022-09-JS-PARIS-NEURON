@@ -8,7 +8,10 @@ const register = (username, password, mail, chatId) => {
       mail,
       chat_id: chatId,
     })
-    .then((res) => console.warn(res));
+    .then((res) => console.warn(res.data))
+    .catch((err) => {
+      console.warn(err.response.data);
+    });
 };
 
 const login = (mail, password) => {
@@ -22,8 +25,11 @@ const login = (mail, password) => {
       { withCredentials: true }
     )
     .then(({ data }) => {
-      console.warn(data);
+      console.warn(data.message);
       localStorage.setItem("token", data.xsrfToken);
+    })
+    .catch((err) => {
+      console.warn(err.response.data);
     });
 };
 
@@ -42,7 +48,7 @@ const logout = (token) => {
       }
     )
     .then((res) => {
-      console.warn(res);
+      console.warn(res.data);
     });
 };
 
@@ -73,7 +79,7 @@ const postTopic = (
   date,
   category,
   userId,
-  tag
+  tags
 ) => {
   axios
     .post(
@@ -86,7 +92,7 @@ const postTopic = (
         date,
         categories_id: category,
         users_id: userId,
-        tag,
+        tags,
       },
       {
         withCredentials: true,

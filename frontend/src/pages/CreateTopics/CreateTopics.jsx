@@ -57,18 +57,16 @@ export const CreateTopics = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setSummary(topic.slice(0, 255));
-    tags.map((tag) =>
-      postTopic(
-        token,
-        title,
-        topic,
-        summary,
-        chatId,
-        date,
-        categorieId,
-        userId,
-        tag
-      )
+    postTopic(
+      token,
+      title,
+      topic,
+      summary,
+      chatId,
+      date,
+      categorieId,
+      userId,
+      tags
     );
     navigate("/topics");
   };
