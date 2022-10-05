@@ -77,18 +77,25 @@ const logout = (req, res) => {
 //     }
 //   })
 
-// const getTag = (req, res) => {
-//   const { tag } = req.body;
+const getTag = (req, res) => {
+  const { tag } = req.body;
 
-//   neuron.query(
-//     "SELECT * FROM tags JOIN users ON users.id = tags.users_id JOIN comments ON users_id = tags.users_id JOIN topics_has_tags ON tags_id = tags.id JOIN topics_has_tags ON topics_has_tags ON topics_id=tags.id "
-//   );
-// };
+  neuron
+    .query("SELECT * FROM tags JOIN users ON users.id = tags.users_id", [tag])
+    .then(([tags]) => {
+      if (tags.users_id != null) {
+        // eslint-disable-next-line prefer-destructuring
+        req.query = tags[0];
+      } else {
+        res.sendStatus(401);
+      }
+    });
+};
 
 module.exports = {
   getUsers,
   createUser,
   registerWithMail,
   logout,
-  // getTag
+  getTag,
 };
