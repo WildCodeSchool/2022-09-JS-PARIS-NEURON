@@ -71,7 +71,7 @@ const verifyToken = (req, res, next) => {
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
 
     if (xsrfToken !== decodedToken.xsrfToken) {
-      return res.status(401).json({ message: "Bad xsrf token" });
+      return res.status(401).json({ message: "erreur, êtes-vous connectés?" });
     }
 
     next();

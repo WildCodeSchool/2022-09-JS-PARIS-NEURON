@@ -15,6 +15,12 @@ export const Auth = ({ show, hide }) => {
 
   const [message, setMessage] = useState("");
 
+  const reload = () => {
+    setTimeout(() => {
+      window.location.reload(false);
+    }, 1500);
+  };
+
   const handleRegister = (e) => {
     e.preventDefault();
     setChatId(uuidv4());
@@ -27,6 +33,7 @@ export const Auth = ({ show, hide }) => {
     login(loginMail, loginPassword, setMessage);
     hide();
     setMessage("");
+    reload();
   };
 
   const handleLogOut = (e) => {
@@ -34,6 +41,7 @@ export const Auth = ({ show, hide }) => {
     logout(localStorage.getItem("token"), setMessage);
     hide();
     setMessage("");
+    reload();
   };
 
   useEffect(() => {
@@ -160,7 +168,7 @@ export const Auth = ({ show, hide }) => {
       ) : null}
       <div className="message">
         <div className={message.length ? "message_show" : "message_hide"}>
-          {message}
+          <div>{message}</div>
         </div>
       </div>
     </div>

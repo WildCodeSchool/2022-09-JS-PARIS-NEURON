@@ -18,6 +18,7 @@ export const CreateTopics = () => {
   const [tags, setTags] = useState([]);
   const [userId, setUserId] = useState(0);
   const [topicId, setTopicId] = useState(0);
+  const [message, setMessage] = useState("");
 
   const navigate = useNavigate();
 
@@ -71,8 +72,10 @@ export const CreateTopics = () => {
       categorieId,
       userId,
       tags,
-      setTopicId
+      setTopicId,
+      setMessage
     );
+    setMessage("");
   };
 
   useEffect(() => {
@@ -141,6 +144,13 @@ export const CreateTopics = () => {
         </div>
       </form>
       <Navbar />
+      <div className="topicMessage">
+        <div
+          className={message.length ? "topicMessage_show" : "topicMessage_hide"}
+        >
+          <div>{message}</div>
+        </div>
+      </div>
     </div>
   );
 };

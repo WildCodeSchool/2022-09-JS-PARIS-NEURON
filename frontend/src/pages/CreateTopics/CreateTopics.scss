@@ -133,4 +133,30 @@
       }
     }
   }
+
+  .topicMessage {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    &_show {
+      visibility: visible;
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      div {
+        background-color: $carbon;
+        color: $cool-grey-1;
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+      }
+    }
+
+    &_hide {
+      visibility: hidden;
+    }
+  }
 }
