@@ -2,7 +2,7 @@ const express = require("express");
 // const { app } = require("./app");
 const usersControllers = require("./controllers/usersControllers");
 const topicsControllers = require("./controllers/topicsControllers");
-const privatemessageControllers = require("./controllers/privatemessageControllers");
+const privatemessageControllers = require("./controllers/usersControllers");
 const {
   hashPassword,
   verifyPassword,

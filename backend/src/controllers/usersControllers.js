@@ -78,12 +78,10 @@ const getPrivateMessage = (req, res) => {
     });
 };
 
-
-
 module.exports = {
   getUsers,
   createUser,
   registerWithMail,
   logout,
-  getPrivateMessage
+  getPrivateMessage,
 };
