@@ -85,6 +85,9 @@ const createTopic = (req, res) => {
       `INSERT INTO topics (title, topic, summary, chat_id, date, categories_id, users_id) VALUES (?, ?, ?, ?, ?, ?, ?) `,
       [title, topic, summary, chat_id, date, categories_id, users_id]
     )
+    .then(([result]) => {
+      res.json(result.insertId);
+    })
     .then(() => {
       let firstPromise = new Promise((resolve, reject) => {
         resolve("OK");
@@ -113,8 +116,8 @@ const createTopic = (req, res) => {
         });
       });
     })
-    .then((result) => {
-      res.status(201).json(result);
+    .then(() => {
+      res.status(201).json();
     })
     .catch((err) => {
       console.error(err);

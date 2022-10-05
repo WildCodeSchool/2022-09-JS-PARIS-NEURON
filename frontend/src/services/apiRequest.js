@@ -94,7 +94,8 @@ const postTopic = (
   date,
   category,
   userId,
-  tags
+  tags,
+  setState
 ) => {
   axios
     .post(
@@ -116,7 +117,9 @@ const postTopic = (
         },
       }
     )
-    .then((res) => console.warn(res))
+    .then((res) => {
+      setState(res.data);
+    })
     .catch((err) => {
       console.warn(err.response.data);
     });

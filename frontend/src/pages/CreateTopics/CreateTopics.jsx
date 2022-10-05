@@ -17,6 +17,7 @@ export const CreateTopics = () => {
   const [singleTag, setSingleTag] = useState("");
   const [tags, setTags] = useState([]);
   const [userId, setUserId] = useState(0);
+  const [topicId, setTopicId] = useState(0);
 
   const navigate = useNavigate();
 
@@ -33,8 +34,6 @@ export const CreateTopics = () => {
   useEffect(() => {
     setSummary(topic.slice(0, 255));
   }, [topic]);
-
-  console.warn(summary);
 
   const handleChangeTitle = (e) => {
     e.preventDefault();
@@ -71,10 +70,14 @@ export const CreateTopics = () => {
       date,
       categorieId,
       userId,
-      tags
+      tags,
+      setTopicId
     );
-    navigate("/topics");
   };
+
+  useEffect(() => {
+    if (topicId) navigate(`/topic/${topicId}`);
+  }, [topicId]);
 
   return (
     <div className="createtopics">

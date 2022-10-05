@@ -15,20 +15,22 @@ export const Auth = ({ show, hide }) => {
 
   const [message, setMessage] = useState("");
 
-  const handleRegister = () => {
+  const handleRegister = (e) => {
+    e.preventDefault();
     setChatId(uuidv4());
     register(username, password, mail, chatId, setMessage);
-    hide();
     setMessage("");
   };
 
-  const handleLogin = () => {
+  const handleLogin = (e) => {
+    e.preventDefault();
     login(loginMail, loginPassword, setMessage);
     hide();
     setMessage("");
   };
 
-  const handleLogOut = () => {
+  const handleLogOut = (e) => {
+    e.preventDefault();
     logout(localStorage.getItem("token"), setMessage);
     hide();
     setMessage("");
@@ -36,7 +38,12 @@ export const Auth = ({ show, hide }) => {
 
   useEffect(() => {
     setChatId(uuidv4());
-  }, [hide]);
+    setUsername("");
+    setPassword("");
+    setMail("");
+    setLoginMail("");
+    setLoginPassword("");
+  }, [message]);
 
   return (
     <div>
@@ -57,7 +64,7 @@ export const Auth = ({ show, hide }) => {
                 <form
                   className="auth_content_form_register auth_content_form_single"
                   action=""
-                  onSubmit={() => handleRegister()}
+                  onSubmit={(e) => handleRegister(e)}
                 >
                   <label htmlFor="username">
                     pseudo<span>*</span>{" "}
@@ -99,7 +106,7 @@ export const Auth = ({ show, hide }) => {
                 <form
                   className="auth_content_form_login auth_content_form_single"
                   action=""
-                  onSubmit={() => handleLogin()}
+                  onSubmit={(e) => handleLogin(e)}
                 >
                   <label htmlFor="loginMail">
                     adresse mail<span>*</span>{" "}
@@ -143,7 +150,7 @@ export const Auth = ({ show, hide }) => {
               <button
                 className="auth_content_logout_submit"
                 type="button"
-                onClick={() => handleLogOut()}
+                onClick={(e) => handleLogOut(e)}
               >
                 se déconnecter
               </button>

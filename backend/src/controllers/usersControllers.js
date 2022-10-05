@@ -21,7 +21,7 @@ const createUser = (req, res) => {
       [username, hashedpassword, mail, chat_id]
     )
     .then(() => {
-      res.status(201).json("neuron créé");
+      res.status(201).json("neuron créé, connectez vous");
     })
     .catch((err) => {
       console.error(err);
