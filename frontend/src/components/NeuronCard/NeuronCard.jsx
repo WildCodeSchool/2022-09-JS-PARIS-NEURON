@@ -1,11 +1,14 @@
 import React from "react";
-import { Avatar } from "@components/";
+import { Avatar, ButtonFavorite } from "@components/";
 import "./NeuronCard.scss";
 
 export const NeuronCard = () => {
   return (
     <div className="NeuronCard">
-      <Avatar />
+      <div className="NeuronCard__avatar">
+        <ButtonFavorite />
+        <Avatar />
+      </div>
     </div>
   );
 };

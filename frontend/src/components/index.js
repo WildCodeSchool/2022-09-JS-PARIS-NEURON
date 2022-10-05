@@ -10,4 +10,7 @@ export { Markdown } from "./Markdown/Markdown";
 export { TopicsDisplay } from "./TopicsDisplay/TopicsDisplay";
 export { TopicCard } from "./TopicCard/TopicCard";
 export { TagsFavorites } from "./TagsFavorites/TagsFavorites";
+export { NeuronFavorites } from "./NeuronFavorites/NeuronFavorites";
 export { Search } from "./Search/Search";
+export { ButtonFavorite } from "./ButtonFavorite/ButtonFavorite";
+export { ProfilDisplay } from "./ProfilDisplay/ProfilDisplay";
