@@ -25,7 +25,9 @@ export const Auth = ({ show, hide }) => {
     e.preventDefault();
     setChatId(uuidv4());
     register(username, password, mail, chatId, setMessage);
+    hide();
     setMessage("");
+    reload();
   };
 
   const handleLogin = (e) => {
