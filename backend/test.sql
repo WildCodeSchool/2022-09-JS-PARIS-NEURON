@@ -18,9 +18,17 @@ VALUES
   );
 
 INSERT INTO
-  `neuron`.`tags` (`name`)
+  `neuron`.`tags` (`tag`)
 VALUES
-  ('test');
+  ('html'),
+  ('css'),
+  ('js'),
+  ('node'),
+  ('react'),
+  ('express'),
+  ('sql'),
+  ('markdown'),
+  ('database');
 
 -- PROBLÈMES
 INSERT INTO
@@ -47,7 +55,7 @@ VALUES
 INSERT INTO
   `neuron`.`topics_has_tags` (`topics_id`, `tags_id`)
 VALUES
-  (LAST_INSERT_ID (), 1);
+  (LAST_INSERT_ID (), 6);
 
 INSERT INTO
   `neuron`.`topics` (
@@ -71,6 +79,11 @@ VALUES
   );
 
 INSERT INTO
+  `neuron`.`topics_has_tags` (`topics_id`, `tags_id`)
+VALUES
+  (LAST_INSERT_ID (), 7);
+
+INSERT INTO
   `neuron`.`topics` (
     `title`,
     `topic`,
@@ -90,6 +103,11 @@ VALUES
     1,
     1
   );
+
+INSERT INTO
+  `neuron`.`topics_has_tags` (`topics_id`, `tags_id`)
+VALUES
+  (LAST_INSERT_ID (), 3);
 
 -- PROJETS
 INSERT INTO
@@ -116,7 +134,7 @@ VALUES
 INSERT INTO
   `neuron`.`topics_has_tags` (`topics_id`, `tags_id`)
 VALUES
-  (LAST_INSERT_ID (), 1);
+  (LAST_INSERT_ID (), 8);
 
 INSERT INTO
   `neuron`.`topics` (
@@ -140,6 +158,11 @@ VALUES
   );
 
 INSERT INTO
+  `neuron`.`topics_has_tags` (`topics_id`, `tags_id`)
+VALUES
+  (LAST_INSERT_ID (), 9);
+
+INSERT INTO
   `neuron`.`topics` (
     `title`,
     `topic`,
@@ -159,6 +182,11 @@ VALUES
     2,
     1
   );
+
+INSERT INTO
+  `neuron`.`topics_has_tags` (`topics_id`, `tags_id`)
+VALUES
+  (LAST_INSERT_ID (), 1);
 
 -- APPRENTISSAGE
 INSERT INTO
@@ -185,7 +213,7 @@ VALUES
 INSERT INTO
   `neuron`.`topics_has_tags` (`topics_id`, `tags_id`)
 VALUES
-  (LAST_INSERT_ID (), 1);
+  (LAST_INSERT_ID (), 5);
 
 INSERT INTO
   `neuron`.`topics` (
@@ -209,6 +237,11 @@ VALUES
   );
 
 INSERT INTO
+  `neuron`.`topics_has_tags` (`topics_id`, `tags_id`)
+VALUES
+  (LAST_INSERT_ID (), 8);
+
+INSERT INTO
   `neuron`.`topics` (
     `title`,
     `topic`,
@@ -228,6 +261,11 @@ VALUES
     3,
     1
   );
+
+INSERT INTO
+  `neuron`.`topics_has_tags` (`topics_id`, `tags_id`)
+VALUES
+  (LAST_INSERT_ID (), 2);
 
 -- VEILLE
 INSERT INTO
@@ -252,6 +290,11 @@ VALUES
   );
 
 INSERT INTO
+  `neuron`.`topics_has_tags` (`topics_id`, `tags_id`)
+VALUES
+  (LAST_INSERT_ID (), 4);
+
+INSERT INTO
   `neuron`.`topics` (
     `title`,
     `topic`,
@@ -271,6 +314,11 @@ VALUES
     4,
     1
   );
+
+INSERT INTO
+  `neuron`.`topics_has_tags` (`topics_id`, `tags_id`)
+VALUES
+  (LAST_INSERT_ID (), 2);
 
 INSERT INTO
   `neuron`.`topics` (
@@ -296,7 +344,7 @@ VALUES
 INSERT INTO
   `neuron`.`topics_has_tags` (`topics_id`, `tags_id`)
 VALUES
-  (LAST_INSERT_ID (), 1);
+  (LAST_INSERT_ID (), 3);
 
 -- DIVERS
 INSERT INTO
@@ -323,7 +371,7 @@ VALUES
 INSERT INTO
   `neuron`.`topics_has_tags` (`topics_id`, `tags_id`)
 VALUES
-  (LAST_INSERT_ID (), 1);
+  (LAST_INSERT_ID (), 6);
 
 INSERT INTO
   `neuron`.`topics` (
@@ -347,6 +395,11 @@ VALUES
   );
 
 INSERT INTO
+  `neuron`.`topics_has_tags` (`topics_id`, `tags_id`)
+VALUES
+  (LAST_INSERT_ID (), 9);
+
+INSERT INTO
   `neuron`.`topics` (
     `title`,
     `topic`,
@@ -366,3 +419,8 @@ VALUES
     5,
     1
   );
+
+INSERT INTO
+  `neuron`.`topics_has_tags` (`topics_id`, `tags_id`)
+VALUES
+  (LAST_INSERT_ID (), 5);

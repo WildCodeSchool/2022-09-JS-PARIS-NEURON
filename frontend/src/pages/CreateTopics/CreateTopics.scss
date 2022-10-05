@@ -47,15 +47,19 @@
     &_title {
       height: 5%;
       width: 100%;
+      padding: 0 1rem;
 
       #title {
         width: 85%;
+        border-radius: 0.5rem;
       }
     }
 
     &_categories {
       height: 5%;
       width: 100%;
+      padding: 0 1rem;
+
       justify-content: start;
 
       > select {
@@ -69,12 +73,20 @@
     &_setTags {
       height: 5%;
       width: 100%;
+      padding: 0 1rem;
 
-      > button {
-        box-shadow: 0 0 5px $carbon;
-        border: solid 1.5px $dark-purple-1;
-        background-color: $dark-purple-3;
-        border-radius: 4px;
+      &_input {
+        > input {
+          border-radius: 0.5rem 0 0 0.5rem;
+        }
+
+        > button {
+          width: 2rem;
+          box-shadow: 0 0 5px $carbon;
+          border: solid 1.5px $dark-purple-1;
+          background-color: $dark-purple-3;
+          border-radius: 0 0.5rem 0.5rem 0;
+        }
       }
     }
 
@@ -98,7 +110,6 @@
         }
 
         > button {
-          box-shadow: 0 0 5px $carbon;
           border: solid 1.5px $dark-purple-1;
           background-color: $dark-purple-3;
           border-radius: 4px;

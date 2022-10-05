@@ -120,3 +120,41 @@
     }
   }
 }
+
+.message {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+
+  &_show {
+    visibility: hidden;
+    background-color: $carbon;
+    color: $cool-grey-1;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+
+    @keyframes disappear {
+      0% {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      70% {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      100% {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+
+    animation-duration: 2s;
+    animation-name: disappear;
+  }
+
+  &_hide {
+    visibility: hidden;
+  }
+}
