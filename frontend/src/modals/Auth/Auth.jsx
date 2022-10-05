@@ -83,6 +83,9 @@ export const Auth = ({ show, hide }) => {
                     id="username"
                     type="text"
                     required
+                    minLength={3}
+                    maxLength={12}
+                    title="entre 3 et 12 caractères"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                   />
@@ -102,6 +105,10 @@ export const Auth = ({ show, hide }) => {
                   <input
                     id="password"
                     type="password"
+                    minLength={8}
+                    maxLength={20}
+                    pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).*$"
+                    title="entre 8 et 20 caractères. au moins 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial"
                     required
                     onChange={(e) => setPassword(e.target.value)}
                   />
@@ -118,9 +125,7 @@ export const Auth = ({ show, hide }) => {
                   action=""
                   onSubmit={(e) => handleLogin(e)}
                 >
-                  <label htmlFor="loginMail">
-                    adresse mail<span>*</span>{" "}
-                  </label>
+                  <label htmlFor="loginMail">adresse mail</label>
                   <input
                     id="loginMail"
                     type="email"
@@ -128,9 +133,7 @@ export const Auth = ({ show, hide }) => {
                     value={loginMail}
                     onChange={(e) => setLoginMail(e.target.value)}
                   />
-                  <label htmlFor="loginPassword">
-                    mot de passe<span>*</span>{" "}
-                  </label>
+                  <label htmlFor="loginPassword">mot de passe</label>
                   <input
                     id="loginPassword"
                     type="password"
