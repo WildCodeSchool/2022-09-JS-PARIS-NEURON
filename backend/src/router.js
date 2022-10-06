@@ -24,8 +24,8 @@ router.post("/login", usersControllers.registerWithMail, verifyPassword);
 router.get("/users", usersControllers.getUsers);
 router.get("/categories", topicsControllers.getCategories);
 router.get("/topics", topicsControllers.getTopics);
-router.get("/topicsbytags", topicsControllers.getTopicsByTags);
-router.get("/topic", topicsControllers.getTopicById);
+router.get("/topicsbytitle", topicsControllers.getTopicsByTitle);
+router.get("/topicbyid", topicsControllers.getTopicById);
 // router.get("/userprofile", usersControllers.getUserFavoritesNeurons);
 
 router.use(verifyToken);

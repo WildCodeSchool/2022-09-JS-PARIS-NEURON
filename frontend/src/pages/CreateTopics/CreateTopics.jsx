@@ -17,6 +17,8 @@ export const CreateTopics = () => {
   const [singleTag, setSingleTag] = useState("");
   const [tags, setTags] = useState([]);
   const [userId, setUserId] = useState(0);
+  const [topicId, setTopicId] = useState(0);
+  const [message, setMessage] = useState("");
 
   const navigate = useNavigate();
 
@@ -33,8 +35,6 @@ export const CreateTopics = () => {
   useEffect(() => {
     setSummary(topic.slice(0, 255));
   }, [topic]);
-
-  console.warn(summary);
 
   const handleChangeTitle = (e) => {
     e.preventDefault();
@@ -71,10 +71,16 @@ export const CreateTopics = () => {
       date,
       categorieId,
       userId,
-      tags
+      tags,
+      setTopicId,
+      setMessage
     );
-    navigate("/topics");
+    setMessage("");
   };
+
+  useEffect(() => {
+    if (topicId) navigate(`/topic/${topicId}`);
+  }, [topicId]);
 
   return (
     <div className="createtopics">
@@ -138,6 +144,13 @@ export const CreateTopics = () => {
         </div>
       </form>
       <Navbar />
+      <div className="topicMessage">
+        <div
+          className={message.length ? "topicMessage_show" : "topicMessage_hide"}
+        >
+          <div>{message}</div>
+        </div>
+      </div>
     </div>
   );
 };
