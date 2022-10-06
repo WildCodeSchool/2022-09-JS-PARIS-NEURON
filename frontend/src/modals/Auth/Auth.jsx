@@ -84,8 +84,8 @@ export const Auth = ({ show, hide }) => {
                     type="text"
                     required
                     minLength={3}
-                    maxLength={12}
-                    title="entre 3 et 12 caractères"
+                    maxLength={10}
+                    title="entre 3 et 10 caractères"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                   />
@@ -106,7 +106,6 @@ export const Auth = ({ show, hide }) => {
                     id="password"
                     type="password"
                     minLength={8}
-                    maxLength={20}
                     pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).*$"
                     title="entre 8 et 20 caractères. au moins 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial"
                     required
