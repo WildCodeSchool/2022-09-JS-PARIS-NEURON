@@ -1,20 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Avatar } from "@components/";
 import { MailOnIcon, NotifOnIcon } from "@assets";
-import { useAvatarContext } from "@contexts";
+
 import "./UserHeader.scss";
 
 export const UserHeader = () => {
-  const { avatarStatus, setAvatarStatus } = useAvatarContext();
+  const [userName, setUserName] = useState("");
+
+  useEffect(() => {
+    setUserName(localStorage.getItem("userName"));
+  }, []);
 
   return (
     <header className="userheader">
       <div className="userheader_pseudo">
-        {/* <LogoLong /> */}
-        <span>Yoh</span>
+        <span>{userName || "invité"}</span>
       </div>
       <div className="userheader_avatarContainer">
-        <Avatar onClick={() => setAvatarStatus(!avatarStatus)} />
+        <Avatar />
       </div>
       <div className="userheader_shortcuts">
         <NotifOnIcon />

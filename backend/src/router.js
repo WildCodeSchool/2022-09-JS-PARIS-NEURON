@@ -27,6 +27,9 @@ router.get("/categories", topicsControllers.getCategories);
 router.get("/topics", topicsControllers.getTopics);
 router.get("/topicsbytags", topicsControllers.getTopicsByTags);
 router.get("/user/privatemessagelist", privatemessageControllers.getEmail);
+router.get("/topicsbytitle", topicsControllers.getTopicsByTitle);
+router.get("/topicbyid", topicsControllers.getTopicById);
+
 router.use(verifyToken);
 
 router.post("/topics", topicsControllers.createTopic);

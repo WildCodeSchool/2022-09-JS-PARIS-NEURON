@@ -1,14 +1,40 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Navbar, Markdown } from "@components/";
+import { postTopic } from "@services/apiRequest";
+import { v4 as uuidv4 } from "uuid";
+import { useNavigate } from "react-router";
 
 import "./CreateTopics.scss";
 
 export const CreateTopics = () => {
-  const [content, setContent] = useState("");
+  const [token, setToken] = useState("");
   const [title, setTitle] = useState("");
-  const [category, setCategory] = useState("");
+  const [topic, setTopic] = useState("");
+  const [summary, setSummary] = useState("");
+  const [chatId, setChatId] = useState("");
+  const [date, setDate] = useState("");
+  const [categorieId, setCategorieId] = useState(0);
   const [singleTag, setSingleTag] = useState("");
   const [tags, setTags] = useState([]);
+  const [userId, setUserId] = useState(0);
+  const [topicId, setTopicId] = useState(0);
+  const [message, setMessage] = useState("");
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    setToken(localStorage.getItem("token"));
+    setChatId(uuidv4());
+    const today = new Date();
+    setDate(
+      `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`
+    );
+    setUserId(1);
+  }, []);
+
+  useEffect(() => {
+    setSummary(topic.slice(0, 255));
+  }, [topic]);
 
   const handleChangeTitle = (e) => {
     e.preventDefault();
@@ -17,7 +43,7 @@ export const CreateTopics = () => {
 
   const handleHadCategorie = (e) => {
     e.preventDefault();
-    setCategory(e.target.value);
+    setCategorieId(parseInt(e.target.value, 10));
   };
 
   const handleChange = (e) => {
@@ -26,7 +52,8 @@ export const CreateTopics = () => {
   };
 
   const handleHadTag = () => {
-    setTags([...tags, `#${singleTag}`]);
+    setTags([...tags, singleTag]);
+    setSingleTag("");
   };
 
   const handleDelete = (tag) => {
@@ -35,16 +62,29 @@ export const CreateTopics = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    postTopic(
+      token,
+      title,
+      topic,
+      summary,
+      chatId,
+      date,
+      categorieId,
+      userId,
+      tags,
+      setTopicId,
+      setMessage
+    );
+    setMessage("");
   };
 
-  console.warn("title: ", title);
-  console.warn("category: ", category);
-  console.warn("tags: ", tags);
-  console.warn("content: ", content);
+  useEffect(() => {
+    if (topicId) navigate(`/topic/${topicId}`);
+  }, [topicId]);
 
   return (
     <div className="createtopics">
-      <form className="createtopics_form">
+      <form className="createtopics_form" onSubmit={(e) => handleSubmit(e)}>
         <div className="createtopics_form_title">
           <label htmlFor="title">Titre:</label>
           <input
@@ -63,25 +103,27 @@ export const CreateTopics = () => {
             onChange={(e) => handleHadCategorie(e)}
           >
             <option value="">...</option>
-            <option value="problème">problème</option>
-            <option value="projet">projet</option>
-            <option value="apprentissage">apprentissage</option>
-            <option value="veille">veille</option>
-            <option value="divers">divers</option>
+            <option value="1">problème</option>
+            <option value="2">projet</option>
+            <option value="3">apprentissage</option>
+            <option value="4">veille</option>
+            <option value="5">divers</option>
           </select>
         </div>
         <div className="createtopics_form_setTags">
           <label htmlFor="tag">tag(s):</label>
-          <input
-            id="tag"
-            type="text"
-            required
-            value={singleTag}
-            onChange={(e) => handleChange(e)}
-          />
-          <button type="button" onClick={() => handleHadTag()}>
-            +
-          </button>
+          <div className="createtopics_form_setTags_input">
+            <input
+              id="tag"
+              type="text"
+              value={singleTag}
+              onChange={(e) => handleChange(e)}
+            />
+
+            <button type="button" onClick={() => handleHadTag()}>
+              +
+            </button>
+          </div>
         </div>
         <div className="createtopics_form_tags">
           {tags.map((tag) => (
@@ -95,15 +137,20 @@ export const CreateTopics = () => {
         </div>
         <hr />
         <div className="createtopics_form_editor">
-          <Markdown input={content} setInput={setContent} />
+          <Markdown input={topic} setInput={setTopic} />
         </div>
         <div className="createtopics_form_send">
-          <button type="submit" onSubmit={(e) => handleSubmit(e)}>
-            créer
-          </button>
+          <button type="submit">créer</button>
         </div>
       </form>
       <Navbar />
+      <div className="topicMessage">
+        <div
+          className={message.length ? "topicMessage_show" : "topicMessage_hide"}
+        >
+          <div>{message}</div>
+        </div>
+      </div>
     </div>
   );
 };
