@@ -17,11 +17,15 @@ const createUser = (req, res) => {
 
   neuron
     .query(
-      "INSERT INTO users (username, hashedpassword, mail, role, status, chat_id) VALUES (?, ?, ?, 'user', false, ?)",
-      [username, hashedpassword, mail, chat_id]
+      "INSERT INTO users (username, hashedpassword, mail, role, status, chat_id) SELECT ?, ?, ?, 'user', false, ? WHERE NOT EXISTS ( SELECT * FROM users WHERE (username=?) OR (mail=?))",
+      [username, hashedpassword, mail, chat_id, username, mail]
     )
-    .then(() => {
-      res.status(201).json("neuron créé, connectez vous");
+    .then(([result]) => {
+      if (!result.affectedRows) {
+        res.status(401).json("pseudo ou email déjà utilisé");
+      } else {
+        res.status(201).json("neuron créé, connectez vous");
+      }
     })
     .catch((err) => {
       console.error(err);
