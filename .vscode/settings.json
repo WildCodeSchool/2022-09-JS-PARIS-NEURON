@@ -9,7 +9,9 @@
         "createtopics",
         "Defaultv",
         "Favoris",
+        "ismarked",
         "Messagerie",
+        "middlewares",
         "neuronavatar",
         "neuroncard",
         "Notif",
@@ -18,6 +20,8 @@
         "Profil",
         "rechercher",
         "rien",
+        "setmarks",
+        "topicsbytags",
         "userheader"
     ]
 }

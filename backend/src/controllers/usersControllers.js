@@ -63,6 +63,15 @@ const logout = (req, res) => {
     });
 };
 
+// const getUserFavoritesNeurons = (req, res) => {
+//   const { id } = req.query;
+
+//   neuron.query(
+//     "SELECT * FROM users WHERE id IN (SELECT neuron_id FROM favorites WHERE user_id = ?)",
+//     [id]
+//   );
+// };
+
 module.exports = {
   getUsers,
   createUser,
