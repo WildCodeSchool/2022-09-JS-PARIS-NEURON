@@ -42,7 +42,7 @@ const verifyPassword = (req, res) => {
         });
         res.send({ xsrfToken, user: req.user, message: "connecté" });
       } else {
-        res.sendStatus(401).json("informations erronées");
+        res.status(401).json("informations erronées");
       }
     })
     .catch((err) => {
@@ -71,13 +71,13 @@ const verifyToken = (req, res, next) => {
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
 
     if (xsrfToken !== decodedToken.xsrfToken) {
-      return res.status(401).json({ message: "erreur, êtes-vous connectés?" });
+      return res.status(401).json({ message: "erreur, êtes-vous connecté?" });
     }
 
     next();
   } catch (err) {
     console.error(err);
-    res.status(401).json("erreur, êtes-vous connectés?");
+    res.status(401).json("erreur, êtes-vous connecté?");
   }
 };
 
