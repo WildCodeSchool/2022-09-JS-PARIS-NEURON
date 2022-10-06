@@ -123,35 +123,43 @@
 
 .message {
   position: fixed;
-  top: 1rem;
-  left: 1rem;
+  top: 0;
+  left: 0;
 
   &_show {
     visibility: hidden;
-    background-color: $carbon;
-    color: $cool-grey-1;
-    padding: 0.5rem;
-    border-radius: 0.5rem;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    @keyframes disappear {
-      0% {
-        opacity: 1;
-        visibility: visible;
+    div {
+      background-color: $carbon;
+      color: $cool-grey-1;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+
+      @keyframes disappear {
+        0% {
+          opacity: 1;
+          visibility: visible;
+        }
+
+        60% {
+          opacity: 1;
+          visibility: visible;
+        }
+
+        100% {
+          opacity: 0;
+          visibility: hidden;
+        }
       }
 
-      70% {
-        opacity: 1;
-        visibility: visible;
-      }
-
-      100% {
-        opacity: 0;
-        visibility: hidden;
-      }
+      animation-duration: 1.5s;
+      animation-name: disappear;
     }
-
-    animation-duration: 2s;
-    animation-name: disappear;
   }
 
   &_hide {

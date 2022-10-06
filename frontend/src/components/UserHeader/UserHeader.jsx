@@ -6,14 +6,10 @@ import "./UserHeader.scss";
 
 export const UserHeader = () => {
   const [userName, setUserName] = useState("");
-  const [connected, setConnected] = useState(0);
 
   useEffect(() => {
     setUserName(localStorage.getItem("userName"));
-    if (userName.length > 1) setConnected(1);
   }, []);
-
-  console.warn(connected);
 
   return (
     <header className="userheader">
@@ -21,7 +17,7 @@ export const UserHeader = () => {
         <span>{userName || "invité"}</span>
       </div>
       <div className="userheader_avatarContainer">
-        <Avatar status={connected} />
+        <Avatar />
       </div>
       <div className="userheader_shortcuts">
         <NotifOnIcon />

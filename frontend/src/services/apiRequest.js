@@ -94,7 +94,9 @@ const postTopic = (
   date,
   category,
   userId,
-  tags
+  tags,
+  setTopicId,
+  setMessage
 ) => {
   axios
     .post(
@@ -116,9 +118,11 @@ const postTopic = (
         },
       }
     )
-    .then((res) => console.warn(res))
+    .then((res) => {
+      setTopicId(res.data);
+    })
     .catch((err) => {
-      console.warn(err.response.data);
+      setMessage(err.response.data.message);
     });
 };
 

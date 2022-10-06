@@ -42,12 +42,12 @@ const verifyPassword = (req, res) => {
         });
         res.send({ xsrfToken, user: req.user, message: "connecté" });
       } else {
-        res.sendStatus(401);
+        res.sendStatus(401).json("informations erronées");
       }
     })
     .catch((err) => {
       console.error(err);
-      res.sendStatus(500);
+      res.status(500);
     });
 };
 
@@ -71,13 +71,13 @@ const verifyToken = (req, res, next) => {
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
 
     if (xsrfToken !== decodedToken.xsrfToken) {
-      return res.status(401).json({ message: "Bad xsrf token" });
+      return res.status(401).json({ message: "erreur, êtes-vous connectés?" });
     }
 
     next();
   } catch (err) {
     console.error(err);
-    res.sendStatus(401);
+    res.status(401).json("erreur, êtes-vous connectés?");
   }
 };
 
