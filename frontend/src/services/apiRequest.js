@@ -97,7 +97,8 @@ const postTopic = (
   category,
   userId,
   tags,
-  setState
+  setTopicId,
+  setMessage
 ) => {
   axios
     .post(
@@ -120,10 +121,10 @@ const postTopic = (
       }
     )
     .then((res) => {
-      setState(res.data);
+      setTopicId(res.data);
     })
     .catch((err) => {
-      console.warn(err.response.data);
+      setMessage(err.response.data.message);
     });
 };
 

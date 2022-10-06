@@ -15,11 +15,19 @@ export const Auth = ({ show, hide }) => {
 
   const [message, setMessage] = useState("");
 
+  const reload = () => {
+    setTimeout(() => {
+      window.location.reload(false);
+    }, 1500);
+  };
+
   const handleRegister = (e) => {
     e.preventDefault();
     setChatId(uuidv4());
     register(username, password, mail, chatId, setMessage);
+    hide();
     setMessage("");
+    reload();
   };
 
   const handleLogin = (e) => {
@@ -27,6 +35,7 @@ export const Auth = ({ show, hide }) => {
     login(loginMail, loginPassword, setMessage);
     hide();
     setMessage("");
+    reload();
   };
 
   const handleLogOut = (e) => {
@@ -34,6 +43,7 @@ export const Auth = ({ show, hide }) => {
     logout(localStorage.getItem("token"), setMessage);
     hide();
     setMessage("");
+    reload();
   };
 
   useEffect(() => {
@@ -73,6 +83,9 @@ export const Auth = ({ show, hide }) => {
                     id="username"
                     type="text"
                     required
+                    minLength={3}
+                    maxLength={10}
+                    title="entre 3 et 10 caractères"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                   />
@@ -92,6 +105,9 @@ export const Auth = ({ show, hide }) => {
                   <input
                     id="password"
                     type="password"
+                    minLength={8}
+                    pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).*$"
+                    title="entre 8 et 20 caractères. au moins 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial"
                     required
                     onChange={(e) => setPassword(e.target.value)}
                   />
@@ -108,9 +124,7 @@ export const Auth = ({ show, hide }) => {
                   action=""
                   onSubmit={(e) => handleLogin(e)}
                 >
-                  <label htmlFor="loginMail">
-                    adresse mail<span>*</span>{" "}
-                  </label>
+                  <label htmlFor="loginMail">adresse mail</label>
                   <input
                     id="loginMail"
                     type="email"
@@ -118,9 +132,7 @@ export const Auth = ({ show, hide }) => {
                     value={loginMail}
                     onChange={(e) => setLoginMail(e.target.value)}
                   />
-                  <label htmlFor="loginPassword">
-                    mot de passe<span>*</span>{" "}
-                  </label>
+                  <label htmlFor="loginPassword">mot de passe</label>
                   <input
                     id="loginPassword"
                     type="password"
@@ -160,7 +172,7 @@ export const Auth = ({ show, hide }) => {
       ) : null}
       <div className="message">
         <div className={message.length ? "message_show" : "message_hide"}>
-          {message}
+          <div>{message}</div>
         </div>
       </div>
     </div>
