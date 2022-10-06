@@ -126,6 +126,59 @@ const postTopic = (
     });
 };
 
+// --------------------USERS PART--------------------------------------------
+
+const postFavorite = (id) => {
+  axios
+    .post(
+      `http://localhost:5000/followed`,
+      { id },
+      {
+        withCredentials: true,
+        headers: {
+          "x-xsrf-token": `${token}`,
+        },
+      }
+    )
+    .then((res) => {
+      addToFavorite(res.data);
+    })
+    .catch((err) => {
+      setMessage(err.response.data.message);
+    });
+};
+
+const deleteFavorite = (id) => {
+  axios
+    .delete(
+      `http://localhost:5000/followed`,
+      { id },
+      {
+        withCredentials: true,
+        headers: {
+          "x-xsrf-token": `${token}`,
+        },
+      }
+    )
+    .then((res) => {
+      removeFromFavorite(res.data);
+    })
+    .catch((err) => {
+      setMessage(err.response.data.message);
+    });
+};
+
+const showFavorite = (setState) => {
+  axios
+    .get(`http://localhost:5000/followed/${id}`)
+    .then((res) => {
+      setState(res.data);
+    })
+    .catch((err) => {
+      setMessage(err.response.data.message);
+    });
+};
+
 export {
   register,
   login,
@@ -135,4 +188,7 @@ export {
   getTopicsByTitle,
   logout,
   postTopic,
+  postFavorite,
+  deleteFavorite,
+  showFavorite,
 };

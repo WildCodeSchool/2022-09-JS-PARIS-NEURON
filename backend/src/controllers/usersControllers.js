@@ -63,18 +63,55 @@ const logout = (req, res) => {
     });
 };
 
-// const getUserFavoritesNeurons = (req, res) => {
-//   const { id } = req.query;
+const addToFavorite = (req, res) => {
+  const { id } = req.body;
 
-//   neuron.query(
-//     "SELECT * FROM users WHERE id IN (SELECT neuron_id FROM favorites WHERE user_id = ?)",
-//     [id]
-//   );
-// };
+  neuron
+    .query(
+      "INSERT INTO followed (id) VALUES (?), JOIN users ON users.id=followed.user_id",
+      [id]
+    )
+    .then(() => {
+      res.status(201).json("ajouté aux favoris");
+    })
+    .catch((err) => {
+      console.warn(err);
+      res.status(500).send("erreur impossible d'ajouter aux favoris");
+    });
+};
+
+const removeFromFavorite = (req, res) => {
+  const { id } = req.body;
+
+  neuron
+    .query("DELETE FROM followed WHERE id = ?", [id])
+    .then(() => {
+      res.status(201).json("supprimé des favoris");
+    })
+    .catch((err) => {
+      console.warn(err);
+      res.status(500).send("erreur impossible de supprimer des favoris");
+    });
+};
+
+const getFavorite = (req, res) => {
+  neuron
+    .query("SELECT * FROM followed JOIN users ON followed.users_id = users.id")
+    .then(([users]) => {
+      res.status(201).json(users);
+    })
+    .catch((err) => {
+      console.warn(err);
+      res.status(500).send("erreur impossible de récupérer les favoris");
+    });
+};
 
 module.exports = {
   getUsers,
   createUser,
   registerWithMail,
   logout,
+  addToFavorite,
+  removeFromFavorite,
+  getFavorite,
 };

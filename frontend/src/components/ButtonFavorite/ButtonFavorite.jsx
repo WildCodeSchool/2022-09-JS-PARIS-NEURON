@@ -1,10 +1,22 @@
 import React, { useState, useEffect } from "react";
 import FullRedHeart from "@assets/images/FullRedHeart.png";
 import EmptyHeart from "@assets/images/emptyHeart.png";
+// import { postFavorite, deleteFavorite } from "@services/apiRequest";
 import "./ButtonFavorite.scss";
 
 export const ButtonFavorite = () => {
   const [isFavorite, setIsFavorite] = useState(false);
+
+  // const handleFavorite = () => {
+  //   e.preventDefault();
+  //   if (isFavorite) {
+  //     setIsFavorite(false);
+  //     deleteFavorite();
+  //   } else {
+  //     setIsFavorite(true);
+  //     postFavorite();
+  //   }
+  // };
 
   const toggleFavorite = () => {
     setIsFavorite(!isFavorite);

@@ -1,14 +1,23 @@
 {
     "cSpell.words": [
+        "ajouté",
         "changetoemptyheart",
         "changetogreen",
         "changetoorange",
         "changetoredheart",
+        "connectez",
         "consolewarn",
         "createmail",
         "createtopics",
+        "créé",
+        "d'ajouter",
+        "deconnecté",
         "Defaultv",
+        "erreur",
+        "erronées",
         "Favoris",
+        "hashedpassword",
+        "informations",
         "ismarked",
         "Messagerie",
         "middlewares",
@@ -19,9 +28,15 @@
         "pascalize",
         "Profil",
         "rechercher",
+        "récupérer",
         "rien",
         "setmarks",
+        "supprimé",
+        "supprimer",
+        "topicbyid",
         "topicsbytags",
-        "userheader"
+        "topicsbytitle",
+        "userheader",
+        "vous"
     ]
 }

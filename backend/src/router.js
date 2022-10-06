@@ -26,8 +26,9 @@ router.get("/categories", topicsControllers.getCategories);
 router.get("/topics", topicsControllers.getTopics);
 router.get("/topicsbytitle", topicsControllers.getTopicsByTitle);
 router.get("/topicbyid", topicsControllers.getTopicById);
-// router.get("/userprofile", usersControllers.getUserFavoritesNeurons);
-
+router.get("/followed", verifyToken, usersControllers.getFavorite);
+router.post("/followed", verifyToken, usersControllers.addToFavorite);
+router.delete("/followed", verifyToken, usersControllers.removeFromFavorite);
 router.use(verifyToken);
 
 router.post("/topics", topicsControllers.createTopic);
