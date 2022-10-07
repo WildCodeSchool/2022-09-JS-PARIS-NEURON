@@ -1,13 +1,14 @@
 import { NeuronCard, Search } from "@components/index";
 import Carousel from "react-grid-carousel";
 import React, { useEffect, useState } from "react";
-import { getFollowed } from "@services/apiRequest";
+import { getFollowed, getUsersByIds } from "@services/apiRequest";
 import "./NeuronFavorites.scss";
 
 export const NeuronFavorites = () => {
   const [neurons, setNeurons] = useState([]);
-  const [searchUser, setSearchUser] = useState("");
+  const [, /* searchUser */ setSearchUser] = useState("");
   const [id, setId] = useState(0);
+  const [idList, setIdList] = useState([]);
   const [token, setToken] = useState("");
   // const [usersById, setUsersById] = useState([]);
   // const handleSearch = () => {
@@ -19,11 +20,16 @@ export const NeuronFavorites = () => {
   }, []);
 
   useEffect(() => {
-    if (token.length) getFollowed(token, id, setNeurons);
+    if (token.length) {
+      getFollowed(token, id, setIdList);
+    }
   }, [token]);
 
-  console.warn(token);
-  console.warn(searchUser);
+  useEffect(() => {
+    if (idList.length) {
+      getUsersByIds(token, idList, setNeurons);
+    }
+  }, [idList]);
 
   const neuronFavList = [
     {
@@ -48,7 +54,6 @@ export const NeuronFavorites = () => {
       loop: true,
     },
   ];
-  console.warn(neurons);
   return (
     <div className="carousel">
       <Carousel

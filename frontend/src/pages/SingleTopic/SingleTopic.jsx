@@ -13,11 +13,14 @@ export const SingleTopic = () => {
   const { id } = useParams();
 
   const [topic, setTopic] = useState([]);
+  const [taglist, setTaglist] = useState([]);
 
   useEffect(() => {
-    getTopicById(id, setTopic);
+    getTopicById(id, setTopic, setTaglist);
     localStorage.removeItem("topicId");
   }, []);
+
+  console.warn(taglist);
 
   return (
     topic && (
@@ -42,7 +45,12 @@ export const SingleTopic = () => {
                 </h4>
               </div>
             </div>
-            <div className="singleTopic_content_header_tags">{topic.tags}</div>
+            <div className="singleTopic_content_header_tags">
+              <span>tags:</span>
+              {taglist.map((tag) => (
+                <div>{tag.tag}</div>
+              ))}
+            </div>
           </div>
           <ReactMarkdown
             className="markdown"
