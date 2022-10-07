@@ -178,7 +178,6 @@ const getFollowed = (token, id, setState) => {
       },
     })
     .then((res) => {
-      console.warn(res);
       setState(res.data.map((elem) => elem.friend_id));
     })
     .catch((err) => {
@@ -198,6 +197,7 @@ const getUsersByIds = (token, idList, setState) => {
       },
     })
     .then((res) => {
+      console.warn(res.data);
       setState(res.data);
     })
     .catch((err) => {
