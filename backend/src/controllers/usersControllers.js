@@ -116,8 +116,8 @@ const getFollowed = (req, res) => {
   const { id } = req.query;
   neuron
     .query(
-      " SELECT followed FROM followed INNER JOIN users ON followed.users_id = users.id WHERE users_id = ?",
-      [id]
+      " SELECT followed FROM followed INNER JOIN users ON followed.users_id = users.id WHERE users.id = ?",
+      [id] // id de l'utilisateur
     )
     .then((result) => {
       console.warn("result: ", result);
