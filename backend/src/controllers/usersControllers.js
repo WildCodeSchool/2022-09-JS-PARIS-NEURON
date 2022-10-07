@@ -139,7 +139,7 @@ const getUserByFollowed = (req, res) => {
     .join(" OR ");
 
   return neuron
-    .query(`SELECT * FROM users WHERE ${queryFragment}`)
+    .query(`SELECT username FROM users WHERE ${queryFragment}`)
     .then(([result]) => {
       return res.status(201).json(result);
     })
