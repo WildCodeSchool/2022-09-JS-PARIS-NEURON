@@ -6,18 +6,19 @@ import "./ButtonFavorite.scss";
 export const ButtonFavorite = () => {
   const [isFavorite, setIsFavorite] = useState(false);
 
+  useEffect(() => {}, [isFavorite]);
+
   const toggleFavorite = () => {
     setIsFavorite(!isFavorite);
+    // handleFollowed();
   };
-
-  useEffect(() => {}, [isFavorite]);
 
   return (
     <div
       aria-hidden="true"
       className="ButtonFavorite"
-      onClick={toggleFavorite}
-      onKeyDown={toggleFavorite}
+      onClick={(e) => toggleFavorite(e)}
+      onKeyDown={(e) => toggleFavorite(e)}
     >
       {isFavorite ? (
         <img className="FullRedHeart" src={FullRedHeart} alt="FullRedHeart" />
