@@ -45,7 +45,12 @@ export const SingleTopic = () => {
                 </h4>
               </div>
             </div>
-            <div className="singleTopic_content_header_tags">{}</div>
+            <div className="singleTopic_content_header_tags">
+              <span>tags:</span>
+              {taglist.map((tag) => (
+                <div>{tag.tag}</div>
+              ))}
+            </div>
           </div>
           <ReactMarkdown
             className="markdown"

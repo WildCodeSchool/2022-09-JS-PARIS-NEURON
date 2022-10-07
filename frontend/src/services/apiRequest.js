@@ -83,7 +83,7 @@ const getTopicById = (id, setTopics, setTaglist) => {
   axios.get(`http://localhost:5000/topicbyid?id=${id}`).then((res) => {
     console.warn(res);
     setTopics(res.data[0][0]);
-    setTaglist(res.data[1][0]);
+    setTaglist(res.data[1]);
   });
 };
 
