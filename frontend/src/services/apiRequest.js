@@ -89,47 +89,47 @@ const getEmail = (setState) => {
   axios.get("http://localhost:5000/email").then((res) => {
     setState(res.data);
   });
-const postTopic = (
-  token,
-  title,
-  topic,
-  summary,
-  chatId,
-  date,
-  category,
-  userId,
-  tags,
-  setTopicId,
-  setMessage
-) => {
-  axios
-    .post(
-      `http://localhost:5000/topics`,
-      {
-        title,
-        topic,
-        summary,
-        chat_id: chatId,
-        date,
-        categories_id: category,
-        users_id: userId,
-        tags,
-      },
-      {
-        withCredentials: true,
-        headers: {
-          "x-xsrf-token": `${token}`,
+  const postTopic = (
+    token,
+    title,
+    topic,
+    summary,
+    chatId,
+    date,
+    category,
+    userId,
+    tags,
+    setTopicId,
+    setMessage
+  ) => {
+    axios
+      .post(
+        `http://localhost:5000/topics`,
+        {
+          title,
+          topic,
+          summary,
+          chat_id: chatId,
+          date,
+          categories_id: category,
+          users_id: userId,
+          tags,
         },
-      }
-    )
-    .then((res) => {
-      setTopicId(res.data);
-    })
-    .catch((err) => {
-      setMessage(err.response.data.message);
-    });
+        {
+          withCredentials: true,
+          headers: {
+            "x-xsrf-token": `${token}`,
+          },
+        }
+      )
+      .then((res) => {
+        setTopicId(res.data);
+      })
+      .catch((err) => {
+        setMessage(err.response.data.message);
+      });
+  };
 };
-}
 export {
   register,
   login,
