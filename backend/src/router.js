@@ -26,11 +26,12 @@ router.get("/categories", topicsControllers.getCategories);
 router.get("/topics", topicsControllers.getTopics);
 router.get("/topicsbytitle", topicsControllers.getTopicsByTitle);
 router.get("/topicbyid", topicsControllers.getTopicById);
-router.get("/followed", verifyToken, usersControllers.getFavorite);
-router.post("/followed", verifyToken, usersControllers.addToFavorite);
-router.delete("/followed", verifyToken, usersControllers.removeFromFavorite);
+
 router.use(verifyToken);
 
+router.get("/followed", verifyToken, usersControllers.getFollowed);
+router.post("/followed", verifyToken, usersControllers.addToFollowed);
+router.delete("/followed", verifyToken, usersControllers.removeFromFollowed);
 router.post("/topics", topicsControllers.createTopic);
 router.post("/logout", usersControllers.logout);
 

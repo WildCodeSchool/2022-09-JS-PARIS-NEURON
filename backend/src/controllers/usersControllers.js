@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 const { neuron } = require("../../neuron");
 
 const getUsers = (req, res) => {
@@ -11,6 +12,19 @@ const getUsers = (req, res) => {
       res.sendStatus(500);
     });
 };
+
+// const getUsersById = (req, res) => {
+//   const { id } = req.body;
+//   neuron
+//     .query(`SELECT * FROM users WHERE id = ?`, [id])
+//     .then(([users]) => {
+//       res.status(201).json(users);
+//     })
+//     .catch((err) => {
+//       console.warn(err);
+//       res.sendStatus(500);
+//     });
+// };
 
 const createUser = (req, res) => {
   const { username, hashedpassword, mail, chat_id } = req.body;
@@ -67,7 +81,7 @@ const logout = (req, res) => {
     });
 };
 
-const addToFavorite = (req, res) => {
+const addToFollowed = (req, res) => {
   const { id } = req.body;
 
   neuron
@@ -84,7 +98,7 @@ const addToFavorite = (req, res) => {
     });
 };
 
-const removeFromFavorite = (req, res) => {
+const removeFromFollowed = (req, res) => {
   const { id } = req.body;
 
   neuron
@@ -98,10 +112,30 @@ const removeFromFavorite = (req, res) => {
     });
 };
 
-const getFavorite = (req, res) => {
+const getFollowed = (req, res) => {
+  const { id } = req.query;
   neuron
-    .query("SELECT * FROM followed JOIN users ON followed.users_id = users.id")
+    .query(
+      " SELECT followed FROM followed INNER JOIN users ON followed.users_id = users.id WHERE users_id = ?",
+      [id]
+    )
+    .then((result) => {
+      console.warn("result: ", result);
+      let firstPromise = new Promise((resolve, reject) => {
+        resolve("OK");
+        reject(new Error("something bad happened about firstPromise"));
+      });
+      result[0].map((elem) => {
+        console.warn("elem: ", elem.followed);
+        firstPromise = firstPromise.then(() => {
+          const { followed } = elem;
+          console.warn("followed: ", followed);
+          return neuron.query(`SELECT * FROM users WHERE id = ${followed}`);
+        });
+      });
+    })
     .then(([users]) => {
+      console.warn(users);
       res.status(201).json(users);
     })
     .catch((err) => {
@@ -115,7 +149,7 @@ module.exports = {
   createUser,
   registerWithMail,
   logout,
-  addToFavorite,
-  removeFromFavorite,
-  getFavorite,
+  addToFollowed,
+  removeFromFollowed,
+  getFollowed,
 };

@@ -1,21 +1,28 @@
 import { NeuronCard, Search } from "@components/index";
 import Carousel from "react-grid-carousel";
 import React, { useEffect, useState } from "react";
+import { getFollowed } from "@services/apiRequest";
 import "./NeuronFavorites.scss";
 
 export const NeuronFavorites = () => {
   const [neurons, setNeurons] = useState([]);
   const [searchUser, setSearchUser] = useState("");
+  const [id, setId] = useState(0);
+  const [token, setToken] = useState("");
   // const [usersById, setUsersById] = useState([]);
   // const handleSearch = () => {
   //   getUsersById(setUsersById);
   // };
   useEffect(() => {
-    setNeurons([
-      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-    ]);
+    setToken(localStorage.getItem("token"));
+    setId(localStorage.getItem("userId"));
   }, []);
 
+  useEffect(() => {
+    if (token.length) getFollowed(token, id, setNeurons);
+  }, [token]);
+
+  console.warn(token);
   console.warn(searchUser);
 
   const neuronFavList = [
@@ -41,7 +48,7 @@ export const NeuronFavorites = () => {
       loop: true,
     },
   ];
-
+  console.warn(neurons);
   return (
     <div className="carousel">
       <Carousel
@@ -56,7 +63,10 @@ export const NeuronFavorites = () => {
           <Carousel.Item key={neuron}>
             <div className="item">
               <NeuronCard />
-              <span className="item_pseudo">pseudo</span>
+              <span className="item_pseudo">{neuron.username}</span>
+              {/* <button type="button" onClick={() => handleDelete}> */}
+              {/* Supprimer
+              </button> */}
             </div>
           </Carousel.Item>
         ))}

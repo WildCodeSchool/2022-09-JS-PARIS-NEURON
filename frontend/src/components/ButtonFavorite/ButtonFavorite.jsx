@@ -1,35 +1,24 @@
 import React, { useState, useEffect } from "react";
 import FullRedHeart from "@assets/images/FullRedHeart.png";
 import EmptyHeart from "@assets/images/emptyHeart.png";
-// import { postFavorite, deleteFavorite } from "@services/apiRequest";
 import "./ButtonFavorite.scss";
 
 export const ButtonFavorite = () => {
   const [isFavorite, setIsFavorite] = useState(false);
 
-  // const handleFavorite = () => {
-  //   e.preventDefault();
-  //   if (isFavorite) {
-  //     setIsFavorite(false);
-  //     deleteFavorite();
-  //   } else {
-  //     setIsFavorite(true);
-  //     postFavorite();
-  //   }
-  // };
+  useEffect(() => {}, [isFavorite]);
 
   const toggleFavorite = () => {
     setIsFavorite(!isFavorite);
+    // handleFollowed();
   };
-
-  useEffect(() => {}, [isFavorite]);
 
   return (
     <div
       aria-hidden="true"
       className="ButtonFavorite"
-      onClick={toggleFavorite}
-      onKeyDown={toggleFavorite}
+      onClick={(e) => toggleFavorite(e)}
+      onKeyDown={(e) => toggleFavorite(e)}
     >
       {isFavorite ? (
         <img className="FullRedHeart" src={FullRedHeart} alt="FullRedHeart" />

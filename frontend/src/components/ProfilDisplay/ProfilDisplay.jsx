@@ -7,6 +7,7 @@ import "./ProfilDisplay.scss";
 
 export const ProfilDisplay = () => {
   const [toggleState, setToggleState] = useState(1);
+
   const toggleTab = (index) => {
     setToggleState(index);
   };

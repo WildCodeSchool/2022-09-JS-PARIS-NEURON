@@ -127,8 +127,7 @@ const postTopic = (
 };
 
 // --------------------USERS PART--------------------------------------------
-
-const postFavorite = (id) => {
+const postFollowed = (id) => {
   axios
     .post(
       `http://localhost:5000/followed`,
@@ -141,14 +140,14 @@ const postFavorite = (id) => {
       }
     )
     .then((res) => {
-      addToFavorite(res.data);
+      console.warn(res.data);
     })
     .catch((err) => {
-      setMessage(err.response.data.message);
+      console.warn(err.response.data.message);
     });
 };
 
-const deleteFavorite = (id) => {
+const deleteFollowed = (id) => {
   axios
     .delete(
       `http://localhost:5000/followed`,
@@ -161,21 +160,26 @@ const deleteFavorite = (id) => {
       }
     )
     .then((res) => {
-      removeFromFavorite(res.data);
+      console.warn(res.data);
     })
     .catch((err) => {
-      setMessage(err.response.data.message);
+      console.warn(err.response.data.message);
     });
 };
 
-const showFavorite = (setState) => {
+const getFollowed = (token, id, setState) => {
   axios
-    .get(`http://localhost:5000/followed/${id}`)
+    .get(`http://localhost:5000/followed?id=${id}`, {
+      withCredentials: true,
+      headers: {
+        "x-xsrf-token": `${token}`,
+      },
+    })
     .then((res) => {
       setState(res.data);
     })
     .catch((err) => {
-      setMessage(err.response.data.message);
+      console.warn(err.response.data.message);
     });
 };
 
@@ -188,7 +192,7 @@ export {
   getTopicsByTitle,
   logout,
   postTopic,
-  postFavorite,
-  deleteFavorite,
-  showFavorite,
+  postFollowed,
+  deleteFollowed,
+  getFollowed,
 };

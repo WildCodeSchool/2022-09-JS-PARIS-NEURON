@@ -1,24 +1,21 @@
 import React from "react";
-import { Avatar, ButtonFavorite } from "@components/";
+import { Avatar } from "@components/";
 import "./NeuronCard.scss";
 
 export const NeuronCard = () => {
-  // user.map((user) => {
-  //   const ismarked = marks.includes(user.id);
+  // const [infoUsers, setInfoUsers] = useState([]);
+
+  // useEffect(() => {
+  //   // getUsersById(setInfoUsers);
+  // }, []);
+
   return (
-    <>
-      <div className="NeuronCard">
+    <div className="NeuronCard">
+      <div className="NeuronCard_content">
         <div className="NeuronCard__avatar">
-          <ButtonFavorite />
           <Avatar />
         </div>
       </div>
-      {/* <div key={user.id} className={`user ${ismarked ? "marked" : ""}`}>
-        <div>{user.username}</div>
-        <button onClick={togglemark(user.id)}>
-          {ismarked ? "Remove from marks" : "Add to marks"}
-        </button>
-      </div> */}
-    </>
+    </div>
   );
 };
