@@ -79,9 +79,11 @@ const getTopicsByTitle = (string, setState) => {
     });
 };
 
-const getTopicById = (id, setState) => {
+const getTopicById = (id, setTopics, setTaglist) => {
   axios.get(`http://localhost:5000/topicbyid?id=${id}`).then((res) => {
-    setState(res.data[0]);
+    console.warn(res);
+    setTopics(res.data[0][0]);
+    setTaglist(res.data[1]);
   });
 };
 

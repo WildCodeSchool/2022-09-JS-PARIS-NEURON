@@ -7,6 +7,7 @@ const neuron = mysql.createPool({
   user: DB_USER,
   password: DB_PASSWORD,
   database: DB_NAME,
+  multipleStatements: true,
 });
 
 neuron.getConnection().catch(() => {

@@ -42,12 +42,21 @@
 
         &_left {
           display: flex;
-          align-items: flex-end;
+          align-items: center;
         }
 
         &_right {
           display: flex;
           flex-direction: column;
+        }
+      }
+
+      &_tags {
+        display: flex;
+        overflow-x: scroll;
+
+        > div {
+          padding: 0 0.3rem;
         }
       }
     }
