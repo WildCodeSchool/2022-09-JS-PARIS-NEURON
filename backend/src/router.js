@@ -29,9 +29,10 @@ router.get("/topicbyid", topicsControllers.getTopicById);
 
 router.use(verifyToken);
 
-router.get("/followed", verifyToken, usersControllers.getFollowed);
-router.post("/followed", verifyToken, usersControllers.addToFollowed);
-router.delete("/followed", verifyToken, usersControllers.removeFromFollowed);
+router.get("/followed", usersControllers.getFollowed);
+router.get("/followedByIds", usersControllers.getUserByFollowed);
+router.post("/followed", usersControllers.addToFollowed);
+router.delete("/followed", usersControllers.removeFromFollowed);
 router.post("/topics", topicsControllers.createTopic);
 router.post("/logout", usersControllers.logout);
 

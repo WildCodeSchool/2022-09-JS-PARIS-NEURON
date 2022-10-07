@@ -127,45 +127,45 @@ const postTopic = (
 };
 
 // --------------------USERS PART--------------------------------------------
-const postFollowed = (id) => {
-  axios
-    .post(
-      `http://localhost:5000/followed`,
-      { id },
-      {
-        withCredentials: true,
-        headers: {
-          "x-xsrf-token": `${token}`,
-        },
-      }
-    )
-    .then((res) => {
-      console.warn(res.data);
-    })
-    .catch((err) => {
-      console.warn(err.response.data.message);
-    });
-};
+// const postFollowed = (id) => {
+//   axios
+//     .post(
+//       `http://localhost:5000/followed`,
+//       { id },
+//       {
+//         withCredentials: true,
+//         headers: {
+//           "x-xsrf-token": `${token}`,
+//         },
+//       }
+//     )
+//     .then((res) => {
+//       console.warn(res.data);
+//     })
+//     .catch((err) => {
+//       console.warn(err.response.data.message);
+//     });
+// };
 
-const deleteFollowed = (id) => {
-  axios
-    .delete(
-      `http://localhost:5000/followed`,
-      { id },
-      {
-        withCredentials: true,
-        headers: {
-          "x-xsrf-token": `${token}`,
-        },
-      }
-    )
-    .then((res) => {
-      console.warn(res.data);
-    })
-    .catch((err) => {
-      console.warn(err.response.data.message);
-    });
-};
+// const deleteFollowed = (id) => {
+//   axios
+//     .delete(
+//       `http://localhost:5000/followed`,
+//       { id },
+//       {
+//         withCredentials: true,
+//         headers: {
+//           "x-xsrf-token": `${token}`,
+//         },
+//       }
+//     )
+//     .then((res) => {
+//       console.warn(res.data);
+//     })
+//     .catch((err) => {
+//       console.warn(err.response.data.message);
+//     });
+// };
 
 const getFollowed = (token, id, setState) => {
   axios
@@ -176,10 +176,30 @@ const getFollowed = (token, id, setState) => {
       },
     })
     .then((res) => {
-      setState(res.data);
+      console.warn(res);
+      setState(res.data.map((elem) => elem.friend_id));
     })
     .catch((err) => {
       console.warn(err.response.data.message);
+    });
+};
+
+const getUsersByIds = (token, idList, setState) => {
+  axios
+    .get(`http://localhost:5000/followedByIds`, {
+      withCredentials: true,
+      headers: {
+        "x-xsrf-token": `${token}`,
+      },
+      params: {
+        idList,
+      },
+    })
+    .then((res) => {
+      setState(res.data);
+    })
+    .catch((err) => {
+      console.warn(err);
     });
 };
 
@@ -192,7 +212,8 @@ export {
   getTopicsByTitle,
   logout,
   postTopic,
-  postFollowed,
-  deleteFollowed,
+  // postFollowed,
+  // deleteFollowed,
   getFollowed,
+  getUsersByIds,
 };

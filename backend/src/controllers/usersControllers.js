@@ -114,33 +114,38 @@ const removeFromFollowed = (req, res) => {
 
 const getFollowed = (req, res) => {
   const { id } = req.query;
+
   neuron
     .query(
-      " SELECT followed FROM followed INNER JOIN users ON followed.users_id = users.id WHERE users_id = ?",
+      " SELECT friend_id FROM followed INNER JOIN users ON followed.users_id = users.id WHERE users_id = ?",
       [id]
     )
-    .then((result) => {
-      console.warn("result: ", result);
-      let firstPromise = new Promise((resolve, reject) => {
-        resolve("OK");
-        reject(new Error("something bad happened about firstPromise"));
-      });
-      result[0].map((elem) => {
-        console.warn("elem: ", elem.followed);
-        firstPromise = firstPromise.then(() => {
-          const { followed } = elem;
-          console.warn("followed: ", followed);
-          return neuron.query(`SELECT * FROM users WHERE id = ${followed}`);
-        });
-      });
-    })
-    .then(([users]) => {
-      console.warn(users);
-      res.status(201).json(users);
+    .then(([result]) => {
+      res.status(201).json(result);
     })
     .catch((err) => {
       console.warn(err);
       res.status(500).send("erreur impossible de récupérer les favoris");
+    });
+};
+
+const getUserByFollowed = (req, res) => {
+  const { idList } = req.query;
+
+  const queryFragment = idList
+    .map((id) => {
+      return `id=${id}`;
+    })
+    .join(" OR ");
+
+  return neuron
+    .query(`SELECT * FROM users WHERE ${queryFragment}`)
+    .then(([result]) => {
+      return res.status(201).json(result);
+    })
+    .catch((err) => {
+      console.warn(err);
+      return res.status(500).send("c'est ballot");
     });
 };
 
@@ -152,4 +157,5 @@ module.exports = {
   addToFollowed,
   removeFromFollowed,
   getFollowed,
+  getUserByFollowed,
 };
