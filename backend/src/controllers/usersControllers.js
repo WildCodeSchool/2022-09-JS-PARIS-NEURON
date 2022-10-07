@@ -106,14 +106,13 @@ const getTag = (req, res) => {
         req.query = tags[0];
       } else {
         res.sendStatus(401);
-      }})
-      .catch((err) => {
-        console.warn("Error: " + err.message);  
-        res.status(500).send(err.message);
-
-
+      }
     })
-  };
+    .catch((err) => {
+      console.warn(`Error: ${err.message}`);
+      res.status(500).send(err.message);
+    });
+};
 
 const addToFollowed = (req, res) => {
   const { id } = req.body;
