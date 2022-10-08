@@ -1,7 +1,8 @@
+/* eslint-disable array-callback-return */
 import React, { useEffect, useState } from "react";
 import { Navbar } from "@components";
 import { useParams } from "react-router";
-import { getTopicById } from "@services/apiRequest";
+import { getTopicById, postComment } from "@services/apiRequest";
 import ReactMarkdown from "react-markdown";
 import rehypeHighlight from "rehype-highlight";
 
@@ -14,13 +15,32 @@ export const SingleTopic = () => {
 
   const [topic, setTopic] = useState([]);
   const [taglist, setTaglist] = useState([]);
+  const [comments, setComments] = useState([]);
+  const [username, setUsername] = useState("");
+  const [commentContent, setCommentContent] = useState("");
+  const [date, setDate] = useState("");
 
   useEffect(() => {
-    getTopicById(id, setTopic, setTaglist);
+    getTopicById(id, setTopic, setTaglist, setComments);
     localStorage.removeItem("topicId");
-  }, []);
+    setUsername(localStorage.getItem("userName"));
+    const today = new Date();
+    setDate(
+      `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`
+    );
+  }, [postComment()]);
 
-  console.warn(taglist);
+  const handleChange = (e) => {
+    e.preventDefault();
+    setCommentContent(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    postComment(id, username, commentContent, date);
+  };
+
+  console.warn(commentContent);
 
   return (
     topic && (
@@ -58,6 +78,55 @@ export const SingleTopic = () => {
           >
             {topic.topic}
           </ReactMarkdown>
+          <hr />
+          <div className="singleTopic_content_comments">
+            <span className="singleTopic_content_comments_title">
+              commentaires:{" "}
+            </span>
+            {comments.length ? (
+              comments.map((singleComment) => {
+                <div
+                  key={singleComment.id}
+                  className="singleTopic_content_comments_singleComment"
+                >
+                  <div className="singleTopic_content_comments_singleComment_header">
+                    <span>`le ${singleComment.dateHour} `</span>
+                    <span>`${singleComment.username} a écrit: `</span>
+                  </div>
+                  <ReactMarkdown
+                    className="markdown"
+                    rehypePlugins={[[rehypeHighlight, { ignoreMissing: true }]]}
+                  >
+                    {singleComment.comment}
+                  </ReactMarkdown>
+                </div>;
+              })
+            ) : (
+              <span className="singleTopic_content_comments_nothing">
+                rien pour le moment
+              </span>
+            )}
+            <form
+              className="singleTopic_content_comments_editor"
+              onSubmit={(e) => handleSubmit(e)}
+            >
+              <textarea
+                className="singleTopic_content_comments_editor_input"
+                name="editor"
+                id="editor"
+                placeholder="nouveau commentaire..."
+                value={commentContent}
+                onChange={(e) => handleChange(e)}
+                required
+              />
+              <button
+                className="singleTopic_content_comments_editor_button"
+                type="submit"
+              >
+                envoyer
+              </button>
+            </form>
+          </div>
         </div>
         <Navbar />
       </div>

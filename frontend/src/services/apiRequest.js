@@ -128,6 +128,26 @@ const postTopic = (
     });
 };
 
+const postComment = (token) => {
+  axios
+    .post(
+      "http://localhost:5000/comments",
+      {},
+      {
+        withCredentials: true,
+        headers: {
+          "x-xsrf-token": `${token}`,
+        },
+      }
+    )
+    .then((res) => {
+      res.json();
+    })
+    .catch((err) => {
+      console.warn(err);
+    });
+};
+
 // --------------------USERS PART--------------------------------------------
 // const postFollowed = (id) => {
 //   axios
@@ -214,6 +234,7 @@ export {
   getTopicsByTitle,
   logout,
   postTopic,
+  postComment,
   // postFollowed,
   // deleteFollowed,
   getFollowed,
