@@ -17,6 +17,8 @@ export const CreateTopics = () => {
   const [singleTag, setSingleTag] = useState("");
   const [tags, setTags] = useState([]);
   const [userId, setUserId] = useState(0);
+  const [topicId, setTopicId] = useState(0);
+  const [message, setMessage] = useState("");
 
   const navigate = useNavigate();
 
@@ -29,6 +31,10 @@ export const CreateTopics = () => {
     );
     setUserId(1);
   }, []);
+
+  useEffect(() => {
+    setSummary(topic.slice(0, 255));
+  }, [topic]);
 
   const handleChangeTitle = (e) => {
     e.preventDefault();
@@ -56,7 +62,6 @@ export const CreateTopics = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSummary(topic.slice(0, 255));
     postTopic(
       token,
       title,
@@ -66,19 +71,16 @@ export const CreateTopics = () => {
       date,
       categorieId,
       userId,
-      tags
+      tags,
+      setTopicId,
+      setMessage
     );
-    navigate("/topics");
+    setMessage("");
   };
 
-  console.warn("title: ", title);
-  console.warn("topic: ", topic);
-  console.warn("summary: ", summary);
-  console.warn("chatId", chatId);
-  console.warn("date: ", date);
-  console.warn("categorieId: ", categorieId);
-  console.warn("tags: ", tags);
-  console.warn("userId: ", userId);
+  useEffect(() => {
+    if (topicId) navigate(`/topic/${topicId}`);
+  }, [topicId]);
 
   return (
     <div className="createtopics">
@@ -142,6 +144,13 @@ export const CreateTopics = () => {
         </div>
       </form>
       <Navbar />
+      <div className="topicMessage">
+        <div
+          className={message.length ? "topicMessage_show" : "topicMessage_hide"}
+        >
+          <div>{message}</div>
+        </div>
+      </div>
     </div>
   );
 };

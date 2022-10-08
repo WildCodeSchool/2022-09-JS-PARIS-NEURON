@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const register = (username, password, mail, chatId) => {
+const register = (username, password, mail, chatId, setState) => {
   axios
     .post("http://localhost:5000/users", {
       username,
@@ -8,13 +8,13 @@ const register = (username, password, mail, chatId) => {
       mail,
       chat_id: chatId,
     })
-    .then((res) => console.warn(res.data))
+    .then((res) => setState(res.data))
     .catch((err) => {
-      console.warn(err.response.data);
+      setState(err.response.data);
     });
 };
 
-const login = (mail, password) => {
+const login = (mail, password, setState) => {
   axios
     .post(
       `http://localhost:5000/login`,
@@ -25,16 +25,20 @@ const login = (mail, password) => {
       { withCredentials: true }
     )
     .then(({ data }) => {
-      console.warn(data.message);
       localStorage.setItem("token", data.xsrfToken);
+      localStorage.setItem("userName", data.user.username);
+      localStorage.setItem("userId", data.user.id);
+      setState(data.message);
     })
     .catch((err) => {
-      console.warn(err.response.data);
+      setState(err.response.data);
     });
 };
 
-const logout = (token) => {
+const logout = (token, setState) => {
   localStorage.removeItem("token");
+  localStorage.removeItem("userName");
+  localStorage.removeItem("userId");
 
   axios
     .post(
@@ -48,7 +52,10 @@ const logout = (token) => {
       }
     )
     .then((res) => {
-      console.warn(res.data);
+      setState(res.data);
+    })
+    .catch((err) => {
+      setState(err.response.data);
     });
 };
 
@@ -64,9 +71,19 @@ const getTopics = (setState) => {
   });
 };
 
-const getTopicsByTags = (tag, setState) => {
-  axios.get(`http://localhost:5000/topicsbytags?tag=${tag}`).then((res) => {
-    setState(res.data);
+const getTopicsByTitle = (string, setState) => {
+  axios
+    .get(`http://localhost:5000/topicsbytitle?string=${string}`)
+    .then((res) => {
+      setState(res.data);
+    });
+};
+
+const getTopicById = (id, setTopics, setTaglist) => {
+  axios.get(`http://localhost:5000/topicbyid?id=${id}`).then((res) => {
+    console.warn(res);
+    setTopics(res.data[0][0]);
+    setTaglist(res.data[1]);
   });
 };
 
@@ -79,7 +96,9 @@ const postTopic = (
   date,
   category,
   userId,
-  tags
+  tags,
+  setTopicId,
+  setMessage
 ) => {
   axios
     .post(
@@ -101,7 +120,89 @@ const postTopic = (
         },
       }
     )
-    .then((res) => console.warn(res));
+    .then((res) => {
+      setTopicId(res.data);
+    })
+    .catch((err) => {
+      setMessage(err.response.data.message);
+    });
+};
+
+// --------------------USERS PART--------------------------------------------
+// const postFollowed = (id) => {
+//   axios
+//     .post(
+//       `http://localhost:5000/followed`,
+//       { id },
+//       {
+//         withCredentials: true,
+//         headers: {
+//           "x-xsrf-token": `${token}`,
+//         },
+//       }
+//     )
+//     .then((res) => {
+//       console.warn(res.data);
+//     })
+//     .catch((err) => {
+//       console.warn(err.response.data.message);
+//     });
+// };
+
+// const deleteFollowed = (id) => {
+//   axios
+//     .delete(
+//       `http://localhost:5000/followed`,
+//       { id },
+//       {
+//         withCredentials: true,
+//         headers: {
+//           "x-xsrf-token": `${token}`,
+//         },
+//       }
+//     )
+//     .then((res) => {
+//       console.warn(res.data);
+//     })
+//     .catch((err) => {
+//       console.warn(err.response.data.message);
+//     });
+// };
+
+const getFollowed = (token, id, setState) => {
+  axios
+    .get(`http://localhost:5000/followed?id=${id}`, {
+      withCredentials: true,
+      headers: {
+        "x-xsrf-token": `${token}`,
+      },
+    })
+    .then((res) => {
+      setState(res.data.map((elem) => elem.friend_id));
+    })
+    .catch((err) => {
+      console.warn(err.response.data.message);
+    });
+};
+
+const getUsersByIds = (token, idList, setState) => {
+  axios
+    .get(`http://localhost:5000/followedByIds`, {
+      withCredentials: true,
+      headers: {
+        "x-xsrf-token": `${token}`,
+      },
+      params: {
+        idList,
+      },
+    })
+    .then((res) => {
+      console.warn(res.data);
+      setState(res.data);
+    })
+    .catch((err) => {
+      console.warn(err);
+    });
 };
 
 export {
@@ -109,7 +210,12 @@ export {
   login,
   getTopics,
   getCategories,
-  getTopicsByTags,
+  getTopicById,
+  getTopicsByTitle,
   logout,
   postTopic,
+  // postFollowed,
+  // deleteFollowed,
+  getFollowed,
+  getUsersByIds,
 };

@@ -6,15 +6,15 @@ import Carousel from "react-grid-carousel";
 import {
   getCategories,
   getTopics,
-  getTopicsByTags,
+  getTopicsByTitle,
 } from "@services/apiRequest";
 
 import "./TopicsDisplay.scss";
 
 export const TopicsDisplay = () => {
   const [topics, setTopics] = useState([]);
-  const [topicsByTags, setTopicsByTags] = useState([]);
-  const [searchTag, setSearchTag] = useState("");
+  const [topicsByTitle, setTopicsByTitle] = useState([]);
+  const [searchString, setSearchString] = useState("");
   const [categories, setCategories] = useState([]);
   const [open, setOpen] = useState(1);
 
@@ -24,18 +24,17 @@ export const TopicsDisplay = () => {
   }, []);
 
   const handleChange = (e) => {
-    setSearchTag(e.target.value);
+    setSearchString(e.target.value);
   };
 
   const handleSearch = () => {
-    setTopicsByTags([]);
-    console.warn(searchTag);
-    getTopicsByTags(searchTag, setTopicsByTags);
+    setTopicsByTitle([]);
+    getTopicsByTitle(searchString, setTopicsByTitle);
     setOpen(0);
   };
 
   const handleSwitch = (category) => {
-    setTopicsByTags([]);
+    setTopicsByTitle([]);
     setOpen(category.id);
   };
 
@@ -85,7 +84,7 @@ export const TopicsDisplay = () => {
                           title={topic.title}
                           summary={topic.summary}
                           date={topic.date}
-                          id={topic.id}
+                          id={topic.topics_id}
                         />
                       </div>
                     </Carousel.Item>
@@ -100,11 +99,11 @@ export const TopicsDisplay = () => {
           placeholder="rechercher un topic"
           handleChange={handleChange}
           handleSearch={handleSearch}
-          value={searchTag}
+          value={searchString}
         />
       </div>
       <div className="categories_showByTags">
-        {(topicsByTags.length && (
+        {(topicsByTitle.length && (
           <Carousel
             cols={10}
             rows={1}
@@ -113,7 +112,7 @@ export const TopicsDisplay = () => {
             mobileBreakpoint={376}
             showDots
           >
-            {topicsByTags.map((topic) => {
+            {topicsByTitle.map((topic) => {
               return (
                 <Carousel.Item key={topic.id}>
                   <div className="categories_category_content">
@@ -121,7 +120,7 @@ export const TopicsDisplay = () => {
                       title={topic.title}
                       summary={topic.summary}
                       date={topic.date}
-                      id={topic.id}
+                      id={topic.topics_id}
                     />
                   </div>
                 </Carousel.Item>
@@ -129,7 +128,7 @@ export const TopicsDisplay = () => {
             })}
           </Carousel>
         )) ||
-          (!topicsByTags.length && (
+          (!topicsByTitle.length && (
             <div
               className={
                 !open

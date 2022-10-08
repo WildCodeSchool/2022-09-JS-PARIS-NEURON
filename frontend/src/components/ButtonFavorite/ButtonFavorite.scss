@@ -1,0 +1,10 @@
+@import "../../colors.scss";
+
+.ButtonFavorite {
+  display: flex;
+  justify-content: flex-start;
+  height: 5%;
+  width: 5%;
+  position: absolute;
+  z-index: 11;
+}

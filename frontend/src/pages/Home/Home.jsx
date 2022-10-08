@@ -6,6 +6,7 @@ import {
   DesktopChart,
   NeuronList,
 } from "@components/";
+// import { Outlet } from "react-router";
 import "./Home.scss";
 
 export const Home = () => {
@@ -22,6 +23,7 @@ export const Home = () => {
         <NeuronList />
       </div>
       <Navbar />
+      {/* <Outlet /> */}
     </div>
   );
 };
