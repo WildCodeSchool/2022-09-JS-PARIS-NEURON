@@ -59,12 +59,12 @@ const verifyPassword = (req, res, next) => {
         }
         res.send({ xsrfToken, user: req.user, message: "connecté" });
       } else {
-        res.sendStatus(401);
+        res.status(401).json("informations erronées");
       }
     })
     .catch((err) => {
       console.error(err);
-      res.sendStatus(500);
+      res.status(500);
     });
 };
 
@@ -88,13 +88,13 @@ const verifyToken = (req, res, next) => {
     req.mail = decodedToken.mail;
     // console.log("comparaison &&&&&", xsrfToken, "decodeddddddd",decodedToken.xsrfToken)
     if (xsrfToken !== decodedToken.xsrfToken) {
-      return res.status(401).json({ message: "Bad xsrf token" });
+      return res.status(401).json({ message: "erreur, êtes-vous connecté?" });
     }
 
     next();
   } catch (err) {
     console.error(err);
-    res.sendStatus(401);
+    res.status(401).json("erreur, êtes-vous connecté?");
   }
 };
 

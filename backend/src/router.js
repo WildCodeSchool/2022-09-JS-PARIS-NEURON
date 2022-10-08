@@ -24,7 +24,8 @@ router.post("/login", usersControllers.registerWithMail, verifyPassword);
 router.get("/users", usersControllers.getUsers);
 router.get("/categories", topicsControllers.getCategories);
 router.get("/topics", topicsControllers.getTopics);
-router.get("/topicsbytags", topicsControllers.getTopicsByTags);
+router.get("/topicsbytitle", topicsControllers.getTopicsByTitle);
+router.get("/topicbyid", topicsControllers.getTopicById);
 
 router.use(verifyToken);
 router.put(
@@ -33,6 +34,11 @@ router.put(
   usersControllers.updateSettings
 );
 router.get("/user_settings", usersControllers.registerWithMail);
+
+router.get("/followed", usersControllers.getFollowed);
+router.get("/followedByIds", usersControllers.getUserByFollowed);
+router.post("/followed", usersControllers.addToFollowed);
+router.delete("/followed", usersControllers.removeFromFollowed);
 router.post("/topics", topicsControllers.createTopic);
 router.post("/logout", usersControllers.logout);
 // Faire ta route settings

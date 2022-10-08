@@ -7,3 +7,5 @@ export { LogoSmall } from "./LogoSmall";
 export { UserProfileIcon } from "./UserProfileIcon";
 export { TopicsIcon } from "./TopicsIcon";
 export { CreateTopicIcon } from "./CreateTopicIcon";
+export { EmptyHeart } from "./EmptyHeart";
+export { FullRedHeart } from "./FullRedHeart";

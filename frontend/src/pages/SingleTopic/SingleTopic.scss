@@ -1,33 +1,65 @@
 @import "../../colors.scss";
 
-.topicCard {
-  height: 210px;
+.singleTopic {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 0.1rem;
-  border-radius: 0.5rem;
-  background-color: $warm-grey-2;
-  box-shadow: 0 0 5px $warm-grey-6;
+  height: 100%;
+  width: 100%;
 
-  &_title {
-    background-color: $dark-purple-9;
+  &_content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 88%;
     width: 100%;
-    padding: 0.5rem;
-    border-radius: 0.5rem;
-    box-shadow: inset 0 0 5px $warm-grey-6;
-    word-break: break-all;
-  }
 
-  &_summary {
-    width: 100%;
-    margin: 0.2rem;
-    border-radius: 0.3rem;
-    padding: 1rem;
-    height: 80%;
-    overflow: scroll;
-    background-color: $warm-grey-3;
+    @keyframes extend {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    animation-duration: 0.5s;
+    animation-name: extend;
+
+    &_header {
+      width: 100%;
+      padding: 1rem;
+      background-color: $dark-purple-5;
+      border-radius: 0.3rem;
+      box-shadow: 0 0 10px $carbon;
+
+      &_bottom {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+
+        &_left {
+          display: flex;
+          align-items: center;
+        }
+
+        &_right {
+          display: flex;
+          flex-direction: column;
+        }
+      }
+
+      &_tags {
+        display: flex;
+        overflow-x: scroll;
+
+        > div {
+          padding: 0 0.3rem;
+        }
+      }
+    }
 
     .markdown {
       height: 100%;
@@ -36,6 +68,7 @@
       white-space: pre-line;
       overflow-y: scroll;
       padding: 0.5rem;
+      margin-top: 1rem;
 
       h1,
       h2,
@@ -81,12 +114,5 @@
         }
       }
     }
-  }
-
-  &_bottom {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    padding: 0 1rem;
   }
 }
