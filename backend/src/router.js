@@ -27,8 +27,14 @@ router.get("/topics", topicsControllers.getTopics);
 router.get("/topicsbytags", topicsControllers.getTopicsByTags);
 
 router.use(verifyToken);
-
+router.put(
+  "/settings",
+  usersControllers.registerWithMail,
+  usersControllers.updateSettings
+);
+router.get("/user_settings", usersControllers.registerWithMail);
 router.post("/topics", topicsControllers.createTopic);
 router.post("/logout", usersControllers.logout);
+// Faire ta route settings
 
 module.exports = router;

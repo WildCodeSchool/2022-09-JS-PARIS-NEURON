@@ -1,7 +1,80 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+
 import "./NeuronSettings.scss";
 
 export const NeuronSettings = () => {
+  const initialValues = {
+    pseudo: "",
+    new_pseudo: "",
+    password: "",
+    new_password: "",
+    mail: "",
+    new_email: "",
+    linkedin: "",
+    github: "",
+    description: "",
+  };
+
+  const [inputs, setInputs] = useState(initialValues);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const token = localStorage.getItem("token");
+    axios
+      .put(
+        `http://localhost:5000/settings`,
+        {
+          token: `${token}`,
+          ...inputs,
+        },
+        {
+          withCredentials: true,
+          headers: {
+            "x-xsrf-token": `${token}`,
+          },
+        }
+      )
+      .then(({ data }) => {
+        if (data.xsrfToken) {
+          localStorage.setItem("token", data.xsrfToken);
+        }
+        console.warn(data.message);
+      })
+      .catch((err) => {
+        console.warn(err.response.data);
+      });
+  }
+
+  function updateInputs(event) {
+    setInputs({
+      ...inputs, // récupère les anciennes valeurs
+      [event.target.name]: event.target.value,
+    });
+  }
+
+  // { clé: "valeur" }
+  // Faire un objet qui contient des champs avec les clé égales au names
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    axios
+      .get(`http://localhost:5000/user_settings?isSettings=${true}`, {
+        withCredentials: true,
+        headers: {
+          "x-xsrf-token": `${token}`,
+        },
+      })
+      .then((res) => {
+        setInputs({
+          ...inputs,
+          pseudo: res.data.username || "",
+          mail: res.data.mail || "",
+          linkedin: res.data.linkedin || "",
+          github: res.data.github || "",
+          description: res.data.description || "",
+        });
+      });
+  }, []);
   return (
     <div>
       <div className="settingsTitle">
@@ -10,74 +83,91 @@ export const NeuronSettings = () => {
 
       <div className="form_container">
         <label htmlFor="pseudo"> Pseudo: </label>
-        <input id="pseudo" type="text" />
+        <input
+          id="pseudo"
+          name="pseudo"
+          type="text"
+          value={inputs.pseudo}
+          onChange={(e) => updateInputs(e)}
+        />
 
-        <label htmlFor="new pseudo"> New Pseudo </label>
-        <input id="new pseudo" type="text" />
+        <label htmlFor="new_pseudo"> New Pseudo </label>
+        <input
+          id="new_pseudo"
+          name="new_pseudo"
+          type="text"
+          value={inputs.new_pseudo}
+          onChange={(e) => updateInputs(e)}
+        />
 
-        <label htmlFor="Password"> Password: </label>
-        <input id="Password" type="text" />
+        <label htmlFor="password"> Password: </label>
+        <input
+          id="password"
+          name="password"
+          type="text"
+          value={inputs.password}
+          onChange={(e) => updateInputs(e)}
+        />
 
-        <label htmlFor="New Password"> New Password </label>
-        <input id="New Password" type="text" />
+        <label htmlFor="new_password"> New Password </label>
+        <input
+          id="new_password"
+          name="new_password"
+          type="text"
+          value={inputs.new_password}
+          onChange={(e) => updateInputs(e)}
+        />
 
-        <label htmlFor="Mail@adress"> Mail@adress: </label>
-        <input id="Mail@adress" type="email" />
+        <label htmlFor="mail"> Mail@adress: </label>
+        <input
+          id="mail"
+          name="mail"
+          type="email"
+          value={inputs.mail}
+          onChange={(e) => updateInputs(e)}
+        />
 
-        <label htmlFor="New Mail@adress"> New Mail@adress: </label>
-        <input id="New Mail@adress" type="email" />
+        <label htmlFor="new_email"> New Mail@adress: </label>
+        <input
+          id="new_email"
+          name="new_email"
+          type="email"
+          value={inputs.new_email}
+          onChange={(e) => updateInputs(e)}
+        />
 
-        <label htmlFor="Linkedin"> Linkedin: </label>
-        <input id="Linkedin" type="text:" />
+        <label htmlFor="linkedin"> Linkedin: </label>
+        <input
+          id="linkedin"
+          name="linkedin"
+          type="text:"
+          value={inputs.linkedin}
+          onChange={(e) => updateInputs(e)}
+        />
 
-        <label htmlFor="Github"> Github: </label>
-        <input id="Github" type="text" />
+        <label htmlFor="github"> Github: </label>
+        <input
+          id="github"
+          name="github"
+          type="text"
+          value={inputs.github}
+          onChange={(e) => updateInputs(e)}
+        />
 
-        <label htmlFor="Descript">Description:</label>
-        <textarea id="Descript" name="Description" rows="4" cols="50" />
+        <label htmlFor="descript">Description:</label>
+        <textarea
+          id="descript"
+          name="description"
+          rows="4"
+          cols="50"
+          value={inputs.description}
+          onChange={(e) => updateInputs(e)}
+        />
 
-        <button type="submit">Send</button>
+        <button type="submit" onClick={(e) => handleSubmit(e)}>
+          Send
+        </button>
       </div>
     </div>
   );
 };
-
-// import React from "react";
-// import "./NeuronSettings.scss";
-
-// class Home extends React.Component {
-
-//     constructor (props)    {
-//         super(props)
-//         this.state = {
-//             Pseudo: '',
-//             NewPseudo: '',
-//         //     Password: "",
-//         //     New password: "",
-//         //     Mail@adress: "",
-//         //     New Mail@adress: "",
-//         //     Linkedin: "",
-//         //     Github: "",
-//         //     Description: ""
-//         // }
-
-//         this.handleChange = this.handleChange.bind(this)
-//     }
-
-// handleChange (e) {
-//     this.setState({
-//         checked: e.tagret.checked
-
-//     })
-
-// }
-
-// render () {
-//     return <div>
-//         <div>
-//             <label htmlfor="Pseudo">Pseudonyme</label>
-//             <input type="text" value={this.state.nom} onChange={this.handleChange} id="Pseudo" name="Pseudo" />
-
-//         </div>
-//     </div>
-// }
