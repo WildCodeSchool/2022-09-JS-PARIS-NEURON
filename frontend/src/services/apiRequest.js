@@ -87,6 +87,12 @@ const getTopicById = (id, setTopics, setTaglist) => {
   });
 };
 
+const getComments = (id, setState) => {
+  axios.get(`http://localhost:5000/comments?id=${id}`).then((res) => {
+    setState(res.data);
+  });
+};
+
 const postTopic = (
   token,
   title,
@@ -128,11 +134,23 @@ const postTopic = (
     });
 };
 
-const postComment = (token) => {
+const postComment = (
+  token,
+  commentContent,
+  date,
+  topicId,
+  userID,
+  setState
+) => {
   axios
     .post(
       "http://localhost:5000/comments",
-      {},
+      {
+        commentContent,
+        date,
+        topicId,
+        userID,
+      },
       {
         withCredentials: true,
         headers: {
@@ -141,7 +159,7 @@ const postComment = (token) => {
       }
     )
     .then((res) => {
-      res.json();
+      setState(res.data);
     })
     .catch((err) => {
       console.warn(err);
@@ -228,11 +246,12 @@ const getUsersByIds = (token, idList, setState) => {
 export {
   register,
   login,
+  logout,
   getTopics,
   getCategories,
   getTopicById,
   getTopicsByTitle,
-  logout,
+  getComments,
   postTopic,
   postComment,
   // postFollowed,

@@ -83,7 +83,14 @@
 
       &_singleComment,
       &_nothing {
-        margin: 1rem auto;
+        margin: 0.5rem auto;
+      }
+
+      &_singleComment {
+        width: 100%;
+        padding: 0.3rem;
+        background-color: $dark-purple-7;
+        border-radius: 0.2rem;
       }
 
       &_editor {

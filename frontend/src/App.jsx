@@ -17,7 +17,9 @@ const App = () => {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    if (message === "vous êtes déconnecté") localStorage.removeItem("token");
+    if (message === "vous êtes déconnecté") {
+      localStorage.removeItem("token");
+    }
   }, []);
 
   return (

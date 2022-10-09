@@ -1,11 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { register, login, logout } from "@services/apiRequest";
-
-import "./Auth.scss";
+import { useNavigate } from "react-router";
 import { messageContext } from "@contexts/messageContext";
 
+import "./Auth.scss";
+
 export const Auth = ({ show, hide }) => {
+  const navigate = useNavigate();
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [mail, setMail] = useState("");
@@ -45,6 +48,7 @@ export const Auth = ({ show, hide }) => {
     hide();
     setMessage("");
     reload();
+    navigate("/");
   };
 
   useEffect(() => {

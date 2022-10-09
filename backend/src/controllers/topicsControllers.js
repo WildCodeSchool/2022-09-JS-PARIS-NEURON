@@ -68,6 +68,25 @@ const getTopicById = (req, res) => {
     });
 };
 
+const getComments = (req, res) => {
+  const { id } = req.query;
+  console.warn(id);
+
+  neuron
+    .query(
+      `SELECT *, DATE_FORMAT(date_comment, "%d/%m/%Y") AS date_comment FROM comments JOIN users ON users.id= comments.users_id WHERE topics_id=? ORDER by comments.id`,
+      [id]
+    )
+    .then(([comment]) => {
+      console.warn(comment);
+      if (comment.length != null) {
+        res.status(201).json(comment);
+      } else {
+        res.status(404).send("Not found");
+      }
+    });
+};
+
 const createTopic = (req, res) => {
   const {
     title,
@@ -125,10 +144,29 @@ const createTopic = (req, res) => {
     });
 };
 
+const createComment = (req, res) => {
+  const { commentContent, date, topicId, userID } = req.body;
+
+  console.warn("body: ", req.body);
+
+  neuron
+    .query(
+      "INSERT INTO comments (comment, date_comment, topics_id, users_id) values (?, ?, ?, ?)",
+      [commentContent, date, topicId, userID]
+    )
+    .then(() => res.status(201).json("topic créé"))
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Error saving the comment");
+    });
+};
+
 module.exports = {
   getCategories,
   getTopics,
   getTopicById,
+  getComments,
   getTopicsByTitle,
   createTopic,
+  createComment,
 };

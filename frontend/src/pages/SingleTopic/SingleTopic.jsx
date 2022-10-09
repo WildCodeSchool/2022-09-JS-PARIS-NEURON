@@ -1,8 +1,9 @@
 /* eslint-disable array-callback-return */
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Navbar } from "@components";
 import { useParams } from "react-router";
-import { getTopicById, postComment } from "@services/apiRequest";
+import { getTopicById, getComments, postComment } from "@services/apiRequest";
+import { messageContext } from "@contexts/messageContext";
 import ReactMarkdown from "react-markdown";
 import rehypeHighlight from "rehype-highlight";
 
@@ -13,17 +14,18 @@ import "./SingleTopic.scss";
 export const SingleTopic = () => {
   const { id } = useParams();
 
+  const { setMessage } = useContext(messageContext);
+
   const [topic, setTopic] = useState([]);
   const [taglist, setTaglist] = useState([]);
   const [comments, setComments] = useState([]);
-  const [username, setUsername] = useState("");
   const [commentContent, setCommentContent] = useState("");
   const [date, setDate] = useState("");
 
   useEffect(() => {
     getTopicById(id, setTopic, setTaglist, setComments);
+    getComments(id, setComments);
     localStorage.removeItem("topicId");
-    setUsername(localStorage.getItem("userName"));
     const today = new Date();
     setDate(
       `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`
@@ -37,11 +39,21 @@ export const SingleTopic = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    postComment(id, username, commentContent, date);
+    postComment(
+      localStorage.getItem("token"),
+      commentContent,
+      date,
+      id,
+      localStorage.getItem("userId"),
+      setMessage
+    );
+    setCommentContent("");
+    setTimeout(() => {
+      window.location.reload(false);
+    }, 1500);
   };
 
-  console.warn(commentContent);
-
+  console.warn("comments: ", comments);
   return (
     topic && (
       <div className="singleTopic">
@@ -84,47 +96,53 @@ export const SingleTopic = () => {
             </span>
             {comments.length ? (
               comments.map((singleComment) => {
-                <div
-                  key={singleComment.id}
-                  className="singleTopic_content_comments_singleComment"
-                >
-                  <div className="singleTopic_content_comments_singleComment_header">
-                    <span>`le ${singleComment.dateHour} `</span>
-                    <span>`${singleComment.username} a écrit: `</span>
-                  </div>
-                  <ReactMarkdown
-                    className="markdown"
-                    rehypePlugins={[[rehypeHighlight, { ignoreMissing: true }]]}
+                return (
+                  <div
+                    key={singleComment.id}
+                    className="singleTopic_content_comments_singleComment"
                   >
-                    {singleComment.comment}
-                  </ReactMarkdown>
-                </div>;
+                    <div className="singleTopic_content_comments_singleComment_header">
+                      <span>le {singleComment.date_comment} </span>
+                      <span>{singleComment.username} a écrit:</span>
+                    </div>
+                    <ReactMarkdown
+                      className="markdown"
+                      rehypePlugins={[
+                        [rehypeHighlight, { ignoreMissing: true }],
+                      ]}
+                    >
+                      {singleComment.comment}
+                    </ReactMarkdown>
+                  </div>
+                );
               })
             ) : (
               <span className="singleTopic_content_comments_nothing">
                 rien pour le moment
               </span>
             )}
-            <form
-              className="singleTopic_content_comments_editor"
-              onSubmit={(e) => handleSubmit(e)}
-            >
-              <textarea
-                className="singleTopic_content_comments_editor_input"
-                name="editor"
-                id="editor"
-                placeholder="nouveau commentaire..."
-                value={commentContent}
-                onChange={(e) => handleChange(e)}
-                required
-              />
-              <button
-                className="singleTopic_content_comments_editor_button"
-                type="submit"
+            {localStorage.getItem("token") ? (
+              <form
+                className="singleTopic_content_comments_editor"
+                onSubmit={(e) => handleSubmit(e)}
               >
-                envoyer
-              </button>
-            </form>
+                <textarea
+                  className="singleTopic_content_comments_editor_input"
+                  name="editor"
+                  id="editor"
+                  placeholder="nouveau commentaire..."
+                  value={commentContent}
+                  onChange={(e) => handleChange(e)}
+                  required
+                />
+                <button
+                  className="singleTopic_content_comments_editor_button"
+                  type="submit"
+                >
+                  envoyer
+                </button>
+              </form>
+            ) : null}
           </div>
         </div>
         <Navbar />
