@@ -41,6 +41,14 @@
       border-radius: 0.3rem;
       box-shadow: 0 0 10px $carbon;
 
+      &_title {
+        color: $warm-grey-1;
+        text-shadow: 0 0 5px $dark-purple-1;
+        font-size: x-large;
+        width: 100%;
+        word-wrap: break-word;
+      }
+
       &_bottom {
         width: 100%;
         display: flex;
@@ -54,15 +62,41 @@
         &_right {
           display: flex;
           flex-direction: column;
+
+          > h4 {
+            padding: 0.2rem;
+          }
+
+          &_user {
+            > span {
+              background-color: $dark-purple-3;
+              color: $cool-grey-2;
+              padding: 0.2rem 0.4rem;
+              border-radius: 0.2rem;
+              cursor: pointer;
+            }
+          }
         }
       }
 
       &_tags {
         display: flex;
-        overflow-x: scroll;
+        background-color: $warm-grey-2;
+        border-radius: 0.2rem;
 
-        > div {
-          padding: 0 0.3rem;
+        > span {
+          background-color: $dark-purple-3;
+          color: $dark-purple-7;
+          padding: 0.2rem;
+          border-radius: 0.2rem 0 0 0.2rem;
+        }
+        &_tagList {
+          display: flex;
+          overflow-x: scroll;
+
+          > div {
+            padding: 0.2rem 0.4rem;
+          }
         }
       }
     }
@@ -104,6 +138,7 @@
             color: $cool-grey-2;
             padding: 0.2rem 0.4rem;
             border-radius: 0.2rem;
+            cursor: pointer;
           }
         }
       }
@@ -122,6 +157,9 @@
 
         &_button {
           width: 17%;
+          background-color: $dark-purple-5;
+          border-radius: 0.5rem;
+          cursor: pointer;
         }
       }
     }

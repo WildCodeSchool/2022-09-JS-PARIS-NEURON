@@ -69,18 +69,22 @@ export const SingleTopic = () => {
                   {topic.date}
                 </span>
               </div>
-              <div className="singleTopic_content_header_bottomright">
-                <h4 className="singleTopic_content_header_bottom_right_user">{`neuron: ${topic.username}`}</h4>
+              <div className="singleTopic_content_header_bottom_right">
+                <h4 className="singleTopic_content_header_bottom_right_user">
+                  neuron: <span>{topic.username}</span>
+                </h4>
                 <h4 className="singleTopic_content_header_bottom_right_category">
-                  {`categorie: ${topic.name}`}
+                  {`cat. ${topic.name}`}
                 </h4>
               </div>
             </div>
             <div className="singleTopic_content_header_tags">
-              <span>tags:</span>
-              {taglist.map((tag) => (
-                <div>{tag.tag}</div>
-              ))}
+              <span>tag(s):</span>
+              <div className="singleTopic_content_header_tags_tagList">
+                {taglist.map((tag) => (
+                  <div>{tag.tag}</div>
+                ))}
+              </div>
             </div>
           </div>
           <ReactMarkdown
