@@ -53,7 +53,6 @@ export const SingleTopic = () => {
     }, 1500);
   };
 
-  console.warn("comments: ", comments);
   return (
     topic && (
       <div className="singleTopic">

@@ -70,7 +70,6 @@ const getTopicById = (req, res) => {
 
 const getComments = (req, res) => {
   const { id } = req.query;
-  console.warn(id);
 
   neuron
     .query(
@@ -147,14 +146,12 @@ const createTopic = (req, res) => {
 const createComment = (req, res) => {
   const { commentContent, date, topicId, userID } = req.body;
 
-  console.warn("body: ", req.body);
-
   neuron
     .query(
       "INSERT INTO comments (comment, date_comment, topics_id, users_id) values (?, ?, ?, ?)",
       [commentContent, date, topicId, userID]
     )
-    .then(() => res.status(201).json("topic créé"))
+    .then(() => res.status(201).json("commentaire créé"))
     .catch((err) => {
       console.error(err);
       res.status(500).send("Error saving the comment");
