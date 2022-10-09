@@ -235,7 +235,6 @@ const getUsersByIds = (token, idList, setState) => {
       },
     })
     .then((res) => {
-      console.warn(res.data);
       setState(res.data);
     })
     .catch((err) => {

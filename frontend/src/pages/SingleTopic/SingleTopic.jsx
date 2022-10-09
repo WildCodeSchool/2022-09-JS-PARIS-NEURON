@@ -101,10 +101,12 @@ export const SingleTopic = () => {
                     className="singleTopic_content_comments_singleComment"
                   >
                     <div className="singleTopic_content_comments_singleComment_header">
-                      <span>le {singleComment.date_comment} </span>
-                      <span>{singleComment.username} a écrit:</span>
+                      le <span>{singleComment.date_comment} </span>
+                      <span className="singleTopic_content_comments_singleComment_header_user">
+                        {singleComment.username}
+                      </span>{" "}
+                      a écrit:
                     </div>
-                    <hr />
                     <ReactMarkdown
                       className="markdown"
                       rehypePlugins={[

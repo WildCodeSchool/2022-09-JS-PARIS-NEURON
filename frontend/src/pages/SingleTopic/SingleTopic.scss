@@ -74,6 +74,8 @@
       padding: 0.3rem;
       background-color: $warm-grey-3;
       border-radius: 0.3rem;
+      box-shadow: inset 0 0 5px $carbon;
+      margin-top: 1rem;
 
       &_title {
         font-size: larger;
@@ -91,8 +93,18 @@
         background-color: $warm-grey-1;
         border-radius: 0.2rem;
 
-        > hr {
-          border: solid 0.1rem $warm-grey-5;
+        &_header {
+          background-color: $warm-grey-2;
+          padding: 0.4rem;
+          border-bottom: solid 0.2rem $warm-grey-3;
+          border-radius: 0.3rem;
+
+          &_user {
+            background-color: $dark-purple-3;
+            color: $cool-grey-2;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+          }
         }
       }
 
