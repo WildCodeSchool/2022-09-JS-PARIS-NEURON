@@ -64,20 +64,27 @@ export const CreateTopics = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    postTopic(
-      token,
-      title,
-      topic,
-      summary,
-      chatId,
-      date,
-      categorieId,
-      userId,
-      tags,
-      setTopicId,
-      setMessage
-    );
-    setMessage("");
+    if (tags.length) {
+      postTopic(
+        token,
+        title,
+        topic,
+        summary,
+        chatId,
+        date,
+        categorieId,
+        userId,
+        tags,
+        setTopicId,
+        setMessage
+      );
+      setMessage("");
+    } else {
+      setMessage("tag nécessaire");
+      setTimeout(() => {
+        setMessage("");
+      }, 1500);
+    }
   };
 
   useEffect(() => {
