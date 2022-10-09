@@ -70,9 +70,9 @@ export const SingleTopic = () => {
                 </span>
               </div>
               <div className="singleTopic_content_header_bottomright">
-                <h4 className="singleTopic_content_header_bottom_right_user">{`neuron: ${topic.users_id}`}</h4>
+                <h4 className="singleTopic_content_header_bottom_right_user">{`neuron: ${topic.username}`}</h4>
                 <h4 className="singleTopic_content_header_bottom_right_category">
-                  {`categorie: ${topic.categories_id}`}
+                  {`categorie: ${topic.name}`}
                 </h4>
               </div>
             </div>
@@ -104,6 +104,7 @@ export const SingleTopic = () => {
                       <span>le {singleComment.date_comment} </span>
                       <span>{singleComment.username} a écrit:</span>
                     </div>
+                    <hr />
                     <ReactMarkdown
                       className="markdown"
                       rehypePlugins={[

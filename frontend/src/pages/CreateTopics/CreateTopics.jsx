@@ -31,7 +31,7 @@ export const CreateTopics = () => {
     setDate(
       `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`
     );
-    setUserId(1);
+    setUserId(localStorage.getItem("userId"));
   }, []);
 
   useEffect(() => {

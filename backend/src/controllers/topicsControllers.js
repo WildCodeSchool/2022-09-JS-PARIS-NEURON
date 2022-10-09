@@ -56,7 +56,7 @@ const getTopicById = (req, res) => {
 
   neuron
     .query(
-      `SELECT *, DATE_FORMAT(date, "%d/%m/%Y") AS date FROM topics WHERE topics.id=?; SELECT tag FROM topics_has_tags AS tht JOIN topics ON topics.id=tht.topics_id JOIN tags ON tags.id=tht.tags_id WHERE tht.topics_id=?`,
+      `SELECT *, DATE_FORMAT(date, "%d/%m/%Y") AS date FROM topics JOIN categories ON categories.id=topics.categories_id JOIN users ON users.id=topics.users_id WHERE topics.id=?; SELECT tag FROM topics_has_tags AS tht JOIN topics ON topics.id=tht.topics_id JOIN tags ON tags.id=tht.tags_id WHERE tht.topics_id=?`,
       [id, id]
     )
     .then(([topic]) => {
