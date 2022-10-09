@@ -34,12 +34,22 @@ export const BrainDeployer = () => {
           <LogOnIcon onClick={() => handleToggle()} />
         </div>
         <div className="braindeployer_circle second">
-          <Link to="/createmail">
-            <MailOnIcon />
-          </Link>
+          {localStorage.getItem("token") ? (
+            <Link to="/createmail">
+              <MailOnIcon />
+            </Link>
+          ) : (
+            <MailOnIcon onClick={() => handleToggle()} />
+          )}
         </div>
         <div className="braindeployer_circle third">
-          <NotifOnIcon />
+          {localStorage.getItem("token") ? (
+            <Link to="/createmail">
+              <NotifOnIcon />
+            </Link>
+          ) : (
+            <NotifOnIcon onClick={() => handleToggle()} />
+          )}
         </div>
       </div>
       <Auth show={isShowing} hide={toggle} />

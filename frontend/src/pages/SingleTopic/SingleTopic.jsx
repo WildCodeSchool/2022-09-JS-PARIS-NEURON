@@ -78,7 +78,6 @@ export const SingleTopic = () => {
           >
             {topic.topic}
           </ReactMarkdown>
-          <hr />
           <div className="singleTopic_content_comments">
             <span className="singleTopic_content_comments_title">
               commentaires:{" "}

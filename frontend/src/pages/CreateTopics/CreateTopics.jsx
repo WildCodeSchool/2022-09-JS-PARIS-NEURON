@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Navbar, Markdown } from "@components/";
 import { postTopic } from "@services/apiRequest";
 import { v4 as uuidv4 } from "uuid";
 import { useNavigate } from "react-router";
+import { messageContext } from "@contexts/messageContext";
 
 import "./CreateTopics.scss";
 
 export const CreateTopics = () => {
+  const { setMessage } = useContext(messageContext);
+
   const [token, setToken] = useState("");
   const [title, setTitle] = useState("");
   const [topic, setTopic] = useState("");
@@ -18,7 +21,6 @@ export const CreateTopics = () => {
   const [tags, setTags] = useState([]);
   const [userId, setUserId] = useState(0);
   const [topicId, setTopicId] = useState(0);
-  const [message, setMessage] = useState("");
 
   const navigate = useNavigate();
 
@@ -144,13 +146,6 @@ export const CreateTopics = () => {
         </div>
       </form>
       <Navbar />
-      <div className="topicMessage">
-        <div
-          className={message.length ? "topicMessage_show" : "topicMessage_hide"}
-        >
-          <div>{message}</div>
-        </div>
-      </div>
     </div>
   );
 };

@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { register, login, logout } from "@services/apiRequest";
 
 import "./Auth.scss";
+import { messageContext } from "@contexts/messageContext";
 
 export const Auth = ({ show, hide }) => {
   const [username, setUsername] = useState("");
@@ -13,7 +14,7 @@ export const Auth = ({ show, hide }) => {
   const [loginMail, setLoginMail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
 
-  const [message, setMessage] = useState("");
+  const { message, setMessage } = useContext(messageContext);
 
   const reload = () => {
     setTimeout(() => {

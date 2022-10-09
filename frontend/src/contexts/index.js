@@ -1,2 +1,2 @@
-export { AvatarContext, useAvatarContext } from "./AvatarContext";
+export { messageContext, useMessageContext } from "./messageContext";
 export { FavoritesContext, useFavoritesContext } from "./FavoritesContext";
