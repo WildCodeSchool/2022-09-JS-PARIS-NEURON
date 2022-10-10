@@ -76,7 +76,7 @@ export const NeuronSettings = () => {
       });
   }, []);
   return (
-    <div>
+    <div className="neuronSettings">
       <div className="settingsTitle">
         <h1> SETTINGS </h1>
       </div>
