@@ -9,7 +9,7 @@ INSERT INTO
   )
 VALUES
   (
-    'test',
+    'neuronTeam',
     'bla',
     'test@test.net',
     'test',
@@ -28,7 +28,9 @@ VALUES
   ('express'),
   ('sql'),
   ('markdown'),
-  ('database');
+  ('database'),
+  ('typescript');
+  
 
 -- PROBLÈMES
 INSERT INTO
@@ -43,71 +45,15 @@ INSERT INTO
   )
 VALUES
   (
-    'title1',
+    'exemple pour problèmes',
+    '*Lorem* **ipsum dolor** sit, amet consectetur adipisicing elit. Maiores ut voluptates temporibus, rem odit alias quis distinctio, nostrum dignissimos dolor laborum et, neque velit perferendis eaque Nihil beatae non molestiae. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores ut voluptates temporibus, rem odit alias quis distinctio, nostrum dignissimos dolor laborum et, neque velit perferendis eaque Nihil beatae non molestiae. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores ut voluptates temporibus, rem odit alias quis distinctio, nostrum dignissimos dolor laborum et, neque velit perferendis eaque Nihil beatae non molestiae.',
     'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores ut voluptates temporibus, rem odit alias quis distinctio, nostrum dignissimos dolor laborum et, neque velit perferendis eaque Nihil beatae non molestiae.',
-    'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
     'title1chatid',
     '2022-09-24',
     1,
     1
   );
-
-INSERT INTO
-  `neuron`.`topics_has_tags` (`topics_id`, `tags_id`)
-VALUES
-  (LAST_INSERT_ID (), 6);
-
-INSERT INTO
-  `neuron`.`topics` (
-    `title`,
-    `topic`,
-    `summary`,
-    `chat_id`,
-    `date`,
-    `categories_id`,
-    `users_id`
-  )
-VALUES
-  (
-    'title2',
-    'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores ut voluptates temporibus, rem odit alias quis distinctio, nostrum dignissimos dolor laborum et, neque velit perferendis eaque Nihil beatae non molestiae.',
-    'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-    'title2chatid',
-    '2022-09-25',
-    1,
-    1
-  );
-
-INSERT INTO
-  `neuron`.`topics_has_tags` (`topics_id`, `tags_id`)
-VALUES
-  (LAST_INSERT_ID (), 7);
-
-INSERT INTO
-  `neuron`.`topics` (
-    `title`,
-    `topic`,
-    `summary`,
-    `chat_id`,
-    `date`,
-    `categories_id`,
-    `users_id`
-  )
-VALUES
-  (
-    'title3',
-    'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores ut voluptates temporibus, rem odit alias quis distinctio, nostrum dignissimos dolor laborum et, neque velit perferendis eaque Nihil beatae non molestiae.',
-    'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-    'title3chatid',
-    '2022-09-24',
-    1,
-    1
-  );
-
-INSERT INTO
-  `neuron`.`topics_has_tags` (`topics_id`, `tags_id`)
-VALUES
-  (LAST_INSERT_ID (), 3);
+  
 
 -- PROJETS
 INSERT INTO
@@ -122,72 +68,15 @@ INSERT INTO
   )
 VALUES
   (
-    'title4',
+    'exemple pour projets',
+    '*Lorem* **ipsum dolor** sit, amet consectetur adipisicing elit. Maiores ut voluptates temporibus, rem odit alias quis distinctio, nostrum dignissimos dolor laborum et, neque velit perferendis eaque Nihil beatae non molestiae. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores ut voluptates temporibus, rem odit alias quis distinctio, nostrum dignissimos dolor laborum et, neque velit perferendis eaque Nihil beatae non molestiae. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores ut voluptates temporibus, rem odit alias quis distinctio, nostrum dignissimos dolor laborum et, neque velit perferendis eaque Nihil beatae non molestiae.',
     'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores ut voluptates temporibus, rem odit alias quis distinctio, nostrum dignissimos dolor laborum et, neque velit perferendis eaque Nihil beatae non molestiae.',
-    'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-    'title4chatid',
+    'title2chatid',
     '2022-09-24',
     2,
     1
   );
-
-INSERT INTO
-  `neuron`.`topics_has_tags` (`topics_id`, `tags_id`)
-VALUES
-  (LAST_INSERT_ID (), 8);
-
-INSERT INTO
-  `neuron`.`topics` (
-    `title`,
-    `topic`,
-    `summary`,
-    `chat_id`,
-    `date`,
-    `categories_id`,
-    `users_id`
-  )
-VALUES
-  (
-    'title5',
-    'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores ut voluptates temporibus, rem odit alias quis distinctio, nostrum dignissimos dolor laborum et, neque velit perferendis eaque Nihil beatae non molestiae.',
-    'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-    'title5chatid',
-    '2022-09-25',
-    2,
-    1
-  );
-
-INSERT INTO
-  `neuron`.`topics_has_tags` (`topics_id`, `tags_id`)
-VALUES
-  (LAST_INSERT_ID (), 9);
-
-INSERT INTO
-  `neuron`.`topics` (
-    `title`,
-    `topic`,
-    `summary`,
-    `chat_id`,
-    `date`,
-    `categories_id`,
-    `users_id`
-  )
-VALUES
-  (
-    'title6',
-    'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores ut voluptates temporibus, rem odit alias quis distinctio, nostrum dignissimos dolor laborum et, neque velit perferendis eaque Nihil beatae non molestiae.',
-    'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-    'title6chatid',
-    '2022-09-24',
-    2,
-    1
-  );
-
-INSERT INTO
-  `neuron`.`topics_has_tags` (`topics_id`, `tags_id`)
-VALUES
-  (LAST_INSERT_ID (), 1);
-
+  
 -- APPRENTISSAGE
 INSERT INTO
   `neuron`.`topics` (
@@ -201,71 +90,15 @@ INSERT INTO
   )
 VALUES
   (
-    'title7',
+    'exemple pour apprentissage',
+    '*Lorem* **ipsum dolor** sit, amet consectetur adipisicing elit. Maiores ut voluptates temporibus, rem odit alias quis distinctio, nostrum dignissimos dolor laborum et, neque velit perferendis eaque Nihil beatae non molestiae. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores ut voluptates temporibus, rem odit alias quis distinctio, nostrum dignissimos dolor laborum et, neque velit perferendis eaque Nihil beatae non molestiae. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores ut voluptates temporibus, rem odit alias quis distinctio, nostrum dignissimos dolor laborum et, neque velit perferendis eaque Nihil beatae non molestiae.',
     'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores ut voluptates temporibus, rem odit alias quis distinctio, nostrum dignissimos dolor laborum et, neque velit perferendis eaque Nihil beatae non molestiae.',
-    'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-    'title4chatid',
+    'title3chatid',
     '2022-09-24',
     3,
     1
   );
-
-INSERT INTO
-  `neuron`.`topics_has_tags` (`topics_id`, `tags_id`)
-VALUES
-  (LAST_INSERT_ID (), 5);
-
-INSERT INTO
-  `neuron`.`topics` (
-    `title`,
-    `topic`,
-    `summary`,
-    `chat_id`,
-    `date`,
-    `categories_id`,
-    `users_id`
-  )
-VALUES
-  (
-    'title8',
-    'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores ut voluptates temporibus, rem odit alias quis distinctio, nostrum dignissimos dolor laborum et, neque velit perferendis eaque Nihil beatae non molestiae.',
-    'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-    'title5chatid',
-    '2022-09-24',
-    3,
-    1
-  );
-
-INSERT INTO
-  `neuron`.`topics_has_tags` (`topics_id`, `tags_id`)
-VALUES
-  (LAST_INSERT_ID (), 8);
-
-INSERT INTO
-  `neuron`.`topics` (
-    `title`,
-    `topic`,
-    `summary`,
-    `chat_id`,
-    `date`,
-    `categories_id`,
-    `users_id`
-  )
-VALUES
-  (
-    'title9',
-    'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores ut voluptates temporibus, rem odit alias quis distinctio, nostrum dignissimos dolor laborum et, neque velit perferendis eaque Nihil beatae non molestiae.',
-    'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-    'title6chatid',
-    '2022-09-24',
-    3,
-    1
-  );
-
-INSERT INTO
-  `neuron`.`topics_has_tags` (`topics_id`, `tags_id`)
-VALUES
-  (LAST_INSERT_ID (), 2);
+  
 
 -- VEILLE
 INSERT INTO
@@ -280,71 +113,15 @@ INSERT INTO
   )
 VALUES
   (
-    'title10',
+    'exemple pour veille',
+    '*Lorem* **ipsum dolor** sit, amet consectetur adipisicing elit. Maiores ut voluptates temporibus, rem odit alias quis distinctio, nostrum dignissimos dolor laborum et, neque velit perferendis eaque Nihil beatae non molestiae. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores ut voluptates temporibus, rem odit alias quis distinctio, nostrum dignissimos dolor laborum et, neque velit perferendis eaque Nihil beatae non molestiae. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores ut voluptates temporibus, rem odit alias quis distinctio, nostrum dignissimos dolor laborum et, neque velit perferendis eaque Nihil beatae non molestiae.',
     'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores ut voluptates temporibus, rem odit alias quis distinctio, nostrum dignissimos dolor laborum et, neque velit perferendis eaque Nihil beatae non molestiae.',
-    'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
     'title4chatid',
-    '2022-09-25',
-    4,
-    1
-  );
-
-INSERT INTO
-  `neuron`.`topics_has_tags` (`topics_id`, `tags_id`)
-VALUES
-  (LAST_INSERT_ID (), 4);
-
-INSERT INTO
-  `neuron`.`topics` (
-    `title`,
-    `topic`,
-    `summary`,
-    `chat_id`,
-    `date`,
-    `categories_id`,
-    `users_id`
-  )
-VALUES
-  (
-    'title11',
-    'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores ut voluptates temporibus, rem odit alias quis distinctio, nostrum dignissimos dolor laborum et, neque velit perferendis eaque Nihil beatae non molestiae.',
-    'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-    'title5chatid',
-    '2022-09-25',
-    4,
-    1
-  );
-
-INSERT INTO
-  `neuron`.`topics_has_tags` (`topics_id`, `tags_id`)
-VALUES
-  (LAST_INSERT_ID (), 2);
-
-INSERT INTO
-  `neuron`.`topics` (
-    `title`,
-    `topic`,
-    `summary`,
-    `chat_id`,
-    `date`,
-    `categories_id`,
-    `users_id`
-  )
-VALUES
-  (
-    'title12',
-    'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores ut voluptates temporibus, rem odit alias quis distinctio, nostrum dignissimos dolor laborum et, neque velit perferendis eaque Nihil beatae non molestiae.',
-    'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-    'title6chatid',
     '2022-09-24',
     4,
     1
   );
-
-INSERT INTO
-  `neuron`.`topics_has_tags` (`topics_id`, `tags_id`)
-VALUES
-  (LAST_INSERT_ID (), 3);
+  
 
 -- DIVERS
 INSERT INTO
@@ -359,35 +136,9 @@ INSERT INTO
   )
 VALUES
   (
-    'title13',
+    'exemple pour divers',
+    '*Lorem* **ipsum dolor** sit, amet consectetur adipisicing elit. Maiores ut voluptates temporibus, rem odit alias quis distinctio, nostrum dignissimos dolor laborum et, neque velit perferendis eaque Nihil beatae non molestiae. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores ut voluptates temporibus, rem odit alias quis distinctio, nostrum dignissimos dolor laborum et, neque velit perferendis eaque Nihil beatae non molestiae. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores ut voluptates temporibus, rem odit alias quis distinctio, nostrum dignissimos dolor laborum et, neque velit perferendis eaque Nihil beatae non molestiae.',
     'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores ut voluptates temporibus, rem odit alias quis distinctio, nostrum dignissimos dolor laborum et, neque velit perferendis eaque Nihil beatae non molestiae.',
-    'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-    'title4chatid',
-    '2022-09-24',
-    5,
-    1
-  );
-
-INSERT INTO
-  `neuron`.`topics_has_tags` (`topics_id`, `tags_id`)
-VALUES
-  (LAST_INSERT_ID (), 6);
-
-INSERT INTO
-  `neuron`.`topics` (
-    `title`,
-    `topic`,
-    `summary`,
-    `chat_id`,
-    `date`,
-    `categories_id`,
-    `users_id`
-  )
-VALUES
-  (
-    'title14',
-    'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores ut voluptates temporibus, rem odit alias quis distinctio, nostrum dignissimos dolor laborum et, neque velit perferendis eaque Nihil beatae non molestiae.',
-    'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
     'title5chatid',
     '2022-09-24',
     5,
@@ -396,31 +147,35 @@ VALUES
 
 INSERT INTO
   `neuron`.`topics_has_tags` (`topics_id`, `tags_id`)
-VALUES
-  (LAST_INSERT_ID (), 9);
-
+VALUES (1, 1);
 INSERT INTO
-  `neuron`.`topics` (
-    `title`,
-    `topic`,
-    `summary`,
-    `chat_id`,
-    `date`,
-    `categories_id`,
-    `users_id`
-  )
-VALUES
-  (
-    'title15',
-    'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores ut voluptates temporibus, rem odit alias quis distinctio, nostrum dignissimos dolor laborum et, neque velit perferendis eaque Nihil beatae non molestiae.',
-    'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-    'title6chatid',
-    '2022-09-24',
-    5,
-    1
-  );
+  `neuron`.`topics_has_tags` (`topics_id`, `tags_id`)
+VALUES (1, 2);
 
 INSERT INTO
   `neuron`.`topics_has_tags` (`topics_id`, `tags_id`)
-VALUES
-  (LAST_INSERT_ID (), 5);
+VALUES (2, 3);
+INSERT INTO
+  `neuron`.`topics_has_tags` (`topics_id`, `tags_id`)
+VALUES (2, 4);
+  
+INSERT INTO
+  `neuron`.`topics_has_tags` (`topics_id`, `tags_id`)
+VALUES (3, 5);
+INSERT INTO
+  `neuron`.`topics_has_tags` (`topics_id`, `tags_id`)
+VALUES (3, 5);
+  
+INSERT INTO
+  `neuron`.`topics_has_tags` (`topics_id`, `tags_id`)
+VALUES (4, 7);
+INSERT INTO
+  `neuron`.`topics_has_tags` (`topics_id`, `tags_id`)
+VALUES (4, 7);
+
+INSERT INTO
+  `neuron`.`topics_has_tags` (`topics_id`, `tags_id`)
+VALUES (5, 9);
+INSERT INTO
+  `neuron`.`topics_has_tags` (`topics_id`, `tags_id`)
+VALUES (5, 9);
