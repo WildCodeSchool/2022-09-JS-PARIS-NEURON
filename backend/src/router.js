@@ -37,5 +37,8 @@ router.delete("/followed", usersControllers.removeFromFollowed);
 router.post("/topics", topicsControllers.createTopic);
 router.post("/comments", topicsControllers.createComment);
 router.post("/logout", usersControllers.logout);
+router.get("/tagsFavorites", usersControllers.getTagsFavorites);
+router.post("/tagsFavorites", usersControllers.addTagsFavorites);
+router.delete("/tagsFavorites", usersControllers.removeFromTagsFavorites);
 
 module.exports = router;

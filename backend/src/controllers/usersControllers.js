@@ -115,7 +115,7 @@ const addTagsFavorites = (req, res) => {
     });
 };
 
-const removeTags = (req, res) => {
+const removeFromTagsFavorites = (req, res) => {
   const { id } = req.query;
 
   neuron
@@ -206,7 +206,7 @@ module.exports = {
   logout,
   getTagsFavorites,
   addTagsFavorites,
-  removeTags,
+  removeFromTagsFavorites,
   addToFollowed,
   removeFromFollowed,
   getFollowed,

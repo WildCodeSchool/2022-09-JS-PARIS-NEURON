@@ -242,6 +242,67 @@ const getUsersByIds = (token, idList, setState) => {
     });
 };
 
+const getTagsFavorites = (setState) => {
+  axios
+    .get(" http://localhost:5000/tagsFavorites", {
+      withCredentials: true,
+      headers: {
+        "x-xsrf-token": `${token}`,
+      },
+    })
+    .then((res) => {
+      setState(res.data);
+    })
+    .catch((err) => {
+      console.warn(err);
+    });
+};
+
+const addTagsFavorites = (setState) => {
+  axios
+    .post(
+      "http://localhost:5000/tagsFavorites",
+      {
+        tags_id,
+        users_id,
+      },
+      {
+        withCredentials: true,
+        headers: {
+          "x-xsrf-token": `${token}`,
+        },
+      }
+    )
+    .then((res) => {
+      setState(res.data);
+    })
+    .catch((err) => {
+      console.warn(err);
+    });
+};
+
+const removeFromTagsFavorites = (setState) => {
+  axios
+    .delete(
+      "http://localhost:5000/tagsFavorites",
+      {
+        id,
+      },
+      {
+        withCredentials: true,
+        headers: {
+          "x-xsrf-token": `${token}`,
+        },
+      }
+    )
+    .then((res) => {
+      setState(res.data);
+    })
+    .catch((err) => {
+      console.warn(err);
+    });
+};
+
 export {
   register,
   login,
@@ -257,4 +318,7 @@ export {
   // deleteFollowed,
   getFollowed,
   getUsersByIds,
+  getTagsFavorites,
+  addTagsFavorites,
+  removeFromTagsFavorites,
 };
