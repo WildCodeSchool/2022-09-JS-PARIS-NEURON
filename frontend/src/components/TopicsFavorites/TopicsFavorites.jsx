@@ -1,15 +1,25 @@
 import { TopicCard } from "@components/index";
 import Carousel from "react-grid-carousel";
 import React, { useEffect, useState } from "react";
+import {
+  getTopicsFavorites,
+  addToTopicsFavorites,
+  removeFromTopicsFavorites,
+} from "@services/apiRequest";
 import "./TopicsFavorites.scss";
 
 export const TopicsFavorites = () => {
   const [topics, setTopics] = useState([]);
+  // const [isFavorite, setIsFavorite] = useState(false);
+  // useEffect(() => {
+  //   addToTopicsFavorites(setIsFavorite)
+  // });
 
+  // const toggleFavorite = () => {
+  //   setIsFavorite(!isFavorite);
+  // };
   useEffect(() => {
-    setTopics([
-      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-    ]);
+    getTopicsFavorites(setTopics);
   }, []);
 
   const topicsFavList = [
@@ -47,9 +57,14 @@ export const TopicsFavorites = () => {
         showDots
       >
         {topics.map((topic) => (
-          <Carousel.Item key={topics}>
+          <Carousel.Item key={topic.id}>
             <div className="item">
-              <TopicCard topic={topic} />
+              <TopicCard
+                title={topic.title}
+                summary={topic.summary}
+                date={topic.date}
+                id={topic.topics_id}
+              />
             </div>
           </Carousel.Item>
         ))}

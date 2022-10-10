@@ -100,8 +100,8 @@ const createTopic = (req, res) => {
 
   neuron
     .query(
-      `INSERT INTO topics (title, topic, summary, chat_id, date, categories_id, users_id) VALUES (?, ?, ?, ?, ?, ?, ?) `,
-      [title, topic, summary, chat_id, date, categories_id, users_id]
+      `INSERT INTO topics (title, topic, summary, chat_id, date, categories_id) VALUES (?, ?, ?, ?, ?, ?, ?); INSERT INTO users_has_topics (users_id) VALUES (?) INNER JOIN users ON users.id = users_has_topics.users_id`,
+      [title, topic, summary, chat_id, date, categories_id], [id]
     )
     .then(([result]) => {
       res.json(result.insertId);

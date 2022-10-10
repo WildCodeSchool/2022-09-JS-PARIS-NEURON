@@ -93,6 +93,37 @@ const getComments = (id, setState) => {
   });
 };
 
+const getTopicsFavorites = (setState) => {
+  axios.get("http://localhost:5000/topicsfavorites").then((res) => {
+    localStorage.setItem("token", data.xsrfToken);
+    localStorage.setItem("userName", data.user.username);
+    localStorage.setItem("userId", data.user.id);
+    console.warn(res);
+    setState(res.data);
+  });
+};
+
+const addToTopicsFavorites = (setState) => {
+  axios.post("http://localhost:5000/topicsfavorites")
+  .then((res) => {
+  localStorage.setItem("token", data.xsrfToken);
+    localStorage.setItem("userName", data.user.username);
+    localStorage.setItem("userId", data.user.id);
+    console.warn(res);
+    setState(res.data);
+});
+};
+
+const removeFromTopicsFavorites = (setState) => {
+  axios.delete("http://localhost:5000/topicsfavorites")
+  .then((res) => {
+    localStorage.setItem("token", data.xsrfToken);
+    localStorage.setItem("userName", data.user.username);
+    localStorage.setItem("userId", data.user.id);
+    console.warn(res);
+    setState(res.data);
+  });
+};
 const postTopic = (
   token,
   title,
@@ -257,4 +288,7 @@ export {
   // deleteFollowed,
   getFollowed,
   getUsersByIds,
+  getTopicsFavorites,
+  addToTopicsFavorites,
+  removeFromTopicsFavorites
 };
