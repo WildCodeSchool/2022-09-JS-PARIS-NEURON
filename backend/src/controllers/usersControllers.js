@@ -149,6 +149,56 @@ const getUserByFollowed = (req, res) => {
     });
 };
 
+const getTopicsFavorites = (req, res) => {
+  const { id } = req.query;
+
+  neuron
+    .query(
+      "SELECT * FROM users_has_topics INNER JOIN users ON users.id = users_has_topics.users_id AND topics ON topics.id = users_has_topics.topics_id",
+      [id]
+    )
+    .then(([topicsfav]) => {
+      res.status(201).json(topicsfav);
+    })
+    .catch((err) => {
+      console.warn(err);
+      res.status(500).send("Une erreur s'est produite");
+    });
+};
+
+const addToTopicsFavorites = (req, res) => {
+  const { id } = req.query;
+
+  neuron
+    .query(
+      "INSERT INTO users_has_topics (users_id, topics_id) VALUES (?, ?) SELECT ?, ? WHERE NO EXISTS (users_id=?) AND (topics_id=?)",
+      [id]
+    )
+    .then(() => {
+      res.status(201).json("ajouté aux favoris");
+    })
+    .catch((err) => {
+      console.warn(err);
+      res.status(500).send("Une erreur s'est produite");
+    });
+};
+
+const removeFromTopicsFavorites = (req, res) => {
+  const { id } = req.query;
+
+  neuron
+    .query(
+      "DELETE FROM users_has_topics WHERE (users_id=?) AND (friend_id=?)",
+      [id]
+    )
+    .then(() => {
+      res.status(201).json("Favoris supprimé");
+    })
+    .catch((err) => {
+      console.warn(err);
+      res.status(500).send("Une erreur est survenue");
+    });
+};
 module.exports = {
   getUsers,
   createUser,
@@ -158,4 +208,7 @@ module.exports = {
   removeFromFollowed,
   getFollowed,
   getUserByFollowed,
+  getTopicsFavorites,
+  addToTopicsFavorites,
+  removeFromTopicsFavorites,
 };

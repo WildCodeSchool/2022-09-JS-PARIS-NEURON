@@ -26,6 +26,7 @@
         "Notif",
         "Paramètres",
         "pascalize",
+        "produite",
         "Profil",
         "rechercher",
         "récupérer",
@@ -33,10 +34,13 @@
         "setmarks",
         "supprimé",
         "supprimer",
+        "survenue",
         "topicbyid",
         "topicsbytags",
         "topicsbytitle",
+        "topicsfav",
         "userheader",
+        "utilisé",
         "vous"
     ]
 }
