@@ -81,26 +81,12 @@ const logout = (req, res) => {
     });
 };
 
-// const { mail } = req.body;
-
-// neuron
-//   .query("SELECT * FROM users WHERE mail = ?", [mail])
-//   .then(([users]) => {
-//     if (users[0] != null) {
-//       // eslint-disable-next-line prefer-destructuring
-//       req.user = users[0];
-//       next();
-//     } else {
-//       res.sendStatus(401);
-//     }
-//   })
-
 const getTagsFavorites = (req, res) => {
   const { id } = req.query;
 
   neuron
     .query(
-      "SELECT * FROM users_has_tags JOIN users ON users.id = users_has_tags.users_id WHERE users_id = ?",
+      "SELECT * FROM users_has_tags INNER JOIN users ON users.id = users_has_tags.users_id INNER JOIN tags ON tags.id = tags_id WHERE users_id = ? tags_id = ?",
       [id]
     )
     .then(([result]) => {
@@ -112,13 +98,30 @@ const getTagsFavorites = (req, res) => {
     });
 };
 
-const removeTags = (req, res) => {
-  const { id } = req.body;
+const addTagsFavorites = (req, res) => {
+  const { id } = req.query;
 
   neuron
-    .query("DELETE FROM users_has_tags WHERE users_id = ? ", [id])
+    .query(
+      "INSERT INTO users_has_tags (users_id, tags_id) VALUES (?, ?) SELECT ?, ? WHERE NOT EXISTS (SELECT * FROM users_has_tags WHERE (users_id=?) AND (tags_id=?))",
+      [id]
+    )
     .then(() => {
-      registerWithMail.status(201).json("supprimé des favoris");
+      res.status(201).json("ajouté aux favoris");
+    })
+    .catch((err) => {
+      console.warn(err);
+      res.status(500).send("Une erreur s'est produite");
+    });
+};
+
+const removeTags = (req, res) => {
+  const { id } = req.query;
+
+  neuron
+    .query("DELETE FROM users_has_tags WHERE users_id = ? AND tags_id = ? ", [id])
+    .then(() => {
+      res.status(201).json("supprimé des favoris");
     })
     .catch((err) => {
       console.warn(err);
@@ -127,11 +130,11 @@ const removeTags = (req, res) => {
 };
 
 const addToFollowed = (req, res) => {
-  const { id } = req.body;
+  const { id } = req.query;
 
   neuron
     .query(
-      "INSERT INTO followed (id) VALUES (?), JOIN users ON users.id=followed.user_id",
+      "INSERT INTO followed (users_id, friend_id) VALUES (?, ?) SELECT ?, ? WHERE NOT EXISTS (SELECT * FROM followed WHERE (user_id = ?) AND (friend_id = ?))",
       [id]
     )
     .then(() => {
@@ -144,10 +147,10 @@ const addToFollowed = (req, res) => {
 };
 
 const removeFromFollowed = (req, res) => {
-  const { id } = req.body;
+  const { id } = req.query;
 
   neuron
-    .query("DELETE FROM followed WHERE id = ?", [id])
+    .query("DELETE FROM followed WHERE (users_id=?) AND (friend_id=?)", [id])
     .then(() => {
       res.status(201).json("supprimé des favoris");
     })
@@ -200,6 +203,7 @@ module.exports = {
   registerWithMail,
   logout,
   getTagsFavorites,
+  addTagsFavorites,
   removeTags,
   addToFollowed,
   removeFromFollowed,
