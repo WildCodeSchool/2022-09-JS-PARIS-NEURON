@@ -99,7 +99,10 @@ const getTagsFavorites = (req, res) => {
   const { id } = req.query;
 
   neuron
-    .query("SELECT * FROM users_has_tags JOIN users ON users.id = users_has_tags.users_id WHERE users_id = ?",[id])
+    .query(
+      "SELECT * FROM users_has_tags JOIN users ON users.id = users_has_tags.users_id WHERE users_id = ?",
+      [id]
+    )
     .then(([result]) => {
       res.status(201).json(result);
     })
