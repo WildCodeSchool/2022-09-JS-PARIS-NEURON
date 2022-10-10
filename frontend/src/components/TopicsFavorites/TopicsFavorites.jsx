@@ -3,8 +3,8 @@ import Carousel from "react-grid-carousel";
 import React, { useEffect, useState } from "react";
 import {
   getTopicsFavorites,
-  addToTopicsFavorites,
-  removeFromTopicsFavorites,
+  // addToTopicsFavorites,
+  // removeFromTopicsFavorites,
 } from "@services/apiRequest";
 import "./TopicsFavorites.scss";
 

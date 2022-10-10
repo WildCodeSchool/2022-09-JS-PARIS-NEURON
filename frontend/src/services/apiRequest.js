@@ -104,19 +104,17 @@ const getTopicsFavorites = (setState) => {
 };
 
 const addToTopicsFavorites = (setState) => {
-  axios.post("http://localhost:5000/topicsfavorites")
-  .then((res) => {
-  localStorage.setItem("token", data.xsrfToken);
+  axios.post("http://localhost:5000/topicsfavorites").then((res) => {
+    localStorage.setItem("token", data.xsrfToken);
     localStorage.setItem("userName", data.user.username);
     localStorage.setItem("userId", data.user.id);
     console.warn(res);
     setState(res.data);
-});
+  });
 };
 
 const removeFromTopicsFavorites = (setState) => {
-  axios.delete("http://localhost:5000/topicsfavorites")
-  .then((res) => {
+  axios.delete("http://localhost:5000/topicsfavorites").then((res) => {
     localStorage.setItem("token", data.xsrfToken);
     localStorage.setItem("userName", data.user.username);
     localStorage.setItem("userId", data.user.id);
@@ -290,5 +288,5 @@ export {
   getUsersByIds,
   getTopicsFavorites,
   addToTopicsFavorites,
-  removeFromTopicsFavorites
+  removeFromTopicsFavorites,
 };

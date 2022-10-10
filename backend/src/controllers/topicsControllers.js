@@ -87,21 +87,15 @@ const getComments = (req, res) => {
 };
 
 const createTopic = (req, res) => {
-  const {
-    title,
-    topic,
-    summary,
-    chat_id,
-    date,
-    categories_id,
-    users_id,
-    tags,
-  } = req.body;
+  const { title, topic, summary, chat_id, date, categories_id, tags } =
+    req.body;
+  const { id } = req.body;
 
   neuron
     .query(
       `INSERT INTO topics (title, topic, summary, chat_id, date, categories_id) VALUES (?, ?, ?, ?, ?, ?, ?); INSERT INTO users_has_topics (users_id) VALUES (?) INNER JOIN users ON users.id = users_has_topics.users_id`,
-      [title, topic, summary, chat_id, date, categories_id], [id]
+      [title, topic, summary, chat_id, date, categories_id],
+      [id]
     )
     .then(([result]) => {
       res.json(result.insertId);
