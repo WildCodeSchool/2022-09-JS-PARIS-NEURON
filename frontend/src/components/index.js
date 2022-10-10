@@ -11,6 +11,8 @@ export { TopicsDisplay } from "./TopicsDisplay/TopicsDisplay";
 export { TopicCard } from "./TopicCard/TopicCard";
 export { NeuronFavorites } from "./NeuronFavorites/NeuronFavorites";
 export { Search } from "./Search/Search";
+
+export { NeuronSettings } from "./NeuronSettings/NeuronSettings/";
 export { ButtonFavorite } from "./ButtonFavorite/ButtonFavorite";
 export { ProfilDisplay } from "./ProfilDisplay/ProfilDisplay";
 export { Favorites } from "./Favorites/Favorites";

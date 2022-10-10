@@ -19,7 +19,7 @@ export const Search = ({ placeholder, handleChange, handleSearch, value }) => {
         onChange={(e) => handleChange(e)}
       />
       <button className="search_send" type="submit">
-        send
+        envoyer
       </button>
     </form>
   );
