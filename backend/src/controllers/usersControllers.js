@@ -119,7 +119,9 @@ const removeTags = (req, res) => {
   const { id } = req.query;
 
   neuron
-    .query("DELETE FROM users_has_tags WHERE users_id = ? AND tags_id = ? ", [id])
+    .query("DELETE FROM users_has_tags WHERE users_id = ? AND tags_id = ? ", [
+      id,
+    ])
     .then(() => {
       res.status(201).json("supprimé des favoris");
     })
