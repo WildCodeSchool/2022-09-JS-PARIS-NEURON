@@ -81,12 +81,62 @@ const logout = (req, res) => {
     });
 };
 
-const addToFollowed = (req, res) => {
-  const { id } = req.body;
+const getTagsFavorites = (req, res) => {
+  const { id } = req.query;
 
   neuron
     .query(
-      "INSERT INTO followed (id) VALUES (?), JOIN users ON users.id=followed.user_id",
+      "SELECT * FROM users_has_tags INNER JOIN users ON users.id = users_has_tags.users_id INNER JOIN tags ON tags.id = tags_id WHERE users_id = ? tags_id = ?",
+      [id]
+    )
+    .then(([result]) => {
+      res.status(201).json(result);
+    })
+    .catch((err) => {
+      console.warn(err);
+      res.status(500).send("impossible d'afficher les favoris");
+    });
+};
+
+const addTagsFavorites = (req, res) => {
+  const { id } = req.query;
+
+  neuron
+    .query(
+      "INSERT INTO users_has_tags (users_id, tags_id) VALUES (?, ?) SELECT ?, ? WHERE NOT EXISTS (SELECT * FROM users_has_tags WHERE (users_id=?) AND (tags_id=?))",
+      [id]
+    )
+    .then(() => {
+      res.status(201).json("ajouté aux favoris");
+    })
+    .catch((err) => {
+      console.warn(err);
+      res.status(500).send("Une erreur s'est produite");
+    });
+};
+
+const removeTags = (req, res) => {
+  const { id } = req.query;
+
+  neuron
+    .query("DELETE FROM users_has_tags WHERE users_id = ? AND tags_id = ? ", [
+      id,
+    ])
+    .then(() => {
+      res.status(201).json("supprimé des favoris");
+    })
+    .catch((err) => {
+      console.warn(err);
+      res.status(500).send("impossible de supprimer des favoris");
+    });
+};
+
+const addToFollowed = (req, res) => {
+  const { id } = req.query;
+
+  neuron
+    .query(
+      "INSERT INTO followed (users_id, friend_id) VALUES (?, ?) SELECT ?, ? WHERE NOT EXISTS (SELECT * FROM followed WHERE (user_id = ?) AND (friend_id = ?))",
       [id]
     )
     .then(() => {
@@ -99,10 +149,10 @@ const addToFollowed = (req, res) => {
 };
 
 const removeFromFollowed = (req, res) => {
-  const { id } = req.body;
+  const { id } = req.query;
 
   neuron
-    .query("DELETE FROM followed WHERE id = ?", [id])
+    .query("DELETE FROM followed WHERE (users_id=?) AND (friend_id=?)", [id])
     .then(() => {
       res.status(201).json("supprimé des favoris");
     })
@@ -154,6 +204,9 @@ module.exports = {
   createUser,
   registerWithMail,
   logout,
+  getTagsFavorites,
+  addTagsFavorites,
+  removeTags,
   addToFollowed,
   removeFromFollowed,
   getFollowed,
