@@ -77,7 +77,7 @@ export const MarkdownSyntax = () => {
           <div className="markdownSyntax_content_example">
             example - {">"} carpe diem donne:
           </div>
-          <ReactMarkdown className="markdown">{">"} carpe diem</ReactMarkdown>
+          <ReactMarkdown className="markdown">{"> carpe diem"}</ReactMarkdown>
         </div>
         <div className="markdownSyntax_content_code">
           <div className="markdownSyntax_content_instruction">
