@@ -73,7 +73,7 @@ const verifyToken = (req, res, next) => {
   try {
     const { cookies, headers } = req;
     if (!cookies || !cookies.token) {
-      return res.status(401).json({ message: "Missing token in cookie" });
+      return res.status(401).json({ message: "vous êtes déconnecté" });
     }
 
     const { token } = cookies;

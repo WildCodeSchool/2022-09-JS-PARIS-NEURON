@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Avatar } from "@components/";
-import { MailOnIcon, NotifOnIcon } from "@assets";
 
 import "./UserHeader.scss";
 
 export const UserHeader = () => {
   const [userName, setUserName] = useState("");
+  const [date, setDate] = useState("");
 
   useEffect(() => {
     setUserName(localStorage.getItem("userName"));
+    const today = new Date();
+    setDate(
+      `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`
+    );
   }, []);
 
   return (
@@ -20,8 +24,7 @@ export const UserHeader = () => {
         <Avatar />
       </div>
       <div className="userheader_shortcuts">
-        <NotifOnIcon />
-        <MailOnIcon />
+        <span>{date}</span>
       </div>
     </header>
   );
