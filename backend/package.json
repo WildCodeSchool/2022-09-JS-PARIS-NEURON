@@ -10,10 +10,6 @@
     "lint": "echo '----- Checking Backend...' && npx prettier --debug-check . && eslint --ext .js . && echo '----- Done!'",
     "fix": "prettier --write . && eslint --fix --ext .js ."
   },
-  "engines": {
-    "node": "18.X",
-    "npm": "8.X"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
