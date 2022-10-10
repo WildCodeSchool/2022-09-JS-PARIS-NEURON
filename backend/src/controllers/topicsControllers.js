@@ -73,7 +73,7 @@ const getComments = (req, res) => {
 
   neuron
     .query(
-      `SELECT *, DATE_FORMAT(date_comment, "%d/%m/%Y") AS date_comment FROM comments JOIN users ON users.id= comments.users_id WHERE topics_id=? ORDER by comments.id`,
+      `SELECT *, DATE_FORMAT(date_comment, "%d/%m/%Y") AS date_comment FROM comments LEFT JOIN users ON comments.users_id=users.id WHERE topics_id=? ORDER by comments.id`,
       [id]
     )
     .then(([comment]) => {

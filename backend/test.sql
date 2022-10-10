@@ -1,5 +1,5 @@
 INSERT INTO
-  `neuron`.`users` (
+  `users` (
     `username`,
     `hashedpassword`,
     `mail`,
@@ -18,7 +18,7 @@ VALUES
   );
 
 INSERT INTO
-  `neuron`.`tags` (`tag`)
+  `tags` (`tag`)
 VALUES
   ('html'),
   ('css'),
@@ -30,11 +30,10 @@ VALUES
   ('markdown'),
   ('database'),
   ('typescript');
-  
 
 -- PROBLÈMES
 INSERT INTO
-  `neuron`.`topics` (
+  `topics` (
     `title`,
     `topic`,
     `summary`,
@@ -53,11 +52,10 @@ VALUES
     1,
     1
   );
-  
 
 -- PROJETS
 INSERT INTO
-  `neuron`.`topics` (
+  `topics` (
     `title`,
     `topic`,
     `summary`,
@@ -76,10 +74,10 @@ VALUES
     2,
     1
   );
-  
+
 -- APPRENTISSAGE
 INSERT INTO
-  `neuron`.`topics` (
+  `topics` (
     `title`,
     `topic`,
     `summary`,
@@ -98,11 +96,10 @@ VALUES
     3,
     1
   );
-  
 
 -- VEILLE
 INSERT INTO
-  `neuron`.`topics` (
+  `topics` (
     `title`,
     `topic`,
     `summary`,
@@ -121,11 +118,10 @@ VALUES
     4,
     1
   );
-  
 
 -- DIVERS
 INSERT INTO
-  `neuron`.`topics` (
+  `topics` (
     `title`,
     `topic`,
     `summary`,
@@ -146,36 +142,51 @@ VALUES
   );
 
 INSERT INTO
-  `neuron`.`topics_has_tags` (`topics_id`, `tags_id`)
-VALUES (1, 1);
-INSERT INTO
-  `neuron`.`topics_has_tags` (`topics_id`, `tags_id`)
-VALUES (1, 2);
+  `topics_has_tags` (`topics_id`, `tags_id`)
+VALUES
+  (1, 1);
 
 INSERT INTO
-  `neuron`.`topics_has_tags` (`topics_id`, `tags_id`)
-VALUES (2, 3);
-INSERT INTO
-  `neuron`.`topics_has_tags` (`topics_id`, `tags_id`)
-VALUES (2, 4);
-  
-INSERT INTO
-  `neuron`.`topics_has_tags` (`topics_id`, `tags_id`)
-VALUES (3, 5);
-INSERT INTO
-  `neuron`.`topics_has_tags` (`topics_id`, `tags_id`)
-VALUES (3, 5);
-  
-INSERT INTO
-  `neuron`.`topics_has_tags` (`topics_id`, `tags_id`)
-VALUES (4, 7);
-INSERT INTO
-  `neuron`.`topics_has_tags` (`topics_id`, `tags_id`)
-VALUES (4, 7);
+  `topics_has_tags` (`topics_id`, `tags_id`)
+VALUES
+  (1, 2);
 
 INSERT INTO
-  `neuron`.`topics_has_tags` (`topics_id`, `tags_id`)
-VALUES (5, 9);
+  `topics_has_tags` (`topics_id`, `tags_id`)
+VALUES
+  (2, 3);
+
 INSERT INTO
-  `neuron`.`topics_has_tags` (`topics_id`, `tags_id`)
-VALUES (5, 9);
+  `topics_has_tags` (`topics_id`, `tags_id`)
+VALUES
+  (2, 4);
+
+INSERT INTO
+  `topics_has_tags` (`topics_id`, `tags_id`)
+VALUES
+  (3, 5);
+
+INSERT INTO
+  `topics_has_tags` (`topics_id`, `tags_id`)
+VALUES
+  (3, 5);
+
+INSERT INTO
+  `topics_has_tags` (`topics_id`, `tags_id`)
+VALUES
+  (4, 7);
+
+INSERT INTO
+  `topics_has_tags` (`topics_id`, `tags_id`)
+VALUES
+  (4, 7);
+
+INSERT INTO
+  `topics_has_tags` (`topics_id`, `tags_id`)
+VALUES
+  (5, 9);
+
+INSERT INTO
+  `topics_has_tags` (`topics_id`, `tags_id`)
+VALUES
+  (5, 9);

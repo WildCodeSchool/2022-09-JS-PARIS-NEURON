@@ -1,6 +1,10 @@
+.neuronSettings {
+  max-width: 100%;
+}
+
 .form_container {
   height: 100%;
-  width: 100%;
+  max-width: 100%;
   display: flex;
   display: grid;
 

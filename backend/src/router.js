@@ -29,6 +29,12 @@ router.get("/comments", topicsControllers.getComments);
 router.get("/topicbyid", topicsControllers.getTopicById);
 
 router.use(verifyToken);
+router.put(
+  "/settings",
+  usersControllers.registerWithMail,
+  usersControllers.updateSettings
+);
+router.get("/user_settings", usersControllers.registerWithMail);
 
 router.get("/followed", usersControllers.getFollowed);
 router.get("/followedByIds", usersControllers.getUserByFollowed);
@@ -40,5 +46,6 @@ router.post("/logout", usersControllers.logout);
 router.get("/tagsFavorites", usersControllers.getTagsFavorites);
 router.post("/tagsFavorites", usersControllers.addTagsFavorites);
 router.delete("/tagsFavorites", usersControllers.removeFromTagsFavorites);
+// Faire ta route settings
 
 module.exports = router;

@@ -126,6 +126,7 @@ export const ProfilDisplay = () => {
           <h2>Content 5</h2>
           <hr />
           <p />
+          <NeuronSettings />
         </div>
       </div>
     </div>
