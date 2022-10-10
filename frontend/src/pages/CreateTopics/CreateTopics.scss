@@ -67,6 +67,7 @@
         box-shadow: 0 0 5px $carbon;
         border: solid 1.5px $dark-purple-1;
         background-color: $dark-purple-3;
+        color: $warm-grey-1;
       }
     }
 
@@ -85,7 +86,9 @@
           box-shadow: 0 0 5px $carbon;
           border: solid 1.5px $dark-purple-1;
           background-color: $dark-purple-3;
+          color: $warm-grey-1;
           border-radius: 0 0.5rem 0.5rem 0;
+          cursor: pointer;
         }
       }
     }
@@ -112,7 +115,9 @@
         > button {
           border: solid 1.5px $dark-purple-1;
           background-color: $dark-purple-3;
+          color: $warm-grey-1;
           border-radius: 4px;
+          cursor: pointer;
         }
       }
     }
@@ -129,7 +134,9 @@
         box-shadow: 0 0 5px $carbon;
         border: solid 1.5px $dark-purple-1;
         background-color: $dark-purple-3;
+        color: $warm-grey-1;
         border-radius: 7px;
+        cursor: pointer;
       }
     }
   }

@@ -25,6 +25,7 @@ router.get("/users", usersControllers.getUsers);
 router.get("/categories", topicsControllers.getCategories);
 router.get("/topics", topicsControllers.getTopics);
 router.get("/topicsbytitle", topicsControllers.getTopicsByTitle);
+router.get("/comments", topicsControllers.getComments);
 router.get("/topicbyid", topicsControllers.getTopicById);
 
 router.use(verifyToken);
@@ -34,6 +35,7 @@ router.get("/followedByIds", usersControllers.getUserByFollowed);
 router.post("/followed", usersControllers.addToFollowed);
 router.delete("/followed", usersControllers.removeFromFollowed);
 router.post("/topics", topicsControllers.createTopic);
+router.post("/comments", topicsControllers.createComment);
 router.post("/logout", usersControllers.logout);
 
 module.exports = router;
