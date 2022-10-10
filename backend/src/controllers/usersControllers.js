@@ -95,22 +95,31 @@ const logout = (req, res) => {
 //     }
 //   })
 
-const getTag = (req, res) => {
-  const { tag } = req.body;
+const getTagsFavorites = (req, res) => {
+  const { id } = req.query;
 
   neuron
-    .query("SELECT * FROM tags JOIN users ON users.id = tags.users_id", [tag])
-    .then(([tags]) => {
-      if (tags.users_id != null) {
-        // eslint-disable-next-line prefer-destructuring
-        req.query = tags[0];
-      } else {
-        res.sendStatus(401);
-      }
+    .query("SELECT * FROM users_has_tags JOIN users ON users.id = users_has_tags.users_id WHERE users_id = ?",[id])
+    .then(([result]) => {
+      res.status(201).json(result);
     })
     .catch((err) => {
-      console.warn(`Error: ${err.message}`);
-      res.status(500).send(err.message);
+      console.warn(err);
+      res.status(500).send("impossible d'afficher les favoris");
+    });
+};
+
+const removeTags = (req, res) => {
+  const { id } = req.body;
+
+  neuron
+    .query("DELETE FROM users_has_tags WHERE users_id = ? ", [id])
+    .then(() => {
+      registerWithMail.status(201).json("supprimé des favoris");
+    })
+    .catch((err) => {
+      console.warn(err);
+      res.status(500).send("impossible de supprimer des favoris");
     });
 };
 
@@ -187,7 +196,8 @@ module.exports = {
   createUser,
   registerWithMail,
   logout,
-  getTag,
+  getTagsFavorites,
+  removeTags,
   addToFollowed,
   removeFromFollowed,
   getFollowed,
