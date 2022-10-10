@@ -1,19 +1,21 @@
-import { NeuronCard, Search } from "@components/index";
+import { NeuronCard } from "@components/index";
 import Carousel from "react-grid-carousel";
 import React, { useEffect, useState } from "react";
-import { getFollowed, getUsersByIds } from "@services/apiRequest";
+import {
+  getFollowed,
+  getUsersByIds,
+  deleteFollowed,
+} from "@services/apiRequest";
 import "./NeuronFavorites.scss";
 
 export const NeuronFavorites = () => {
   const [neurons, setNeurons] = useState([]);
-  const [, /* searchUser */ setSearchUser] = useState("");
+  // const [, /* searchUser */ setSearchUser] = useState("");
   const [id, setId] = useState(0);
   const [idList, setIdList] = useState([]);
   const [token, setToken] = useState("");
-  // const [usersById, setUsersById] = useState([]);
   // const handleSearch = () => {
-  //   getUsersById(setUsersById);
-  // };
+
   useEffect(() => {
     setToken(localStorage.getItem("token"));
     setId(localStorage.getItem("userId"));
@@ -30,6 +32,11 @@ export const NeuronFavorites = () => {
       getUsersByIds(token, idList, setNeurons);
     }
   }, [idList]);
+
+  const handleDelete = () => {
+    deleteFollowed(token, id);
+    setNeurons(neurons.filter((neuron) => neuron.id !== id));
+  };
 
   const neuronFavList = [
     {
@@ -69,20 +76,20 @@ export const NeuronFavorites = () => {
             <div className="item">
               <NeuronCard />
               <span className="item_pseudo">{neuron.username}</span>
-              {/* <button type="button" onClick={() => handleDelete}> */}
-              {/* Supprimer
-              </button> */}
+              <button type="button" onClick={() => handleDelete(neuron)}>
+                Supprimer
+              </button>
             </div>
           </Carousel.Item>
         ))}
       </Carousel>
 
       <div className="users_filter">
-        <Search
+        {/* <Search
           placeholder="rechercher un Neuron"
           content={setSearchUser}
-          // handleSearch={handleSearch}
-        />
+          handleSearch={handleSearch}
+        /> */}
       </div>
     </div>
   );

@@ -149,25 +149,25 @@ const postTopic = (
 //     });
 // };
 
-// const deleteFollowed = (id) => {
-//   axios
-//     .delete(
-//       `http://localhost:5000/followed`,
-//       { id },
-//       {
-//         withCredentials: true,
-//         headers: {
-//           "x-xsrf-token": `${token}`,
-//         },
-//       }
-//     )
-//     .then((res) => {
-//       console.warn(res.data);
-//     })
-//     .catch((err) => {
-//       console.warn(err.response.data.message);
-//     });
-// };
+const deleteFollowed = (id) => {
+  axios
+    .delete(
+      `http://localhost:5000/followed`,
+      { id },
+      {
+        withCredentials: true,
+        headers: {
+          "x-xsrf-token": `${token}`,
+        },
+      }
+    )
+    .then((res) => {
+      console.warn(res.data);
+    })
+    .catch((err) => {
+      console.warn(err.response.data.message);
+    });
+};
 
 const getFollowed = (token, id, setState) => {
   axios
@@ -215,7 +215,7 @@ export {
   logout,
   postTopic,
   // postFollowed,
-  // deleteFollowed,
+  deleteFollowed,
   getFollowed,
   getUsersByIds,
 };
