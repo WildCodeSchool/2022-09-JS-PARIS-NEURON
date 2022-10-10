@@ -12,6 +12,7 @@ import {
 } from "@pages";
 
 import "./App.scss";
+import { MarkdownSyntax } from "@pages/MarkdownSyntax/MarkdownSyntax";
 
 const App = () => {
   const [message, setMessage] = useState("");
@@ -34,6 +35,7 @@ const App = () => {
             <Route path="/createtopics" element={<CreateTopics />} />
             <Route path="/userprofile" element={<UserProfile />} />
             <Route path="/createmail" element={<CreateMail />} />
+            <Route path="/markdownsyntax" element={<MarkdownSyntax />} />
           </Routes>
         </BrowserRouter>
       </messageContext.Provider>
