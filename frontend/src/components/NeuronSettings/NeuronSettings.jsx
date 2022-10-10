@@ -87,6 +87,9 @@ export const NeuronSettings = () => {
           id="pseudo"
           name="pseudo"
           type="text"
+          minLength={3}
+          maxLength={10}
+          title="entre 3 et 10 caractères"
           value={inputs.pseudo}
           onChange={(e) => updateInputs(e)}
         />
@@ -104,7 +107,10 @@ export const NeuronSettings = () => {
         <input
           id="password"
           name="password"
-          type="text"
+          type="password"
+          minLength={8}
+          pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).*$"
+          title="entre 8 et 20 caractères. au moins 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial"
           value={inputs.password}
           onChange={(e) => updateInputs(e)}
         />
@@ -113,7 +119,7 @@ export const NeuronSettings = () => {
         <input
           id="new_password"
           name="new_password"
-          type="text"
+          type="password"
           value={inputs.new_password}
           onChange={(e) => updateInputs(e)}
         />
