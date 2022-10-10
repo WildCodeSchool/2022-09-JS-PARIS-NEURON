@@ -85,13 +85,13 @@ export const MarkdownSyntax = () => {
             colorisation spécifique
           </div>
           <div className="markdownSyntax_content_example">
-            example - ```js console.log()``` donne:
+            example - ``` console.log()``` donne:
           </div>
           <ReactMarkdown
             className="markdown"
             rehypePlugins={[[rehypeHighlight, { ignoreMissing: true }]]}
           >
-            ```js console.log()```
+            ```console.log()```
           </ReactMarkdown>
         </div>
       </div>
