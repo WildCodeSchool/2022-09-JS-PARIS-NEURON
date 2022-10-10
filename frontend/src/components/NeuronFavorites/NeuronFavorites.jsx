@@ -1,12 +1,12 @@
 import { NeuronCard } from "@components/index";
 import Carousel from "react-grid-carousel";
 import React, { useContext, useEffect, useState } from "react";
+import { messageContext } from "@contexts/messageContext";
 import {
   getFollowed,
   getUsersByIds,
   deleteFollowed,
 } from "@services/apiRequest";
-import { messageContext } from "@contexts/messageContext";
 
 import "./NeuronFavorites.scss";
 
@@ -14,11 +14,9 @@ export const NeuronFavorites = () => {
   const { setMessage } = useContext(messageContext);
 
   const [neurons, setNeurons] = useState([]);
-  // const [, /* searchUser */ setSearchUser] = useState("");
   const [id, setId] = useState(0);
   const [idList, setIdList] = useState([]);
   const [token, setToken] = useState("");
-  // const handleSearch = () => {
 
   useEffect(() => {
     setToken(localStorage.getItem("token"));
@@ -38,8 +36,8 @@ export const NeuronFavorites = () => {
   }, [idList]);
 
   const handleDelete = () => {
-    deleteFollowed(token, id);
     setNeurons(neurons.filter((neuron) => neuron.id !== id));
+    deleteFollowed(token, id);
   };
 
   const neuronFavList = [
@@ -80,7 +78,7 @@ export const NeuronFavorites = () => {
             <div className="item">
               <NeuronCard />
               <span className="item_pseudo">{neuron.username}</span>
-              <button type="button" onClick={() => handleDelete(neuron)}>
+              <button type="button" onClick={() => handleDelete(neuron.id)}>
                 Supprimer
               </button>
             </div>
