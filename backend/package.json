@@ -11,8 +11,8 @@
     "fix": "prettier --write . && eslint --fix --ext .js ."
   },
   "engines": {
-    "npm": "8.19.2",
-    "node": "18.10.0"
+    "npm": "8.x",
+    "node": "18.x"
   },
   "keywords": [],
   "author": "",
