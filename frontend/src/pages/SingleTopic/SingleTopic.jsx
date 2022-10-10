@@ -1,5 +1,6 @@
 /* eslint-disable array-callback-return */
 import React, { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { Navbar } from "@components";
 import { useParams } from "react-router";
 import { getTopicById, getComments, postComment } from "@services/apiRequest";
@@ -52,6 +53,8 @@ export const SingleTopic = () => {
       window.location.reload(false);
     }, 1500);
   };
+
+  console.warn(comments);
 
   return (
     topic && (
@@ -132,15 +135,20 @@ export const SingleTopic = () => {
                 className="singleTopic_content_comments_editor"
                 onSubmit={(e) => handleSubmit(e)}
               >
-                <textarea
-                  className="singleTopic_content_comments_editor_input"
-                  name="editor"
-                  id="editor"
-                  placeholder="nouveau commentaire..."
-                  value={commentContent}
-                  onChange={(e) => handleChange(e)}
-                  required
-                />
+                <div>
+                  <Link to="/markdownsyntax" target="_blank">
+                    <span>syntax markdown</span>
+                  </Link>
+                  <textarea
+                    className="singleTopic_content_comments_editor_input"
+                    name="editor"
+                    id="editor"
+                    placeholder="nouveau commentaire..."
+                    value={commentContent}
+                    onChange={(e) => handleChange(e)}
+                    required
+                  />
+                </div>
                 <button
                   className="singleTopic_content_comments_editor_button"
                   type="submit"

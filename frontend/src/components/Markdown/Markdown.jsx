@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import rehypeHighlight from "rehype-highlight";
 
@@ -22,6 +23,9 @@ export const Markdown = ({ input, setInput }) => {
           {input}
         </ReactMarkdown>
       </div>
+      <Link to="/markdownsyntax" target="_blank">
+        <span>syntax markdown</span>
+      </Link>
       <textarea
         type="text"
         className="editor"
