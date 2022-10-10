@@ -122,6 +122,7 @@ export const ProfilDisplay = () => {
         <div
           className={toggleState === 5 ? "content  active-content" : "content"}
         >
+          <NeuronSettings />
           <h2>Content 5</h2>
           <hr />
           <p />
