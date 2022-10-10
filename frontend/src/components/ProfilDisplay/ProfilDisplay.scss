@@ -1,0 +1,74 @@
+@import "../../colors.scss";
+
+.tabs_display {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 95%;
+  height: 75%;
+  background: $cool-grey-1;
+  margin-top: 0.5rem;
+  // word-break: break-all;
+  border: 1px solid $carbon;
+  border-radius: 5px 5px 5px 5px;
+
+  .tabs_display_tabs {
+    display: flex;
+    width: 20%;
+    height: 10%;
+  }
+  .tabs {
+    padding: 10px;
+    text-align: center;
+    width: 20%;
+    height: 100%;
+    background: $dark-purple-5;
+    cursor: pointer;
+    border-bottom: 1px solid $carbon;
+    position: relative;
+    outline: none;
+    transition: all 0.3s ease-in-out;
+    font-size: 10px;
+    font-weight: bold;
+    border-radius: 5px 5px 0 0;
+  }
+  .tabs:not(:last-child) {
+    border-right: 1px solid $carbon;
+  }
+
+  .active-tabs {
+    background: $dark-purple-1;
+    border-bottom: 1px solid transparent;
+  }
+
+  .active-tabs::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% + 2px);
+    height: 5px;
+    background: $green-apple;
+    border-radius: 5px 5px 0 0;
+  }
+
+  button {
+    border: none;
+  }
+  .content-tabs {
+    flex-grow: 1;
+  }
+  .content {
+    background: white;
+    padding: 20px;
+    width: 100%;
+    height: 100%;
+    display: none;
+  }
+
+  .active-content {
+    display: block;
+  }
+}

@@ -1,11 +1,11 @@
 import React from "react";
-import { Navbar, TopicsFavorites } from "@components/";
+import { Navbar, ProfilDisplay } from "@components/";
 import "./UserProfile.scss";
 
 export const UserProfile = () => {
   return (
     <div className="userprofile">
-      <TopicsFavorites />
+      <ProfilDisplay />
       <Navbar />
     </div>
   );

@@ -2,7 +2,11 @@ const express = require("express");
 // const { app } = require("./app");
 const usersControllers = require("./controllers/usersControllers");
 const topicsControllers = require("./controllers/topicsControllers");
-const { hashPassword, verifyPassword } = require("./middlewares/auth");
+const {
+  hashPassword,
+  verifyPassword,
+  verifyToken,
+} = require("./middlewares/auth");
 const { validateUser } = require("./middlewares/validators");
 
 const router = express.Router();
@@ -15,15 +19,23 @@ const router = express.Router();
 // router.post("/items", itemControllers.add);
 // router.delete("/items/:id", itemControllers.destroy);
 
-router.get("/users", usersControllers.getUsers);
 router.post("/users", validateUser, hashPassword, usersControllers.createUser);
+router.post("/login", usersControllers.registerWithMail, verifyPassword);
+router.get("/users", usersControllers.getUsers);
 router.get("/categories", topicsControllers.getCategories);
-router.post(
-  "/login",
-  usersControllers.getUserByEmailWithPasswordAndPassToNext,
-  verifyPassword
-);
+router.get("/topics", topicsControllers.getTopics);
+router.get("/topicsbytitle", topicsControllers.getTopicsByTitle);
+router.get("/comments", topicsControllers.getComments);
+router.get("/topicbyid", topicsControllers.getTopicById);
 
-// app.use(verifyToken);
+router.use(verifyToken);
+
+router.get("/followed", usersControllers.getFollowed);
+router.get("/followedByIds", usersControllers.getUserByFollowed);
+router.post("/followed", usersControllers.addToFollowed);
+router.delete("/followed", usersControllers.removeFromFollowed);
+router.post("/topics", topicsControllers.createTopic);
+router.post("/comments", topicsControllers.createComment);
+router.post("/logout", usersControllers.logout);
 
 module.exports = router;

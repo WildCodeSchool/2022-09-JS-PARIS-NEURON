@@ -1,14 +1,11 @@
 import React from "react";
-import { useAvatarContext } from "@contexts";
 
 import "./Avatar.scss";
 
-export const Avatar = () => {
-  const { avatarStatus } = useAvatarContext();
-
+export const Avatar = ({ connected }) => {
   return (
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-    <div className={avatarStatus ? "avatar on" : "avatar off"}>
+    <div className={connected === 1 ? "avatar on" : "avatar off"}>
       <img
         className="avatar-content"
         src="\src\assets\images\avatarDefaultv2.svg"

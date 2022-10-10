@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { BrainDeployer } from "@components/";
 import {
   CreateTopicIcon,
@@ -8,7 +9,6 @@ import {
 } from "@assets";
 
 import "./Navbar.scss";
-import { Link } from "react-router-dom";
 
 export const Navbar = () => {
   return (
@@ -16,15 +16,19 @@ export const Navbar = () => {
       <Link to="/">
         <LogoLong />
       </Link>
-      <Link to="/userprofile">
-        <UserProfileIcon />
-      </Link>
+      {localStorage.getItem("token") ? (
+        <Link to="/userprofile">
+          <UserProfileIcon />
+        </Link>
+      ) : null}
       <Link to="/topics">
         <TopicsIcon />
       </Link>
-      <Link to="/createtopics">
-        <CreateTopicIcon />
-      </Link>
+      {localStorage.getItem("token") ? (
+        <Link to="/createtopics">
+          <CreateTopicIcon />
+        </Link>
+      ) : null}
       <BrainDeployer />
     </nav>
   );

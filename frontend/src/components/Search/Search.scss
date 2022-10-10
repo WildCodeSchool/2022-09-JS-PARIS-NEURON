@@ -1,0 +1,20 @@
+@import "../../colors.scss";
+
+.search {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &_text {
+    background-color: $cool-grey-1;
+    border-radius: 0.5rem 0 0 0.5rem;
+    outline: none;
+  }
+
+  &_send {
+    background-color: $dark-purple-5;
+    border-radius: 0 0.5rem 0.5rem 0;
+    cursor: pointer;
+  }
+}
