@@ -1,1 +1,1 @@
-web: node indes.js
+web: npm start
