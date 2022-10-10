@@ -66,7 +66,7 @@ export const NeuronSettings = () => {
 
 // handleChange (e) {
 //     this.setState({
-//         checked: e.tagret.checked
+//         checked: e.target.checked
 
 //     })
 
