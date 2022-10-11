@@ -81,6 +81,7 @@ const getTopics = (setState) => {
 
 const getTopicsByTitle = (string, setState) => {
   axios.get(`${BASE_URL}/topicsbytitle?string=${string}`).then((res) => {
+    console.warn(res.data);
     setState(res.data);
   });
 };
