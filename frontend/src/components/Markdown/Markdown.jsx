@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import rehypeHighlight from "rehype-highlight";
 
-import "highlight.js/styles/github.css";
+import "../../github.css";
 
 import "./Markdown.scss";
 
