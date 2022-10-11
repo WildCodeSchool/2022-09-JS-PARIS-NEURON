@@ -125,7 +125,7 @@ const createTopic = (req, res) => {
       tags.map((tag) => {
         secondPromise = secondPromise.then(() => {
           return neuron.query(
-            `INSERT INTO topics_has_tags (topics_id, tags_id) SELECT topics.id, tags.id FROM topics, tags WHERE topics.title=? AND tags.tag=? `,
+            `INSERT INTO topics_has_tags (topics_id, tags_id) VALUES (SELECT id FROM topics WHERE title=?), (SELECT id FROM tags WHERE tag=?)`,
             [title, tag]
           );
         });
