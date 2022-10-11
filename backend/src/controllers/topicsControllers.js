@@ -56,7 +56,7 @@ const getTopicById = (req, res) => {
 
   neuron
     .query(
-      `SELECT *, DATE_FORMAT(date, "%d/%m/%Y") AS date FROM topics JOIN categories ON categories.id=topics.categories_id JOIN users ON users.id=topics.users_id WHERE topics.id=?; SELECT tag FROM topics_has_tags AS tht JOIN topics ON topics.id=tht.topics_id JOIN tags ON tags.id=tht.tags_id WHERE tht.topics_id=?`,
+      `SELECT *, DATE_FORMAT(date, "%d/%m/%Y") AS date FROM topics JOIN categories ON categories.id=topics.categories_id JOIN users ON users.id=topics.users_id WHERE topics.id=?; SELECT tags.id, tags.tag FROM topics_has_tags AS tht JOIN topics ON topics.id=tht.topics_id JOIN tags ON tags.id=tht.tags_id WHERE tht.topics_id=?`,
       [id, id]
     )
     .then(([topic]) => {
@@ -113,7 +113,10 @@ const createTopic = (req, res) => {
       });
       tags.map((tag) => {
         firstPromise = firstPromise.then(() => {
-          return neuron.query(`INSERT INTO tags (tag) VALUES (?)`, [tag]);
+          return neuron.query(
+            `INSERT INTO tags (tag) SELECT (?) WHERE NOT EXISTS (SELECT tag FROM tags WHERE tag=?) `,
+            [tag, tag]
+          );
         });
       });
     })
@@ -125,7 +128,7 @@ const createTopic = (req, res) => {
       tags.map((tag) => {
         secondPromise = secondPromise.then(() => {
           return neuron.query(
-            `INSERT INTO topics_has_tags (topics_id, tags_id) VALUES (SELECT id FROM topics WHERE title=?), (SELECT id FROM tags WHERE tag=?)`,
+            `INSERT INTO topics_has_tags (topics_id, tags_id) VALUES ((SELECT id FROM topics WHERE title=? LIMIT 1), (SELECT id FROM tags WHERE tag=? LIMIT 1))`,
             [title, tag]
           );
         });

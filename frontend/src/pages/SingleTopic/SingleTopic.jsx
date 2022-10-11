@@ -51,8 +51,6 @@ export const SingleTopic = () => {
     }, 1500);
   };
 
-  console.warn(comments);
-
   return (
     topic && (
       <div className="singleTopic">
@@ -82,7 +80,7 @@ export const SingleTopic = () => {
               <span>tag(s):</span>
               <div className="singleTopic_content_header_tags_tagList">
                 {taglist.map((tag) => (
-                  <div>{tag.tag}</div>
+                  <div key={tag.id}>{tag.tag}</div>
                 ))}
               </div>
             </div>
