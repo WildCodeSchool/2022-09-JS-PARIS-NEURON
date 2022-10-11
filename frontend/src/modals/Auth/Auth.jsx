@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { register, login, logout } from "@services/apiRequest";
-// import { useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { messageContext } from "@contexts/messageContext";
 
 import "./Auth.scss";
 
 export const Auth = ({ show, hide }) => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -19,11 +19,11 @@ export const Auth = ({ show, hide }) => {
 
   const { message, setMessage } = useContext(messageContext);
 
-  // const reload = () => {
-  //   setTimeout(() => {
-  //     window.location.reload(false);
-  //   }, 1500);
-  // };
+  const reload = () => {
+    setTimeout(() => {
+      window.location.reload(false);
+    }, 1500);
+  };
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -31,7 +31,7 @@ export const Auth = ({ show, hide }) => {
     register(username, password, mail, chatId, setMessage);
     hide();
     setMessage("");
-    // reload();
+    reload();
   };
 
   const handleLogin = (e) => {
@@ -39,7 +39,7 @@ export const Auth = ({ show, hide }) => {
     login(loginMail, loginPassword, setMessage);
     hide();
     setMessage("");
-    // reload();
+    reload();
   };
 
   const handleLogOut = (e) => {
@@ -47,8 +47,8 @@ export const Auth = ({ show, hide }) => {
     logout(localStorage.getItem("token"), setMessage);
     hide();
     setMessage("");
-    // reload();
-    // navigate("/");
+    reload();
+    navigate("/");
   };
 
   useEffect(() => {
