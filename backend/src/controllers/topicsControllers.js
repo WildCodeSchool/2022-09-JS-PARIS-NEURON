@@ -113,7 +113,7 @@ const createTopic = (req, res) => {
       });
       tags.map((tag) => {
         firstPromise = firstPromise.then(() => {
-          return neuron.query(`INSERT INTO tags (tag) VALUES (?)`, [tag, tag]);
+          return neuron.query(`INSERT INTO tags (tag) VALUES (?)`, [tag]);
         });
       });
     })
