@@ -81,14 +81,12 @@ const getTopics = (setState) => {
 
 const getTopicsByTitle = (string, setState) => {
   axios.get(`${BASE_URL}/topicsbytitle?string=${string}`).then((res) => {
-    console.warn(res.data);
     setState(res.data);
   });
 };
 
 const getTopicById = (id, setTopics, setTaglist) => {
   axios.get(`${BASE_URL}/topicbyid?id=${id}`).then((res) => {
-    console.warn(res);
     setTopics(res.data[0][0]);
     setTaglist(res.data[1]);
   });
