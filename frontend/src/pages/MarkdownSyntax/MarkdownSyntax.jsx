@@ -54,7 +54,7 @@ export const MarkdownSyntax = () => {
           <div className="markdownSyntax_content_example">
             example - [moteur](https://duckduckgo.com/):
           </div>
-          <ReactMarkdown className="markdown">
+          <ReactMarkdown className="markdown" linkTarget="_blank">
             [moteur](https://duckduckgo.com/)
           </ReactMarkdown>
         </div>

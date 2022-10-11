@@ -87,6 +87,7 @@ export const SingleTopic = () => {
           </div>
           <ReactMarkdown
             className="markdown"
+            linkTarget="_blank"
             rehypePlugins={[[rehypeHighlight, { ignoreMissing: true }]]}
           >
             {topic.topic}
@@ -111,6 +112,7 @@ export const SingleTopic = () => {
                     </div>
                     <ReactMarkdown
                       className="markdown"
+                      linkTarget="_blank"
                       rehypePlugins={[
                         [rehypeHighlight, { ignoreMissing: true }],
                       ]}
