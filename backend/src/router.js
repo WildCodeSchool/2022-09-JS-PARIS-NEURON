@@ -35,7 +35,6 @@ router.put(
   usersControllers.updateSettings
 );
 router.get("/user_settings", usersControllers.registerWithMail);
-
 router.get("/followed", usersControllers.getFollowed);
 router.get("/followedByIds", usersControllers.getUserByFollowed);
 router.post("/followed", usersControllers.addToFollowed);

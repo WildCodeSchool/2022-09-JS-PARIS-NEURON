@@ -22,8 +22,12 @@ export const SingleTopic = () => {
   const [comments, setComments] = useState([]);
   const [commentContent, setCommentContent] = useState("");
   const [date, setDate] = useState("");
+  const [userId, setUserId] = useState("");
+  const [token, setToken] = useState("");
 
   useEffect(() => {
+    setUserId(localStorage.getItem("userId"));
+    setToken(localStorage.getItem("token"));
     getTopicById(id, setTopic, setTaglist, setComments);
     getComments(id, setComments);
     localStorage.removeItem("topicId");
@@ -31,7 +35,7 @@ export const SingleTopic = () => {
     setDate(
       `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`
     );
-  }, [postComment()]);
+  }, []);
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -40,14 +44,7 @@ export const SingleTopic = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    postComment(
-      localStorage.getItem("token"),
-      commentContent,
-      date,
-      id,
-      localStorage.getItem("userId"),
-      setMessage
-    );
+    postComment(token, commentContent, date, id, userId, setMessage);
     setCommentContent("");
     setTimeout(() => {
       window.location.reload(false);
