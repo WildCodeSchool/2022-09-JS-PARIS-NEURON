@@ -114,7 +114,7 @@ const createTopic = (req, res) => {
       tags.map((tag) => {
         firstPromise = firstPromise.then(() => {
           return neuron.query(
-            `INSERT INTO tags (tag) SELECT ? WHERE NOT EXISTS (SELECT tag FROM tags WHERE tag=?) `,
+            `IF NOT EXISTS (SELECT tag FROM tags WHERE tag=?) INSERT INTO tags (tag) VALUES (?) `,
             [tag, tag]
           );
         });
