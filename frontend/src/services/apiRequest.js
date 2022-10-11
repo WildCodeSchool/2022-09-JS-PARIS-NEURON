@@ -62,15 +62,21 @@ const logout = (token, setState) => {
 };
 
 const getCategories = (setState) => {
-  axios.get(`${BASE_URL}/categories`).then((res) => {
-    setState(res.data);
-  });
+  axios
+    .get(`${BASE_URL}/categories`)
+    .then((res) => {
+      setState(res.data);
+    })
+    .catch((err) => console.warn(err));
 };
 
 const getTopics = (setState) => {
-  axios.get(`${BASE_URL}/topics`).then((res) => {
-    setState(res.data);
-  });
+  axios
+    .get(`${BASE_URL}/topics`)
+    .then((res) => {
+      setState(res.data);
+    })
+    .catch((err) => console.warn(err));
 };
 
 const getTopicsByTitle = (string, setState) => {
