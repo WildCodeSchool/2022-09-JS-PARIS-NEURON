@@ -213,6 +213,66 @@ const deleteFollowed = (id) => {
     });
 };
 
+const getNeuronById = (token, id, setNeuronInfos) => {
+  axios
+    .get(`${BASE_URL}/neuron?id=${id}`, {
+      withCredentials: true,
+      headers: {
+        "x-xsrf-token": `${token}`,
+      },
+    })
+    .then(({ data }) => {
+      setNeuronInfos(data);
+    })
+    .catch((err) => console.warn(err));
+};
+
+const sendPrivateMessage = (
+  token,
+  neuronId,
+  userId,
+  neuronname,
+  username,
+  message
+) => {
+  axios
+    .post(
+      `${BASE_URL}/privatemessage`,
+      {
+        neuronId,
+        userId,
+        neuronname,
+        username,
+        message,
+      },
+      {
+        withCredentials: true,
+        headers: {
+          "x-xsrf-token": `${token}`,
+        },
+      }
+    )
+    .then((res) => {
+      console.warn(res);
+    })
+    .catch((err) => console.warn(err));
+};
+
+const getPrivateMessages = (token, userId, setState) => {
+  axios
+    .get(`${BASE_URL}/privatemessages?id=${userId}`, {
+      withCredentials: true,
+      headers: {
+        "x-xsrf-token": `${token}`,
+      },
+    })
+    .then((res) => {
+      console.warn(res);
+      setState(res.data);
+    })
+    .catch((err) => console.warn(err));
+};
+
 const getFollowed = (token, id, setState) => {
   axios
     .get(`${BASE_URL}/followed?id=${id}`, {
@@ -323,6 +383,9 @@ export {
   postComment,
   postFollowed,
   deleteFollowed,
+  getNeuronById,
+  sendPrivateMessage,
+  getPrivateMessages,
   getFollowed,
   getUsersByIds,
   getTagsFavorites,

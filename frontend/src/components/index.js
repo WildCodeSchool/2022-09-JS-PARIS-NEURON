@@ -18,3 +18,4 @@ export { ButtonAddToFavorite } from "./ButtonsFavorites/ButtonAddToFavorite";
 export { ButtonRemoveFromFavorite } from "./ButtonsFavorites/ButtonRemoveFromFavorite";
 export { ProfilDisplay } from "./ProfilDisplay/ProfilDisplay";
 export { Favorites } from "./Favorites/Favorites";
+export { MailsDisplay } from "./MailsDisplay/MailsDisplay";

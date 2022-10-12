@@ -7,6 +7,7 @@ import {
   TopicCard,
   NeuronSettings,
   TagsFavorites,
+  MailsDisplay,
 } from "@components";
 
 import "./ProfilDisplay.scss";
@@ -112,9 +113,10 @@ export const ProfilDisplay = () => {
         <div
           className={toggleState === 4 ? "content  active-content" : "content"}
         >
-          <h2>Content 4</h2>
+          <h2>messages privés</h2>
           <hr />
           <p />
+          <MailsDisplay />
         </div>
         <div
           className={toggleState === 5 ? "content  active-content" : "content"}

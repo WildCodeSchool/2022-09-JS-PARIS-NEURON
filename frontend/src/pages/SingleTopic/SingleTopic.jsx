@@ -57,6 +57,8 @@ export const SingleTopic = () => {
     postComment(token, commentContent, date, id, userId, setComments);
     setCommentContent("");
   };
+  console.warn("topic: ", topic);
+  console.warn("comments: ", comments);
 
   return (
     topic && (
@@ -76,8 +78,12 @@ export const SingleTopic = () => {
               </div>
               <div className="singleTopic_content_header_bottom_right">
                 <h4 className="singleTopic_content_header_bottom_right_user">
-                  neuron: <span>{topic.username}</span>
+                  neuron:{" "}
+                  <Link to={`/neuronprofile/${topic.users_id}`}>
+                    <span>{topic.username}</span>
+                  </Link>
                 </h4>
+
                 <h4 className="singleTopic_content_header_bottom_right_category">
                   {`cat. ${topic.name}`}
                 </h4>
@@ -115,9 +121,11 @@ export const SingleTopic = () => {
                   >
                     <div className="singleTopic_content_comments_singleComment_header">
                       le <span>{singleComment.date_comment} </span>
-                      <span className="singleTopic_content_comments_singleComment_header_user">
-                        {singleComment.username}
-                      </span>{" "}
+                      <Link to={`/neuronprofile/${singleComment.users_id}`}>
+                        <span className="singleTopic_content_comments_singleComment_header_user">
+                          {singleComment.username}
+                        </span>
+                      </Link>{" "}
                       a écrit:
                     </div>
                     <ReactMarkdown
