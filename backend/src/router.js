@@ -21,6 +21,7 @@ const router = express.Router();
 
 router.post("/users", validateUser, hashPassword, usersControllers.createUser);
 router.post("/login", usersControllers.registerWithMail, verifyPassword);
+router.get("/tagstop", topicsControllers.getTagsTop);
 router.get("/users", usersControllers.getUsers);
 router.get("/categories", topicsControllers.getCategories);
 router.get("/topics", topicsControllers.getTopics);

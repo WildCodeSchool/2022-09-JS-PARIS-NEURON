@@ -123,12 +123,12 @@ const getTagsFavorites = (req, res) => {
       "SELECT * FROM users_has_tags INNER JOIN users ON users.id = users_has_tags.users_id INNER JOIN tags ON tags.id = tags_id WHERE users_id = ? tags_id = ?",
       [id]
     )
-    .then(([result]) => {
-      res.status(201).json(result);
-    })
-    .catch((err) => {
-      console.warn(err);
-      res.status(500).send("impossible d'afficher les favoris");
+    .then(([tags]) => {
+      if (tags[0] != null) {
+        res.status(201).json(tags);
+      } else {
+        tags.Status(404).send("not found");
+      }
     });
 };
 
@@ -304,10 +304,14 @@ const addToFollowed = (req, res) => {
 };
 
 const removeFromFollowed = (req, res) => {
-  const { id } = req.query;
+  const { id, friend_id } = req.query;
+  console.warn(req.query);
 
   neuron
-    .query("DELETE FROM followed WHERE users_id= ? AND friends_id=?", [id])
+    .query("DELETE FROM followed WHERE users_id= ? AND friend_id=?", [
+      id,
+      friend_id,
+    ])
     .then(() => {
       res.status(201).json("supprimé des favoris");
     })
@@ -319,7 +323,6 @@ const removeFromFollowed = (req, res) => {
 
 const getFollowed = (req, res) => {
   const { id } = req.query;
-
   neuron
     .query(
       " SELECT friend_id FROM followed INNER JOIN users ON followed.users_id = users.id WHERE users_id = ?",

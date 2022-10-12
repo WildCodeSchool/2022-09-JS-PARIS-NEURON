@@ -33,9 +33,9 @@ export const NeuronFavorites = () => {
   }, [idList]);
 
   const handleDelete = (neuron) => {
-    setNeurons(neurons.filter((elem) => elem !== neuron));
-    removeFromFollowed(id, token);
-    setTimeout(() => {}, 1500);
+    setNeurons(neurons.filter((elem) => elem !== neuron.id));
+    removeFromFollowed(token, id, neuron.id, setIdList);
+    console.warn(id, neuron.id);
   };
 
   const neuronFavList = [

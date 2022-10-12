@@ -61,6 +61,18 @@ const logout = (token, setState) => {
     });
 };
 
+const getTagsTop = (setState) => {
+  axios
+    .get(`${BASE_URL}/tagstop`)
+    .then((res) => {
+      console.warn(res.data);
+      setState(res.data);
+    })
+    .catch((err) => {
+      console.warn(err);
+    });
+};
+
 const getCategories = (setState) => {
   axios
     .get(`${BASE_URL}/categories`)
@@ -172,7 +184,7 @@ const postComment = (
 };
 
 // --------------------USERS PART--------------------------------------------
-const postFollowed = (id) => {
+const postFollowed = (token, id) => {
   axios
     .post(
       `http://localhost:5000/followed`,
@@ -193,21 +205,18 @@ const postFollowed = (id) => {
     });
 };
 
-const removeFromFollowed = (token, friends_id, id) => {
+const removeFromFollowed = (token, id, friend_id, setState) => {
   axios
-    .delete(
-      `http://localhost:5000/followed?id=${id}&friends_id=${friends_id}`,
-      { token, friends_id, id },
-      {
-        withCredentials: true,
-        headers: {
-          "x-xsrf-token": `${token}`,
-        },
-      }
-    )
+    .delete(`http://localhost:5000/followed?id=${id}&friend_id=${friend_id}`, {
+      withCredentials: true,
+      headers: {
+        "x-xsrf-token": `${token}`,
+      },
+    })
     .then((res) => {
       console.warn(res.data);
       setState(res.data);
+      getFollowed(token, id, setState);
     })
     .catch((err) => {
       console.warn(err.response.data);
@@ -253,6 +262,7 @@ export {
   register,
   login,
   logout,
+  getTagsTop,
   getTopics,
   getCategories,
   getTopicById,
