@@ -1,19 +1,21 @@
 import Carousel from "react-grid-carousel";
 import React, { useEffect, useState } from "react";
-import "./TagsFavorites.scss";
 import { getTagsFavorites } from "@services/apiRequest";
+import "./TagsFavorites.scss";
 
 export const TagsFavorites = () => {
-  const [tags, setTags] = useState([]);
   const [token, setToken] = useState("");
-
+  const [usersId, setUsersId] = useState("");
+  const [tagList, setTagList] = useState([]);
   useEffect(() => {
     setToken(localStorage.getItem("token"));
-  }, []);
+    setUsersId(localStorage.getItem("userId"));
 
+  }, []);
+console.warn(usersId);
   useEffect(() => {
     if (token.length) {
-      getTagsFavorites(token, setTags);
+      getTagsFavorites(token, usersId, setTagList);
     }
   }, [token]);
 
@@ -40,8 +42,9 @@ export const TagsFavorites = () => {
       loop: true,
     },
   ];
-  console.warn(tags);
+  console.warn(tagList);
   return (
+    <div className="taglist_container">
     <div className="carousel">
       <Carousel
         cols={10}
@@ -51,12 +54,20 @@ export const TagsFavorites = () => {
         mobileBreakpoint={0}
         showDots
       >
-        {tags.map((tag) => (
+        {tagList.map((tag) => (
           <Carousel.Item key={tag.id}>
-            <div className="item">{tag.name}</div>
+            <div className="item">{tag.tag}</div>
           </Carousel.Item>
         ))}
       </Carousel>
+      </div>
+      <form className= "taglist_container_addtagtofavorites">
+        <label> 
+          Ajouter un tag à votre liste de favoris:
+          <input className="taglist_container_input" type="text" />
+          </label>
+          <button type="button">Ajouter</button>
+      </form>
     </div>
   );
 };

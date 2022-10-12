@@ -251,7 +251,7 @@ const getUsersByIds = (token, idList, setState) => {
 const addTagsFavorites = (token, tags_id, users_id) => {
   axios
     .post(
-      "http://localhost:5000/tagsFavorites",
+      `${BASE_URL}/tagsFavorites`,
       {
         tags_id,
         users_id,
@@ -274,7 +274,7 @@ const addTagsFavorites = (token, tags_id, users_id) => {
 const removeFromTagsFavorites = (setState) => {
   axios
     .delete(
-      "http://localhost:5000/tagsFavorites",
+      `${BASE_URL}/tagsFavorites`,
       {
         id,
       },
@@ -293,16 +293,17 @@ const removeFromTagsFavorites = (setState) => {
     });
 };
 
-const getTagsFavorites = (token, id, setState) => {
+const getTagsFavorites = (token, usersId, setState ) => {
   axios
-    .get(`http://localhost:5000/tagsFavorites?id=${id}`, {
+    .get(`${BASE_URL}/tagsFavorites?usersId=${usersId}`, {
       withCredentials: true,
       headers: {
         "x-xsrf-token": `${token}`,
       },
     })
     .then((res) => {
-      setState(res.data);
+     console.warn(res);
+     setState(res.data);
     })
     .catch((err) => {
       console.warn(err);

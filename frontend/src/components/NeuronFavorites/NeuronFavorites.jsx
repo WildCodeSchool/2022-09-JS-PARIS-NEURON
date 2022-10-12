@@ -1,7 +1,7 @@
 import { NeuronCard, Search } from "@components/index";
 import Carousel from "react-grid-carousel";
 import React, { useContext, useEffect, useState } from "react";
-import { getFollowed, getUsersByIds } from "@services/apiRequest";
+import {getFollowed, getUsersByIds } from "@services/apiRequest";
 import { messageContext } from "@contexts/messageContext";
 
 import "./NeuronFavorites.scss";
@@ -14,10 +14,7 @@ export const NeuronFavorites = () => {
   const [id, setId] = useState(0);
   const [idList, setIdList] = useState([]);
   const [token, setToken] = useState("");
-  // const [usersById, setUsersById] = useState([]);
-  // const handleSearch = () => {
-  //   getUsersById(setUsersById);
-  // };
+  
   useEffect(() => {
     setToken(localStorage.getItem("token"));
     setId(localStorage.getItem("userId"));
@@ -80,14 +77,6 @@ export const NeuronFavorites = () => {
           </Carousel.Item>
         ))}
       </Carousel>
-
-      <div className="users_filter">
-        <Search
-          placeholder="rechercher un Neuron"
-          content={setSearchUser}
-          // handleSearch={handleSearch}
-        />
       </div>
-    </div>
   );
 };
