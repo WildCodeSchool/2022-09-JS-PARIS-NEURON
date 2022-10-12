@@ -9,6 +9,8 @@
     "sourceType": "module"
   },
   "rules": {
+    "no-param-reassign": 0,
+    "consistent-return": 0,
     "camelcase": "off",
     "no-console": "off",
     "no-restricted-syntax": [

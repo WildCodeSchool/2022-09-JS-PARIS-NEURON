@@ -54,7 +54,7 @@ export const MarkdownSyntax = () => {
           <div className="markdownSyntax_content_example">
             example - [moteur](https://duckduckgo.com/):
           </div>
-          <ReactMarkdown className="markdown">
+          <ReactMarkdown className="markdown" linkTarget="_blank">
             [moteur](https://duckduckgo.com/)
           </ReactMarkdown>
         </div>
@@ -77,7 +77,7 @@ export const MarkdownSyntax = () => {
           <div className="markdownSyntax_content_example">
             example - {">"} carpe diem donne:
           </div>
-          <ReactMarkdown className="markdown">{">"} carpe diem</ReactMarkdown>
+          <ReactMarkdown className="markdown">{"> carpe diem"}</ReactMarkdown>
         </div>
         <div className="markdownSyntax_content_code">
           <div className="markdownSyntax_content_instruction">
@@ -85,13 +85,13 @@ export const MarkdownSyntax = () => {
             colorisation spécifique
           </div>
           <div className="markdownSyntax_content_example">
-            example - ```js console.log()``` donne:
+            example - ``` console.log()``` donne:
           </div>
           <ReactMarkdown
             className="markdown"
             rehypePlugins={[[rehypeHighlight, { ignoreMissing: true }]]}
           >
-            ```js console.log()```
+            ```console.log()```
           </ReactMarkdown>
         </div>
       </div>

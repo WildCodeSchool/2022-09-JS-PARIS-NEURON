@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import rehypeHighlight from "rehype-highlight";
 
-import "highlight.js/styles/github.css";
+import "../../github.css";
 
 import "./Markdown.scss";
 
@@ -18,6 +18,7 @@ export const Markdown = ({ input, setInput }) => {
       <div className="preview">
         <ReactMarkdown
           className="markdown"
+          linkTarget="_blank"
           rehypePlugins={[[rehypeHighlight, { ignoreMissing: true }]]}
         >
           {input}

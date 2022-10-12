@@ -1,8 +1,10 @@
 import axios from "axios";
 
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
 const register = (username, password, mail, chatId, setState) => {
   axios
-    .post("http://localhost:5000/users", {
+    .post(`${BASE_URL}/users`, {
       username,
       password,
       mail,
@@ -17,7 +19,7 @@ const register = (username, password, mail, chatId, setState) => {
 const login = (mail, password, setState) => {
   axios
     .post(
-      `http://localhost:5000/login`,
+      `${BASE_URL}/login`,
       {
         mail,
         password,
@@ -42,7 +44,7 @@ const logout = (token, setState) => {
 
   axios
     .post(
-      "http://localhost:5000/logout",
+      `${BASE_URL}/logout`,
       { token: `${token}` },
       {
         withCredentials: true,
@@ -60,35 +62,38 @@ const logout = (token, setState) => {
 };
 
 const getCategories = (setState) => {
-  axios.get("http://localhost:5000/categories").then((res) => {
-    setState(res.data);
-  });
+  axios
+    .get(`${BASE_URL}/categories`)
+    .then((res) => {
+      setState(res.data);
+    })
+    .catch((err) => console.warn(err));
 };
 
 const getTopics = (setState) => {
-  axios.get("http://localhost:5000/topics").then((res) => {
+  axios
+    .get(`${BASE_URL}/topics`)
+    .then((res) => {
+      setState(res.data);
+    })
+    .catch((err) => console.warn(err));
+};
+
+const getTopicsByTitle = (string, setState) => {
+  axios.get(`${BASE_URL}/topicsbytitle?string=${string}`).then((res) => {
     setState(res.data);
   });
 };
 
-const getTopicsByTitle = (string, setState) => {
-  axios
-    .get(`http://localhost:5000/topicsbytitle?string=${string}`)
-    .then((res) => {
-      setState(res.data);
-    });
-};
-
 const getTopicById = (id, setTopics, setTaglist) => {
-  axios.get(`http://localhost:5000/topicbyid?id=${id}`).then((res) => {
-    console.warn(res);
+  axios.get(`${BASE_URL}/topicbyid?id=${id}`).then((res) => {
     setTopics(res.data[0][0]);
     setTaglist(res.data[1]);
   });
 };
 
 const getComments = (id, setState) => {
-  axios.get(`http://localhost:5000/comments?id=${id}`).then((res) => {
+  axios.get(`${BASE_URL}/comments?id=${id}`).then((res) => {
     setState(res.data);
   });
 };
@@ -108,7 +113,7 @@ const postTopic = (
 ) => {
   axios
     .post(
-      `http://localhost:5000/topics`,
+      `${BASE_URL}/topics`,
       {
         title,
         topic,
@@ -140,11 +145,11 @@ const postComment = (
   date,
   topicId,
   userID,
-  setState
+  setComments
 ) => {
   axios
     .post(
-      "http://localhost:5000/comments",
+      `${BASE_URL}/comments`,
       {
         commentContent,
         date,
@@ -158,8 +163,8 @@ const postComment = (
         },
       }
     )
-    .then((res) => {
-      setState(res.data);
+    .then(() => {
+      getComments(topicId, setComments);
     })
     .catch((err) => {
       console.warn(err);
@@ -211,7 +216,7 @@ const removeFromFollowed = (token, friends_id, id) => {
 
 const getFollowed = (token, id, setState) => {
   axios
-    .get(`http://localhost:5000/followed?id=${id}`, {
+    .get(`${BASE_URL}/followed?id=${id}`, {
       withCredentials: true,
       headers: {
         "x-xsrf-token": `${token}`,
@@ -227,7 +232,7 @@ const getFollowed = (token, id, setState) => {
 
 const getUsersByIds = (token, idList, setState) => {
   axios
-    .get(`http://localhost:5000/followedByIds`, {
+    .get(`${BASE_URL}/followedByIds`, {
       withCredentials: true,
       headers: {
         "x-xsrf-token": `${token}`,

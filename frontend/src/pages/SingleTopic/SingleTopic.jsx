@@ -1,29 +1,30 @@
 /* eslint-disable array-callback-return */
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Navbar } from "@components";
 import { useParams } from "react-router";
 import { getTopicById, getComments, postComment } from "@services/apiRequest";
-import { messageContext } from "@contexts/messageContext";
 import ReactMarkdown from "react-markdown";
 import rehypeHighlight from "rehype-highlight";
 
-import "highlight.js/styles/github.css";
+import "../../github.css";
 
 import "./SingleTopic.scss";
 
 export const SingleTopic = () => {
   const { id } = useParams();
 
-  const { setMessage } = useContext(messageContext);
-
   const [topic, setTopic] = useState([]);
   const [taglist, setTaglist] = useState([]);
   const [comments, setComments] = useState([]);
   const [commentContent, setCommentContent] = useState("");
   const [date, setDate] = useState("");
+  const [userId, setUserId] = useState("");
+  const [token, setToken] = useState("");
 
   useEffect(() => {
+    setUserId(localStorage.getItem("userId"));
+    setToken(localStorage.getItem("token"));
     getTopicById(id, setTopic, setTaglist, setComments);
     getComments(id, setComments);
     localStorage.removeItem("topicId");
@@ -31,7 +32,7 @@ export const SingleTopic = () => {
     setDate(
       `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`
     );
-  }, [postComment()]);
+  }, []);
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -40,21 +41,9 @@ export const SingleTopic = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    postComment(
-      localStorage.getItem("token"),
-      commentContent,
-      date,
-      id,
-      localStorage.getItem("userId"),
-      setMessage
-    );
+    postComment(token, commentContent, date, id, userId, setComments);
     setCommentContent("");
-    setTimeout(() => {
-      window.location.reload(false);
-    }, 1500);
   };
-
-  console.warn(comments);
 
   return (
     topic && (
@@ -85,13 +74,14 @@ export const SingleTopic = () => {
               <span>tag(s):</span>
               <div className="singleTopic_content_header_tags_tagList">
                 {taglist.map((tag) => (
-                  <div>{tag.tag}</div>
+                  <div key={tag.id}>{tag.tag}</div>
                 ))}
               </div>
             </div>
           </div>
           <ReactMarkdown
             className="markdown"
+            linkTarget="_blank"
             rehypePlugins={[[rehypeHighlight, { ignoreMissing: true }]]}
           >
             {topic.topic}
@@ -116,6 +106,7 @@ export const SingleTopic = () => {
                     </div>
                     <ReactMarkdown
                       className="markdown"
+                      linkTarget="_blank"
                       rehypePlugins={[
                         [rehypeHighlight, { ignoreMissing: true }],
                       ]}

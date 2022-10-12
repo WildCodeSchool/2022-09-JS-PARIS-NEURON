@@ -5,6 +5,7 @@
   flex-direction: column;
   height: 100%;
   width: 100%;
+  overflow-y: scroll;
 
   &_content {
     display: flex;
@@ -42,6 +43,7 @@
     white-space: pre-line;
     padding: 0.5rem;
     margin-top: 1rem;
+    background-color: $cool-grey-1;
 
     h1,
     h2,

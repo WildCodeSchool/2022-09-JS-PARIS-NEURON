@@ -8,7 +8,7 @@ export const Avatar = ({ connected }) => {
     <div className={connected === 1 ? "avatar on" : "avatar off"}>
       <img
         className="avatar-content"
-        src="\src\assets\images\avatarDefaultv2.svg"
+        src=".\assets\images\avatarDefaultv2.svg"
         alt="Avatar"
       />
     </div>
