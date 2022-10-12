@@ -1,7 +1,7 @@
 /* eslint-disable array-callback-return */
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Navbar, ButtonFavorite } from "@components";
+import { Navbar, ButtonAddToFavorite } from "@components";
 import { useParams } from "react-router";
 import {
   getTopicById,
@@ -89,7 +89,7 @@ export const SingleTopic = () => {
                 {taglist.map((tag) => (
                   <div key={tag.id}>
                     <div>{tag.tag}</div>
-                    <ButtonFavorite onClick={() => handleToggle()} />
+                    <ButtonAddToFavorite onClick={() => handleToggle()} />
                   </div>
                 ))}
               </div>

@@ -1,12 +1,14 @@
 import Carousel from "react-grid-carousel";
 import React, { useEffect, useState } from "react";
-import { getTagsFavorites } from "@services/apiRequest";
+import { getTagsFavorites, addTagsFavorites } from "@services/apiRequest";
+import { ButtonRemoveFromFavorite } from "@components";
 import "./TagsFavorites.scss";
 
 export const TagsFavorites = () => {
   const [token, setToken] = useState("");
   const [usersId, setUsersId] = useState("");
   const [tagList, setTagList] = useState([]);
+  const [tagId, setTagId] = useState("");
   useEffect(() => {
     setToken(localStorage.getItem("token"));
     setUsersId(localStorage.getItem("userId"));
@@ -15,8 +17,19 @@ export const TagsFavorites = () => {
   useEffect(() => {
     if (token.length) {
       getTagsFavorites(token, usersId, setTagList);
+      addTagsFavorites(setTagId);
     }
   }, [token]);
+
+  const handleChange = (e) => {
+    e.preventDefault();
+    setTagId(e.target.value);
+  };
+
+  const handleAddTag = (e) => {
+    e.preventDefault();
+    setTagId("");
+  };
 
   const tagsFavList = [
     {
@@ -55,17 +68,31 @@ export const TagsFavorites = () => {
         >
           {tagList.map((tag) => (
             <Carousel.Item key={tag.id}>
-              <div className="item">{tag.tag}</div>
+              <div className="item">
+                <div>{tag.tag}</div>
+                <ButtonRemoveFromFavorite />
+              </div>
             </Carousel.Item>
           ))}
         </Carousel>
       </div>
       <form className="taglist_container_addtagtofavorites">
-        <label>
+        <label className="taglist_container_label">
           Ajouter un tag à votre liste de favoris:
-          <input className="taglist_container_input" type="text" />
+          <input
+            className="taglist_container_input"
+            type="text"
+            value={tagId}
+            onChange={(e) => handleChange(e)}
+          />
         </label>
-        <button type="button">Ajouter</button>
+        <button
+          className="taglist_container_buttontag"
+          type="submit"
+          onClick={(e) => handleAddTag(e)}
+        >
+          Ajouter
+        </button>
       </form>
     </div>
   );

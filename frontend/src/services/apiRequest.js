@@ -248,13 +248,13 @@ const getUsersByIds = (token, idList, setState) => {
     });
 };
 
-const addTagsFavorites = (token, tags_id, users_id) => {
+const addTagsFavorites = (token, tagId, userId) => {
   axios
     .post(
       `${BASE_URL}/tagsFavorites`,
       {
-        tags_id,
-        users_id,
+        tagId,
+        userId,
       },
       {
         withCredentials: true,
@@ -264,7 +264,7 @@ const addTagsFavorites = (token, tags_id, users_id) => {
       }
     )
     .then((res) => {
-      setState(res.data);
+      getTagsFavorites(res.data);
     })
     .catch((err) => {
       console.warn(err);

@@ -7,5 +7,5 @@ export { LogoSmall } from "./LogoSmall";
 export { UserProfileIcon } from "./UserProfileIcon";
 export { TopicsIcon } from "./TopicsIcon";
 export { CreateTopicIcon } from "./CreateTopicIcon";
-export { CocherIcon } from "./CocherIcon";
-export { PlusIcon } from "./PlusIcon";
+export { CocherIcon } from "./PlusIcon";
+export { PlusIcon } from "./CocherIcon";

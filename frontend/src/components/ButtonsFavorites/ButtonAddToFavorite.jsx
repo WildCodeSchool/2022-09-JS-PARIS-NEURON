@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { CocherIcon, PlusIcon } from "@assets";
-import "./ButtonFavorite.scss";
+import "./ButtonAddToFavorite.scss";
 
-export const ButtonFavorite = () => {
+export const ButtonAddToFavorite = () => {
   const [isFavorite, setIsFavorite] = useState(false);
   const addFavoriteIcon = <PlusIcon />;
-  const removeFavoriteIcon = <CocherIcon />;
+  const addedFavoriteIcon = <CocherIcon />;
   useEffect(() => {}, [isFavorite]);
 
   const toggleFavorite = () => {
@@ -19,7 +19,7 @@ export const ButtonFavorite = () => {
       onClick={(e) => toggleFavorite(e)}
       onKeyDown={(e) => toggleFavorite(e)}
     >
-      {isFavorite ? addFavoriteIcon : removeFavoriteIcon}
+      {isFavorite ? addFavoriteIcon : addedFavoriteIcon}
     </div>
   );
 };

@@ -3,3 +3,23 @@
 .taglist_container_addtagtofavorites {
   margin-top: 20%;
 }
+
+.taglist_container_label {
+  font-weight: bold;
+}
+
+.taglist_container_input {
+  margin-top: 8%;
+  border-radius: 0.5rem 0 0 0.5rem;
+  width: 15rem;
+}
+.taglist_container_buttontag {
+  width: 3.5rem;
+  height: 1.3rem;
+  box-shadow: 0 0 5px $carbon;
+  border: solid 1.5px $dark-purple-1;
+  background-color: $dark-purple-3;
+  color: $warm-grey-1;
+  border-radius: 0 0.5rem 0.5rem 0;
+  cursor: pointer;
+}

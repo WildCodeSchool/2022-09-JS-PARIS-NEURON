@@ -14,6 +14,7 @@ export { NeuronFavorites } from "./NeuronFavorites/NeuronFavorites";
 export { Search } from "./Search/Search";
 
 export { NeuronSettings } from "./NeuronSettings/NeuronSettings/";
-export { ButtonFavorite } from "./ButtonsFavorite/ButtonFavorite";
+export { ButtonAddToFavorite } from "./ButtonsFavorites/ButtonAddToFavorite";
+export { ButtonRemoveFromFavorite } from "./ButtonsFavorites/ButtonRemoveFromFavorite";
 export { ProfilDisplay } from "./ProfilDisplay/ProfilDisplay";
 export { Favorites } from "./Favorites/Favorites";
