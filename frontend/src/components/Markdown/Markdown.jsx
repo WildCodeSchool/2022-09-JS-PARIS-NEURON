@@ -18,6 +18,7 @@ export const Markdown = ({ input, setInput }) => {
       <div className="preview">
         <ReactMarkdown
           className="markdown"
+          linkTarget="_blank"
           rehypePlugins={[[rehypeHighlight, { ignoreMissing: true }]]}
         >
           {input}
