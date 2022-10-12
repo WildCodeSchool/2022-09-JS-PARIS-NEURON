@@ -8,11 +8,12 @@ import {
   SingleTopic,
   CreateTopics,
   UserProfile,
+  NeuronProfile,
   CreateMail,
+  MarkdownSyntax,
 } from "@pages";
 
 import "./App.scss";
-import { MarkdownSyntax } from "@pages/MarkdownSyntax/MarkdownSyntax";
 
 const App = () => {
   const [message, setMessage] = useState("");
@@ -34,6 +35,7 @@ const App = () => {
             <Route path="/topic/:id" element={<SingleTopic />} />
             <Route path="/createtopics" element={<CreateTopics />} />
             <Route path="/userprofile" element={<UserProfile />} />
+            <Route path="neuronprofile/:id" element={<NeuronProfile />} />
             <Route path="/createmail" element={<CreateMail />} />
             <Route path="/markdownsyntax" element={<MarkdownSyntax />} />
           </Routes>

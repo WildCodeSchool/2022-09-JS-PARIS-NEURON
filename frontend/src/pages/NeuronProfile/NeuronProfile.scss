@@ -1,0 +1,80 @@
+@import "../../colors.scss";
+
+.neuronProfile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  padding: 2rem;
+  overflow-y: scroll;
+
+  button {
+    background-color: $dark-purple-5;
+    border-radius: 0.5rem;
+    cursor: pointer;
+  }
+
+  &_header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 10%;
+    width: 100%;
+    margin-bottom: 10%;
+
+    &_left {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      > span {
+        background-color: $dark-purple-1;
+        color: $warm-grey-1;
+        border-radius: 0.3rem;
+        padding: 0.3rem;
+        margin-left: 1rem;
+      }
+    }
+  }
+
+  &_links {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    margin-bottom: 10%;
+
+    > span {
+      width: 100%;
+      background-color: $dark-purple-3;
+      color: $warm-grey-1;
+      border-radius: 00.3rem;
+      padding: 0.3rem;
+      margin: 0.3rem;
+      overflow-x: scroll;
+    }
+  }
+
+  &_mailEditor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 80%;
+    width: 100%;
+
+    > label {
+      background-color: $dark-purple-3;
+      color: $warm-grey-1;
+      padding: 0.3rem;
+      border-radius: 0.3rem;
+      margin-bottom: 5%;
+    }
+
+    > textarea {
+      width: 100%;
+      height: 100%;
+      margin-bottom: 5%;
+      resize: none;
+    }
+  }
+}
