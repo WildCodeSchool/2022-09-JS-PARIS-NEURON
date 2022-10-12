@@ -145,7 +145,7 @@ const postComment = (
   date,
   topicId,
   userID,
-  setState
+  setComments
 ) => {
   axios
     .post(
@@ -163,8 +163,8 @@ const postComment = (
         },
       }
     )
-    .then((res) => {
-      setState(res.data);
+    .then(() => {
+      getComments(topicId, setComments);
     })
     .catch((err) => {
       console.warn(err);

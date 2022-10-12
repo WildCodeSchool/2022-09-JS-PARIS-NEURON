@@ -1,5 +1,5 @@
 /* eslint-disable array-callback-return */
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Navbar, ButtonFavorite } from "@components";
 import { useParams } from "react-router";
@@ -20,8 +20,6 @@ import "./SingleTopic.scss";
 
 export const SingleTopic = () => {
   const { id } = useParams();
-
-  const { setMessage } = useContext(messageContext);
 
   const [topic, setTopic] = useState([]);
   const [taglist, setTaglist] = useState([]);
@@ -56,11 +54,8 @@ export const SingleTopic = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    postComment(token, commentContent, date, id, userId, setMessage);
+    postComment(token, commentContent, date, id, userId, setComments);
     setCommentContent("");
-    setTimeout(() => {
-      window.location.reload(false);
-    }, 1500);
   };
 
   return (
