@@ -39,6 +39,7 @@ router.delete("/followed", usersControllers.removeFromFollowed);
 router.post("/topics", topicsControllers.createTopic);
 router.post("/comments", topicsControllers.createComment);
 router.post("/privatemessage", usersControllers.postPrivateMessage);
+router.get("/privatemessages", usersControllers.getPrivateMessages);
 router.post("/logout", usersControllers.logout);
 router.put(
   "/settings",

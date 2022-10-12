@@ -318,6 +318,25 @@ const postPrivateMessage = (req, res) => {
     });
 };
 
+const getPrivateMessages = (req, res) => {
+  const { id } = req.query;
+  console.warn(req.query);
+
+  neuron
+    .query(
+      `SELECT * FROM private_messages_has_users JOIN private_messages ON private_messages.id=private_messages_has_users.private_messages_id INNER JOIN users ON users.id=private_messages_has_users.users_id WHERE users.id = ? ORDER BY private_messages.id DESC`,
+      [id]
+    )
+    .then(([mails]) => {
+      console.warn(mails);
+      res.status(201).json(mails);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("impossible de récupérer les messages");
+    });
+};
+
 module.exports = {
   getUsers,
   getNeuronById,
@@ -330,4 +349,5 @@ module.exports = {
   getFollowed,
   getUserByFollowed,
   postPrivateMessage,
+  getPrivateMessages,
 };

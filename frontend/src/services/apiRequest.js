@@ -257,6 +257,21 @@ const sendPrivateMessage = (
     .catch((err) => console.warn(err));
 };
 
+const getPrivateMessages = (token, userId, setState) => {
+  axios
+    .get(`${BASE_URL}/privatemessages?id=${userId}`, {
+      withCredentials: true,
+      headers: {
+        "x-xsrf-token": `${token}`,
+      },
+    })
+    .then((res) => {
+      console.warn(res);
+      setState(res.data);
+    })
+    .catch((err) => console.warn(err));
+};
+
 const getFollowed = (token, id, setState) => {
   axios
     .get(`${BASE_URL}/followed?id=${id}`, {
@@ -305,6 +320,7 @@ export {
   postComment,
   getNeuronById,
   sendPrivateMessage,
+  getPrivateMessages,
   // postFollowed,
   // deleteFollowed,
   getFollowed,
