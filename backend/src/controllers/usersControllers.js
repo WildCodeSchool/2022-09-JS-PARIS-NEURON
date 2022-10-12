@@ -226,14 +226,13 @@ const updateSettings = async (req, res) => {
 
 const getTagsFavorites = (req, res) => {
   const { usersId } = req.query;
-  
+
   neuron
     .query(
       `SELECT * FROM users_has_tags INNER JOIN users ON users.id=users_has_tags.users_id INNER JOIN tags ON tags.id=users_has_tags.tags_id WHERE users_has_tags.users_id=?`,
       [usersId]
     )
     .then(([result]) => {
-     
       res.status(201).json(result);
     })
     .catch((error) => {
@@ -244,11 +243,11 @@ const getTagsFavorites = (req, res) => {
 
 const addTagsFavorites = (req, res) => {
   const { userId, tagId } = req.query;
-console.warn(req.query);
+  console.warn(req.query);
   neuron
     .query(
       "INSERT IGNORE INTO users_has_tags (users_id, tags_id) VALUES ((SELECT id FROM users WHERE id=? LIMIT 1), (SELECT id FROM tags WHERE id=? LIMIT 1))",
-      [userId, tagId],
+      [userId, tagId]
     )
     .then(() => {
       res.status(201).json("ajouté aux favoris");
