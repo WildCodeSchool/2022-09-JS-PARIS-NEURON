@@ -10,7 +10,6 @@ export const ButtonFavorite = () => {
 
   const toggleFavorite = () => {
     setIsFavorite(!isFavorite);
-    // handleFollowed();
   };
 
   return (

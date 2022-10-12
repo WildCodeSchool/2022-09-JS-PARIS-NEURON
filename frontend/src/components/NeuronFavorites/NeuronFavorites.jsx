@@ -1,18 +1,15 @@
 import { NeuronCard } from "@components/index";
 import Carousel from "react-grid-carousel";
-import React, { useContext, useEffect, useState } from "react";
-import { messageContext } from "@contexts/messageContext";
+import React, { useEffect, useState } from "react";
 import {
   getFollowed,
   getUsersByIds,
-  deleteFollowed,
+  removeFromFollowed,
 } from "@services/apiRequest";
 
 import "./NeuronFavorites.scss";
 
 export const NeuronFavorites = () => {
-  const { setMessage } = useContext(messageContext);
-
   const [neurons, setNeurons] = useState([]);
   const [id, setId] = useState(0);
   const [idList, setIdList] = useState([]);
@@ -31,13 +28,14 @@ export const NeuronFavorites = () => {
 
   useEffect(() => {
     if (idList.length) {
-      getUsersByIds(token, idList, setNeurons, setMessage);
+      getUsersByIds(token, idList, setNeurons);
     }
   }, [idList]);
 
-  const handleDelete = () => {
-    setNeurons(neurons.filter((neuron) => neuron.id !== id));
-    deleteFollowed(token, id);
+  const handleDelete = (neuron) => {
+    setNeurons(neurons.filter((elem) => elem !== neuron));
+    removeFromFollowed(id, token);
+    setTimeout(() => {}, 1500);
   };
 
   const neuronFavList = [
@@ -73,26 +71,26 @@ export const NeuronFavorites = () => {
         mobileBreakpoint={0}
         showDots
       >
-        {neurons.map((neuron) => (
-          <Carousel.Item key={neuron}>
-            <div className="item">
-              <NeuronCard />
-              <span className="item_pseudo">{neuron.username}</span>
-              <button type="button" onClick={() => handleDelete(neuron.id)}>
-                Supprimer
-              </button>
-            </div>
-          </Carousel.Item>
-        ))}
+        {neurons.length ? (
+          neurons.map((neuron) => {
+            return (
+              <Carousel.Item key={neuron}>
+                <div className="item">
+                  <NeuronCard />
+                  <span className="item_pseudo">{neuron.username}</span>
+                  <button type="button" onClick={() => handleDelete(neuron)}>
+                    Supprimer
+                  </button>
+                </div>
+              </Carousel.Item>
+            );
+          })
+        ) : (
+          <div>
+            <p>Pas de neurones favoris 🙁</p>
+          </div>
+        )}
       </Carousel>
-
-      <div className="users_filter">
-        {/* <Search
-          placeholder="rechercher un Neuron"
-          content={setSearchUser}
-          handleSearch={handleSearch}
-        /> */}
-      </div>
     </div>
   );
 };

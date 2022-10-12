@@ -167,29 +167,9 @@ const postComment = (
 };
 
 // --------------------USERS PART--------------------------------------------
-// const postFollowed = (id) => {
-//   axios
-//     .post(
-//       `http://localhost:5000/followed`,
-//       { id },
-//       {
-//         withCredentials: true,
-//         headers: {
-//           "x-xsrf-token": `${token}`,
-//         },
-//       }
-//     )
-//     .then((res) => {
-//       console.warn(res.data);
-//     })
-//     .catch((err) => {
-//       console.warn(err.response.data.message);
-//     });
-// };
-
-const deleteFollowed = (id) => {
+const postFollowed = (id) => {
   axios
-    .delete(
+    .post(
       `http://localhost:5000/followed`,
       { id },
       {
@@ -200,10 +180,32 @@ const deleteFollowed = (id) => {
       }
     )
     .then((res) => {
+      setState(res.data);
       console.warn(res.data);
     })
     .catch((err) => {
       console.warn(err.response.data.message);
+    });
+};
+
+const removeFromFollowed = (token, friends_id, id) => {
+  axios
+    .delete(
+      `http://localhost:5000/followed?id=${id}&friends_id=${friends_id}`,
+      { token, friends_id, id },
+      {
+        withCredentials: true,
+        headers: {
+          "x-xsrf-token": `${token}`,
+        },
+      }
+    )
+    .then((res) => {
+      console.warn(res.data);
+      setState(res.data);
+    })
+    .catch((err) => {
+      console.warn(err.response.data);
     });
 };
 
@@ -253,8 +255,8 @@ export {
   getComments,
   postTopic,
   postComment,
-  // postFollowed,
-  deleteFollowed,
+  postFollowed,
+  removeFromFollowed,
   getFollowed,
   getUsersByIds,
 };

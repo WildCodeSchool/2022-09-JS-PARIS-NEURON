@@ -133,15 +133,17 @@ const removeTags = (req, res) => {
 
 const addToFollowed = (req, res) => {
   const { id } = req.query;
+  // INSERT INTO ma_table_1 (colonne_1,colonne_2, colonne_3) VALUES ((SELECT colonne_1 FROM ma_table_2 WHERE conditions LIMIT 1),'seconde valeur', 'troisième valeur')
 
   neuron
     .query(
-      "INSERT INTO followed (users_id, friend_id) VALUES (?, ?) SELECT ?, ? WHERE NOT EXISTS (SELECT * FROM followed WHERE (user_id = ?) AND (friend_id = ?))",
+      "INSERT INTO followed (users_id, friend_id) VALUES ((SELECT id FROM users WHERE id = ?), (SELECT id FROM users WHERE id = ?))",
       [id]
     )
     .then(() => {
       res.status(201).json("ajouté aux favoris");
     })
+    .then(() => {})
     .catch((err) => {
       console.warn(err);
       res.status(500).send("erreur impossible d'ajouter aux favoris");
@@ -152,7 +154,7 @@ const removeFromFollowed = (req, res) => {
   const { id } = req.query;
 
   neuron
-    .query("DELETE FROM followed WHERE (users_id=?) AND (friend_id=?)", [id])
+    .query("DELETE FROM followed WHERE users_id= ? AND friends_id=?", [id])
     .then(() => {
       res.status(201).json("supprimé des favoris");
     })
