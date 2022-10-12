@@ -1,17 +1,21 @@
 import Carousel from "react-grid-carousel";
 import React, { useEffect, useState } from "react";
 import "./TagsFavorites.scss";
+import { getTagsFavorites } from "@services/apiRequest";
 
 export const TagsFavorites = () => {
-  const [tag, setTags] = useState([]);
+  const [tags, setTags] = useState([]);
+  const [token, setToken] = useState("");
 
   useEffect(() => {
-    setTags([
-      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-    ]);
+    setToken(localStorage.getItem("token"));
   }, []);
 
-  const tagsList = [{ name: "PHP" }, { name: "python" }, { name: "issues" }];
+  useEffect(() => {
+    if (token.length) {
+      getTagsFavorites(token, setTags);
+    }
+  }, [token]);
 
   const tagsFavList = [
     {
@@ -36,7 +40,7 @@ export const TagsFavorites = () => {
       loop: true,
     },
   ];
-  console.warn(tag);
+  console.warn(tags);
   return (
     <div className="carousel">
       <Carousel
@@ -47,9 +51,9 @@ export const TagsFavorites = () => {
         mobileBreakpoint={0}
         showDots
       >
-        {tagsList.map((tags) => (
-          <Carousel.Item key={tag}>
-            <div className="item">{tags.name}</div>
+        {tags.map((tag) => (
+          <Carousel.Item key={tag.id}>
+            <div className="item">{tag.name}</div>
           </Carousel.Item>
         ))}
       </Carousel>

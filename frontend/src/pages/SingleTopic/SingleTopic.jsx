@@ -1,9 +1,15 @@
 /* eslint-disable array-callback-return */
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Navbar } from "@components";
+import { Navbar, ButtonFavorite } from "@components";
 import { useParams } from "react-router";
-import { getTopicById, getComments, postComment } from "@services/apiRequest";
+import {
+  getTopicById,
+  getComments,
+  postComment,
+  addTagsFavorites,
+  getTagsFavorites,
+} from "@services/apiRequest";
 import { messageContext } from "@contexts/messageContext";
 import ReactMarkdown from "react-markdown";
 import rehypeHighlight from "rehype-highlight";
@@ -22,9 +28,11 @@ export const SingleTopic = () => {
   const [comments, setComments] = useState([]);
   const [commentContent, setCommentContent] = useState("");
   const [date, setDate] = useState("");
+  const [favorite, setFavorite] = useState("");
 
   useEffect(() => {
     getTopicById(id, setTopic, setTaglist, setComments);
+    getTagsFavorites(setFavorite);
     getComments(id, setComments);
     localStorage.removeItem("topicId");
     const today = new Date();
@@ -36,6 +44,10 @@ export const SingleTopic = () => {
   const handleChange = (e) => {
     e.preventDefault();
     setCommentContent(e.target.value);
+  };
+
+  const handleToggle = () => {
+    addTagsFavorites(localStorage.getItem("token"), favorite);
   };
 
   const handleSubmit = (e) => {
@@ -85,7 +97,10 @@ export const SingleTopic = () => {
               <span>tag(s):</span>
               <div className="singleTopic_content_header_tags_tagList">
                 {taglist.map((tag) => (
-                  <div>{tag.tag}</div>
+                  <div>
+                    <div>{tag.tag}</div>
+                    <ButtonFavorite onClick={() => handleToggle()} />
+                  </div>
                 ))}
               </div>
             </div>

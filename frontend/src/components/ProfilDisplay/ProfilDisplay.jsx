@@ -6,6 +6,7 @@ import {
   NeuronFavorites,
   TopicCard,
   NeuronSettings,
+  TagsFavorites,
 } from "@components";
 
 import "./ProfilDisplay.scss";
@@ -106,26 +107,20 @@ export const ProfilDisplay = () => {
         >
           <h2>Mes Tags</h2>
           <hr />
-          <p />
-          <Search />
+          <TagsFavorites />
         </div>
         <div
           className={toggleState === 4 ? "content  active-content" : "content"}
         >
           <h2>Content 4</h2>
           <hr />
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente
-            voluptatum qui adipisci.
-          </p>
+          <p />
         </div>
         <div
           className={toggleState === 5 ? "content  active-content" : "content"}
         >
-          <NeuronSettings />
-          <h2>Content 5</h2>
+          <h2> Paramètres</h2>
           <hr />
-          <p />
           <NeuronSettings />
         </div>
       </div>

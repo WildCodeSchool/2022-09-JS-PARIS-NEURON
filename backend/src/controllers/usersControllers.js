@@ -152,17 +152,7 @@ const updateSettings = async (req, res) => {
   ) {
     req.body.new_password = await createUserHashPassword(req.body.new_password);
   }
-  // {
-  // mail: "mail de base ",
-  // pseudo: "pseudo de base",
-  //   password: "fekfndsk",
-  //   new_pseudo: "oneblood",
-  //   new_password: "dhjhfbhsj",
-  //   new_email: "oneblood@hotmail.fr",
-  //   linkedin: "url.linkedin.com",
-  //   github: "url.github.com",
-  //   description: "Je crée et vend des t-shirts",
-  // }
+
   const query = "UPDATE users SET "; // "UPDATE user SET password = ?, email = ?, linkedin = ?, github = ?, description = ?, where mail = ?",
   const dicoToCreateQuery = {
     new_password: "hashedpassword",
@@ -239,7 +229,7 @@ const getTagsFavorites = (req, res) => {
 
   neuron
     .query(
-      "SELECT * FROM users_has_tags INNER JOIN users ON users.id = users_has_tags.users_id INNER JOIN tags ON tags.id = tags_id WHERE users_id = ? tags_id = ?",
+      "SELECT * FROM users_has_tags INNER JOIN users ON users.id = users_has_tags.users_id INNER JOIN tags ON tags.id = users_has_tags.tags_id WHERE users_id = ?",
       [id]
     )
     .then(([result]) => {
