@@ -1,10 +1,9 @@
 /* eslint-disable array-callback-return */
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Navbar } from "@components";
 import { useParams } from "react-router";
 import { getTopicById, getComments, postComment } from "@services/apiRequest";
-import { messageContext } from "@contexts/messageContext";
 import ReactMarkdown from "react-markdown";
 import rehypeHighlight from "rehype-highlight";
 
@@ -14,8 +13,6 @@ import "./SingleTopic.scss";
 
 export const SingleTopic = () => {
   const { id } = useParams();
-
-  const { setMessage } = useContext(messageContext);
 
   const [topic, setTopic] = useState([]);
   const [taglist, setTaglist] = useState([]);
@@ -44,11 +41,8 @@ export const SingleTopic = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    postComment(token, commentContent, date, id, userId, setMessage);
+    postComment(token, commentContent, date, id, userId, setComments);
     setCommentContent("");
-    setTimeout(() => {
-      window.location.reload(false);
-    }, 1500);
   };
 
   return (
