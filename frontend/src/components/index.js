@@ -17,3 +17,4 @@ export { NeuronSettings } from "./NeuronSettings/NeuronSettings/";
 export { ButtonFavorite } from "./ButtonFavorite/ButtonFavorite";
 export { ProfilDisplay } from "./ProfilDisplay/ProfilDisplay";
 export { Favorites } from "./Favorites/Favorites";
+export { MailsDisplay } from "./MailsDisplay/MailsDisplay";

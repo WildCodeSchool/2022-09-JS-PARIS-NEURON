@@ -6,6 +6,7 @@ import {
   NeuronFavorites,
   TopicCard,
   NeuronSettings,
+  MailsDisplay,
 } from "@components";
 
 import "./ProfilDisplay.scss";
@@ -86,12 +87,9 @@ export const ProfilDisplay = () => {
         <div
           className={toggleState === 4 ? "content  active-content" : "content"}
         >
-          <h2>Content 4</h2>
+          <h2>messages privés</h2>
           <hr />
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente
-            voluptatum qui adipisci.
-          </p>
+          <MailsDisplay />
         </div>
         <div
           className={toggleState === 5 ? "content  active-content" : "content"}

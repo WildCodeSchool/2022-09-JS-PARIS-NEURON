@@ -23,18 +23,19 @@ const getUsers = (req, res) => {
     });
 };
 
-// const getUsersById = (req, res) => {
-//   const { id } = req.body;
-//   neuron
-//     .query(`SELECT * FROM users WHERE id = ?`, [id])
-//     .then(([users]) => {
-//       res.status(201).json(users);
-//     })
-//     .catch((err) => {
-//       console.warn(err);
-//       res.sendStatus(500);
-//     });
-// };
+const getNeuronById = (req, res) => {
+  const { id } = req.query;
+
+  neuron
+    .query(`SELECT username, github, linkedin FROM users WHERE id=?`, [id])
+    .then(([users]) => {
+      res.status(201).json(users);
+    })
+    .catch((err) => {
+      console.warn(err);
+      res.sendStatus(500);
+    });
+};
 
 const createUser = (req, res) => {
   const { username, hashedpassword, mail, chat_id } = req.body;
@@ -351,14 +352,49 @@ const getUserByFollowed = (req, res) => {
     .then(([result]) => {
       return res.status(201).json(result);
     })
-    .catch((err) => {
-      console.warn(err);
+    .catch(() => {
       return res.status(500).send("c'est ballot");
+    });
+};
+
+const postPrivateMessage = (req, res) => {
+  const { neuronId, neuronname, username, message } = req.body;
+  console.warn(req.body);
+
+  neuron
+    .query(
+      `INSERT INTO private_messages (sender, receiver, subject, content, message_status) VALUES (?, ?, 'test', ?, 0); INSERT INTO private_messages_has_users (private_messages_id, users_id) VALUES (LAST_INSERT_ID(), ?) `,
+      [username, neuronname, message, neuronId]
+    )
+    .then(() => res.status(201).json("message envoyé"))
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("impossible d'envoyer le message");
+    });
+};
+
+const getPrivateMessages = (req, res) => {
+  const { id } = req.query;
+  console.warn(req.query);
+
+  neuron
+    .query(
+      `SELECT * FROM private_messages_has_users JOIN private_messages ON private_messages.id=private_messages_has_users.private_messages_id INNER JOIN users ON users.id=private_messages_has_users.users_id WHERE users.id = ? ORDER BY private_messages.id DESC`,
+      [id]
+    )
+    .then(([mails]) => {
+      console.warn(mails);
+      res.status(201).json(mails);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("impossible de récupérer les messages");
     });
 };
 
 module.exports = {
   getUsers,
+  getNeuronById,
   createUser,
   registerWithMail,
   logout,
@@ -369,5 +405,7 @@ module.exports = {
   removeFromFollowed,
   getFollowed,
   getUserByFollowed,
+  postPrivateMessage,
+  getPrivateMessages,
   updateSettings,
 };
