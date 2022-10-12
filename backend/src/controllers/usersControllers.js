@@ -225,16 +225,16 @@ const updateSettings = async (req, res) => {
 };
 
 const getTagsFavorites = (req, res) => {
- const { usersId }= req.query;
- console.warn(usersId)
+  const { usersId } = req.query;
+  console.warn(usersId);
   neuron
     .query(
       `SELECT * FROM users_has_tags INNER JOIN users ON users.id=users_has_tags.users_id INNER JOIN tags ON tags.id=users_has_tags.tags_id WHERE users_has_tags.users_id=?`,
       [usersId]
     )
     .then(([result]) => {
-      console.warn(result)
-        res.status(201).json(result);
+      console.warn(result);
+      res.status(201).json(result);
     })
     .catch((error) => {
       console.error(error);

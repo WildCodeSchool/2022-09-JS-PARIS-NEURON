@@ -293,7 +293,7 @@ const removeFromTagsFavorites = (setState) => {
     });
 };
 
-const getTagsFavorites = (token, usersId, setState ) => {
+const getTagsFavorites = (token, usersId, setState) => {
   axios
     .get(`${BASE_URL}/tagsFavorites?usersId=${usersId}`, {
       withCredentials: true,
@@ -302,8 +302,8 @@ const getTagsFavorites = (token, usersId, setState ) => {
       },
     })
     .then((res) => {
-     console.warn(res);
-     setState(res.data);
+      console.warn(res);
+      setState(res.data);
     })
     .catch((err) => {
       console.warn(err);

@@ -10,9 +10,8 @@ export const TagsFavorites = () => {
   useEffect(() => {
     setToken(localStorage.getItem("token"));
     setUsersId(localStorage.getItem("userId"));
-
   }, []);
-console.warn(usersId);
+  console.warn(usersId);
   useEffect(() => {
     if (token.length) {
       getTagsFavorites(token, usersId, setTagList);
@@ -45,28 +44,28 @@ console.warn(usersId);
   console.warn(tagList);
   return (
     <div className="taglist_container">
-    <div className="carousel">
-      <Carousel
-        cols={10}
-        rows={1}
-        gap={10}
-        responsiveLayout={tagsFavList}
-        mobileBreakpoint={0}
-        showDots
-      >
-        {tagList.map((tag) => (
-          <Carousel.Item key={tag.id}>
-            <div className="item">{tag.tag}</div>
-          </Carousel.Item>
-        ))}
-      </Carousel>
+      <div className="carousel">
+        <Carousel
+          cols={10}
+          rows={1}
+          gap={10}
+          responsiveLayout={tagsFavList}
+          mobileBreakpoint={0}
+          showDots
+        >
+          {tagList.map((tag) => (
+            <Carousel.Item key={tag.id}>
+              <div className="item">{tag.tag}</div>
+            </Carousel.Item>
+          ))}
+        </Carousel>
       </div>
-      <form className= "taglist_container_addtagtofavorites">
-        <label> 
+      <form className="taglist_container_addtagtofavorites">
+        <label>
           Ajouter un tag à votre liste de favoris:
           <input className="taglist_container_input" type="text" />
-          </label>
-          <button type="button">Ajouter</button>
+        </label>
+        <button type="button">Ajouter</button>
       </form>
     </div>
   );
