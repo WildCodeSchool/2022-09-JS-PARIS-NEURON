@@ -51,7 +51,8 @@ const verifyPassword = (req, res, next) => {
         delete req.user.hashedpassword;
         res.cookie("token", token, {
           httpOnly: true,
-          // secure: true,
+          secure: process.env.NODE_ENV === "production",
+          sameSite: "none",
           maxAge: 24 * 60 * 60 * 1000,
         });
         if (req.body.updatingSettings) {

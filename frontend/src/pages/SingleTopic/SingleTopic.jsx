@@ -14,7 +14,7 @@ import { messageContext } from "@contexts/messageContext";
 import ReactMarkdown from "react-markdown";
 import rehypeHighlight from "rehype-highlight";
 
-import "highlight.js/styles/github.css";
+import "../../github.css";
 
 import "./SingleTopic.scss";
 
@@ -29,8 +29,12 @@ export const SingleTopic = () => {
   const [commentContent, setCommentContent] = useState("");
   const [date, setDate] = useState("");
   const [favorite, setFavorite] = useState("");
+  const [userId, setUserId] = useState("");
+  const [token, setToken] = useState("");
 
   useEffect(() => {
+    setUserId(localStorage.getItem("userId"));
+    setToken(localStorage.getItem("token"));
     getTopicById(id, setTopic, setTaglist, setComments);
     getTagsFavorites(setFavorite);
     getComments(id, setComments);
@@ -39,7 +43,7 @@ export const SingleTopic = () => {
     setDate(
       `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`
     );
-  }, [postComment()]);
+  }, []);
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -52,21 +56,12 @@ export const SingleTopic = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    postComment(
-      localStorage.getItem("token"),
-      commentContent,
-      date,
-      id,
-      localStorage.getItem("userId"),
-      setMessage
-    );
+    postComment(token, commentContent, date, id, userId, setMessage);
     setCommentContent("");
     setTimeout(() => {
       window.location.reload(false);
     }, 1500);
   };
-
-  console.warn(comments);
 
   return (
     topic && (
@@ -97,7 +92,7 @@ export const SingleTopic = () => {
               <span>tag(s):</span>
               <div className="singleTopic_content_header_tags_tagList">
                 {taglist.map((tag) => (
-                  <div>
+                  <div key={tag.id}>
                     <div>{tag.tag}</div>
                     <ButtonFavorite onClick={() => handleToggle()} />
                   </div>
@@ -107,6 +102,7 @@ export const SingleTopic = () => {
           </div>
           <ReactMarkdown
             className="markdown"
+            linkTarget="_blank"
             rehypePlugins={[[rehypeHighlight, { ignoreMissing: true }]]}
           >
             {topic.topic}
@@ -131,6 +127,7 @@ export const SingleTopic = () => {
                     </div>
                     <ReactMarkdown
                       className="markdown"
+                      linkTarget="_blank"
                       rehypePlugins={[
                         [rehypeHighlight, { ignoreMissing: true }],
                       ]}
