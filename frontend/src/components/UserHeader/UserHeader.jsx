@@ -21,7 +21,7 @@ export const UserHeader = () => {
         <span>{userName || "invité"}</span>
       </div>
       <div className="userheader_avatarContainer">
-        <Avatar />
+        <Avatar connected={localStorage.getItem("token")} />
       </div>
       <div className="userheader_shortcuts">
         <span>{date}</span>

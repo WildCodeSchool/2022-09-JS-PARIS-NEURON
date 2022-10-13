@@ -2,6 +2,7 @@ const Joi = require("joi");
 
 const validateUser = (req, res, next) => {
   const pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).*$/;
+  // Au moins une minuscule, Majuscule, un chiffre et un caractère spécial
 
   const userSchema = Joi.object({
     username: Joi.string().min(3).max(10).required(),

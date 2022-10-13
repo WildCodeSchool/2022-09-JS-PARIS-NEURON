@@ -1,28 +1,30 @@
 /* eslint-disable array-callback-return */
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { Navbar } from "@components";
 import { useParams } from "react-router";
 import { getTopicById, getComments, postComment } from "@services/apiRequest";
-import { messageContext } from "@contexts/messageContext";
 import ReactMarkdown from "react-markdown";
 import rehypeHighlight from "rehype-highlight";
 
-import "highlight.js/styles/github.css";
+import "../../github.css";
 
 import "./SingleTopic.scss";
 
 export const SingleTopic = () => {
   const { id } = useParams();
 
-  const { setMessage } = useContext(messageContext);
-
   const [topic, setTopic] = useState([]);
   const [taglist, setTaglist] = useState([]);
   const [comments, setComments] = useState([]);
   const [commentContent, setCommentContent] = useState("");
   const [date, setDate] = useState("");
+  const [userId, setUserId] = useState("");
+  const [token, setToken] = useState("");
 
   useEffect(() => {
+    setUserId(localStorage.getItem("userId"));
+    setToken(localStorage.getItem("token"));
     getTopicById(id, setTopic, setTaglist, setComments);
     getComments(id, setComments);
     localStorage.removeItem("topicId");
@@ -30,7 +32,7 @@ export const SingleTopic = () => {
     setDate(
       `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`
     );
-  }, [postComment()]);
+  }, []);
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -39,19 +41,11 @@ export const SingleTopic = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    postComment(
-      localStorage.getItem("token"),
-      commentContent,
-      date,
-      id,
-      localStorage.getItem("userId"),
-      setMessage
-    );
+    postComment(token, commentContent, date, id, userId, setComments);
     setCommentContent("");
-    setTimeout(() => {
-      window.location.reload(false);
-    }, 1500);
   };
+  console.warn("topic: ", topic);
+  console.warn("comments: ", comments);
 
   return (
     topic && (
@@ -71,8 +65,12 @@ export const SingleTopic = () => {
               </div>
               <div className="singleTopic_content_header_bottom_right">
                 <h4 className="singleTopic_content_header_bottom_right_user">
-                  neuron: <span>{topic.username}</span>
+                  neuron:{" "}
+                  <Link to={`/neuronprofile/${topic.users_id}`}>
+                    <span>{topic.username}</span>
+                  </Link>
                 </h4>
+
                 <h4 className="singleTopic_content_header_bottom_right_category">
                   {`cat. ${topic.name}`}
                 </h4>
@@ -82,13 +80,14 @@ export const SingleTopic = () => {
               <span>tag(s):</span>
               <div className="singleTopic_content_header_tags_tagList">
                 {taglist.map((tag) => (
-                  <div>{tag.tag}</div>
+                  <div key={tag.id}>{tag.tag}</div>
                 ))}
               </div>
             </div>
           </div>
           <ReactMarkdown
             className="markdown"
+            linkTarget="_blank"
             rehypePlugins={[[rehypeHighlight, { ignoreMissing: true }]]}
           >
             {topic.topic}
@@ -106,13 +105,16 @@ export const SingleTopic = () => {
                   >
                     <div className="singleTopic_content_comments_singleComment_header">
                       le <span>{singleComment.date_comment} </span>
-                      <span className="singleTopic_content_comments_singleComment_header_user">
-                        {singleComment.username}
-                      </span>{" "}
+                      <Link to={`/neuronprofile/${singleComment.users_id}`}>
+                        <span className="singleTopic_content_comments_singleComment_header_user">
+                          {singleComment.username}
+                        </span>
+                      </Link>{" "}
                       a écrit:
                     </div>
                     <ReactMarkdown
                       className="markdown"
+                      linkTarget="_blank"
                       rehypePlugins={[
                         [rehypeHighlight, { ignoreMissing: true }],
                       ]}
@@ -132,15 +134,20 @@ export const SingleTopic = () => {
                 className="singleTopic_content_comments_editor"
                 onSubmit={(e) => handleSubmit(e)}
               >
-                <textarea
-                  className="singleTopic_content_comments_editor_input"
-                  name="editor"
-                  id="editor"
-                  placeholder="nouveau commentaire..."
-                  value={commentContent}
-                  onChange={(e) => handleChange(e)}
-                  required
-                />
+                <div>
+                  <Link to="/markdownsyntax" target="_blank">
+                    <span>syntax markdown</span>
+                  </Link>
+                  <textarea
+                    className="singleTopic_content_comments_editor_input"
+                    name="editor"
+                    id="editor"
+                    placeholder="nouveau commentaire..."
+                    value={commentContent}
+                    onChange={(e) => handleChange(e)}
+                    required
+                  />
+                </div>
                 <button
                   className="singleTopic_content_comments_editor_button"
                   type="submit"

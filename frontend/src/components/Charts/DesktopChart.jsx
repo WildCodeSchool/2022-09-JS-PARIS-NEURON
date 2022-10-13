@@ -1,68 +1,33 @@
-import React from "react";
+import { useState, useEffect } from "react";
+import { getTagsTop } from "@services/apiRequest";
 import ReactFC from "react-fusioncharts";
 import FusionCharts from "fusioncharts";
-import Column2D from "fusioncharts/fusioncharts.charts";
+import Charts from "fusioncharts/fusioncharts.charts";
 import FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
+import PowerCharts from "fusioncharts/fusioncharts.powercharts";
 
-ReactFC.fcRoot(FusionCharts, Column2D, FusionTheme);
+ReactFC.fcRoot(FusionCharts, PowerCharts, Charts, FusionTheme);
 
 export const DesktopChart = () => {
-  // Preparing the chart data
-  const chartData = [
-    {
-      label: "PHP",
-      value: "290",
-    },
-    {
-      label: "C++",
-      value: "260",
-    },
-    {
-      label: "JS",
-      value: "180",
-    },
-    {
-      label: "Swift",
-      value: "140",
-    },
-    {
-      label: "TCS",
-      value: "115",
-    },
-    {
-      label: "Python",
-      value: "100",
-    },
-    {
-      label: "Ruby",
-      value: "30",
-    },
-    {
-      label: "Angular",
-      value: "30",
-    },
-  ];
+  const [tagList, setTagList] = useState([]);
 
-  // Create a JSON object to store the chart configurations
+  useEffect(() => {
+    getTagsTop(setTagList);
+  }, []);
+
   const chartConfigs = {
-    type: "column2d", // The chart type
-    width: "90%", // Width of the chart
-    height: "40%", // Height of the chart
-    dataFormat: "json", // Data type
+    type: "column2d",
+    width: "95%",
+    height: "45%",
+    dataFormat: "json",
     dataSource: {
-      // Chart Configuration
       chart: {
-        caption: "The most used Dev-language in real time !", // Set the chart caption
-        subCaption: "", // Set the chart subcaption
-        xAxisName: "Language", // Set the x-axis name
-        yAxisName: "NB. of topics (MMbbl)", // Set the y-axis name
-        numberSuffix: "NB",
-        theme: "candy", // Set the theme for your chart
+        caption: "Les 10 tags les plus utilisés",
+        yAxisName: "NB. de topics",
+        theme: "candy",
         bgColor: "#e0ded8",
-        showBorder: "0",
       },
-      // Chart Data - from step 2
-      data: chartData,
+      data: tagList,
     },
   };
 

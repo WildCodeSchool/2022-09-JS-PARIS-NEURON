@@ -1,8 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import rehypeHighlight from "rehype-highlight";
 
-import "highlight.js/styles/github.css";
+import "../../github.css";
 
 import "./Markdown.scss";
 
@@ -17,11 +18,15 @@ export const Markdown = ({ input, setInput }) => {
       <div className="preview">
         <ReactMarkdown
           className="markdown"
+          linkTarget="_blank"
           rehypePlugins={[[rehypeHighlight, { ignoreMissing: true }]]}
         >
           {input}
         </ReactMarkdown>
       </div>
+      <Link to="/markdownsyntax" target="_blank">
+        <span>syntax markdown</span>
+      </Link>
       <textarea
         type="text"
         className="editor"
