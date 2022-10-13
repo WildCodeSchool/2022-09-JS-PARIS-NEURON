@@ -78,7 +78,11 @@ export const NeuronFavorites = () => {
                 <div className="item">
                   <NeuronCard />
                   <span className="item_pseudo">{neuron.username}</span>
-                  <button type="button" onClick={() => handleDelete(neuron)}>
+                  <button
+                    className="btn_sup"
+                    type="button"
+                    onClick={() => handleDelete(neuron)}
+                  >
                     Supprimer
                   </button>
                 </div>
