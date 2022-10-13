@@ -7,7 +7,10 @@ const {
   verifyPassword,
   verifyToken,
 } = require("./middlewares/auth");
-const { validateUser } = require("./middlewares/validators");
+const {
+  validateUser,
+  validateUserSettings,
+} = require("./middlewares/validators");
 
 const router = express.Router();
 
@@ -34,7 +37,12 @@ router.put(
   usersControllers.registerWithMail,
   usersControllers.updateSettings
 );
-router.get("/user_settings", usersControllers.registerWithMail);
+router.get(
+  "/user_settings",
+  validateUserSettings,
+  usersControllers.registerWithMail
+);
+// router.get("/user_settings", usersControllers.registerWithMail);
 
 router.get("/followed", usersControllers.getFollowed);
 router.get("/followedByIds", usersControllers.getUserByFollowed);

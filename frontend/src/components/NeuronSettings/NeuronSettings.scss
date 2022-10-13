@@ -1,14 +1,7 @@
 .form_container {
-  height: 100%;
-  width: 100%;
-  display: flex;
+  align-content: center;
   display: grid;
-
-  // justify-content: center;
-}
-
-.settingsTitle {
-  // border: 1px
-  // solid purple;
-  padding: 5px;
+  font-weight: bold;
+  //  overflow: hidden;
+  justify-content: center;
 }
