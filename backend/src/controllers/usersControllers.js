@@ -23,25 +23,26 @@ const getUsers = (req, res) => {
     });
 };
 
-// const getUsersById = (req, res) => {
-//   const { id } = req.body;
-//   neuron
-//     .query(`SELECT * FROM users WHERE id = ?`, [id])
-//     .then(([users]) => {
-//       res.status(201).json(users);
-//     })
-//     .catch((err) => {
-//       console.warn(err);
-//       res.sendStatus(500);
-//     });
-// };
+const getNeuronById = (req, res) => {
+  const { id } = req.query;
+
+  neuron
+    .query(`SELECT username, github, linkedin FROM users WHERE id=?`, [id])
+    .then(([users]) => {
+      res.status(201).json(users);
+    })
+    .catch((err) => {
+      console.warn(err);
+      res.sendStatus(500);
+    });
+};
 
 const createUser = (req, res) => {
   const { username, hashedpassword, mail, chat_id } = req.body;
 
   neuron
     .query(
-      "INSERT INTO users (username, hashedpassword, mail, role, status, chat_id) SELECT ?, ?, ?, 'user', false, ? WHERE NOT EXISTS ( SELECT * FROM users WHERE (username=?) OR (mail=?))",
+      "INSERT INTO users (username, hashedpassword, mail, role, status, chat_id) VALUES (?, ?, ?, 'user', false, ?)",
       [username, hashedpassword, mail, chat_id, username, mail]
     )
     .then(([result]) => {
@@ -112,6 +113,56 @@ const logout = (req, res) => {
     .catch((err) => {
       console.error(err);
       res.sendStatus(500);
+    });
+};
+
+const getTagsFavorites = (req, res) => {
+  const { id } = req.query;
+
+  neuron
+    .query(
+      "SELECT * FROM users_has_tags INNER JOIN users ON users.id = users_has_tags.users_id INNER JOIN tags ON tags.id = tags_id WHERE users_id = ? tags_id = ?",
+      [id]
+    )
+    .then(([tags]) => {
+      if (tags[0] != null) {
+        res.status(201).json(tags);
+      } else {
+        tags.Status(404).send("not found");
+      }
+    });
+};
+
+const addTagsFavorites = (req, res) => {
+  const { id } = req.query;
+
+  neuron
+    .query(
+      "INSERT INTO users_has_tags (users_id, tags_id) VALUES (?, ?) SELECT ?, ? WHERE NOT EXISTS (SELECT * FROM users_has_tags WHERE (users_id=?) AND (tags_id=?))",
+      [id]
+    )
+    .then(() => {
+      res.status(201).json("ajouté aux favoris");
+    })
+    .catch((err) => {
+      console.warn(err);
+      res.status(500).send("Une erreur s'est produite");
+    });
+};
+
+const removeTags = (req, res) => {
+  const { id } = req.query;
+
+  neuron
+    .query("DELETE FROM users_has_tags WHERE users_id = ? AND tags_id = ? ", [
+      id,
+    ])
+    .then(() => {
+      res.status(201).json("supprimé des favoris");
+    })
+    .catch((err) => {
+      console.warn(err);
+      res.status(500).send("impossible de supprimer des favoris");
     });
 };
 
@@ -235,16 +286,18 @@ const updateSettings = async (req, res) => {
 };
 
 const addToFollowed = (req, res) => {
-  const { id } = req.body;
+  const { id } = req.query;
+  // INSERT INTO ma_table_1 (colonne_1,colonne_2, colonne_3) VALUES ((SELECT colonne_1 FROM ma_table_2 WHERE conditions LIMIT 1),'seconde valeur', 'troisième valeur')
 
   neuron
     .query(
-      "INSERT INTO followed (id) VALUES (?), JOIN users ON users.id=followed.user_id",
+      "INSERT INTO followed (users_id, friend_id) VALUES ((SELECT id FROM users WHERE id = ?), (SELECT id FROM users WHERE id = ?))",
       [id]
     )
     .then(() => {
       res.status(201).json("ajouté aux favoris");
     })
+    .then(() => {})
     .catch((err) => {
       console.warn(err);
       res.status(500).send("erreur impossible d'ajouter aux favoris");
@@ -252,10 +305,14 @@ const addToFollowed = (req, res) => {
 };
 
 const removeFromFollowed = (req, res) => {
-  const { id } = req.body;
+  const { id, friend_id } = req.query;
+  console.warn(req.query);
 
   neuron
-    .query("DELETE FROM followed WHERE id = ?", [id])
+    .query("DELETE FROM followed WHERE users_id= ? AND friend_id=?", [
+      id,
+      friend_id,
+    ])
     .then(() => {
       res.status(201).json("supprimé des favoris");
     })
@@ -267,7 +324,6 @@ const removeFromFollowed = (req, res) => {
 
 const getFollowed = (req, res) => {
   const { id } = req.query;
-
   neuron
     .query(
       " SELECT friend_id FROM followed INNER JOIN users ON followed.users_id = users.id WHERE users_id = ?",
@@ -296,20 +352,60 @@ const getUserByFollowed = (req, res) => {
     .then(([result]) => {
       return res.status(201).json(result);
     })
-    .catch((err) => {
-      console.warn(err);
+    .catch(() => {
       return res.status(500).send("c'est ballot");
+    });
+};
+
+const postPrivateMessage = (req, res) => {
+  const { neuronname, username, message, date, userId, neuronId } = req.body;
+  console.warn(req.body);
+
+  neuron
+    .query(
+      `INSERT INTO private_messages (sender, receiver, subject, content, date_message, message_status) VALUES (?, ?, 'test', ?, ?, 0); INSERT INTO private_messages_has_users (private_messages_id, users_id, neuron_id) VALUES (LAST_INSERT_ID(), ?, ?) `,
+      [username, neuronname, message, date, neuronId, userId]
+    )
+    .then(() => res.status(201).json("message envoyé"))
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("impossible d'envoyer le message");
+    });
+};
+
+const getPrivateMessages = (req, res) => {
+  const { id } = req.query;
+  console.warn(req.query);
+
+  neuron
+    .query(
+      `SELECT *, DATE_FORMAT(private_messages.date_message, "%d/%m/%Y") AS date_message FROM private_messages_has_users JOIN private_messages ON private_messages.id=private_messages_has_users.private_messages_id INNER JOIN users ON users.id=private_messages_has_users.users_id WHERE users.id = ? ORDER BY private_messages.id DESC`,
+      [id]
+    )
+    .then(([mails]) => {
+      console.warn(mails);
+      res.status(201).json(mails);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("impossible de récupérer les messages");
     });
 };
 
 module.exports = {
   getUsers,
+  getNeuronById,
   createUser,
   registerWithMail,
   logout,
-  updateSettings,
+  getTagsFavorites,
+  addTagsFavorites,
+  removeTags,
   addToFollowed,
   removeFromFollowed,
   getFollowed,
   getUserByFollowed,
+  postPrivateMessage,
+  getPrivateMessages,
+  updateSettings,
 };

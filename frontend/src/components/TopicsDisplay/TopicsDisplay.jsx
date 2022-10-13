@@ -30,6 +30,7 @@ export const TopicsDisplay = () => {
   const handleSearch = () => {
     setTopicsByTitle([]);
     getTopicsByTitle(searchString, setTopicsByTitle);
+    console.warn(topicsByTitle);
     setOpen(0);
   };
 
@@ -120,7 +121,7 @@ export const TopicsDisplay = () => {
                       title={topic.title}
                       summary={topic.summary}
                       date={topic.date}
-                      id={topic.topics_id}
+                      id={topic.id}
                     />
                   </div>
                 </Carousel.Item>

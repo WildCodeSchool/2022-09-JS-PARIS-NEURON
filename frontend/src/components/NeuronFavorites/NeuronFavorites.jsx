@@ -1,23 +1,20 @@
-import { NeuronCard, Search } from "@components/index";
+import { NeuronCard } from "@components/index";
 import Carousel from "react-grid-carousel";
-import React, { useContext, useEffect, useState } from "react";
-import { getFollowed, getUsersByIds } from "@services/apiRequest";
-import { messageContext } from "@contexts/messageContext";
+import React, { useEffect, useState } from "react";
+import {
+  getFollowed,
+  getUsersByIds,
+  removeFromFollowed,
+} from "@services/apiRequest";
 
 import "./NeuronFavorites.scss";
 
 export const NeuronFavorites = () => {
-  const { setMessage } = useContext(messageContext);
-
   const [neurons, setNeurons] = useState([]);
-  const [, /* searchUser */ setSearchUser] = useState("");
   const [id, setId] = useState(0);
   const [idList, setIdList] = useState([]);
   const [token, setToken] = useState("");
-  // const [usersById, setUsersById] = useState([]);
-  // const handleSearch = () => {
-  //   getUsersById(setUsersById);
-  // };
+
   useEffect(() => {
     setToken(localStorage.getItem("token"));
     setId(localStorage.getItem("userId"));
@@ -31,9 +28,15 @@ export const NeuronFavorites = () => {
 
   useEffect(() => {
     if (idList.length) {
-      getUsersByIds(token, idList, setNeurons, setMessage);
+      getUsersByIds(token, idList, setNeurons);
     }
   }, [idList]);
+
+  const handleDelete = (neuron) => {
+    setNeurons(neurons.filter((elem) => elem !== neuron.id));
+    removeFromFollowed(token, id, neuron.id, setIdList);
+    console.warn(id, neuron.id);
+  };
 
   const neuronFavList = [
     {
@@ -68,26 +71,26 @@ export const NeuronFavorites = () => {
         mobileBreakpoint={0}
         showDots
       >
-        {neurons.map((neuron) => (
-          <Carousel.Item key={neuron}>
-            <div className="item">
-              <NeuronCard />
-              <span className="item_pseudo">{neuron.username}</span>
-              {/* <button type="button" onClick={() => handleDelete}> */}
-              {/* Supprimer
-              </button> */}
-            </div>
-          </Carousel.Item>
-        ))}
+        {neurons.length ? (
+          neurons.map((neuron) => {
+            return (
+              <Carousel.Item key={neuron}>
+                <div className="item">
+                  <NeuronCard />
+                  <span className="item_pseudo">{neuron.username}</span>
+                  <button type="button" onClick={() => handleDelete(neuron)}>
+                    Supprimer
+                  </button>
+                </div>
+              </Carousel.Item>
+            );
+          })
+        ) : (
+          <div>
+            <p>Pas de neurones favoris 🙁</p>
+          </div>
+        )}
       </Carousel>
-
-      <div className="users_filter">
-        <Search
-          placeholder="rechercher un Neuron"
-          content={setSearchUser}
-          // handleSearch={handleSearch}
-        />
-      </div>
     </div>
   );
 };

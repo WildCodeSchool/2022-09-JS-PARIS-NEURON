@@ -1,0 +1,91 @@
+@import "../../colors.scss";
+
+.privateMessages {
+  height: 93%;
+  width: 100%;
+  overflow-y: scroll;
+
+  a {
+    text-decoration: none;
+  }
+
+  &_mail {
+    width: 100%;
+    padding: 0.3rem;
+    background-color: $warm-grey-1;
+    border-radius: 0.2rem;
+    margin-bottom: 1rem;
+
+    &_header {
+      background-color: $warm-grey-2;
+      padding: 0.4rem;
+      border-bottom: solid 0.2rem $warm-grey-3;
+      border-radius: 0.3rem;
+
+      &_user {
+        background-color: $dark-purple-3;
+        color: $cool-grey-2;
+        padding: 0.2rem 0.4rem;
+        border-radius: 0.2rem;
+        cursor: pointer;
+      }
+    }
+
+    .markdown {
+      height: auto;
+      width: 100%;
+      border-radius: 0.5rem;
+      white-space: pre-line;
+      padding: 0.5rem;
+      margin-top: 1rem;
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        text-indent: 1rem;
+      }
+
+      img {
+        width: 100%;
+      }
+
+      p {
+        width: 100%;
+        text-align: justify;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        overflow-x: scroll;
+      }
+
+      code {
+        display: block;
+        width: 100%;
+        padding: 0.3rem;
+        font-size: 90%;
+        background-color: $dark-purple-7;
+        color: inherit;
+        overflow-y: scroll;
+      }
+
+      blockquote {
+        width: 100%;
+        background-color: $warm-grey-2;
+        color: $cool-grey-1;
+        padding: 0.2rem 1rem;
+        border-radius: 0.5rem;
+
+        &::before,
+        &::after {
+          content: "``";
+        }
+      }
+
+      hr {
+        border: solid 0.1rem $carbon;
+      }
+    }
+  }
+}

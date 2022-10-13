@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import FullRedHeart from "@assets/images/FullRedHeart.png";
-import EmptyHeart from "@assets/images/emptyHeart.png";
 import "./ButtonFavorite.scss";
 
 export const ButtonFavorite = () => {
@@ -10,7 +8,6 @@ export const ButtonFavorite = () => {
 
   const toggleFavorite = () => {
     setIsFavorite(!isFavorite);
-    // handleFollowed();
   };
 
   return (
@@ -21,9 +18,17 @@ export const ButtonFavorite = () => {
       onKeyDown={(e) => toggleFavorite(e)}
     >
       {isFavorite ? (
-        <img className="FullRedHeart" src={FullRedHeart} alt="FullRedHeart" />
+        <img
+          className="FullRedHeart"
+          src="./assets/images/fullRedHeart"
+          alt="FullRedHeart"
+        />
       ) : (
-        <img className="EmptyHeart" src={EmptyHeart} alt="EmptyHeart" />
+        <img
+          className="EmptyHeart"
+          src="./assets/images/emptyHeart"
+          alt="EmptyHeart"
+        />
       )}
     </div>
   );

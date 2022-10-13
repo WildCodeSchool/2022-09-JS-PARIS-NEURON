@@ -1,8 +1,10 @@
 import axios from "axios";
 
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
 const register = (username, password, mail, chatId, setState) => {
   axios
-    .post("http://localhost:5000/users", {
+    .post(`${BASE_URL}/users`, {
       username,
       password,
       mail,
@@ -17,7 +19,7 @@ const register = (username, password, mail, chatId, setState) => {
 const login = (mail, password, setState) => {
   axios
     .post(
-      `http://localhost:5000/login`,
+      `${BASE_URL}/login`,
       {
         mail,
         password,
@@ -42,7 +44,7 @@ const logout = (token, setState) => {
 
   axios
     .post(
-      "http://localhost:5000/logout",
+      `${BASE_URL}/logout`,
       { token: `${token}` },
       {
         withCredentials: true,
@@ -59,36 +61,51 @@ const logout = (token, setState) => {
     });
 };
 
-const getCategories = (setState) => {
-  axios.get("http://localhost:5000/categories").then((res) => {
-    setState(res.data);
-  });
-};
-
-const getTopics = (setState) => {
-  axios.get("http://localhost:5000/topics").then((res) => {
-    setState(res.data);
-  });
-};
-
-const getTopicsByTitle = (string, setState) => {
+const getTagsTop = (setState) => {
   axios
-    .get(`http://localhost:5000/topicsbytitle?string=${string}`)
+    .get(`${BASE_URL}/tagstop`)
     .then((res) => {
+      console.warn(res.data);
       setState(res.data);
+    })
+    .catch((err) => {
+      console.warn(err);
     });
 };
 
+const getCategories = (setState) => {
+  axios
+    .get(`${BASE_URL}/categories`)
+    .then((res) => {
+      setState(res.data);
+    })
+    .catch((err) => console.warn(err));
+};
+
+const getTopics = (setState) => {
+  axios
+    .get(`${BASE_URL}/topics`)
+    .then((res) => {
+      setState(res.data);
+    })
+    .catch((err) => console.warn(err));
+};
+
+const getTopicsByTitle = (string, setState) => {
+  axios.get(`${BASE_URL}/topicsbytitle?string=${string}`).then((res) => {
+    setState(res.data);
+  });
+};
+
 const getTopicById = (id, setTopics, setTaglist) => {
-  axios.get(`http://localhost:5000/topicbyid?id=${id}`).then((res) => {
-    console.warn(res);
+  axios.get(`${BASE_URL}/topicbyid?id=${id}`).then((res) => {
     setTopics(res.data[0][0]);
     setTaglist(res.data[1]);
   });
 };
 
 const getComments = (id, setState) => {
-  axios.get(`http://localhost:5000/comments?id=${id}`).then((res) => {
+  axios.get(`${BASE_URL}/comments?id=${id}`).then((res) => {
     setState(res.data);
   });
 };
@@ -108,7 +125,7 @@ const postTopic = (
 ) => {
   axios
     .post(
-      `http://localhost:5000/topics`,
+      `${BASE_URL}/topics`,
       {
         title,
         topic,
@@ -140,11 +157,11 @@ const postComment = (
   date,
   topicId,
   userID,
-  setState
+  setComments
 ) => {
   axios
     .post(
-      "http://localhost:5000/comments",
+      `${BASE_URL}/comments`,
       {
         commentContent,
         date,
@@ -158,8 +175,8 @@ const postComment = (
         },
       }
     )
-    .then((res) => {
-      setState(res.data);
+    .then(() => {
+      getComments(topicId, setComments);
     })
     .catch((err) => {
       console.warn(err);
@@ -167,49 +184,9 @@ const postComment = (
 };
 
 // --------------------USERS PART--------------------------------------------
-// const postFollowed = (id) => {
-//   axios
-//     .post(
-//       `http://localhost:5000/followed`,
-//       { id },
-//       {
-//         withCredentials: true,
-//         headers: {
-//           "x-xsrf-token": `${token}`,
-//         },
-//       }
-//     )
-//     .then((res) => {
-//       console.warn(res.data);
-//     })
-//     .catch((err) => {
-//       console.warn(err.response.data.message);
-//     });
-// };
-
-// const deleteFollowed = (id) => {
-//   axios
-//     .delete(
-//       `http://localhost:5000/followed`,
-//       { id },
-//       {
-//         withCredentials: true,
-//         headers: {
-//           "x-xsrf-token": `${token}`,
-//         },
-//       }
-//     )
-//     .then((res) => {
-//       console.warn(res.data);
-//     })
-//     .catch((err) => {
-//       console.warn(err.response.data.message);
-//     });
-// };
-
 const getFollowed = (token, id, setState) => {
   axios
-    .get(`http://localhost:5000/followed?id=${id}`, {
+    .get(`${BASE_URL}/followed?id=${id}`, {
       withCredentials: true,
       headers: {
         "x-xsrf-token": `${token}`,
@@ -223,9 +200,110 @@ const getFollowed = (token, id, setState) => {
     });
 };
 
+const postFollowed = (token, id, setState) => {
+  axios
+    .post(
+      `http://localhost:5000/followed`,
+      { id },
+      {
+        withCredentials: true,
+        headers: {
+          "x-xsrf-token": `${token}`,
+        },
+      }
+    )
+    .then((res) => {
+      setState(res.data);
+      console.warn(res.data);
+    })
+    .catch((err) => {
+      console.warn(err.response.data.message);
+    });
+};
+
+const removeFromFollowed = (token, id, friendId, setState) => {
+  axios
+    .delete(`http://localhost:5000/followed?id=${id}&friend_id=${friendId}`, {
+      withCredentials: true,
+      headers: {
+        "x-xsrf-token": `${token}`,
+      },
+    })
+    .then((res) => {
+      console.warn(res.data);
+      setState(res.data);
+      getFollowed(token, id, setState);
+    })
+    .catch((err) => {
+      console.warn(err.response.data);
+    });
+};
+
+const getNeuronById = (token, id, setNeuronInfos) => {
+  axios
+    .get(`${BASE_URL}/neuron?id=${id}`, {
+      withCredentials: true,
+      headers: {
+        "x-xsrf-token": `${token}`,
+      },
+    })
+    .then(({ data }) => {
+      setNeuronInfos(data);
+    })
+    .catch((err) => console.warn(err));
+};
+
+const sendPrivateMessage = (
+  token,
+  neuronId,
+  userId,
+  neuronname,
+  username,
+  date,
+  message
+) => {
+  axios
+    .post(
+      `${BASE_URL}/privatemessage`,
+      {
+        neuronId,
+        userId,
+        neuronname,
+        username,
+        date,
+        message,
+      },
+      {
+        withCredentials: true,
+        headers: {
+          "x-xsrf-token": `${token}`,
+        },
+      }
+    )
+    .then((res) => {
+      console.warn(res);
+    })
+    .catch((err) => console.warn(err));
+};
+
+const getPrivateMessages = (token, userId, setState) => {
+  axios
+    .get(`${BASE_URL}/privatemessages?id=${userId}`, {
+      withCredentials: true,
+      headers: {
+        "x-xsrf-token": `${token}`,
+      },
+    })
+    .then((res) => {
+      console.warn(res);
+      setState(res.data);
+    })
+    .catch((err) => console.warn(err));
+};
+
 const getUsersByIds = (token, idList, setState) => {
   axios
-    .get(`http://localhost:5000/followedByIds`, {
+    .get(`${BASE_URL}/followedByIds`, {
       withCredentials: true,
       headers: {
         "x-xsrf-token": `${token}`,
@@ -246,6 +324,7 @@ export {
   register,
   login,
   logout,
+  getTagsTop,
   getTopics,
   getCategories,
   getTopicById,
@@ -253,8 +332,11 @@ export {
   getComments,
   postTopic,
   postComment,
-  // postFollowed,
-  // deleteFollowed,
+  getNeuronById,
+  sendPrivateMessage,
+  getPrivateMessages,
+  postFollowed,
+  removeFromFollowed,
   getFollowed,
   getUsersByIds,
 };

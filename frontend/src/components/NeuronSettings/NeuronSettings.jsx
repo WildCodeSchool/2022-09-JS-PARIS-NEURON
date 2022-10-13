@@ -3,6 +3,8 @@ import axios from "axios";
 
 import "./NeuronSettings.scss";
 
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
 export const NeuronSettings = () => {
   const initialValues = {
     pseudo: "",
@@ -23,7 +25,7 @@ export const NeuronSettings = () => {
     const token = localStorage.getItem("token");
     axios
       .put(
-        `http://localhost:5000/settings`,
+        `${BASE_URL}/settings`,
         {
           token: `${token}`,
           ...inputs,
@@ -58,7 +60,7 @@ export const NeuronSettings = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     axios
-      .get(`http://localhost:5000/user_settings?isSettings=${true}`, {
+      .get(`${BASE_URL}/user_settings?isSettings=${true}`, {
         withCredentials: true,
         headers: {
           "x-xsrf-token": `${token}`,
