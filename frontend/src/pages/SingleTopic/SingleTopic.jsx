@@ -57,8 +57,6 @@ export const SingleTopic = () => {
     postComment(token, commentContent, date, id, userId, setComments);
     setCommentContent("");
   };
-  console.warn("topic: ", topic);
-  console.warn("comments: ", comments);
 
   return (
     topic && (

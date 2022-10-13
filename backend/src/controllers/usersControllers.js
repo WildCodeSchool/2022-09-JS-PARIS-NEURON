@@ -15,7 +15,7 @@ const getUsers = (req, res) => {
   neuron
     .query(`SELECT * FROM users`)
     .then(([users]) => {
-      res.status(201).json(users);
+      res.status(200).json(users);
     })
     .catch((err) => {
       console.error(err);
@@ -29,7 +29,7 @@ const getNeuronById = (req, res) => {
   neuron
     .query(`SELECT username, github, linkedin FROM users WHERE id=?`, [id])
     .then(([users]) => {
-      res.status(201).json(users);
+      res.status(200).json(users);
     })
     .catch((err) => {
       console.warn(err);
@@ -49,7 +49,7 @@ const createUser = (req, res) => {
       if (!result.affectedRows) {
         res.status(401).json("pseudo ou email déjà utilisé");
       } else {
-        res.status(201).json("neuron créé, connectez vous");
+        res.status(200).json("neuron créé, connectez vous");
       }
     })
     .catch((err) => {
@@ -108,7 +108,7 @@ const logout = (req, res) => {
   neuron
     .query("INSERT INTO blacklist(token) VALUE (?)", [token])
     .then(() => {
-      res.status(201).json("deconnecté");
+      res.status(200).json("deconnecté");
     })
     .catch((err) => {
       console.error(err);
@@ -285,7 +285,18 @@ const addToFollowed = (req, res) => {
     )
     .then(() => {
       res.status(201).json("ajouté aux favoris");
+const addToFollowed = (req, res) => {
+  const { userId, id } = req.body;
+
+  neuron
+    .query("INSERT INTO followed (users_id, friend_id) VALUES (?, ?)", [
+      userId,
+      id,
+    ])
+    .then(() => {
+      res.status(200).json("ajouté aux favoris");
     })
+    .then(() => {})
     .catch((err) => {
       console.warn(err);
       res.status(500).send("erreur impossible d'ajouter aux favoris");
@@ -293,16 +304,16 @@ const addToFollowed = (req, res) => {
 };
 
 const removeFromFollowed = (req, res) => {
-  const { id, friend_id } = req.query;
+  const { id, friendId } = req.query;
   console.warn(req.query);
 
   neuron
     .query("DELETE FROM followed WHERE users_id= ? AND friend_id=?", [
       id,
-      friend_id,
+      friendId,
     ])
     .then(() => {
-      res.status(201).json("supprimé des favoris");
+      res.status(200).json("supprimé des favoris");
     })
     .catch((err) => {
       console.warn(err);
@@ -312,14 +323,13 @@ const removeFromFollowed = (req, res) => {
 
 const getFollowed = (req, res) => {
   const { id } = req.query;
-
   neuron
     .query(
-      " SELECT friend_id FROM followed INNER JOIN users ON followed.users_id = users.id WHERE users_id = ?",
+      " SELECT * FROM followed INNER JOIN users ON followed.users_id = users.id WHERE users.id = ?",
       [id]
     )
     .then(([result]) => {
-      res.status(201).json(result);
+      res.status(200).json(result);
     })
     .catch((err) => {
       console.warn(err);
@@ -339,7 +349,11 @@ const getUserByFollowed = (req, res) => {
   return neuron
     .query(`SELECT id, username FROM users WHERE ${queryFragment}`)
     .then(([result]) => {
-      return res.status(201).json(result);
+      if (result[0] != null) {
+        res.status(200).json(result);
+      } else {
+        res.status(404).json();
+      }
     })
     .catch(() => {
       return res.status(500).send("c'est ballot");
@@ -347,14 +361,15 @@ const getUserByFollowed = (req, res) => {
 };
 
 const postPrivateMessage = (req, res) => {
-  const { neuronId, neuronname, username, message } = req.body;
+  const { neuronname, username, message, date, userId, neuronId } = req.body;
+  console.warn(req.body);
 
   neuron
     .query(
-      `INSERT INTO private_messages (sender, receiver, subject, content, message_status) VALUES (?, ?, 'test', ?, 0); INSERT INTO private_messages_has_users (private_messages_id, users_id) VALUES (LAST_INSERT_ID(), ?) `,
-      [username, neuronname, message, neuronId]
+      `INSERT INTO private_messages (sender, receiver, subject, content, date_message, message_status) VALUES (?, ?, 'test', ?, ?, 0); INSERT INTO private_messages_has_users (private_messages_id, users_id, neuron_id) VALUES (LAST_INSERT_ID(), ?, ?) `,
+      [username, neuronname, message, date, neuronId, userId]
     )
-    .then(() => res.status(201).json("message envoyé"))
+    .then(() => res.status(200).json("message envoyé"))
     .catch((err) => {
       console.error(err);
       res.status(500).send("impossible d'envoyer le message");
@@ -366,12 +381,12 @@ const getPrivateMessages = (req, res) => {
 
   neuron
     .query(
-      `SELECT * FROM private_messages_has_users JOIN private_messages ON private_messages.id=private_messages_has_users.private_messages_id INNER JOIN users ON users.id=private_messages_has_users.users_id WHERE users.id = ? ORDER BY private_messages.id DESC`,
+      `SELECT *, DATE_FORMAT(private_messages.date_message, "%d/%m/%Y") AS date_message FROM private_messages_has_users JOIN private_messages ON private_messages.id=private_messages_has_users.private_messages_id INNER JOIN users ON users.id=private_messages_has_users.users_id WHERE users.id = ? ORDER BY private_messages.id DESC`,
       [id]
     )
     .then(([mails]) => {
       console.warn(mails);
-      res.status(201).json(mails);
+      res.status(200).json(mails);
     })
     .catch((err) => {
       console.error(err);
@@ -389,10 +404,12 @@ module.exports = {
   addTagsFavorites,
   removeFromTagsFavorites,
   updateSettings,
+  removeTags,
   addToFollowed,
   removeFromFollowed,
   getFollowed,
   getUserByFollowed,
   postPrivateMessage,
   getPrivateMessages,
+  updateSettings,
 };

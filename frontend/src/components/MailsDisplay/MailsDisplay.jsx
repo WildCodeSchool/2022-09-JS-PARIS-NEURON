@@ -19,16 +19,15 @@ export const MailsDisplay = () => {
     if (token) getPrivateMessages(token, userId, setMails);
   }, [token]);
 
-  console.warn(userId);
-
   return (
     <div className="privateMessages">
-      {mails.length &&
+      {mails.length ? (
         mails.map((mail) => {
           return (
             <div key={mail.id} className="privateMessages_mail">
               <div className="privateMessages_mail_header">
-                <Link to={`/neuronprofile/${mail.users_id}`}>
+                le <span>{mail.date_message} </span>
+                <Link to={`/neuronprofile/${mail.neuron_id}`}>
                   <span className="privateMessages_mail_header_user">
                     {mail.sender}
                   </span>
@@ -44,7 +43,10 @@ export const MailsDisplay = () => {
               </ReactMarkdown>
             </div>
           );
-        })}
+        })
+      ) : (
+        <span>pas de message pour l'instant</span>
+      )}
     </div>
   );
 };

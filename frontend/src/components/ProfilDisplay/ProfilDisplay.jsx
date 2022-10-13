@@ -2,7 +2,6 @@
 // /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState } from "react";
 import {
-  Search,
   NeuronFavorites,
   TopicCard,
   NeuronSettings,
@@ -18,29 +17,6 @@ export const ProfilDisplay = () => {
   const toggleTab = (index) => {
     setToggleState(index);
   };
-
-  //   const TabsList = [
-  //     {
-  //       id: 1,
-  //       tab: "Neurons Favoris",
-  //     },
-  //     {
-  //       id: 2,
-  //       tab: "Topics Favoris",
-  //     },
-  //     {
-  //       id: 3,
-  //       tab: "Tags Favoris",
-  //     },
-  //     {
-  //       id: 4,
-  //       tab: "Messagerie",
-  //     },
-  //     {
-  //       id: 5,
-  //       tab: "Paramètres",
-  //     },
-  //   ];
 
   return (
     <div className="tabs_display">
@@ -73,7 +49,6 @@ export const ProfilDisplay = () => {
           onClick={() => toggleTab(4)}
         >
           Messagerie
-          {/* <MailOnIcon /> */}
         </button>
         <button
           type="button"
@@ -99,8 +74,6 @@ export const ProfilDisplay = () => {
           <h2>Mes Topics</h2>
           <hr />
           <TopicCard />
-          <hr />
-          <Search />
         </div>
 
         <div
@@ -121,7 +94,7 @@ export const ProfilDisplay = () => {
         <div
           className={toggleState === 5 ? "content  active-content" : "content"}
         >
-          <h2> Paramètres</h2>
+          <h2>Mes Paramètres</h2>
           <hr />
           <NeuronSettings />
         </div>

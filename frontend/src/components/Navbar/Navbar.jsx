@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { BrainDeployer } from "@components/";
 import {
@@ -11,13 +11,19 @@ import {
 import "./Navbar.scss";
 
 export const Navbar = () => {
+  const [userId, setUserId] = useState("");
+
+  useEffect(() => {
+    setUserId(localStorage.getItem("userId"));
+  }, [userId]);
+
   return (
     <nav className="navbar">
       <Link to="/">
         <LogoLong />
       </Link>
       {localStorage.getItem("token") ? (
-        <Link to="/userprofile">
+        <Link to={`/userprofile/${userId}`}>
           <UserProfileIcon />
         </Link>
       ) : null}
