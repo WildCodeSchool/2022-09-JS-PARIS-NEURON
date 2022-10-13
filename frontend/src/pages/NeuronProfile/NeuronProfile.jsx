@@ -12,12 +12,17 @@ export const NeuronProfile = () => {
   const [neuronInfos, setNeuronInfos] = useState([]);
   const [username, setUsername] = useState("");
   const [userId, setUserId] = useState("");
+  const [date, setDate] = useState("");
   const [input, setInput] = useState("");
 
   useEffect(() => {
     setToken(localStorage.getItem("token"));
     setUsername(localStorage.getItem("userName"));
     setUserId(localStorage.getItem("userId"));
+    const today = new Date();
+    setDate(
+      `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`
+    );
     if (token) getNeuronById(token, id, setNeuronInfos);
   }, [token]);
 
@@ -38,6 +43,7 @@ export const NeuronProfile = () => {
       userId,
       neuronInfos[0].username,
       username,
+      date,
       input
     );
   };

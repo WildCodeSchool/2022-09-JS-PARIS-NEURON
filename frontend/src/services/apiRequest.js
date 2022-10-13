@@ -184,7 +184,23 @@ const postComment = (
 };
 
 // --------------------USERS PART--------------------------------------------
-const postFollowed = (token, id) => {
+const getFollowed = (token, id, setState) => {
+  axios
+    .get(`${BASE_URL}/followed?id=${id}`, {
+      withCredentials: true,
+      headers: {
+        "x-xsrf-token": `${token}`,
+      },
+    })
+    .then((res) => {
+      setState(res.data.map((elem) => elem.friend_id));
+    })
+    .catch((err) => {
+      console.warn(err.response.data.message);
+    });
+};
+
+const postFollowed = (token, id, setState) => {
   axios
     .post(
       `http://localhost:5000/followed`,
@@ -205,9 +221,9 @@ const postFollowed = (token, id) => {
     });
 };
 
-const removeFromFollowed = (token, id, friend_id, setState) => {
+const removeFromFollowed = (token, id, friendId, setState) => {
   axios
-    .delete(`http://localhost:5000/followed?id=${id}&friend_id=${friend_id}`, {
+    .delete(`http://localhost:5000/followed?id=${id}&friend_id=${friendId}`, {
       withCredentials: true,
       headers: {
         "x-xsrf-token": `${token}`,
@@ -243,6 +259,7 @@ const sendPrivateMessage = (
   userId,
   neuronname,
   username,
+  date,
   message
 ) => {
   axios
@@ -253,6 +270,7 @@ const sendPrivateMessage = (
         userId,
         neuronname,
         username,
+        date,
         message,
       },
       {
@@ -281,22 +299,6 @@ const getPrivateMessages = (token, userId, setState) => {
       setState(res.data);
     })
     .catch((err) => console.warn(err));
-};
-
-const getFollowed = (token, id, setState) => {
-  axios
-    .get(`${BASE_URL}/followed?id=${id}`, {
-      withCredentials: true,
-      headers: {
-        "x-xsrf-token": `${token}`,
-      },
-    })
-    .then((res) => {
-      setState(res.data.map((elem) => elem.friend_id));
-    })
-    .catch((err) => {
-      console.warn(err.response.data.message);
-    });
 };
 
 const getUsersByIds = (token, idList, setState) => {

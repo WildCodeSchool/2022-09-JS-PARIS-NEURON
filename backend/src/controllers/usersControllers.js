@@ -358,13 +358,13 @@ const getUserByFollowed = (req, res) => {
 };
 
 const postPrivateMessage = (req, res) => {
-  const { neuronId, neuronname, username, message } = req.body;
+  const { neuronname, username, message, date, userId, neuronId } = req.body;
   console.warn(req.body);
 
   neuron
     .query(
-      `INSERT INTO private_messages (sender, receiver, subject, content, message_status) VALUES (?, ?, 'test', ?, 0); INSERT INTO private_messages_has_users (private_messages_id, users_id) VALUES (LAST_INSERT_ID(), ?) `,
-      [username, neuronname, message, neuronId]
+      `INSERT INTO private_messages (sender, receiver, subject, content, date_message, message_status) VALUES (?, ?, 'test', ?, ?, 0); INSERT INTO private_messages_has_users (private_messages_id, users_id, neuron_id) VALUES (LAST_INSERT_ID(), ?, ?) `,
+      [username, neuronname, message, date, neuronId, userId]
     )
     .then(() => res.status(201).json("message envoyé"))
     .catch((err) => {
@@ -379,7 +379,7 @@ const getPrivateMessages = (req, res) => {
 
   neuron
     .query(
-      `SELECT * FROM private_messages_has_users JOIN private_messages ON private_messages.id=private_messages_has_users.private_messages_id INNER JOIN users ON users.id=private_messages_has_users.users_id WHERE users.id = ? ORDER BY private_messages.id DESC`,
+      `SELECT *, DATE_FORMAT(private_messages.date_message, "%d/%m/%Y") AS date_message FROM private_messages_has_users JOIN private_messages ON private_messages.id=private_messages_has_users.private_messages_id INNER JOIN users ON users.id=private_messages_has_users.users_id WHERE users.id = ? ORDER BY private_messages.id DESC`,
       [id]
     )
     .then(([mails]) => {
