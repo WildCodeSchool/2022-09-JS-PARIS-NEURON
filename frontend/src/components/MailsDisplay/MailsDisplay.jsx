@@ -23,7 +23,7 @@ export const MailsDisplay = () => {
 
   return (
     <div className="privateMessages">
-      {mails.length &&
+      {mails.length ? (
         mails.map((mail) => {
           return (
             <div key={mail.id} className="privateMessages_mail">
@@ -44,7 +44,10 @@ export const MailsDisplay = () => {
               </ReactMarkdown>
             </div>
           );
-        })}
+        })
+      ) : (
+        <span>pas de message pour l'instant</span>
+      )}
     </div>
   );
 };
