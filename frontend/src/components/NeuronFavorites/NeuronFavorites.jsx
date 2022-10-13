@@ -83,7 +83,7 @@ export const NeuronFavorites = () => {
                     type="button"
                     onClick={() => handleDelete(neuron)}
                   >
-                    Supprimer
+                    oublier
                   </button>
                 </div>
               </Carousel.Item>

@@ -2,7 +2,6 @@
 // /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState } from "react";
 import {
-  Search,
   NeuronFavorites,
   TopicCard,
   NeuronSettings,
@@ -64,7 +63,6 @@ export const ProfilDisplay = () => {
           className={toggleState === 1 ? "content  active-content" : "content"}
         >
           <h2>Mes neurons</h2>
-          <hr />
           <NeuronFavorites />
         </div>
 
@@ -82,7 +80,6 @@ export const ProfilDisplay = () => {
           <h2>Mes Tags</h2>
           <hr />
           <p />
-          <Search />
         </div>
         <div
           className={toggleState === 4 ? "content  active-content" : "content"}

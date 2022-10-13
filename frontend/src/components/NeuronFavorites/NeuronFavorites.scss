@@ -1,16 +1,16 @@
 @import "../../colors.scss";
 
 .btn_sup {
-  width: 5rem;
+  width: 4rem;
   box-shadow: 0 0 5px $carbon;
   border: solid 1.5px $dark-purple-1;
   background-color: $dark-purple-3;
   color: $warm-grey-1;
   border-radius: 0.5rem;
   cursor: pointer;
+  font-size: 0.8rem;
 }
 
-.carousel {
-  width: 70%;
-  height: 90%;
+.item {
+  width: 4.8rem;
 }
