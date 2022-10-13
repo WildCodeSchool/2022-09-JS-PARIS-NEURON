@@ -104,9 +104,10 @@ const getTopicById = (id, setTopics, setTaglist) => {
   });
 };
 
-const getComments = (id, setState) => {
+const getComments = (id, setComments, setCommentContent) => {
   axios.get(`${BASE_URL}/comments?id=${id}`).then((res) => {
-    setState(res.data);
+    setComments(res.data);
+    setCommentContent("");
   });
 };
 
@@ -157,7 +158,8 @@ const postComment = (
   date,
   topicId,
   userID,
-  setComments
+  setComments,
+  setCommentContent
 ) => {
   axios
     .post(
@@ -176,7 +178,36 @@ const postComment = (
       }
     )
     .then(() => {
-      getComments(topicId, setComments);
+      getComments(topicId, setComments, setCommentContent);
+    })
+    .catch((err) => {
+      console.warn(err);
+    });
+};
+
+const updateComment = (
+  token,
+  id,
+  commentContent,
+  topicId,
+  setComments,
+  setCommentContent,
+  setIsShowing
+) => {
+  axios
+    .put(
+      `${BASE_URL}/comments`,
+      { id, commentContent },
+      {
+        withCredentials: true,
+        headers: {
+          "x-xsrf-token": `${token}`,
+        },
+      }
+    )
+    .then(() => {
+      getComments(topicId, setComments, setCommentContent);
+      setIsShowing(0);
     })
     .catch((err) => {
       console.warn(err);
@@ -331,6 +362,7 @@ export {
   getComments,
   postTopic,
   postComment,
+  updateComment,
   getNeuronById,
   sendPrivateMessage,
   getPrivateMessages,
