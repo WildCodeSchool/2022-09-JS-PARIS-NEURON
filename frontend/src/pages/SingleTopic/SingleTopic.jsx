@@ -3,7 +3,12 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Navbar } from "@components";
 import { useParams } from "react-router";
-import { getTopicById, getComments, postComment } from "@services/apiRequest";
+import {
+  getTopicById,
+  getComments,
+  postComment,
+  updateComment,
+} from "@services/apiRequest";
 import ReactMarkdown from "react-markdown";
 import rehypeHighlight from "rehype-highlight";
 
@@ -21,6 +26,7 @@ export const SingleTopic = () => {
   const [date, setDate] = useState("");
   const [userId, setUserId] = useState("");
   const [token, setToken] = useState("");
+  const [isShowing, setIsShowing] = useState(0);
 
   useEffect(() => {
     setUserId(localStorage.getItem("userId"));
@@ -41,11 +47,40 @@ export const SingleTopic = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    postComment(token, commentContent, date, id, userId, setComments);
+    postComment(
+      token,
+      commentContent,
+      date,
+      id,
+      userId,
+      setComments,
+      setCommentContent
+    );
     setCommentContent("");
   };
-  console.warn("topic: ", topic);
-  console.warn("comments: ", comments);
+
+  const handleToggle = (commentId) => {
+    if (isShowing !== commentId) {
+      setIsShowing(commentId);
+    } else {
+      setIsShowing(0);
+    }
+  };
+
+  const handleUpdate = (e, comment) => {
+    e.preventDefault();
+    updateComment(
+      token,
+      comment.commentId,
+      commentContent,
+      id,
+      setComments,
+      setCommentContent,
+      setIsShowing
+    );
+  };
+
+  console.warn(isShowing);
 
   return (
     topic && (
@@ -100,12 +135,12 @@ export const SingleTopic = () => {
               comments.map((singleComment) => {
                 return (
                   <div
-                    key={singleComment.id}
+                    key={singleComment.commentId}
                     className="singleTopic_content_comments_singleComment"
                   >
                     <div className="singleTopic_content_comments_singleComment_header">
                       le <span>{singleComment.date_comment} </span>
-                      <Link to={`/neuronprofile/${singleComment.users_id}`}>
+                      <Link to={`/neuronprofile/${singleComment.userId}`}>
                         <span className="singleTopic_content_comments_singleComment_header_user">
                           {singleComment.username}
                         </span>
@@ -121,6 +156,44 @@ export const SingleTopic = () => {
                     >
                       {singleComment.comment}
                     </ReactMarkdown>
+                    {singleComment.userId === parseInt(userId, 10) ? (
+                      <button
+                        className="singleTopic_content_comments_singleComment_edit"
+                        type="button"
+                        onClick={() => handleToggle(singleComment.commentId)}
+                      >
+                        éditer
+                      </button>
+                    ) : null}
+                    <form
+                      className={
+                        isShowing === singleComment.commentId
+                          ? "singleTopic_content_comments_singleComment_editor show"
+                          : "singleTopic_content_comments_singleComment_editor hide"
+                      }
+                      onSubmit={(e) => handleUpdate(e, singleComment)}
+                    >
+                      <div>
+                        <Link to="/markdownsyntax" target="_blank">
+                          <span>syntax markdown</span>
+                        </Link>
+                        <textarea
+                          className="singleTopic_content_comments_editor_input"
+                          name="editor"
+                          id="editor"
+                          placeholder="nouveau commentaire..."
+                          value={commentContent}
+                          onChange={(e) => handleChange(e)}
+                          required
+                        />
+                      </div>
+                      <button
+                        className="singleTopic_content_comments_editor_button"
+                        type="submit"
+                      >
+                        envoyer
+                      </button>
+                    </form>
                   </div>
                 );
               })

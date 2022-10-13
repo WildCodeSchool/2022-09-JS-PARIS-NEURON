@@ -131,12 +131,16 @@
         padding: 0.3rem;
         background-color: $warm-grey-1;
         border-radius: 0.2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
 
         &_header {
           background-color: $warm-grey-2;
           padding: 0.4rem;
           border-bottom: solid 0.2rem $warm-grey-3;
           border-radius: 0.3rem;
+          width: 100%;
 
           &_user {
             background-color: $dark-purple-3;
@@ -145,6 +149,13 @@
             border-radius: 0.2rem;
             cursor: pointer;
           }
+        }
+
+        &_edit {
+          width: 17%;
+          background-color: $dark-purple-5;
+          border-radius: 0.5rem;
+          cursor: pointer;
         }
       }
 
@@ -161,7 +172,7 @@
         }
 
         &_button {
-          width: 17%;
+          width: 20%;
           background-color: $dark-purple-5;
           border-radius: 0.5rem;
           cursor: pointer;
@@ -169,6 +180,13 @@
       }
     }
 
+    .hide {
+      display: none;
+    }
+
+    .show {
+      display: block;
+    }
     .markdown {
       height: auto;
       width: 100%;
