@@ -266,7 +266,6 @@ const getPrivateMessages = (token, userId, setState) => {
       },
     })
     .then((res) => {
-      console.warn(res);
       setState(res.data);
     })
     .catch((err) => console.warn(err));
