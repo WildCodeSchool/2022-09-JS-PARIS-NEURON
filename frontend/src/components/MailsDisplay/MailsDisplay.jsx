@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import rehypeHighlight from "rehype-highlight";
-import { getPrivateMessages } from "@services/apiRequest";
+import { getPrivateMessages, deletePrivateMessage } from "@services/apiRequest";
 
 import "../../github.css";
 
@@ -19,12 +19,19 @@ export const MailsDisplay = () => {
     if (token) getPrivateMessages(token, userId, setMails);
   }, [token]);
 
+  const handleRemove = (id) => {
+    deletePrivateMessage(token, id, userId, setMails);
+  };
+
   return (
     <div className="privateMessages">
       {mails.length ? (
         mails.map((mail) => {
           return (
-            <div key={mail.id} className="privateMessages_mail">
+            <div
+              key={mail.private_messages_id}
+              className="privateMessages_mail"
+            >
               <div className="privateMessages_mail_header">
                 le <span>{mail.date_message} </span>
                 <Link to={`/neuronprofile/${mail.neuron_id}`}>
@@ -41,6 +48,13 @@ export const MailsDisplay = () => {
               >
                 {mail.content}
               </ReactMarkdown>
+              <button
+                className="privateMessages_mail_remove"
+                type="button"
+                onClick={() => handleRemove(mail.private_messages_id)}
+              >
+                supprimer
+              </button>
             </div>
           );
         })

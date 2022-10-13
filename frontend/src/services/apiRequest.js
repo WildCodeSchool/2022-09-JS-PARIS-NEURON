@@ -65,7 +65,6 @@ const getTagsTop = (setState) => {
   axios
     .get(`${BASE_URL}/tagstop`)
     .then((res) => {
-      console.warn(res.data);
       setState(res.data);
     })
     .catch((err) => {
@@ -104,9 +103,10 @@ const getTopicById = (id, setTopics, setTaglist) => {
   });
 };
 
-const getComments = (id, setState) => {
+const getComments = (id, setComments, setCommentContent) => {
   axios.get(`${BASE_URL}/comments?id=${id}`).then((res) => {
-    setState(res.data);
+    setComments(res.data);
+    setCommentContent("");
   });
 };
 
@@ -157,7 +157,8 @@ const postComment = (
   date,
   topicId,
   userID,
-  setComments
+  setComments,
+  setCommentContent
 ) => {
   axios
     .post(
@@ -176,7 +177,36 @@ const postComment = (
       }
     )
     .then(() => {
-      getComments(topicId, setComments);
+      getComments(topicId, setComments, setCommentContent);
+    })
+    .catch((err) => {
+      console.warn(err);
+    });
+};
+
+const updateComment = (
+  token,
+  id,
+  commentContent,
+  topicId,
+  setComments,
+  setCommentContent,
+  setIsShowing
+) => {
+  axios
+    .put(
+      `${BASE_URL}/comments`,
+      { id, commentContent },
+      {
+        withCredentials: true,
+        headers: {
+          "x-xsrf-token": `${token}`,
+        },
+      }
+    )
+    .then(() => {
+      getComments(topicId, setComments, setCommentContent);
+      setIsShowing(0);
     })
     .catch((err) => {
       console.warn(err);
@@ -300,6 +330,20 @@ const getPrivateMessages = (token, userId, setState) => {
     .catch((err) => console.warn(err));
 };
 
+const deletePrivateMessage = (token, id, userId, setState) => {
+  axios
+    .delete(`${BASE_URL}/privatemessages?id=${id}`, {
+      withCredentials: true,
+      headers: {
+        "x-xsrf-token": `${token}`,
+      },
+    })
+    .then(() => {
+      getPrivateMessages(token, userId, setState);
+    })
+    .catch((err) => console.warn(err));
+};
+
 const getUsersByIds = (token, idList, setState) => {
   axios
     .get(`${BASE_URL}/followedByIds`, {
@@ -392,11 +436,11 @@ export {
   getComments,
   postTopic,
   postComment,
-  postFollowed,
-  deleteFollowed,
+  updateComment,
   getNeuronById,
   sendPrivateMessage,
   getPrivateMessages,
+  deletePrivateMessage,
   addToFollowed,
   removeFromFollowed,
   getFollowed,

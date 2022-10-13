@@ -384,6 +384,23 @@ const getPrivateMessages = (req, res) => {
     });
 };
 
+const deletePrivateMessage = (req, res) => {
+  const { id } = req.query;
+
+  console.warn(req.query);
+
+  neuron
+    .query(
+      `DELETE FROM private_messages_has_users WHERE private_messages_id=?; DELETE FROM private_messages WHERE id=?`,
+      [id, id]
+    )
+    .then(() => res.status(200).json())
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("impossible d'effacer le message");
+    });
+};
+
 module.exports = {
   getUsers,
   getNeuronById,
@@ -393,11 +410,12 @@ module.exports = {
   getTagsFavorites,
   addTagsFavorites,
   removeFromTagsFavorites,
-  updateSettings,
   addToFollowed,
   removeFromFollowed,
   getFollowed,
   getUserByFollowed,
   postPrivateMessage,
   getPrivateMessages,
+  deletePrivateMessage,
+  updateSettings,
 };
