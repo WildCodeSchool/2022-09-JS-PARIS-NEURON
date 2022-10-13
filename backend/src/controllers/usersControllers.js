@@ -244,7 +244,7 @@ const getTagsFavorites = (req, res) => {
 
 const addTagsFavorites = (req, res) => {
   const { tag, userId } = req.body;
-  console.warn("req: ", req.body);
+
   neuron
     .query(
       "INSERT IGNORE INTO tags (tag) VALUES (?);INSERT INTO users_has_tags (users_id, tags_id) VALUES (?, (SELECT id FROM tags WHERE tag=? LIMIT 1))",
@@ -260,7 +260,7 @@ const addTagsFavorites = (req, res) => {
 };
 
 const removeFromTagsFavorites = (req, res) => {
-  const { id } = req.query;
+  const { id } = req.body;
 
   neuron
     .query("DELETE FROM users_has_tags WHERE users_id = ? AND tags_id = ? ", [
@@ -280,7 +280,7 @@ const addToFollowed = (req, res) => {
 
   neuron
     .query(
-      "INSERT INTO followed (users_id, friend_id) VALUES (?, ?) SELECT ?, ? WHERE NOT EXISTS (SELECT * FROM followed WHERE (user_id = ?) AND (friend_id = ?))",
+      "INSERT IGNORE INTO followed (users_id, friend_id) VALUES ((SELECT id FROM users WHERE id=? ), (SELECT id FROM users WHERE id=?)); SELECT * FROM followed GROUP BY friend_id;",
       [id]
     )
     .then(() => {
@@ -293,10 +293,14 @@ const addToFollowed = (req, res) => {
 };
 
 const removeFromFollowed = (req, res) => {
-  const { id } = req.query;
+  const { id, friend_id } = req.query;
+  console.warn(req.query);
 
   neuron
-    .query("DELETE FROM followed WHERE (users_id=?) AND (friend_id=?)", [id])
+    .query("DELETE FROM followed WHERE users_id= ? AND friend_id=?", [
+      id,
+      friend_id,
+    ])
     .then(() => {
       res.status(201).json("supprimé des favoris");
     })
@@ -344,7 +348,6 @@ const getUserByFollowed = (req, res) => {
 
 const postPrivateMessage = (req, res) => {
   const { neuronId, neuronname, username, message } = req.body;
-  console.warn(req.body);
 
   neuron
     .query(
@@ -360,7 +363,6 @@ const postPrivateMessage = (req, res) => {
 
 const getPrivateMessages = (req, res) => {
   const { id } = req.query;
-  console.warn(req.query);
 
   neuron
     .query(

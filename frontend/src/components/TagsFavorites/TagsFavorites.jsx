@@ -1,7 +1,6 @@
 import Carousel from "react-grid-carousel";
 import React, { useEffect, useState } from "react";
 import { getTagsFavorites, addTagsFavorites } from "@services/apiRequest";
-import { ButtonRemoveFromFavorite } from "@components";
 import "./TagsFavorites.scss";
 
 export const TagsFavorites = () => {
@@ -22,7 +21,6 @@ export const TagsFavorites = () => {
   const handleChange = (e) => {
     e.preventDefault();
     setTag(e.target.value);
-    console.warn(tag);
   };
 
   const handleAddTag = (e) => {
@@ -54,7 +52,6 @@ export const TagsFavorites = () => {
       loop: true,
     },
   ];
-  console.warn(tagList, tag);
 
   return (
     <div className="taglist_container">
@@ -72,7 +69,6 @@ export const TagsFavorites = () => {
               <Carousel.Item key={tags}>
                 <div className="item">
                   <div>{tags.tag}</div>
-                  <ButtonRemoveFromFavorite />
                 </div>
               </Carousel.Item>
             ))}
