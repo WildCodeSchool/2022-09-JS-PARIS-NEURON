@@ -19,7 +19,7 @@ DROP TABLE
 
 DROP TABLE
   IF EXISTS comments;
-
+  
 DROP TABLE
   IF EXISTS topics;
 
@@ -105,6 +105,7 @@ CREATE TABLE
     `receiver` VARCHAR(70) NOT NULL,
     `subject` VARCHAR(70) NOT NULL,
     `content` MEDIUMTEXT NOT NULL,
+    `date_message` DATE NOT NULL,
     `message_status` TINYINT (1) NOT NULL COMMENT 'true: message sent\nfalse: message received',
     PRIMARY KEY (`id`)
   );
@@ -121,6 +122,7 @@ CREATE TABLE
   IF NOT EXISTS `private_messages_has_users` (
     `private_messages_id` INT NOT NULL,
     `users_id` INT NOT NULL,
+    `neuron_id` INT NOT NULL,
     PRIMARY KEY (`private_messages_id`, `users_id`),
     FOREIGN KEY (`private_messages_id`) REFERENCES `private_messages` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
     FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION

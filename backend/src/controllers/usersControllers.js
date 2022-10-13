@@ -287,11 +287,9 @@ const updateSettings = async (req, res) => {
 
 const addToFollowed = (req, res) => {
   const { id } = req.query;
-  // INSERT INTO ma_table_1 (colonne_1,colonne_2, colonne_3) VALUES ((SELECT colonne_1 FROM ma_table_2 WHERE conditions LIMIT 1),'seconde valeur', 'troisième valeur')
-
   neuron
     .query(
-      "INSERT INTO followed (users_id, friend_id) VALUES ((SELECT id FROM users WHERE id = ?), (SELECT id FROM users WHERE id = ?))",
+      "INSERT IGNORE INTO followed (users_id, friend_id) VALUES ((SELECT id FROM users WHERE id=?), (SELECT id FROM users WHERE id=?)); SELECT * FROM followed GROUP BY friend_id;",
       [id]
     )
     .then(() => {
