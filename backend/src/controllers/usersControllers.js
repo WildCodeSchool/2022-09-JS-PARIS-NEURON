@@ -243,12 +243,12 @@ const getTagsFavorites = (req, res) => {
 };
 
 const addTagsFavorites = (req, res) => {
-  const { userId, tagId } = req.query;
-  console.warn(req.query);
+  const { tag, userId } = req.body;
+  console.warn("req: ", req.body);
   neuron
     .query(
-      "INSERT IGNORE INTO users_has_tags (users_id, tags_id) VALUES ((SELECT id FROM users WHERE id=? LIMIT 1), (SELECT id FROM tags WHERE id=? LIMIT 1))",
-      [userId, tagId]
+      "INSERT IGNORE INTO tags (tag) VALUES (?);INSERT INTO users_has_tags (users_id, tags_id) VALUES (?, (SELECT id FROM tags WHERE tag=? LIMIT 1))",
+      [tag, userId, tag]
     )
     .then(() => {
       res.status(201).json("ajouté aux favoris");
