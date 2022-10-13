@@ -1,12 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import { Avatar } from "@components/";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { Avatar, Navbar } from "@components/";
+import {
+  getNeuronById,
+  sendPrivateMessage,
+  addToFollowed,
+} from "@services/apiRequest";
 
 import "./NeuronProfile.scss";
-import { getNeuronById, sendPrivateMessage } from "@services/apiRequest";
 
 export const NeuronProfile = () => {
   const { id } = useParams();
+
+  const navigate = useNavigate();
 
   const [token, setToken] = useState("");
   const [neuronInfos, setNeuronInfos] = useState([]);
@@ -27,7 +33,8 @@ export const NeuronProfile = () => {
   }, [token]);
 
   const handleFollow = () => {
-    // addToFollowed(token, id);
+    addToFollowed(token, userId, id);
+    navigate(`/userprofile/${userId}`);
   };
 
   const handleChange = (e) => {
@@ -44,7 +51,8 @@ export const NeuronProfile = () => {
       neuronInfos[0].username,
       username,
       date,
-      input
+      input,
+      setInput
     );
   };
 
@@ -82,6 +90,7 @@ export const NeuronProfile = () => {
           />
           <button type="submit">envoyer</button>
         </form>
+        <Navbar />
       </div>
     )
   );
