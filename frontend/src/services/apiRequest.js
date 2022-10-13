@@ -200,11 +200,11 @@ const getFollowed = (token, id, setState) => {
     });
 };
 
-const postFollowed = (token, id, setState) => {
+const addToFollowed = (token, userId, id) => {
   axios
     .post(
       `http://localhost:5000/followed`,
-      { id },
+      { userId, id },
       {
         withCredentials: true,
         headers: {
@@ -213,8 +213,7 @@ const postFollowed = (token, id, setState) => {
       }
     )
     .then((res) => {
-      setState(res.data);
-      console.warn(res.data);
+      console.warn(res);
     })
     .catch((err) => {
       console.warn(err.response.data.message);
@@ -260,7 +259,8 @@ const sendPrivateMessage = (
   neuronname,
   username,
   date,
-  message
+  message,
+  setState
 ) => {
   axios
     .post(
@@ -280,8 +280,8 @@ const sendPrivateMessage = (
         },
       }
     )
-    .then((res) => {
-      console.warn(res);
+    .then(() => {
+      setState("");
     })
     .catch((err) => console.warn(err));
 };
@@ -295,7 +295,6 @@ const getPrivateMessages = (token, userId, setState) => {
       },
     })
     .then((res) => {
-      console.warn(res);
       setState(res.data);
     })
     .catch((err) => console.warn(err));
@@ -335,7 +334,7 @@ export {
   getNeuronById,
   sendPrivateMessage,
   getPrivateMessages,
-  postFollowed,
+  addToFollowed,
   removeFromFollowed,
   getFollowed,
   getUsersByIds,
