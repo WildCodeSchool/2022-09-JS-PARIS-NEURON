@@ -1,28 +1,40 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import { Avatar } from "@components/";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { Avatar, Navbar } from "@components/";
+import {
+  getNeuronById,
+  sendPrivateMessage,
+  addToFollowed,
+} from "@services/apiRequest";
 
 import "./NeuronProfile.scss";
-import { getNeuronById, sendPrivateMessage } from "@services/apiRequest";
 
 export const NeuronProfile = () => {
   const { id } = useParams();
+
+  const navigate = useNavigate();
 
   const [token, setToken] = useState("");
   const [neuronInfos, setNeuronInfos] = useState([]);
   const [username, setUsername] = useState("");
   const [userId, setUserId] = useState("");
+  const [date, setDate] = useState("");
   const [input, setInput] = useState("");
 
   useEffect(() => {
     setToken(localStorage.getItem("token"));
     setUsername(localStorage.getItem("userName"));
     setUserId(localStorage.getItem("userId"));
+    const today = new Date();
+    setDate(
+      `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`
+    );
     if (token) getNeuronById(token, id, setNeuronInfos);
   }, [token]);
 
   const handleFollow = () => {
-    // addToFollowed(token, id);
+    addToFollowed(token, userId, id);
+    navigate(`/userprofile/${userId}`);
   };
 
   const handleChange = (e) => {
@@ -38,7 +50,9 @@ export const NeuronProfile = () => {
       userId,
       neuronInfos[0].username,
       username,
-      input
+      date,
+      input,
+      setInput
     );
   };
 
@@ -76,6 +90,7 @@ export const NeuronProfile = () => {
           />
           <button type="submit">envoyer</button>
         </form>
+        <Navbar />
       </div>
     )
   );

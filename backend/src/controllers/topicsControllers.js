@@ -2,11 +2,23 @@
 /* eslint-disable array-callback-return */
 const { neuron } = require("../../neuron");
 
+const getTagsTop = (req, res) => {
+  neuron
+    .query(
+      `SELECT tags.tag AS label, count(*) AS value FROM topics_has_tags AS tht INNER JOIN topics ON topics.id=tht.topics_id INNER JOIN tags ON tags.id=tht.tags_id GROUP BY tags.tag ORDER BY value DESC limit 10`
+    )
+    .then(([tags]) => {
+      console.warn(tags);
+      res.status(200).json(tags);
+    })
+    .catch((err) => res.status(500).json(err));
+};
+
 const getCategories = (req, res) => {
   neuron
     .query(`SELECT * FROM categories`)
     .then(([categories]) => {
-      res.status(201).json(categories);
+      res.status(200).json(categories);
     })
     .catch((err) => {
       console.error(err);
@@ -20,7 +32,7 @@ const getTopics = (req, res) => {
       `SELECT *, DATE_FORMAT(date, "%d/%m/%Y") AS date FROM topics_has_tags AS tht JOIN topics ON topics.id=tht.topics_id JOIN tags ON tags.id=tht.tags_id GROUP BY topics.id ORDER BY topics.id DESC`
     )
     .then(([topics]) => {
-      res.status(201).json(topics);
+      res.status(200).json(topics);
     })
     .catch((err) => {
       console.error(err);
@@ -40,7 +52,7 @@ const getTopicsByTitle = (req, res) => {
     .query(newQuery)
     .then(([topics]) => {
       if (topics[0] != null) {
-        res.status(201).json(topics);
+        res.status(200).json(topics);
       } else {
         res.status(404).send("Not Found");
       }
@@ -61,7 +73,7 @@ const getTopicById = (req, res) => {
     )
     .then(([topic]) => {
       if (topic[0] != null) {
-        res.status(201).json(topic);
+        res.status(200).json(topic);
       } else {
         res.status(404).send("Not Found");
       }
@@ -79,7 +91,7 @@ const getComments = (req, res) => {
     .then(([comment]) => {
       console.warn(comment);
       if (comment.length != null) {
-        res.status(201).json(comment);
+        res.status(200).json(comment);
       } else {
         res.status(404).send("Not found");
       }
@@ -134,7 +146,7 @@ const createTopic = (req, res) => {
       });
     })
     .then(() => {
-      res.status(201).json();
+      res.status(200).json();
     })
     .catch((err) => {
       console.error(err);
@@ -150,7 +162,7 @@ const createComment = (req, res) => {
       "INSERT INTO comments (comment, date_comment, topics_id, users_id) values (?, ?, ?, ?)",
       [commentContent, date, topicId, userID]
     )
-    .then(() => res.status(201).json("commentaire créé"))
+    .then(() => res.status(200).json("commentaire créé"))
     .catch((err) => {
       console.error(err);
       res.status(500).send("Error saving the comment");
@@ -158,6 +170,7 @@ const createComment = (req, res) => {
 };
 
 module.exports = {
+  getTagsTop,
   getCategories,
   getTopics,
   getTopicById,

@@ -7,7 +7,10 @@ const {
   verifyPassword,
   verifyToken,
 } = require("./middlewares/auth");
-const { validateUser } = require("./middlewares/validators");
+const {
+  validateUser,
+  validateUserSettings,
+} = require("./middlewares/validators");
 
 const router = express.Router();
 
@@ -21,6 +24,7 @@ const router = express.Router();
 
 router.post("/users", validateUser, hashPassword, usersControllers.createUser);
 router.post("/login", usersControllers.registerWithMail, verifyPassword);
+router.get("/tagstop", topicsControllers.getTagsTop);
 router.get("/users", usersControllers.getUsers);
 router.get("/categories", topicsControllers.getCategories);
 router.get("/topics", topicsControllers.getTopics);
@@ -31,7 +35,11 @@ router.get("/topicbyid", topicsControllers.getTopicById);
 router.use(verifyToken);
 
 router.get("/neuron", usersControllers.getNeuronById);
-router.get("/user_settings", usersControllers.registerWithMail);
+router.get(
+  "/user_settings",
+  validateUserSettings,
+  usersControllers.registerWithMail
+);
 router.get("/followed", usersControllers.getFollowed);
 router.get("/followedByIds", usersControllers.getUserByFollowed);
 router.post("/followed", usersControllers.addToFollowed);

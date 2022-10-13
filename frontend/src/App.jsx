@@ -34,7 +34,7 @@ const App = () => {
             <Route path="/topics" element={<Topics />} />
             <Route path="/topic/:id" element={<SingleTopic />} />
             <Route path="/createtopics" element={<CreateTopics />} />
-            <Route path="/userprofile" element={<UserProfile />} />
+            <Route path="/userprofile/:id" element={<UserProfile />} />
             <Route path="neuronprofile/:id" element={<NeuronProfile />} />
             <Route path="/createmail" element={<CreateMail />} />
             <Route path="/markdownsyntax" element={<MarkdownSyntax />} />
