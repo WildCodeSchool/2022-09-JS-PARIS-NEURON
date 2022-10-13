@@ -10,6 +10,7 @@
   // word-break: break-all;
   border: 1px solid $carbon;
   border-radius: 5px 5px 5px 5px;
+  overflow-y: scroll;
 
   .tabs_display_tabs {
     display: flex;
