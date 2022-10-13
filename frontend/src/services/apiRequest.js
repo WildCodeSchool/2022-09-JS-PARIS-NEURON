@@ -259,7 +259,8 @@ const sendPrivateMessage = (
   neuronname,
   username,
   date,
-  message
+  message,
+  setState
 ) => {
   axios
     .post(
@@ -279,8 +280,8 @@ const sendPrivateMessage = (
         },
       }
     )
-    .then((res) => {
-      console.warn(res);
+    .then(() => {
+      setState("");
     })
     .catch((err) => console.warn(err));
 };
