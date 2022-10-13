@@ -395,7 +395,7 @@ const getTopicsFavorites = (req, res) => {
 
   neuron
     .query(
-      "SELECT * FROM users_has_topics INNER JOIN users ON users.id = users_has_topics.users_id AND topics ON topics.id = users_has_topics.topics_id",
+      "SELECT * FROM users INNER JOIN topics ON users.id = topics.users_id WHERE users.id=?",
       [id]
     )
     .then(([topicsfav]) => {
@@ -403,7 +403,7 @@ const getTopicsFavorites = (req, res) => {
     })
     .catch((err) => {
       console.warn(err);
-      res.status(500).send("Une erreur s'est produite");
+      res.status(500).send("impossible de récupérer les topics favoris");
     });
 };
 
