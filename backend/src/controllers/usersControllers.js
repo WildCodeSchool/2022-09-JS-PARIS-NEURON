@@ -276,16 +276,6 @@ const removeFromTagsFavorites = (req, res) => {
 };
 
 const addToFollowed = (req, res) => {
-  const { id } = req.query;
-
-  neuron
-    .query(
-      "INSERT IGNORE INTO followed (users_id, friend_id) VALUES ((SELECT id FROM users WHERE id=? ), (SELECT id FROM users WHERE id=?)); SELECT * FROM followed GROUP BY friend_id;",
-      [id]
-    )
-    .then(() => {
-      res.status(201).json("ajouté aux favoris");
-const addToFollowed = (req, res) => {
   const { userId, id } = req.body;
 
   neuron
@@ -404,12 +394,10 @@ module.exports = {
   addTagsFavorites,
   removeFromTagsFavorites,
   updateSettings,
-  removeTags,
   addToFollowed,
   removeFromFollowed,
   getFollowed,
   getUserByFollowed,
   postPrivateMessage,
   getPrivateMessages,
-  updateSettings,
 };
