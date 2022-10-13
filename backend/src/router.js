@@ -54,6 +54,7 @@ router.post("/comments", topicsControllers.createComment);
 router.put("/comments", topicsControllers.updateComment);
 router.post("/privatemessage", usersControllers.postPrivateMessage);
 router.get("/privatemessages", usersControllers.getPrivateMessages);
+router.delete("/privatemessages", usersControllers.deletePrivateMessage);
 router.post("/logout", usersControllers.logout);
 
 // Faire ta route settings

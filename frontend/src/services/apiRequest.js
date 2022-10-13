@@ -65,7 +65,6 @@ const getTagsTop = (setState) => {
   axios
     .get(`${BASE_URL}/tagstop`)
     .then((res) => {
-      console.warn(res.data);
       setState(res.data);
     })
     .catch((err) => {
@@ -331,6 +330,20 @@ const getPrivateMessages = (token, userId, setState) => {
     .catch((err) => console.warn(err));
 };
 
+const deletePrivateMessage = (token, id, userId, setState) => {
+  axios
+    .delete(`${BASE_URL}/privatemessages?id=${id}`, {
+      withCredentials: true,
+      headers: {
+        "x-xsrf-token": `${token}`,
+      },
+    })
+    .then(() => {
+      getPrivateMessages(token, userId, setState);
+    })
+    .catch((err) => console.warn(err));
+};
+
 const getUsersByIds = (token, idList, setState) => {
   axios
     .get(`${BASE_URL}/followedByIds`, {
@@ -366,6 +379,7 @@ export {
   getNeuronById,
   sendPrivateMessage,
   getPrivateMessages,
+  deletePrivateMessage,
   addToFollowed,
   removeFromFollowed,
   getFollowed,
