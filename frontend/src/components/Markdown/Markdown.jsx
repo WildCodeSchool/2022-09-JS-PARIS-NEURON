@@ -19,7 +19,9 @@ export const Markdown = ({ input, setInput }) => {
         <ReactMarkdown
           className="markdown"
           linkTarget="_blank"
-          rehypePlugins={[[rehypeHighlight, { ignoreMissing: true }]]}
+          rehypePlugins={[
+            [rehypeHighlight, { ignoreMissing: true, subset: false }],
+          ]}
         >
           {input}
         </ReactMarkdown>
