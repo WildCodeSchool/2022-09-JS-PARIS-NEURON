@@ -61,6 +61,18 @@ const logout = (token, setState) => {
     });
 };
 
+const getTagsTop = (setState) => {
+  axios
+    .get(`${BASE_URL}/tagstop`)
+    .then((res) => {
+      console.warn(res.data);
+      setState(res.data);
+    })
+    .catch((err) => {
+      console.warn(err);
+    });
+};
+
 const getCategories = (setState) => {
   axios
     .get(`${BASE_URL}/categories`)
@@ -172,45 +184,59 @@ const postComment = (
 };
 
 // --------------------USERS PART--------------------------------------------
-// const postFollowed = (id) => {
-//   axios
-//     .post(
-//       `${BASE_URL}/followed`,
-//       { id },
-//       {
-//         withCredentials: true,
-//         headers: {
-//           "x-xsrf-token": `${token}`,
-//         },
-//       }
-//     )
-//     .then((res) => {
-//       console.warn(res.data);
-//     })
-//     .catch((err) => {
-//       console.warn(err.response.data.message);
-//     });
-// };
+const getFollowed = (token, id, setState) => {
+  axios
+    .get(`${BASE_URL}/followed?id=${id}`, {
+      withCredentials: true,
+      headers: {
+        "x-xsrf-token": `${token}`,
+      },
+    })
+    .then((res) => {
+      setState(res.data.map((elem) => elem.friend_id));
+    })
+    .catch((err) => {
+      console.warn(err.response.data.message);
+    });
+};
 
-// const deleteFollowed = (id) => {
-//   axios
-//     .delete(
-//       `${BASE_URL}/followed`,
-//       { id },
-//       {
-//         withCredentials: true,
-//         headers: {
-//           "x-xsrf-token": `${token}`,
-//         },
-//       }
-//     )
-//     .then((res) => {
-//       console.warn(res.data);
-//     })
-//     .catch((err) => {
-//       console.warn(err.response.data.message);
-//     });
-// };
+const addToFollowed = (token, userId, id) => {
+  axios
+    .post(
+      `http://localhost:5000/followed`,
+      { userId, id },
+      {
+        withCredentials: true,
+        headers: {
+          "x-xsrf-token": `${token}`,
+        },
+      }
+    )
+    .then((res) => {
+      console.warn(res);
+    })
+    .catch((err) => {
+      console.warn(err.response.data.message);
+    });
+};
+
+const removeFromFollowed = (token, id, friendId, setState) => {
+  axios
+    .delete(`http://localhost:5000/followed?id=${id}&friend_id=${friendId}`, {
+      withCredentials: true,
+      headers: {
+        "x-xsrf-token": `${token}`,
+      },
+    })
+    .then((res) => {
+      console.warn(res.data);
+      setState(res.data);
+      getFollowed(token, id, setState);
+    })
+    .catch((err) => {
+      console.warn(err.response.data);
+    });
+};
 
 const getNeuronById = (token, id, setNeuronInfos) => {
   axios
@@ -232,7 +258,9 @@ const sendPrivateMessage = (
   userId,
   neuronname,
   username,
-  message
+  date,
+  message,
+  setState
 ) => {
   axios
     .post(
@@ -242,6 +270,7 @@ const sendPrivateMessage = (
         userId,
         neuronname,
         username,
+        date,
         message,
       },
       {
@@ -251,8 +280,8 @@ const sendPrivateMessage = (
         },
       }
     )
-    .then((res) => {
-      console.warn(res);
+    .then(() => {
+      setState("");
     })
     .catch((err) => console.warn(err));
 };
@@ -266,26 +295,9 @@ const getPrivateMessages = (token, userId, setState) => {
       },
     })
     .then((res) => {
-      console.warn(res);
       setState(res.data);
     })
     .catch((err) => console.warn(err));
-};
-
-const getFollowed = (token, id, setState) => {
-  axios
-    .get(`${BASE_URL}/followed?id=${id}`, {
-      withCredentials: true,
-      headers: {
-        "x-xsrf-token": `${token}`,
-      },
-    })
-    .then((res) => {
-      setState(res.data.map((elem) => elem.friend_id));
-    })
-    .catch((err) => {
-      console.warn(err.response.data.message);
-    });
 };
 
 const getUsersByIds = (token, idList, setState) => {
@@ -311,6 +323,7 @@ export {
   register,
   login,
   logout,
+  getTagsTop,
   getTopics,
   getCategories,
   getTopicById,
@@ -321,8 +334,8 @@ export {
   getNeuronById,
   sendPrivateMessage,
   getPrivateMessages,
-  // postFollowed,
-  // deleteFollowed,
+  addToFollowed,
+  removeFromFollowed,
   getFollowed,
   getUsersByIds,
 };

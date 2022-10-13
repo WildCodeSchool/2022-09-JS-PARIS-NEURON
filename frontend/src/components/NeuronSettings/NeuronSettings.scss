@@ -1,18 +1,29 @@
+@import "../../colors.scss";
+
 .neuronSettings {
   max-width: 100%;
 }
 
 .form_container {
-  height: 100%;
-  max-width: 100%;
-  display: flex;
   display: grid;
-
-  // justify-content: center;
+  grid-template-columns: 100px 200px;
+  grid-gap: 15px;
+  font-weight: bold;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
 
-.settingsTitle {
-  // border: 1px
-  // solid purple;
-  padding: 5px;
+.boutonSender {
+  text-align: center;
+  width: 3.5rem;
+  background-color: #d3bad7;
+  margin-left: 160px;
+  margin-top: 15px;
+  width: 100px;
+  height: 30px;
+  font-weight: bold;
+  border-radius: 3px;
+  &:hover {
+    background-color: #7c3585;
+    color: $cool-grey-1;
+  }
 }

@@ -18,29 +18,6 @@ export const ProfilDisplay = () => {
     setToggleState(index);
   };
 
-  //   const TabsList = [
-  //     {
-  //       id: 1,
-  //       tab: "Neurons Favoris",
-  //     },
-  //     {
-  //       id: 2,
-  //       tab: "Topics Favoris",
-  //     },
-  //     {
-  //       id: 3,
-  //       tab: "Tags Favoris",
-  //     },
-  //     {
-  //       id: 4,
-  //       tab: "Messagerie",
-  //     },
-  //     {
-  //       id: 5,
-  //       tab: "Paramètres",
-  //     },
-  //   ];
-
   return (
     <div className="tabs_display">
       <div className="tabs_display__tabs">
@@ -72,7 +49,6 @@ export const ProfilDisplay = () => {
           onClick={() => toggleTab(4)}
         >
           Messagerie
-          {/* <MailOnIcon /> */}
         </button>
         <button
           type="button"
@@ -98,8 +74,6 @@ export const ProfilDisplay = () => {
           <h2>Mes Topics</h2>
           <hr />
           <TopicCard />
-          <hr />
-          <Search />
         </div>
 
         <div
@@ -120,9 +94,8 @@ export const ProfilDisplay = () => {
         <div
           className={toggleState === 5 ? "content  active-content" : "content"}
         >
-          <h2>Content 5</h2>
+          <h2>Mes Paramètres</h2>
           <hr />
-          <p />
           <NeuronSettings />
         </div>
       </div>
