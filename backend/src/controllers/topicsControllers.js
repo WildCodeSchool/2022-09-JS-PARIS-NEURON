@@ -85,7 +85,7 @@ const getComments = (req, res) => {
 
   neuron
     .query(
-      `SELECT *, DATE_FORMAT(date_comment, "%d/%m/%Y") AS date_comment FROM comments LEFT JOIN users ON comments.users_id=users.id WHERE topics_id=? ORDER by comments.id`,
+      `SELECT comments.id AS commentId, DATE_FORMAT(date_comment, "%d/%m/%Y") AS date_comment, comments.comment, comments.users_id AS userId, users.username  FROM comments LEFT JOIN users ON comments.users_id=users.id WHERE topics_id=? ORDER by comments.id`,
       [id]
     )
     .then(([comment]) => {
@@ -169,6 +169,19 @@ const createComment = (req, res) => {
     });
 };
 
+const updateComment = (req, res) => {
+  const { id, commentContent } = req.body;
+  console.warn(req.body);
+
+  neuron
+    .query(`UPDATE comments SET comment=? WHERE id=?`, [commentContent, id])
+    .then(() => res.status(200).json())
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Error updating the comment");
+    });
+};
+
 module.exports = {
   getTagsTop,
   getCategories,
@@ -178,4 +191,5 @@ module.exports = {
   getTopicsByTitle,
   createTopic,
   createComment,
+  updateComment,
 };
