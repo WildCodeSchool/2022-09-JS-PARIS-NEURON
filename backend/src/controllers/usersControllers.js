@@ -150,7 +150,7 @@ const addTagsFavorites = (req, res) => {
     });
 };
 
-const removeTags = (req, res) => {
+const removeFromTagsFavorites = (req, res) => {
   const { id } = req.query;
 
   neuron
@@ -203,17 +203,7 @@ const updateSettings = async (req, res) => {
   ) {
     req.body.new_password = await createUserHashPassword(req.body.new_password);
   }
-  // {
-  // mail: "mail de base ",
-  // pseudo: "pseudo de base",
-  //   password: "fekfndsk",
-  //   new_pseudo: "oneblood",
-  //   new_password: "dhjhfbhsj",
-  //   new_email: "oneblood@hotmail.fr",
-  //   linkedin: "url.linkedin.com",
-  //   github: "url.github.com",
-  //   description: "Je crée et vend des t-shirts",
-  // }
+
   const query = "UPDATE users SET "; // "UPDATE user SET password = ?, email = ?, linkedin = ?, github = ?, description = ?, where mail = ?",
   const dicoToCreateQuery = {
     new_password: "hashedpassword",
@@ -286,16 +276,16 @@ const updateSettings = async (req, res) => {
 };
 
 const addToFollowed = (req, res) => {
-  const { id } = req.query;
+  const { id } = req.body;
+
   neuron
     .query(
-      "INSERT IGNORE INTO followed (users_id, friend_id) VALUES ((SELECT id FROM users WHERE id=?), (SELECT id FROM users WHERE id=?)); SELECT * FROM followed GROUP BY friend_id;",
+      "INSERT INTO followed (id) VALUES (?), JOIN users ON users.id=followed.user_id",
       [id]
     )
     .then(() => {
       res.status(201).json("ajouté aux favoris");
     })
-    .then(() => {})
     .catch((err) => {
       console.warn(err);
       res.status(500).send("erreur impossible d'ajouter aux favoris");
@@ -448,14 +438,14 @@ module.exports = {
   logout,
   getTagsFavorites,
   addTagsFavorites,
-  removeTags,
+  removeFromTagsFavorites,
+  updateSettings,
   addToFollowed,
   removeFromFollowed,
   getFollowed,
   getUserByFollowed,
   postPrivateMessage,
   getPrivateMessages,
-  updateSettings,
   getTopicsFavorites,
   addToTopicsFavorites,
   removeFromTopicsFavorites,

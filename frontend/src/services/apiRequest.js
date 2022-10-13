@@ -346,6 +346,68 @@ const getUsersByIds = (token, idList, setState) => {
       console.warn(err);
     });
 };
+const getTagsFavorites = (token, usersId, setState) => {
+  axios
+    .get(`${BASE_URL}/tagsFavorites?usersId=${usersId}`, {
+      withCredentials: true,
+      headers: {
+        "x-xsrf-token": `${token}`,
+      },
+    })
+    .then((res) => {
+      console.warn(res);
+      setState(res.data);
+    })
+    .catch((err) => {
+      console.warn(err);
+    });
+};
+
+const addTagsFavorites = (token, tag, userId, setState) => {
+  axios
+    .post(
+      `${BASE_URL}/tagsFavorites`,
+      {
+        tag,
+        userId,
+      },
+      {
+        withCredentials: true,
+        headers: {
+          "x-xsrf-token": `${token}`,
+        },
+      }
+    )
+    .then((res) => {
+      console.warn(res);
+      getTagsFavorites(token, userId, setState);
+    })
+    .catch((err) => {
+      console.warn(err);
+    });
+};
+
+const removeFromTagsFavorites = (setState) => {
+  axios
+    .delete(
+      `${BASE_URL}/tagsFavorites`,
+      {
+        id,
+      },
+      {
+        withCredentials: true,
+        headers: {
+          "x-xsrf-token": `${token}`,
+        },
+      }
+    )
+    .then((res) => {
+      setState(res.data);
+    })
+    .catch((err) => {
+      console.warn(err);
+    });
+};
 
 export {
   register,
@@ -359,6 +421,8 @@ export {
   getComments,
   postTopic,
   postComment,
+  postFollowed,
+  deleteFollowed,
   getNeuronById,
   sendPrivateMessage,
   getPrivateMessages,
@@ -366,6 +430,9 @@ export {
   removeFromFollowed,
   getFollowed,
   getUsersByIds,
+  getTagsFavorites,
+  addTagsFavorites,
+  removeFromTagsFavorites,
   getTopicsFavorites,
   addToTopicsFavorites,
   removeFromTopicsFavorites,

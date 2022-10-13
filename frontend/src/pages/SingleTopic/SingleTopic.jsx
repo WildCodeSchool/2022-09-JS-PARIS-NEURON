@@ -1,9 +1,16 @@
 /* eslint-disable array-callback-return */
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Navbar } from "@components";
+import { Navbar, ButtonAddToFavorite } from "@components";
 import { useParams } from "react-router";
-import { getTopicById, getComments, postComment } from "@services/apiRequest";
+import {
+  getTopicById,
+  getComments,
+  postComment,
+  addTagsFavorites,
+  getTagsFavorites,
+} from "@services/apiRequest";
+// import { messageContext } from "@contexts/messageContext";
 import ReactMarkdown from "react-markdown";
 import rehypeHighlight from "rehype-highlight";
 
@@ -19,6 +26,7 @@ export const SingleTopic = () => {
   const [comments, setComments] = useState([]);
   const [commentContent, setCommentContent] = useState("");
   const [date, setDate] = useState("");
+  const [favorite, setFavorite] = useState("");
   const [userId, setUserId] = useState("");
   const [token, setToken] = useState("");
 
@@ -26,6 +34,7 @@ export const SingleTopic = () => {
     setUserId(localStorage.getItem("userId"));
     setToken(localStorage.getItem("token"));
     getTopicById(id, setTopic, setTaglist, setComments);
+    getTagsFavorites(setFavorite);
     getComments(id, setComments);
     localStorage.removeItem("topicId");
     const today = new Date();
@@ -37,6 +46,10 @@ export const SingleTopic = () => {
   const handleChange = (e) => {
     e.preventDefault();
     setCommentContent(e.target.value);
+  };
+
+  const handleToggle = () => {
+    addTagsFavorites(localStorage.getItem("token"), favorite);
   };
 
   const handleSubmit = (e) => {
@@ -80,7 +93,10 @@ export const SingleTopic = () => {
               <span>tag(s):</span>
               <div className="singleTopic_content_header_tags_tagList">
                 {taglist.map((tag) => (
-                  <div key={tag.id}>{tag.tag}</div>
+                  <div key={tag.id}>
+                    <div>{tag.tag}</div>
+                    <ButtonAddToFavorite onClick={() => handleToggle()} />
+                  </div>
                 ))}
               </div>
             </div>

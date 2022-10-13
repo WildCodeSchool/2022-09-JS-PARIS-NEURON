@@ -45,6 +45,9 @@ router.post("/comments", topicsControllers.createComment);
 router.post("/privatemessage", usersControllers.postPrivateMessage);
 router.get("/privatemessages", usersControllers.getPrivateMessages);
 router.post("/logout", usersControllers.logout);
+router.get("/tagsFavorites", usersControllers.getTagsFavorites);
+router.post("/tagsFavorites", usersControllers.addTagsFavorites);
+router.delete("/tagsFavorites", usersControllers.removeFromTagsFavorites);
 router.put(
   "/settings",
   usersControllers.registerWithMail,

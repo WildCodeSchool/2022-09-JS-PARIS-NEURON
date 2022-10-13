@@ -1,17 +1,35 @@
 import Carousel from "react-grid-carousel";
 import React, { useEffect, useState } from "react";
+import { getTagsFavorites, addTagsFavorites } from "@services/apiRequest";
+import { ButtonRemoveFromFavorite } from "@components";
 import "./TagsFavorites.scss";
 
 export const TagsFavorites = () => {
-  const [tag, setTags] = useState([]);
-
+  const [token, setToken] = useState("");
+  const [usersId, setUsersId] = useState("");
+  const [tagList, setTagList] = useState([]);
+  const [tag, setTag] = useState("");
   useEffect(() => {
-    setTags([
-      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-    ]);
+    setToken(localStorage.getItem("token"));
+    setUsersId(localStorage.getItem("userId"));
   }, []);
+  useEffect(() => {
+    if (token.length) {
+      getTagsFavorites(token, usersId, setTagList);
+    }
+  }, [token]);
 
-  const tagsList = [{ name: "PHP" }, { name: "python" }, { name: "issues" }];
+  const handleChange = (e) => {
+    e.preventDefault();
+    setTag(e.target.value);
+    console.warn(tag);
+  };
+
+  const handleAddTag = (e) => {
+    e.preventDefault();
+    addTagsFavorites(token, tag, usersId, setTagList);
+    setTag("");
+  };
 
   const tagsFavList = [
     {
@@ -36,23 +54,48 @@ export const TagsFavorites = () => {
       loop: true,
     },
   ];
-  console.warn(tag);
+  console.warn(tagList, tag);
+
   return (
-    <div className="carousel">
-      <Carousel
-        cols={10}
-        rows={1}
-        gap={10}
-        responsiveLayout={tagsFavList}
-        mobileBreakpoint={0}
-        showDots
+    <div className="taglist_container">
+      <div className="carousel">
+        {tagList.length && (
+          <Carousel
+            cols={10}
+            rows={1}
+            gap={10}
+            responsiveLayout={tagsFavList}
+            mobileBreakpoint={0}
+            showDots
+          >
+            {tagList.map((tags) => (
+              <Carousel.Item key={tags}>
+                <div className="item">
+                  <div>{tags.tag}</div>
+                  <ButtonRemoveFromFavorite />
+                </div>
+              </Carousel.Item>
+            ))}
+          </Carousel>
+        )}
+      </div>
+      <form
+        className="taglist_container_addtagtofavorites"
+        onSubmit={(e) => handleAddTag(e)}
       >
-        {tagsList.map((tags) => (
-          <Carousel.Item key={tag}>
-            <div className="item">{tags.name}</div>
-          </Carousel.Item>
-        ))}
-      </Carousel>
+        <label className="taglist_container_label">
+          Ajouter un tag à votre liste de favoris:
+          <input
+            className="taglist_container_input"
+            type="text"
+            value={tag}
+            onChange={(e) => handleChange(e)}
+          />
+        </label>
+        <button className="taglist_container_buttontag" type="submit">
+          Ajouter
+        </button>
+      </form>
     </div>
   );
 };
