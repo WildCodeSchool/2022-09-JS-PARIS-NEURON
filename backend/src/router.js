@@ -35,6 +35,11 @@ router.get("/topicbyid", topicsControllers.getTopicById);
 router.use(verifyToken);
 
 router.get("/neuron", usersControllers.getNeuronById);
+router.put(
+  "/settings",
+  usersControllers.registerWithMail,
+  usersControllers.updateSettings
+);
 router.get(
   "/user_settings",
   validateUserSettings,
@@ -50,11 +55,7 @@ router.put("/comments", topicsControllers.updateComment);
 router.post("/privatemessage", usersControllers.postPrivateMessage);
 router.get("/privatemessages", usersControllers.getPrivateMessages);
 router.post("/logout", usersControllers.logout);
-router.put(
-  "/settings",
-  usersControllers.registerWithMail,
-  usersControllers.updateSettings
-);
+
 // Faire ta route settings
 
 module.exports = router;
