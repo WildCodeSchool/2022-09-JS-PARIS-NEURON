@@ -92,7 +92,7 @@ export const NeuronSettings = () => {
           onChange={(e) => updateInputs(e)}
         />
 
-        <label htmlFor="new_pseudo"> New Pseudo </label>
+        <label htmlFor="new_pseudo"> New Pseudo: </label>
         <input
           id="new_pseudo"
           name="new_pseudo"
@@ -113,7 +113,7 @@ export const NeuronSettings = () => {
           onChange={(e) => updateInputs(e)}
         />
 
-        <label htmlFor="new_password"> New Password </label>
+        <label htmlFor="new_password"> New Password: </label>
         <input
           id="new_password"
           name="new_password"
@@ -168,9 +168,10 @@ export const NeuronSettings = () => {
           onChange={(e) => updateInputs(e)}
         />
 
-        <button type="submit" onClick={(e) => handleSubmit(e)}>
-          Send
+        <button className="boutonSender" type="submit" onClick={(e) => handleSubmit(e)}>
+          Mettre à jour
         </button>
+       
       </div>
     </div>
   );

@@ -35,11 +35,8 @@ router.get("/topicbyid", topicsControllers.getTopicById);
 router.use(verifyToken);
 
 router.get("/neuron", usersControllers.getNeuronById);
-router.get(
-  "/user_settings",
-  validateUserSettings,
-  usersControllers.registerWithMail
-);
+router.put("/settings", usersControllers.registerWithMail, usersControllers.updateSettings);
+router.get("/user_settings", validateUserSettings, usersControllers.registerWithMail);
 router.get("/followed", usersControllers.getFollowed);
 router.get("/followedByIds", usersControllers.getUserByFollowed);
 router.post("/followed", usersControllers.addToFollowed);
@@ -49,11 +46,7 @@ router.post("/comments", topicsControllers.createComment);
 router.post("/privatemessage", usersControllers.postPrivateMessage);
 router.get("/privatemessages", usersControllers.getPrivateMessages);
 router.post("/logout", usersControllers.logout);
-router.put(
-  "/settings",
-  usersControllers.registerWithMail,
-  usersControllers.updateSettings
-);
+
 // Faire ta route settings
 
 module.exports = router;
