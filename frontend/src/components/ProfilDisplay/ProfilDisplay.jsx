@@ -94,7 +94,7 @@ export const ProfilDisplay = () => {
         <div
           className={toggleState === 5 ? "content  active-content" : "content"}
         >
-          <h2>Content 5</h2>
+          <h2>Mes Paramètres</h2>
           <hr />
           <NeuronSettings />
         </div>

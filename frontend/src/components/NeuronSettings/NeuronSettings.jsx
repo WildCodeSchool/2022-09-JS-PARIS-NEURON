@@ -78,11 +78,7 @@ export const NeuronSettings = () => {
       });
   }, []);
   return (
-    <div className="neuronSettings">
-      <div className="settingsTitle">
-        <h1> SETTINGS </h1>
-      </div>
-
+    <div>
       <div className="form_container">
         <label htmlFor="pseudo"> Pseudo: </label>
         <input
