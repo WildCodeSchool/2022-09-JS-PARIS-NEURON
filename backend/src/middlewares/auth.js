@@ -87,7 +87,7 @@ const verifyToken = (req, res, next) => {
 
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
     req.mail = decodedToken.mail;
-    // console.log("comparaison &&&&&", xsrfToken, "decodeddddddd",decodedToken.xsrfToken)
+    
     if (xsrfToken !== decodedToken.xsrfToken) {
       return res.status(401).json({ message: "erreur, êtes-vous connecté?" });
     }
