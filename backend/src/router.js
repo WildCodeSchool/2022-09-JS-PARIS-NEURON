@@ -35,8 +35,16 @@ router.get("/topicbyid", topicsControllers.getTopicById);
 router.use(verifyToken);
 
 router.get("/neuron", usersControllers.getNeuronById);
-router.put("/settings", usersControllers.registerWithMail, usersControllers.updateSettings);
-router.get("/user_settings", validateUserSettings, usersControllers.registerWithMail);
+router.put(
+  "/settings",
+  usersControllers.registerWithMail,
+  usersControllers.updateSettings
+);
+router.get(
+  "/user_settings",
+  validateUserSettings,
+  usersControllers.registerWithMail
+);
 router.get("/followed", usersControllers.getFollowed);
 router.get("/followedByIds", usersControllers.getUserByFollowed);
 router.post("/followed", usersControllers.addToFollowed);

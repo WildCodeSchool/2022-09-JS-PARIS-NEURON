@@ -168,10 +168,13 @@ export const NeuronSettings = () => {
           onChange={(e) => updateInputs(e)}
         />
 
-        <button className="boutonSender" type="submit" onClick={(e) => handleSubmit(e)}>
+        <button
+          className="boutonSender"
+          type="submit"
+          onClick={(e) => handleSubmit(e)}
+        >
           Mettre à jour
         </button>
-       
       </div>
     </div>
   );

@@ -19,7 +19,6 @@ export const MailsDisplay = () => {
     if (token) getPrivateMessages(token, userId, setMails);
   }, [token]);
 
-
   return (
     <div className="privateMessages">
       {mails.length &&

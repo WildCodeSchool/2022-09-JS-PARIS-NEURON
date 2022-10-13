@@ -1,6 +1,6 @@
-import React from "react"
+import React from "react";
 
-const SvgComponent = props => (
+const SvgComponent = (props) => (
   <svg
     x="0px"
     y="0px"
@@ -13,6 +13,6 @@ const SvgComponent = props => (
       fill="#662483"
     />
   </svg>
-)
+);
 
-export default SvgComponent
+export default SvgComponent;
