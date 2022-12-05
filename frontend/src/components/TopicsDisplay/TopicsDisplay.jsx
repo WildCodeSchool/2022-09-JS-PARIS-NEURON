@@ -30,6 +30,9 @@ export const TopicsDisplay = () => {
     setUserId(localStorage.getItem("userId"));
     getCategories(setCategories);
     getTopics(setTopics);
+  }, []);
+
+  useEffect(() => {
     getTagsFavorites(token, userId, setTagsFavorites);
   }, [token]);
 
