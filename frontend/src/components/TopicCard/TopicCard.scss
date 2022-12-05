@@ -2,7 +2,6 @@
 
 .topicCard {
   height: 210px;
-  width: 200px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -95,5 +94,11 @@
       border-radius: 0.5rem 0.5rem;
       cursor: pointer;
     }
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .topicCard {
+    width: 200px;
   }
 }
