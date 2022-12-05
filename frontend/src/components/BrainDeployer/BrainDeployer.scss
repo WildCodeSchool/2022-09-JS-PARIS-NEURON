@@ -55,12 +55,16 @@
 @media screen and (min-width: 1200px) {
   .braindeployer {
     top: 0;
+    width: 160px;
     align-items: start;
     border-radius: 0 0 0 10rem;
-    padding-right: 1rem;
+    padding-right: 3rem;
 
     &.touched,
     &:hover {
+      height: 170px;
+      width: 200px;
+
       & > svg {
         transform: scale(0.4) rotate(1turn);
       }
