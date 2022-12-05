@@ -5,7 +5,7 @@ import { TopicCard, Search } from "@components";
 import Carousel from "react-grid-carousel";
 import {
   getCategories,
-  getTagsFavorites,
+  getTagsFavoritesForTopics,
   getTopics,
   getTopicsByTitle,
 } from "@services/apiRequest";
@@ -31,7 +31,7 @@ export const TopicsDisplay = () => {
   }, []);
 
   const handleFilter = () => {
-    getTagsFavorites(token, userId, setTopics);
+    getTagsFavoritesForTopics(token, userId, setTopics);
     setToggleFilter(!toggleFilter);
   };
 
@@ -47,7 +47,6 @@ export const TopicsDisplay = () => {
   const handleSearch = () => {
     setTopicsByTitle([]);
     getTopicsByTitle(searchString, setTopicsByTitle);
-    console.warn(topicsByTitle);
     setOpen(0);
   };
 

@@ -119,6 +119,22 @@ const getTopicsByTags = (token, tags, setState) => {
     });
 };
 
+const getTagsFavoritesForTopics = (token, usersId, setState) => {
+  axios
+    .get(`${BASE_URL}/tagsFavorites?usersId=${usersId}`, {
+      withCredentials: true,
+      headers: {
+        "x-xsrf-token": `${token}`,
+      },
+    })
+    .then((res) => {
+      getTopicsByTags(token, res.data, setState);
+    })
+    .catch((err) => {
+      console.warn(err);
+    });
+};
+
 const getComments = (id, setComments, setCommentContent) => {
   axios.get(`${BASE_URL}/comments?id=${id}`).then((res) => {
     setComments(res.data);
@@ -387,8 +403,7 @@ const getTagsFavorites = (token, usersId, setState) => {
       },
     })
     .then((res) => {
-      // setState(res.data);
-      getTopicsByTags(token, res.data, setState);
+      setState(res.data);
     })
     .catch((err) => {
       console.warn(err);
@@ -450,6 +465,7 @@ export {
   getCategories,
   getTopicById,
   getTopicsByTags,
+  getTagsFavoritesForTopics,
   getTopicsByTitle,
   getComments,
   postTopic,
