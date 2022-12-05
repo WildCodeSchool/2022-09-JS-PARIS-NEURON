@@ -254,6 +254,10 @@
 
     &_content {
       height: 100%;
+
+      &_comments_editor_input {
+        width: 200%;
+      }
     }
   }
 }
