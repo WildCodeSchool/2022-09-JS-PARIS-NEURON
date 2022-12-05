@@ -100,31 +100,39 @@ export const TopicsDisplay = () => {
             >
               {category.name}
             </div>
-            <Carousel
-              cols={5}
-              rows={1}
-              gap={10}
-              responsiveLayout={TopicsList}
-              mobileBreakpoint={376}
-              showDots
-            >
-              {topics
-                .filter((topic) => topic.categories_id === category.id)
-                .map((topic) => {
-                  return (
-                    <Carousel.Item key={topic.id}>
-                      <div className="categories_category_content">
-                        <TopicCard
-                          title={topic.title}
-                          summary={topic.summary}
-                          date={topic.date}
-                          id={topic.topics_id}
-                        />
-                      </div>
-                    </Carousel.Item>
-                  );
-                })}
-            </Carousel>
+            {topics.filter((topic) => topic.categories_id === category.id)
+              .length ? (
+              <Carousel
+                cols={5}
+                rows={1}
+                gap={10}
+                responsiveLayout={TopicsList}
+                mobileBreakpoint={376}
+                showDots
+              >
+                {topics
+                  .filter((topic) => topic.categories_id === category.id)
+                  .map((topic) => {
+                    return (
+                      <Carousel.Item key={topic.id}>
+                        <div className="categories_category_content">
+                          <TopicCard
+                            title={topic.title}
+                            summary={topic.summary}
+                            date={topic.date}
+                            id={topic.topics_id}
+                          />
+                        </div>
+                      </Carousel.Item>
+                    );
+                  })}
+              </Carousel>
+            ) : (
+              <p className="categories_category_void">
+                rien pour le moment, ajoutez quelques tags à votre profil (html,
+                css, javascript, react...)
+              </p>
+            )}
           </div>
         );
       })}

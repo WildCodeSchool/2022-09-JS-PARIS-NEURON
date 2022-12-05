@@ -55,6 +55,10 @@
       padding: 0.5rem;
     }
 
+    &_void {
+      text-align: center;
+    }
+
     &_missing {
       &_visible {
         display: flex;
