@@ -7,7 +7,6 @@ import {
   getCategories,
   getTagsFavorites,
   getTopics,
-  getTopicsByTags,
   getTopicsByTitle,
 } from "@services/apiRequest";
 
@@ -23,20 +22,16 @@ export const TopicsDisplay = () => {
   const [token, setToken] = useState("");
   const [userId, setUserId] = useState("");
   const [toggleFilter, setToggleFilter] = useState(false);
-  const [tagsFavorites, setTagsFavorites] = useState([]);
 
   useEffect(() => {
     setToken(localStorage.getItem("token"));
     setUserId(localStorage.getItem("userId"));
     getCategories(setCategories);
     getTopics(setTopics);
-    if (token) {
-      getTagsFavorites(token, userId, setTagsFavorites);
-    }
-  }, [token]);
+  }, []);
 
   const handleFilter = () => {
-    getTopicsByTags(token, tagsFavorites, setTopics);
+    getTagsFavorites(token, userId, setTopics);
     setToggleFilter(!toggleFilter);
   };
 

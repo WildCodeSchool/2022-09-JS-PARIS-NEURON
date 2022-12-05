@@ -387,7 +387,8 @@ const getTagsFavorites = (token, usersId, setState) => {
       },
     })
     .then((res) => {
-      setState(res.data);
+      // setState(res.data);
+      getTopicsByTags(token, res.data, setState);
     })
     .catch((err) => {
       console.warn(err);
