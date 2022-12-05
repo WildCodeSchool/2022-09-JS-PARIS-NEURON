@@ -95,8 +95,25 @@
   }
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 1200px) {
   .markdownSyntax {
     max-width: 1200px;
+
+    &_content {
+      margin: 7rem auto auto 0;
+      display: grid;
+      grid-template-columns: 50% 50%;
+
+      > * {
+        width: 98%;
+        margin: 0 auto;
+      }
+    }
+
+    .markdown {
+      img {
+        width: 20%;
+      }
+    }
   }
 }

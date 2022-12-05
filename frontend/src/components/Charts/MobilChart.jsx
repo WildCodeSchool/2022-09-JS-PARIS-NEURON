@@ -17,7 +17,8 @@ export const MobilChart = () => {
 
   const chartConfigs = {
     type: "pie3d",
-    width: "90%",
+    width: "100%",
+    height: "35%",
     dataFormat: "json",
     dataSource: {
       chart: {

@@ -58,6 +58,15 @@ export const MarkdownSyntax = () => {
             [moteur](https://duckduckgo.com/)
           </ReactMarkdown>
         </div>
+        <div className="markdownSyntax_content_quote">
+          <div className="markdownSyntax_content_instruction">
+            ajouter une citation avec {">"}
+          </div>
+          <div className="markdownSyntax_content_example">
+            example - {">"} carpe diem donne:
+          </div>
+          <ReactMarkdown className="markdown">{"> carpe diem"}</ReactMarkdown>
+        </div>
         <div className="markdownSyntax_content_image">
           <div className="markdownSyntax_content_instruction">
             ajouter une image avec ![]()
@@ -69,15 +78,6 @@ export const MarkdownSyntax = () => {
           <ReactMarkdown className="markdown">
             ![panda](https://img.over-blog-kiwi.com/1/18/13/76/20170702/ob_679f68_28c-panda-roux.jpg)
           </ReactMarkdown>
-        </div>
-        <div className="markdownSyntax_content_quote">
-          <div className="markdownSyntax_content_instruction">
-            ajouter une citation avec {">"}
-          </div>
-          <div className="markdownSyntax_content_example">
-            example - {">"} carpe diem donne:
-          </div>
-          <ReactMarkdown className="markdown">{"> carpe diem"}</ReactMarkdown>
         </div>
         <div className="markdownSyntax_content_code">
           <div className="markdownSyntax_content_instruction">

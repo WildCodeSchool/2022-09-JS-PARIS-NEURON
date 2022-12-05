@@ -23,7 +23,7 @@ export const DesktopChart = () => {
     dataSource: {
       chart: {
         caption: "Les 10 tags les plus utilisés",
-        yAxisName: "NB. de topics",
+        yAxisName: "récurrence",
         theme: "candy",
         bgColor: "#e0ded8",
       },

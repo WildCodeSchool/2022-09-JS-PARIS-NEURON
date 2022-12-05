@@ -168,8 +168,19 @@
   }
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 1200px) {
   .createtopics {
-    max-width: 1200px;
+    max-width: 800px;
+    padding-top: 7rem;
+
+    &_form {
+      &_editor {
+        height: 70%;
+      }
+
+      &_send {
+        margin: 2rem auto 0 auto;
+      }
+    }
   }
 }

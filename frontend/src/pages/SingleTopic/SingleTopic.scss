@@ -246,8 +246,10 @@
   }
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 1200px) {
   .singleTopic {
-    max-width: 1200px;
+    max-width: 800px;
+    height: 88%;
+    margin: 7rem auto auto auto;
   }
 }

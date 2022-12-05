@@ -32,8 +32,10 @@
   }
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 1200px) {
   .userprofile {
-    max-width: 1200px;
+    max-width: 900px;
+    height: 88%;
+    margin: 7rem auto auto auto;
   }
 }
