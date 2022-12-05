@@ -27,7 +27,7 @@ export const BrainDeployer = () => {
       <div
         role="button"
         className={!touched ? "braindeployer" : "braindeployer touched"}
-        onClick={() => (windowWidth < 1440 ? setTouched(!touched) : null)}
+        onClick={() => (windowWidth < 1200 ? setTouched(!touched) : null)}
       >
         <BrainIcon />
         <div className="braindeployer_circle first">

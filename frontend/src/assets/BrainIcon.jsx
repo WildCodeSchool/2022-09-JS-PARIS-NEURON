@@ -13,7 +13,7 @@ export const BrainIcon = (props) => {
       y="0px"
       viewBox="0 0 177.8 155.29"
       xmlSpace="preserve"
-      height={windowWidth < 768 ? 50 : 80}
+      height={windowWidth < 376 ? 50 : 80}
       width={50}
       {...props}
     >
