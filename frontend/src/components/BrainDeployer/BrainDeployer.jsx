@@ -56,5 +56,3 @@ export const BrainDeployer = () => {
     </>
   );
 };
-
-// tenter avec deuxième modale pour déco
