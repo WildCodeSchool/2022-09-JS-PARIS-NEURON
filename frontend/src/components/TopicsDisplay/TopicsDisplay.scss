@@ -18,9 +18,9 @@
         transition: opacity 200ms linear 300ms, visibility 0ms linear 300ms;
       }
 
-      > div {
-        margin-bottom: 10%;
-      }
+      // > div {
+      //   margin-bottom: 1rem;
+      // }
     }
 
     &_close {
@@ -35,7 +35,7 @@
     &_name {
       width: 100%;
       padding: 1%;
-      margin: 1rem 0;
+      margin: 1rem 0 3rem 0;
       background-color: $dark-purple-1;
       color: $warm-grey-1;
       cursor: pointer;
