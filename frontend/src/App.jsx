@@ -9,7 +9,6 @@ import {
   CreateTopics,
   UserProfile,
   NeuronProfile,
-  CreateMail,
   MarkdownSyntax,
 } from "@pages";
 
@@ -36,7 +35,6 @@ const App = () => {
             <Route path="/createtopics" element={<CreateTopics />} />
             <Route path="/userprofile/:id" element={<UserProfile />} />
             <Route path="neuronprofile/:id" element={<NeuronProfile />} />
-            <Route path="/createmail" element={<CreateMail />} />
             <Route path="/markdownsyntax" element={<MarkdownSyntax />} />
           </Routes>
         </BrowserRouter>
