@@ -15,27 +15,21 @@ export const MarkdownSyntax = () => {
           <div className="markdownSyntax_content_instruction">
             ajouter un titre avec #, # donne un h1, ## donne un h2...
           </div>
-          <div className="markdownSyntax_content_example">
-            example - ## titre donne:
-          </div>
+          <div className="markdownSyntax_content_example">## titre donne:</div>
           <ReactMarkdown className="markdown">## titre</ReactMarkdown>
         </div>
         <div className="markdownSyntax_content_bold">
           <div className="markdownSyntax_content_instruction">
             mettre en gras avec ** **
           </div>
-          <div className="markdownSyntax_content_example">
-            example - **bold** donne:
-          </div>
+          <div className="markdownSyntax_content_example">**bold** donne:</div>
           <ReactMarkdown className="markdown">**bold**</ReactMarkdown>
         </div>
         <div className="markdownSyntax_content_italic">
           <div className="markdownSyntax_content_instruction">
             mettre en italic avec * *
           </div>
-          <div className="markdownSyntax_content_example">
-            example - *italic* donne:
-          </div>
+          <div className="markdownSyntax_content_example">*italic* donne:</div>
           <ReactMarkdown className="markdown">*italic*</ReactMarkdown>
         </div>
         <div className="markdownSyntax_content_underline">
@@ -43,7 +37,7 @@ export const MarkdownSyntax = () => {
             afficher une ligne séparatrice avec ___ ou ***
           </div>
           <div className="markdownSyntax_content_example">
-            example - *** ou ___ donne:
+            *** ou ___ donne:
           </div>
           <ReactMarkdown className="markdown">___</ReactMarkdown>{" "}
         </div>
@@ -52,7 +46,7 @@ export const MarkdownSyntax = () => {
             ajouter un lien avec []()
           </div>
           <div className="markdownSyntax_content_example">
-            example - [moteur](https://duckduckgo.com/):
+            [moteur](https://duckduckgo.com/) donne:
           </div>
           <ReactMarkdown className="markdown" linkTarget="_blank">
             [moteur](https://duckduckgo.com/)
@@ -63,7 +57,7 @@ export const MarkdownSyntax = () => {
             ajouter une citation avec {">"}
           </div>
           <div className="markdownSyntax_content_example">
-            example - {">"} carpe diem donne:
+            {">"} carpe diem donne:
           </div>
           <ReactMarkdown className="markdown">{"> carpe diem"}</ReactMarkdown>
         </div>
@@ -72,8 +66,8 @@ export const MarkdownSyntax = () => {
             ajouter une image avec ![]()
           </div>
           <div className="markdownSyntax_content_example">
-            example -
-            ![panda](https://img.over-blog-kiwi.com/1/18/13/76/20170702/ob_679f68_28c-panda-roux.jpg):
+            ![panda](https://img.over-blog-kiwi.com/1/18/13/76/20170702/ob_679f68_28c-panda-roux.jpg)
+            donne:
           </div>
           <ReactMarkdown className="markdown">
             ![panda](https://img.over-blog-kiwi.com/1/18/13/76/20170702/ob_679f68_28c-panda-roux.jpg)
@@ -81,11 +75,10 @@ export const MarkdownSyntax = () => {
         </div>
         <div className="markdownSyntax_content_code">
           <div className="markdownSyntax_content_instruction">
-            écrire en code avec ``` ```, ```js ``` ou autre langage pour une
-            colorisation spécifique
+            écrire en code avec ``` ```
           </div>
           <div className="markdownSyntax_content_example">
-            example - ``` console.log()``` donne:
+            ``` console.log()``` donne:
           </div>
           <ReactMarkdown
             className="markdown"

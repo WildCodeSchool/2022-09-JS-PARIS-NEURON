@@ -77,6 +77,34 @@ const getTopicById = (req, res) => {
       } else {
         res.status(404).send("Not Found");
       }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500);
+    });
+};
+
+const getTopicByTags = (req, res) => {
+  const { string } = req.query;
+  console.warn(string);
+
+  const newQuery = `SELECT  *, DATE_FORMAT(date, "%d/%m/%Y") AS date FROM topics_has_tags AS tht INNER JOIN topics ON topics.id=tht.topics_id INNER JOIN tags ON tags.id=tht.tags_id WHERE tags.tag='${string.replaceAll(
+    ",",
+    "' OR tags.tag='"
+  )}' GROUP BY topics.id ORDER BY topics.id DESC`;
+
+  neuron
+    .query(newQuery)
+    .then(([topic]) => {
+      if (topic[0] != null) {
+        res.status(200).json(topic);
+      } else {
+        res.status(404).send("Not Found");
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500);
     });
 };
 
@@ -187,6 +215,7 @@ module.exports = {
   getCategories,
   getTopics,
   getTopicById,
+  getTopicByTags,
   getComments,
   getTopicsByTitle,
   createTopic,

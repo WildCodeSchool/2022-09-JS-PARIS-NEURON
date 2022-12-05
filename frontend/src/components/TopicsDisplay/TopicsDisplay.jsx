@@ -5,7 +5,9 @@ import { TopicCard, Search } from "@components";
 import Carousel from "react-grid-carousel";
 import {
   getCategories,
+  getTagsFavorites,
   getTopics,
+  getTopicsByTags,
   getTopicsByTitle,
 } from "@services/apiRequest";
 
@@ -18,10 +20,26 @@ export const TopicsDisplay = () => {
   const [categories, setCategories] = useState([]);
   const [open, setOpen] = useState(1);
 
+  const [toggleFilter, setToggleFilter] = useState(false);
+  const [tagsFavorites, setTagsFavorites] = useState([]);
+
   useEffect(() => {
     getCategories(setCategories);
     getTopics(setTopics);
   }, []);
+
+  const handleFilter = () => {
+    const token = localStorage.getItem("token");
+    const userId = localStorage.getItem("userId");
+    getTagsFavorites(token, userId, setTagsFavorites);
+    getTopicsByTags(token, tagsFavorites, setTopics);
+    setToggleFilter(!toggleFilter);
+  };
+
+  const handleFullTopics = () => {
+    getTopics(setTopics);
+    setToggleFilter(!toggleFilter);
+  };
 
   const handleChange = (e) => {
     setSearchString(e.target.value);
@@ -51,6 +69,23 @@ export const TopicsDisplay = () => {
 
   return (
     <div className="categories">
+      {!toggleFilter ? (
+        <button
+          type="button"
+          className="categories_filterByTags"
+          onClick={() => handleFilter()}
+        >
+          filtrer avec mes tags
+        </button>
+      ) : (
+        <button
+          type="button"
+          className="categories_filterByTags"
+          onClick={() => handleFullTopics()}
+        >
+          tous les topics
+        </button>
+      )}
       {categories.map((category) => {
         return (
           <div

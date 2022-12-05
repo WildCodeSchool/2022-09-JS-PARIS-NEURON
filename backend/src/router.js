@@ -49,6 +49,7 @@ router.get("/followed", usersControllers.getFollowed);
 router.get("/followedByIds", usersControllers.getUserByFollowed);
 router.post("/followed", usersControllers.addToFollowed);
 router.delete("/followed", usersControllers.removeFromFollowed);
+router.get("/topicbytag", topicsControllers.getTopicByTags);
 router.post("/topics", topicsControllers.createTopic);
 router.post("/comments", topicsControllers.createComment);
 router.put("/comments", topicsControllers.updateComment);

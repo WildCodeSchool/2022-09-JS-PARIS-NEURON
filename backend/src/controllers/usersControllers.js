@@ -230,7 +230,7 @@ const getTagsFavorites = (req, res) => {
 
   neuron
     .query(
-      `SELECT * FROM users_has_tags INNER JOIN users ON users.id=users_has_tags.users_id INNER JOIN tags ON tags.id=users_has_tags.tags_id WHERE users_has_tags.users_id=?`,
+      `SELECT tags.tag FROM users_has_tags INNER JOIN users ON users.id=users_has_tags.users_id INNER JOIN tags ON tags.id=users_has_tags.tags_id WHERE users_has_tags.users_id=?`,
       [usersId]
     )
     .then(([result]) => {

@@ -19,19 +19,19 @@ export const Navbar = () => {
 
   return (
     <nav className="navbar">
-      <Link to="/">
+      <Link to="/" title="page d'acceuil">
         <LogoLong />
       </Link>
       {localStorage.getItem("token") ? (
-        <Link to={`/userprofile/${userId}`}>
+        <Link to={`/userprofile/${userId}`} title="mon profil">
           <UserProfileIcon />
         </Link>
       ) : null}
-      <Link to="/topics">
+      <Link to="/topics" title="voir les topics">
         <TopicsIcon />
       </Link>
       {localStorage.getItem("token") ? (
-        <Link to="/createtopics">
+        <Link to="/createtopics" title="créer un nouveau topic">
           <CreateTopicIcon />
         </Link>
       ) : null}

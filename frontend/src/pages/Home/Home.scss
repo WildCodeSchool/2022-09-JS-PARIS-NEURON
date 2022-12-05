@@ -39,6 +39,7 @@
       margin-top: 8rem;
       display: grid;
       grid-template-rows: 20%;
+      grid-template-columns: 70% 45%;
       grid-template-areas:
         "chart userHeader"
         "chart neuronList";

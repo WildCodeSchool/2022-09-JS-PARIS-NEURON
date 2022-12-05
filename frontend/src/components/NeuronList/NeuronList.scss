@@ -1,3 +1,5 @@
+@import "../../colors.scss";
+
 .carousel {
   width: 100%;
   height: 20%;
@@ -8,6 +10,11 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+  }
+
+  &_missTag {
+    color: $dark-purple-3;
+    text-align: center;
   }
 }
 

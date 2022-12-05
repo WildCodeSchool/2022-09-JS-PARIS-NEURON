@@ -30,10 +30,10 @@ export const BrainDeployer = () => {
         onClick={() => (windowWidth < 1200 ? setTouched(!touched) : null)}
       >
         <BrainIcon />
-        <div className="braindeployer_circle first">
+        <div className="braindeployer_circle first" title="me connecter">
           <LogOnIcon onClick={() => handleToggle()} />
         </div>
-        <div className="braindeployer_circle second">
+        <div className="braindeployer_circle second" title="mes messages">
           {localStorage.getItem("token") ? (
             <Link to="/createmail">
               <MailOnIcon />
@@ -42,7 +42,7 @@ export const BrainDeployer = () => {
             <MailOnIcon onClick={() => handleToggle()} />
           )}
         </div>
-        <div className="braindeployer_circle third">
+        <div className="braindeployer_circle third" title="mes notifications">
           {localStorage.getItem("token") ? (
             <Link to="/createmail">
               <NotifOnIcon />

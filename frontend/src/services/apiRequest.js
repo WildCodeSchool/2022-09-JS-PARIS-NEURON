@@ -103,6 +103,22 @@ const getTopicById = (id, setTopics, setTaglist) => {
   });
 };
 
+const getTopicsByTags = (token, tags, setState) => {
+  const array = tags.map((tag) => tag.tag);
+  const string = array.join(",", " ");
+
+  axios
+    .get(`${BASE_URL}/topicbytag?string=${string}`, {
+      withCredentials: true,
+      headers: {
+        "x-xsrf-token": `${token}`,
+      },
+    })
+    .then((res) => {
+      setState(res.data);
+    });
+};
+
 const getComments = (id, setComments, setCommentContent) => {
   axios.get(`${BASE_URL}/comments?id=${id}`).then((res) => {
     setComments(res.data);
@@ -402,27 +418,27 @@ const addTagsFavorites = (token, tag, userId, setState) => {
     });
 };
 
-const removeFromTagsFavorites = (setState) => {
-  axios
-    .delete(
-      `${BASE_URL}/tagsFavorites`,
-      {
-        id,
-      },
-      {
-        withCredentials: true,
-        headers: {
-          "x-xsrf-token": `${token}`,
-        },
-      }
-    )
-    .then((res) => {
-      setState(res.data);
-    })
-    .catch((err) => {
-      console.warn(err);
-    });
-};
+// const removeFromTagsFavorites = (setState) => {
+//   axios
+//     .delete(
+//       `${BASE_URL}/tagsFavorites`,
+//       {
+//         id,
+//       },
+//       {
+//         withCredentials: true,
+//         headers: {
+//           "x-xsrf-token": `${token}`,
+//         },
+//       }
+//     )
+//     .then((res) => {
+//       setState(res.data);
+//     })
+//     .catch((err) => {
+//       console.warn(err);
+//     });
+// };
 
 export {
   register,
@@ -432,6 +448,7 @@ export {
   getTopics,
   getCategories,
   getTopicById,
+  getTopicsByTags,
   getTopicsByTitle,
   getComments,
   postTopic,
@@ -447,5 +464,5 @@ export {
   getUsersByIds,
   getTagsFavorites,
   addTagsFavorites,
-  removeFromTagsFavorites,
+  // removeFromTagsFavorites,
 };
