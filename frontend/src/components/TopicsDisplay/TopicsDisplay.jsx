@@ -20,18 +20,20 @@ export const TopicsDisplay = () => {
   const [categories, setCategories] = useState([]);
   const [open, setOpen] = useState(1);
 
+  const [token, setToken] = useState("");
+  const [userId, setUserId] = useState("");
   const [toggleFilter, setToggleFilter] = useState(false);
   const [tagsFavorites, setTagsFavorites] = useState([]);
 
   useEffect(() => {
+    setToken(localStorage.getItem("token"));
+    setUserId(localStorage.getItem("userId"));
     getCategories(setCategories);
     getTopics(setTopics);
-  }, []);
+    getTagsFavorites(token, userId, setTagsFavorites);
+  }, [token]);
 
   const handleFilter = () => {
-    const token = localStorage.getItem("token");
-    const userId = localStorage.getItem("userId");
-    getTagsFavorites(token, userId, setTagsFavorites);
     getTopicsByTags(token, tagsFavorites, setTopics);
     setToggleFilter(!toggleFilter);
   };
