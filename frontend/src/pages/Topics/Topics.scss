@@ -30,3 +30,9 @@
   animation-duration: 0.5s;
   animation-name: extend;
 }
+
+@media screen and (min-width: 768px) {
+  .topics {
+    max-width: 1200px;
+  }
+}

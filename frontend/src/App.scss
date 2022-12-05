@@ -148,6 +148,8 @@ table {
 .App {
   height: 100vh;
   width: 100vw;
+  display: flex;
+  justify-content: center;
   background-color: $warm-grey-1;
   color: $carbon;
   padding: 1% 1%;

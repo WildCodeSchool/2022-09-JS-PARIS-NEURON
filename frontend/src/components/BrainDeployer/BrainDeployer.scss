@@ -51,3 +51,30 @@
     visibility: hidden;
   }
 }
+
+@media screen and (min-width: 768px) {
+  .braindeployer {
+    top: 0;
+    align-items: start;
+    border-radius: 0 0 0 10rem;
+
+    &.touched,
+    &:hover {
+      & > svg {
+        transform: scale(0.4) rotate(1turn);
+      }
+
+      & > .first {
+        transform: translate(-5px, 85px) rotate(1turn);
+      }
+
+      & > .second {
+        transform: translate(-55px, 60px) rotate(1turn);
+      }
+
+      & > .third {
+        transform: translate(-80px, 10px) rotate(1turn);
+      }
+    }
+  }
+}

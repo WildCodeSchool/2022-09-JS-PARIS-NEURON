@@ -17,9 +17,11 @@ export const Home = () => {
   return (
     <div className="home">
       <div className="home_content">
-        <UserHeader />
-        {windowWidth < 376 ? <MobilChart /> : <DesktopChart />}
-        <NeuronList />
+        <UserHeader className="userHeader" />
+        <div className="chart">
+          {windowWidth < 376 ? <MobilChart /> : <DesktopChart />}
+        </div>
+        <NeuronList className="neuronList" />
       </div>
       <Navbar />
     </div>

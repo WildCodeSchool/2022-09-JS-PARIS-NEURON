@@ -38,9 +38,23 @@
   }
 }
 
-@media (min-width: 768px) {
+@media screen and (min-width: 768px) {
   .userheader {
-    align-self: flex-end;
-    width: 375px;
+    height: 50%;
+    width: 60%;
+    margin: 0;
+
+    &_pseudo {
+      width: 0;
+    }
+
+    &_avatarContainer {
+      width: 0;
+      height: 170%;
+    }
+
+    &_shortcuts {
+      width: 0;
+    }
   }
 }

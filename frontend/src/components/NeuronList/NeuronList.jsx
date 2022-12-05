@@ -20,20 +20,13 @@ export const NeuronList = () => {
       gap: 2,
       loop: true,
     },
-    {
-      breakpoint: 1439,
-      cols: 6,
-      rows: 1,
-      gap: 2,
-      loop: true,
-    },
   ];
 
   return (
     <div className="carousel">
       <Carousel
-        cols={10}
-        rows={1}
+        cols={3}
+        rows={4}
         gap={10}
         responsiveLayout={neuronList}
         mobileBreakpoint={0}

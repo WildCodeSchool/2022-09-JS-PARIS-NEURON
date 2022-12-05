@@ -30,3 +30,31 @@
   animation-duration: 0.5s;
   animation-name: extend;
 }
+
+@media screen and (min-width: 768px) {
+  .home {
+    max-width: 1200px;
+
+    &_content {
+      padding-top: 6rem;
+      display: grid;
+      grid-template-rows: 30%;
+      grid-template-areas:
+        "chart userHeader"
+        "chart neuronList";
+
+      .userHeader {
+        grid-area: userHeader;
+      }
+
+      .chart {
+        grid-area: chart;
+        width: 800px;
+      }
+
+      .neuronList {
+        grid-area: neuronList;
+      }
+    }
+  }
+}

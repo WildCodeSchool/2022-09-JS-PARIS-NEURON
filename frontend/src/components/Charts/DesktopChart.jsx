@@ -18,7 +18,7 @@ export const DesktopChart = () => {
   const chartConfigs = {
     type: "column2d",
     width: "95%",
-    height: "45%",
+    height: "80%",
     dataFormat: "json",
     dataSource: {
       chart: {
