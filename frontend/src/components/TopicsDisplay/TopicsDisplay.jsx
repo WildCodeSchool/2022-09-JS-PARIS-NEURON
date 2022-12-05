@@ -68,7 +68,7 @@ export const TopicsDisplay = () => {
               {category.name}
             </div>
             <Carousel
-              cols={6}
+              cols={5}
               rows={1}
               gap={10}
               responsiveLayout={TopicsList}
@@ -106,7 +106,7 @@ export const TopicsDisplay = () => {
       <div className="categories_showByTags">
         {(topicsByTitle.length && (
           <Carousel
-            cols={6}
+            cols={5}
             rows={1}
             gap={10}
             responsiveLayout={TopicsList}
