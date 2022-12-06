@@ -318,7 +318,7 @@ const getFollowed = (token, id, setState) => {
 const addToFollowed = (token, userId, id) => {
   axios
     .post(
-      `http://localhost:5000/followed`,
+      `${BASE_URL}/followed`,
       { userId, id },
       {
         withCredentials: true,
@@ -337,7 +337,7 @@ const addToFollowed = (token, userId, id) => {
 
 const removeFromFollowed = (token, id, friendId, setState) => {
   axios
-    .delete(`http://localhost:5000/followed?id=${id}&friend_id=${friendId}`, {
+    .delete(`${BASE_URL}/followed?id=${id}&friend_id=${friendId}`, {
       withCredentials: true,
       headers: {
         "x-xsrf-token": `${token}`,
