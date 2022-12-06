@@ -70,7 +70,9 @@ export const TopicsDisplay = () => {
       {!toggleFilter ? (
         <button
           type="button"
-          className="categories_filterByTags"
+          className={
+            token != null ? "categories_filterByTags" : "categories_hideButton"
+          }
           onClick={() => handleFilter()}
         >
           filtrer avec mes tags
@@ -78,7 +80,9 @@ export const TopicsDisplay = () => {
       ) : (
         <button
           type="button"
-          className="categories_filterByTags"
+          className={
+            token != null ? "categories_filterByTags" : "categories_hideButton"
+          }
           onClick={() => handleFullTopics()}
         >
           tous les topics

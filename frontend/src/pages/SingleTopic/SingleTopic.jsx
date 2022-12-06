@@ -116,7 +116,9 @@ export const SingleTopic = () => {
               <div className="singleTopic_content_header_tags_tagList">
                 {taglist.map((tag) => (
                   <div key={tag.id}>
-                    <div>{tag.tag}</div>
+                    <div>
+                      <strong>{tag.tag}</strong>
+                    </div>
                   </div>
                 ))}
               </div>

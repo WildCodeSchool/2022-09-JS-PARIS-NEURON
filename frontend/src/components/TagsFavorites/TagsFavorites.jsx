@@ -68,7 +68,9 @@ export const TagsFavorites = () => {
             {tagList.map((tags) => (
               <Carousel.Item key={tags}>
                 <div className="item">
-                  <div>{tags.tag}</div>
+                  <div>
+                    <strong>{tags.tag}</strong>{" "}
+                  </div>
                 </div>
               </Carousel.Item>
             ))}
