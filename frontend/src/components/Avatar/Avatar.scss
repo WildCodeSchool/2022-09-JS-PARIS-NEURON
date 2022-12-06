@@ -3,6 +3,7 @@
 .avatar {
   height: 100%;
   border-radius: 50%;
+  object-fit: cover;
   cursor: pointer;
 
   @keyframes changetogreen {
@@ -40,8 +41,4 @@
   &.off {
     animation-name: changetoorange;
   }
-
-  object-fit: cover;
-  height: 100%;
-  border-radius: 50%;
 }
