@@ -71,8 +71,18 @@ export const NeuronProfile = () => {
           </div>
         </div>
         <div className="neuronProfile_links">
-          <span>Github: {neuronInfos[0].github}</span>
-          <span>linkedin: {neuronInfos[0].linkedin}</span>
+          <span>
+            Github:{" "}
+            <a href={neuronInfos[0].github} rel="noreferrer" target="_blank">
+              {neuronInfos[0].github}
+            </a>
+          </span>
+          <span>
+            linkedin:{" "}
+            <a href={neuronInfos[0].linkedin} rel="noreferrer" target="_blank">
+              {neuronInfos[0].linkedin}
+            </a>
+          </span>
         </div>
         <form
           className="neuronProfile_mailEditor"
