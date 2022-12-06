@@ -62,7 +62,7 @@ export const NeuronFavorites = () => {
   ];
   return (
     <div className="carousel">
-      {neurons && neurons.length ? (
+      {neurons.length && neurons.length ? (
         <Carousel
           cols={5}
           rows={4}
