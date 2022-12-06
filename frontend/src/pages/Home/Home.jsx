@@ -15,7 +15,7 @@ export const Home = () => {
   });
 
   return (
-    <div className="home">
+    <section className="home">
       <div className="home_content">
         <UserHeader className="userHeader" />
         <div className="chart">
@@ -24,6 +24,6 @@ export const Home = () => {
         <NeuronList className="neuronList" />
       </div>
       <Navbar />
-    </div>
+    </section>
   );
 };

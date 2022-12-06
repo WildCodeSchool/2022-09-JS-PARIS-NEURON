@@ -345,7 +345,6 @@ const removeFromFollowed = (token, id, friendId, setState) => {
     })
     .then((res) => {
       console.warn(res.data);
-      setState(res.data);
       getFollowed(token, id, setState);
     })
     .catch((err) => {

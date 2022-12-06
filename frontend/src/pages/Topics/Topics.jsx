@@ -6,9 +6,9 @@ import "./Topics.scss";
 
 export const Topics = () => {
   return (
-    <div className="topics">
+    <section className="topics">
       <TopicsDisplay />
       <Navbar />
-    </div>
+    </section>
   );
 };

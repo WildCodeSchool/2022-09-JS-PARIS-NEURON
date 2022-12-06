@@ -58,7 +58,7 @@ export const NeuronProfile = () => {
 
   return (
     neuronInfos.length && (
-      <div className="neuronProfile">
+      <section className="neuronProfile">
         <div className="neuronProfile_header">
           <div className="neuronProfile_header_left">
             <Avatar />
@@ -91,7 +91,7 @@ export const NeuronProfile = () => {
           <button type="submit">envoyer</button>
         </form>
         <Navbar />
-      </div>
+      </section>
     )
   );
 };

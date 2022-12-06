@@ -321,13 +321,13 @@ const addToFollowed = (req, res) => {
 };
 
 const removeFromFollowed = (req, res) => {
-  const { id, friendId } = req.query;
+  const { id, friend_id } = req.query;
   console.warn(req.query);
 
   neuron
-    .query("DELETE FROM followed WHERE users_id= ? AND friend_id=?", [
+    .query("DELETE FROM followed WHERE users_id=? AND friend_id=?", [
       id,
-      friendId,
+      friend_id,
     ])
     .then(() => {
       res.status(200).json("supprimé des favoris");

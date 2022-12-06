@@ -84,8 +84,8 @@ export const SingleTopic = () => {
 
   return (
     topic && (
-      <div className="singleTopic">
-        <div className="singleTopic_content">
+      <section className="singleTopic">
+        <article className="singleTopic_content">
           <div className="singleTopic_content_header">
             <div className="singleTopic_content_header_top">
               <h3 className="singleTopic_content_header_title">
@@ -234,9 +234,9 @@ export const SingleTopic = () => {
               </form>
             ) : null}
           </div>
-        </div>
+        </article>
         <Navbar />
-      </div>
+      </section>
     )
   );
 };

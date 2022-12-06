@@ -33,9 +33,8 @@ export const NeuronFavorites = () => {
   }, [idList]);
 
   const handleDelete = (neuron) => {
-    setNeurons(neurons.filter((elem) => elem !== neuron.id));
     removeFromFollowed(token, id, neuron.id, setIdList);
-    console.warn(id, neuron.id);
+    setNeurons(neurons.filter((elem) => elem.id !== neuron.id));
   };
 
   const neuronFavList = [
@@ -63,16 +62,16 @@ export const NeuronFavorites = () => {
   ];
   return (
     <div className="carousel">
-      <Carousel
-        cols={5}
-        rows={4}
-        gap={5}
-        responsiveLayout={neuronFavList}
-        mobileBreakpoint={0}
-        showDots
-      >
-        {neurons.length ? (
-          neurons.map((neuron) => {
+      {neurons && neurons.length ? (
+        <Carousel
+          cols={5}
+          rows={4}
+          gap={5}
+          responsiveLayout={neuronFavList}
+          mobileBreakpoint={0}
+          showDots
+        >
+          {neurons.map((neuron) => {
             return (
               <Carousel.Item key={neuron}>
                 <div className="item">
@@ -84,13 +83,13 @@ export const NeuronFavorites = () => {
                 </div>
               </Carousel.Item>
             );
-          })
-        ) : (
-          <div>
-            <p>Pas de neurones favoris 🙁</p>
-          </div>
-        )}
-      </Carousel>
+          })}
+        </Carousel>
+      ) : (
+        <div>
+          <p>Pas de neurones favoris 🙁</p>
+        </div>
+      )}
     </div>
   );
 };

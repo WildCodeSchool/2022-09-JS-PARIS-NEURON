@@ -9,7 +9,7 @@ import { Navbar } from "@components/";
 
 export const MarkdownSyntax = () => {
   return (
-    <div className="markdownSyntax">
+    <section className="markdownSyntax">
       <div className="markdownSyntax_content">
         <div className="markdownSyntax_content_title">
           <div className="markdownSyntax_content_instruction">
@@ -89,6 +89,6 @@ export const MarkdownSyntax = () => {
         </div>
       </div>
       <Navbar />
-    </div>
+    </section>
   );
 };

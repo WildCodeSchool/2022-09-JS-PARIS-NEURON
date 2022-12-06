@@ -14,7 +14,7 @@ export const UserProfile = () => {
   }, []);
 
   return (
-    <div className="userprofile">
+    <section className="userprofile">
       {auth ? (
         <>
           <ProfilDisplay />
@@ -23,6 +23,6 @@ export const UserProfile = () => {
       ) : (
         <span>vous n'êtes pas autorisé</span>
       )}
-    </div>
+    </section>
   );
 };
