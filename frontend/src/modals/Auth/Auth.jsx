@@ -11,6 +11,7 @@ export const Auth = ({ show, hide }) => {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [confirm, setConfirm] = useState("");
   const [mail, setMail] = useState("");
   const [chatId, setChatId] = useState("");
 
@@ -27,11 +28,17 @@ export const Auth = ({ show, hide }) => {
 
   const handleRegister = (e) => {
     e.preventDefault();
-    setChatId(uuidv4());
-    register(username, password, mail, chatId, setMessage);
-    hide();
-    setMessage("");
-    reload();
+    if (confirm !== password) {
+      hide();
+      setMessage("les mots de passe sont différents");
+      reload();
+    } else {
+      setChatId(uuidv4());
+      register(username, password, mail, chatId, setMessage);
+      hide();
+      setMessage("");
+      reload();
+    }
   };
 
   const handleLogin = (e) => {
@@ -115,6 +122,18 @@ export const Auth = ({ show, hide }) => {
                     title="entre 8 et 20 caractères. au moins 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial"
                     required
                     onChange={(e) => setPassword(e.target.value)}
+                  />
+                  <label htmlFor="Confirm">
+                    confirmer<span>*</span>{" "}
+                  </label>
+                  <input
+                    id="Confirm"
+                    type="password"
+                    minLength={8}
+                    pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).*$"
+                    title="entre 8 et 20 caractères. au moins 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial"
+                    required
+                    onChange={(e) => setConfirm(e.target.value)}
                   />
                   <button
                     className="auth_content_form_single_submit register"
