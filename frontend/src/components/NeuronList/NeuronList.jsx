@@ -33,8 +33,8 @@ export const NeuronList = () => {
         </p>
       ) : (
         <Carousel
-          cols={3}
-          rows={4}
+          cols={2}
+          rows={3}
           gap={10}
           responsiveLayout={neuronList}
           mobileBreakpoint={0}
