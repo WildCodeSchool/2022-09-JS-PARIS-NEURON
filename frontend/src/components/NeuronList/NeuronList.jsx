@@ -2,15 +2,18 @@ import React, { useEffect, useState } from "react";
 import Carousel from "react-grid-carousel";
 import { NeuronCard } from "@components/";
 import "./NeuronList.scss";
+import { getTagsFavoritesForNeurons } from "@services/apiRequest";
 
 export const NeuronList = () => {
   const [neurons, setNeurons] = useState([]);
+  const [token, setToken] = useState("");
+  const [userId, setUserId] = useState("");
 
   useEffect(() => {
-    setNeurons([
-      // 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-    ]);
-  }, []);
+    setToken(localStorage.getItem("token"));
+    setUserId(localStorage.getItem("userId"));
+    if (token) getTagsFavoritesForNeurons(token, userId, setNeurons);
+  }, [token]);
 
   const neuronList = [
     {
@@ -37,14 +40,16 @@ export const NeuronList = () => {
           mobileBreakpoint={0}
           showDots
         >
-          {neurons.map((neuron) => (
-            <Carousel.Item key={neuron}>
-              <div className="item" title="suggestion de neuron">
-                <NeuronCard />
-                <span className="item_pseudo">pseudo</span>
-              </div>
-            </Carousel.Item>
-          ))}
+          {neurons
+            .filter((neuron) => neuron.id.toString() !== userId)
+            .map((neuron) => (
+              <Carousel.Item key={neuron.id}>
+                <div className="item" title="suggestion de neuron">
+                  <NeuronCard id={neuron.id} />
+                  <p className="item_pseudo">{neuron.username}</p>
+                </div>
+              </Carousel.Item>
+            ))}
         </Carousel>
       )}
     </div>

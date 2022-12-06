@@ -37,6 +37,33 @@ const getNeuronById = (req, res) => {
     });
 };
 
+const getNeuronByTag = (req, res) => {
+  const { id, string } = req.query;
+
+  console.warn(id, string);
+
+  const newQuery = `SELECT users.id, users.username FROM users_has_tags AS uht INNER JOIN users ON users.id=uht.users_id INNER JOIN tags ON tags.id=uht.tags_id WHERE (tags.tag='${string.replaceAll(
+    ",",
+    "' OR tags.tag='"
+  )}') AND users.id NOT IN (SELECT friend_id from followed INNER JOIN users ON users.id=followed.users_id WHERE users_id=${id}) GROUP BY users.id ORDER BY users.id DESC`;
+
+  console.warn(newQuery);
+
+  neuron
+    .query(newQuery)
+    .then(([user]) => {
+      if (user[0] != null) {
+        res.status(200).json(user);
+      } else {
+        res.status(404).send("Not Found");
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500);
+    });
+};
+
 const createUser = (req, res) => {
   const { username, hashedpassword, mail, chat_id } = req.body;
 
@@ -404,6 +431,7 @@ const deletePrivateMessage = (req, res) => {
 module.exports = {
   getUsers,
   getNeuronById,
+  getNeuronByTag,
   createUser,
   registerWithMail,
   logout,

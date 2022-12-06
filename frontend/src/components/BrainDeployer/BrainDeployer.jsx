@@ -30,7 +30,10 @@ export const BrainDeployer = () => {
         onClick={() => (windowWidth < 1200 ? setTouched(!touched) : null)}
       >
         <BrainIcon />
-        <div className="braindeployer_circle first" title="me connecter">
+        <div
+          className="braindeployer_circle first"
+          title="connexion/deconnexion"
+        >
           <LogOnIcon onClick={() => handleToggle()} />
         </div>
         <div className="braindeployer_circle second" title="mes messages">

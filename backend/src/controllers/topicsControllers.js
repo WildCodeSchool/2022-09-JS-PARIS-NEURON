@@ -8,7 +8,6 @@ const getTagsTop = (req, res) => {
       `SELECT tags.tag AS label, count(*) AS value FROM topics_has_tags AS tht INNER JOIN topics ON topics.id=tht.topics_id INNER JOIN tags ON tags.id=tht.tags_id GROUP BY tags.tag ORDER BY value DESC limit 10`
     )
     .then(([tags]) => {
-      console.warn(tags);
       res.status(200).json(tags);
     })
     .catch((err) => res.status(500).json(err));

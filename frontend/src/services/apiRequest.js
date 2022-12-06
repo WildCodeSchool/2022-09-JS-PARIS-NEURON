@@ -61,6 +61,41 @@ const logout = (token, setState) => {
     });
 };
 
+const getNeuronsByTags = (token, id, tags, setState) => {
+  const array = tags.map((tag) => tag.tag);
+  const string = array.join(",", " ");
+
+  axios
+    .get(`${BASE_URL}/neuronbytag?id=${id}&string=${string}`, {
+      withCredentials: true,
+      headers: {
+        "x-xsrf-token": `${token}`,
+      },
+    })
+    .then((res) => {
+      setState(res.data);
+    })
+    .catch((err) => {
+      console.warn(err);
+    });
+};
+
+const getTagsFavoritesForNeurons = (token, usersId, setState) => {
+  axios
+    .get(`${BASE_URL}/tagsFavorites?usersId=${usersId}`, {
+      withCredentials: true,
+      headers: {
+        "x-xsrf-token": `${token}`,
+      },
+    })
+    .then((res) => {
+      getNeuronsByTags(token, usersId, res.data, setState);
+    })
+    .catch((err) => {
+      console.warn(err);
+    });
+};
+
 const getTagsTop = (setState) => {
   axios
     .get(`${BASE_URL}/tagstop`)
@@ -91,16 +126,26 @@ const getTopics = (setState) => {
 };
 
 const getTopicsByTitle = (string, setState) => {
-  axios.get(`${BASE_URL}/topicsbytitle?string=${string}`).then((res) => {
-    setState(res.data);
-  });
+  axios
+    .get(`${BASE_URL}/topicsbytitle?string=${string}`)
+    .then((res) => {
+      setState(res.data);
+    })
+    .catch((err) => {
+      console.warn(err);
+    });
 };
 
 const getTopicById = (id, setTopics, setTaglist) => {
-  axios.get(`${BASE_URL}/topicbyid?id=${id}`).then((res) => {
-    setTopics(res.data[0][0]);
-    setTaglist(res.data[1]);
-  });
+  axios
+    .get(`${BASE_URL}/topicbyid?id=${id}`)
+    .then((res) => {
+      setTopics(res.data[0][0]);
+      setTaglist(res.data[1]);
+    })
+    .catch((err) => {
+      console.warn(err);
+    });
 };
 
 const getTopicsByTags = (token, tags, setState) => {
@@ -116,6 +161,9 @@ const getTopicsByTags = (token, tags, setState) => {
     })
     .then((res) => {
       setState(res.data);
+    })
+    .catch((err) => {
+      console.warn(err);
     });
 };
 
@@ -136,10 +184,15 @@ const getTagsFavoritesForTopics = (token, usersId, setState) => {
 };
 
 const getComments = (id, setComments, setCommentContent) => {
-  axios.get(`${BASE_URL}/comments?id=${id}`).then((res) => {
-    setComments(res.data);
-    setCommentContent("");
-  });
+  axios
+    .get(`${BASE_URL}/comments?id=${id}`)
+    .then((res) => {
+      setComments(res.data);
+      setCommentContent("");
+    })
+    .catch((err) => {
+      console.warn(err);
+    });
 };
 
 const postTopic = (
@@ -394,6 +447,7 @@ const getUsersByIds = (token, idList, setState) => {
       console.warn(err);
     });
 };
+
 const getTagsFavorites = (token, usersId, setState) => {
   axios
     .get(`${BASE_URL}/tagsFavorites?usersId=${usersId}`, {
@@ -461,6 +515,8 @@ export {
   login,
   logout,
   getTagsTop,
+  getNeuronsByTags,
+  getTagsFavoritesForNeurons,
   getTopics,
   getCategories,
   getTopicById,

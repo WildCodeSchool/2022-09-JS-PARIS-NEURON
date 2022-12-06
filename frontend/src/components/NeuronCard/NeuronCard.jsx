@@ -1,11 +1,14 @@
 import React from "react";
 import { Avatar } from "@components/";
 import "./NeuronCard.scss";
+import { Link } from "react-router-dom";
 
-export const NeuronCard = () => {
+export const NeuronCard = ({ id }) => {
   return (
     <div className="NeuronCard">
-      <Avatar />
+      <Link to={`/neuronprofile/${id}`}>
+        <Avatar />
+      </Link>
     </div>
   );
 };

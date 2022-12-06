@@ -14,14 +14,6 @@ const {
 
 const router = express.Router();
 
-// const itemControllers = require("./controllers/itemControllers");
-
-// router.get("/items", itemControllers.browse);
-// router.get("/items/:id", itemControllers.read);
-// router.put("/items/:id", itemControllers.edit);
-// router.post("/items", itemControllers.add);
-// router.delete("/items/:id", itemControllers.destroy);
-
 router.post("/users", validateUser, hashPassword, usersControllers.createUser);
 router.post("/login", usersControllers.registerWithMail, verifyPassword);
 router.get("/tagstop", topicsControllers.getTagsTop);
@@ -35,6 +27,7 @@ router.get("/topicbyid", topicsControllers.getTopicById);
 router.use(verifyToken);
 
 router.get("/neuron", usersControllers.getNeuronById);
+router.get("/neuronbytag", usersControllers.getNeuronByTag);
 router.put(
   "/settings",
   usersControllers.registerWithMail,
@@ -65,7 +58,5 @@ router.put(
   usersControllers.registerWithMail,
   usersControllers.updateSettings
 );
-
-// Faire ta route settings
 
 module.exports = router;
