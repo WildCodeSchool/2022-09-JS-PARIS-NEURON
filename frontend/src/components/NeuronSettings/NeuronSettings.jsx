@@ -22,6 +22,8 @@ export const NeuronSettings = () => {
 
   function handleSubmit(e) {
     e.preventDefault();
+    if (inputs.new_password === "") inputs.new_password = inputs.password;
+    console.warn(inputs);
     const token = localStorage.getItem("token");
     axios
       .put(
@@ -109,6 +111,7 @@ export const NeuronSettings = () => {
           minLength={8}
           pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).*$"
           title="entre 8 et 20 caractères. au moins 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial"
+          required
           value={inputs.password}
           onChange={(e) => updateInputs(e)}
         />
@@ -118,6 +121,9 @@ export const NeuronSettings = () => {
           id="new_password"
           name="new_password"
           type="password"
+          minLength={8}
+          pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).*$"
+          title="entre 8 et 20 caractères. au moins 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial"
           value={inputs.new_password}
           onChange={(e) => updateInputs(e)}
         />
