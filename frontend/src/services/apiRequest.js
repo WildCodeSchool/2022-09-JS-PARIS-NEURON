@@ -17,6 +17,9 @@ const register = (username, password, mail, chatId, setState) => {
 };
 
 const login = (mail, password, setState) => {
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+
   axios
     .post(
       `${BASE_URL}/login`,
@@ -30,6 +33,7 @@ const login = (mail, password, setState) => {
       localStorage.setItem("token", data.xsrfToken);
       localStorage.setItem("userName", data.user.username);
       localStorage.setItem("userId", data.user.id);
+      localStorage.setItem("endOfSession", tomorrow.getTime());
       setState(data.message);
     })
     .catch((err) => {
@@ -38,9 +42,7 @@ const login = (mail, password, setState) => {
 };
 
 const logout = (token, setState) => {
-  localStorage.removeItem("token");
-  localStorage.removeItem("userName");
-  localStorage.removeItem("userId");
+  localStorage.clear();
 
   axios
     .post(

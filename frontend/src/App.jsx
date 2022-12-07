@@ -17,9 +17,20 @@ import "./App.scss";
 const App = () => {
   const [message, setMessage] = useState("");
 
+  const reload = () => {
+    setTimeout(() => {
+      window.location.reload(false);
+    }, 1500);
+  };
+
   useEffect(() => {
-    if (message === "vous êtes déconnecté") {
-      localStorage.removeItem("token");
+    const today = new Date();
+    const endOfSession = parseInt(localStorage.getItem("endOfSession"), 10);
+
+    if (endOfSession < today.getTime()) {
+      localStorage.clear();
+      setMessage("vous êtes déconnecté");
+      reload();
     }
   }, []);
 
