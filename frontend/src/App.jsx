@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { messageContext } from "@contexts";
 import {
@@ -16,23 +16,6 @@ import "./App.scss";
 
 const App = () => {
   const [message, setMessage] = useState("");
-
-  const reload = () => {
-    setTimeout(() => {
-      window.location.reload(false);
-    }, 1500);
-  };
-
-  useEffect(() => {
-    const today = new Date();
-    const endOfSession = parseInt(localStorage.getItem("endOfSession"), 10);
-
-    if (endOfSession < today.getTime()) {
-      localStorage.clear();
-      setMessage("vous êtes déconnecté");
-      reload();
-    }
-  }, []);
 
   return (
     <div className="App">

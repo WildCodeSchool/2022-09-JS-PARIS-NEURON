@@ -1,4 +1,5 @@
 import axios from "axios";
+import { verifyConnexion } from "./verifyConnexion";
 
 const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
@@ -64,6 +65,8 @@ const logout = (token, setState) => {
 };
 
 const getNeuronsByTags = (token, id, tags, setState) => {
+  verifyConnexion();
+
   const array = tags.map((tag) => tag.tag);
   const string = array.join(",", " ");
 
@@ -83,6 +86,8 @@ const getNeuronsByTags = (token, id, tags, setState) => {
 };
 
 const getTagsFavoritesForNeurons = (token, usersId, setState) => {
+  verifyConnexion();
+
   axios
     .get(`${BASE_URL}/tagsFavorites?usersId=${usersId}`, {
       withCredentials: true,
@@ -151,6 +156,8 @@ const getTopicById = (id, setTopics, setTaglist) => {
 };
 
 const getTopicsByTags = (token, tags, setState) => {
+  verifyConnexion();
+
   const array = tags.map((tag) => tag.tag);
   const string = array.join(",", " ");
 
@@ -170,6 +177,8 @@ const getTopicsByTags = (token, tags, setState) => {
 };
 
 const getTagsFavoritesForTopics = (token, usersId, setState) => {
+  verifyConnexion();
+
   axios
     .get(`${BASE_URL}/tagsFavorites?usersId=${usersId}`, {
       withCredentials: true,
@@ -210,6 +219,8 @@ const postTopic = (
   setTopicId,
   setMessage
 ) => {
+  verifyConnexion();
+
   axios
     .post(
       `${BASE_URL}/topics`,
@@ -247,6 +258,8 @@ const postComment = (
   setComments,
   setCommentContent
 ) => {
+  verifyConnexion();
+
   axios
     .post(
       `${BASE_URL}/comments`,
@@ -280,6 +293,8 @@ const updateComment = (
   setCommentContent,
   setIsShowing
 ) => {
+  verifyConnexion();
+
   axios
     .put(
       `${BASE_URL}/comments`,
@@ -302,6 +317,8 @@ const updateComment = (
 
 // --------------------USERS PART--------------------------------------------
 const getFollowed = (token, id, setState) => {
+  verifyConnexion();
+
   axios
     .get(`${BASE_URL}/followed?id=${id}`, {
       withCredentials: true,
@@ -318,6 +335,8 @@ const getFollowed = (token, id, setState) => {
 };
 
 const addToFollowed = (token, userId, id) => {
+  verifyConnexion();
+
   axios
     .post(
       `${BASE_URL}/followed`,
@@ -338,6 +357,8 @@ const addToFollowed = (token, userId, id) => {
 };
 
 const removeFromFollowed = (token, id, friendId, setState) => {
+  verifyConnexion();
+
   axios
     .delete(`${BASE_URL}/followed?id=${id}&friend_id=${friendId}`, {
       withCredentials: true,
@@ -355,6 +376,8 @@ const removeFromFollowed = (token, id, friendId, setState) => {
 };
 
 const getNeuronById = (token, id, setNeuronInfos) => {
+  verifyConnexion();
+
   axios
     .get(`${BASE_URL}/neuron?id=${id}`, {
       withCredentials: true,
@@ -378,6 +401,8 @@ const sendPrivateMessage = (
   message,
   setState
 ) => {
+  verifyConnexion();
+
   axios
     .post(
       `${BASE_URL}/privatemessage`,
@@ -403,6 +428,8 @@ const sendPrivateMessage = (
 };
 
 const getPrivateMessages = (token, userId, setState) => {
+  verifyConnexion();
+
   axios
     .get(`${BASE_URL}/privatemessages?id=${userId}`, {
       withCredentials: true,
@@ -417,6 +444,8 @@ const getPrivateMessages = (token, userId, setState) => {
 };
 
 const deletePrivateMessage = (token, id, userId, setState) => {
+  verifyConnexion();
+
   axios
     .delete(`${BASE_URL}/privatemessages?id=${id}`, {
       withCredentials: true,
@@ -431,6 +460,8 @@ const deletePrivateMessage = (token, id, userId, setState) => {
 };
 
 const getUsersByIds = (token, idList, setState) => {
+  verifyConnexion();
+
   axios
     .get(`${BASE_URL}/followedByIds`, {
       withCredentials: true,
@@ -450,6 +481,8 @@ const getUsersByIds = (token, idList, setState) => {
 };
 
 const getTagsFavorites = (token, usersId, setState) => {
+  verifyConnexion();
+
   axios
     .get(`${BASE_URL}/tagsFavorites?usersId=${usersId}`, {
       withCredentials: true,
@@ -466,6 +499,8 @@ const getTagsFavorites = (token, usersId, setState) => {
 };
 
 const addTagsFavorites = (token, tag, userId, setState) => {
+  verifyConnexion();
+
   axios
     .post(
       `${BASE_URL}/tagsFavorites`,
@@ -489,7 +524,9 @@ const addTagsFavorites = (token, tag, userId, setState) => {
     });
 };
 
-// const removeFromTagsFavorites = (setState) => {
+// // const removeFromTagsFavorites = (setState) => {
+//   verifyConnexion();
+
 //   axios
 //     .delete(
 //       `${BASE_URL}/tagsFavorites`,
