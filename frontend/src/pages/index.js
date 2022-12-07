@@ -5,3 +5,4 @@ export { UserProfile } from "./UserProfile/UserProfile";
 export { NeuronProfile } from "./NeuronProfile/NeuronProfile";
 export { SingleTopic } from "./SingleTopic/SingleTopic";
 export { MarkdownSyntax } from "./MarkdownSyntax/MarkdownSyntax";
+export { NotFound } from "./NotFound/NotFound";

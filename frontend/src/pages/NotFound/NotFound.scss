@@ -1,0 +1,27 @@
+@import "../../colors.scss";
+
+.notFound {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &_text {
+    color: $light-purple-9;
+    font-weight: bolder;
+    font-size: xx-large;
+    margin-bottom: 2rem;
+  }
+
+  &_return {
+    height: 2rem;
+    width: 4rem;
+    color: $warm-grey-1;
+    background-color: $dark-purple-1;
+    border-radius: 0.5rem 0.5rem;
+    margin: 0 30%;
+    cursor: pointer;
+  }
+}

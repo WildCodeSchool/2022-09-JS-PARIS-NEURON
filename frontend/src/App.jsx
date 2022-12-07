@@ -10,6 +10,7 @@ import {
   UserProfile,
   NeuronProfile,
   MarkdownSyntax,
+  NotFound,
 } from "@pages";
 
 import "./App.scss";
@@ -22,6 +23,7 @@ const App = () => {
       <messageContext.Provider value={{ message, setMessage }}>
         <BrowserRouter>
           <Routes>
+            <Route path="*" element={<NotFound />} />
             <Route path="/" element={<Home />} />
             <Route path="userprofile" element={<UserProfile />} />
             <Route path="/topics" element={<Topics />} />
