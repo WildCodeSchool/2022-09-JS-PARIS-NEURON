@@ -1,9 +1,15 @@
 @import "../../colors.scss";
 
-.taglist_container_addtagtofavorites {
-  margin-top: 20%;
+.taglist_container {
+  &_addtagtofavorites {
+    margin-top: 20%;
+  }
+  &_item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }
-
 .taglist_container_label {
   font-weight: bold;
 }

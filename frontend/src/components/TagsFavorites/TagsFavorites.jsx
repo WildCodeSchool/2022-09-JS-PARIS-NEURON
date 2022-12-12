@@ -47,20 +47,6 @@ export const TagsFavorites = () => {
       gap: 2,
       loop: true,
     },
-    {
-      breakpoint: 1440,
-      cols: 6,
-      rows: 2,
-      gap: 2,
-      loop: true,
-    },
-    {
-      breakpoint: 2160,
-      cols: 10,
-      rows: 1,
-      gap: 2,
-      loop: true,
-    },
   ];
   console.warn(tagList);
   return (
@@ -68,7 +54,7 @@ export const TagsFavorites = () => {
       <div className="carousel">
         {tagList.length && tagList.length ? (
           <Carousel
-            cols={10}
+            cols={6}
             rows={2}
             gap={10}
             responsiveLayout={tagsFavList}
@@ -78,16 +64,14 @@ export const TagsFavorites = () => {
             {tagList.map((tags) => {
               return (
                 <Carousel.Item key={tags.id}>
-                  <div className="item">
-                    <div>
-                      <strong>{tags.tag}</strong>{" "}
-                      <button
-                        type="button"
-                        onClick={() => handleDeleteTag(tags.id)}
-                      >
-                        Supprimer
-                      </button>
-                    </div>
+                  <div className="taglist_container_item">
+                    <strong>{tags.tag}</strong>{" "}
+                    <button
+                      type="button"
+                      onClick={() => handleDeleteTag(tags.id)}
+                    >
+                      Supprimer
+                    </button>
                   </div>
                 </Carousel.Item>
               );
