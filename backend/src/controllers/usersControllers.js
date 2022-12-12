@@ -252,30 +252,14 @@ const updateSettings = async (req, res) => {
     });
 };
 
-const getTagsFavorites = (req, res) => {
-  const { usersId } = req.query;
-
-  neuron
-    .query(
-      `SELECT tags.tag FROM users_has_tags INNER JOIN users ON users.id=users_has_tags.users_id INNER JOIN tags ON tags.id=users_has_tags.tags_id WHERE users_has_tags.users_id=?`,
-      [usersId]
-    )
-    .then(([result]) => {
-      res.status(201).json(result);
-    })
-    .catch((error) => {
-      console.error(error);
-      res.sendStatus(500);
-    });
-};
 
 const addTagsFavorites = (req, res) => {
   const { tag, userId } = req.body;
-
+  
   neuron
-    .query(
-      "INSERT IGNORE INTO tags (tag) VALUES (?);INSERT INTO users_has_tags (users_id, tags_id) VALUES (?, (SELECT id FROM tags WHERE tag=? LIMIT 1))",
-      [tag, userId, tag]
+  .query(
+    "INSERT IGNORE INTO tags (tag) VALUES (?);INSERT INTO users_has_tags (users_id, tags_id) VALUES (?, (SELECT id FROM tags WHERE tag=? LIMIT 1))",
+    [tag, userId, tag]
     )
     .then(() => {
       res.status(201).json("ajouté aux favoris");
@@ -284,25 +268,43 @@ const addTagsFavorites = (req, res) => {
       console.warn(err);
       res.status(500).send("Une erreur s'est produite");
     });
-};
-
-const removeFromTagsFavorites = (req, res) => {
-  const { id } = req.body;
-
-  neuron
-    .query("DELETE FROM users_has_tags WHERE users_id = ? AND tags_id = ? ", [
-      id,
+  };
+  
+  const removeFromTagsFavorites = (req, res) => {
+    const { users_id, tags_id } = req.query;
+  console.warn(req.query);
+    neuron
+    .query("DELETE FROM users_has_tags WHERE users_id=? AND tags_id=?", [
+      users_id,
+      tags_id
     ])
     .then(() => {
-      res.status(201).json("supprimé des favoris");
+      res.status(200).json("supprimé des favoris");
+      
     })
     .catch((err) => {
       console.warn(err);
       res.status(500).send("impossible de supprimer des favoris");
     });
-};
-
-const addToFollowed = (req, res) => {
+  };
+  
+  const getTagsFavorites = (req, res) => {
+    const { usersId } = req.query;
+  console.warn(req.query);
+    neuron
+      .query(
+        `SELECT tags.tag, tags.id FROM users_has_tags INNER JOIN users ON users.id=users_has_tags.users_id INNER JOIN tags ON tags.id=users_has_tags.tags_id WHERE users_has_tags.users_id=?`,
+        [usersId]
+      )
+      .then(([result]) => {
+        res.status(201).json(result);
+      })
+      .catch((error) => {
+        console.error(error);
+        res.sendStatus(500);
+      });
+  };
+  const addToFollowed = (req, res) => {
   const { userId, id } = req.body;
 
   neuron

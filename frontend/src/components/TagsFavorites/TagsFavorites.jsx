@@ -1,6 +1,6 @@
 import Carousel from "react-grid-carousel";
 import React, { useEffect, useState } from "react";
-import { getTagsFavorites, addTagsFavorites } from "@services/apiRequest";
+import { getTagsFavorites, addTagsFavorites, removeFromTagsFavorites } from "@services/apiRequest";
 import "./TagsFavorites.scss";
 
 export const TagsFavorites = () => {
@@ -8,6 +8,8 @@ export const TagsFavorites = () => {
   const [usersId, setUsersId] = useState("");
   const [tagList, setTagList] = useState([]);
   const [tag, setTag] = useState("");
+  
+  
   useEffect(() => {
     setToken(localStorage.getItem("token"));
     setUsersId(localStorage.getItem("userId"));
@@ -29,10 +31,16 @@ export const TagsFavorites = () => {
     setTag("");
   };
 
+  const handleDeleteTag = (tagId) => {
+    console.warn(tagId);
+    removeFromTagsFavorites(token, usersId, tagId, setTagList);
+    
+  }; 
+
   const tagsFavList = [
     {
       breakpoint: 720,
-      cols: 3,
+      cols: 2,
       rows: 4,
       gap: 2,
       loop: true,
@@ -52,31 +60,38 @@ export const TagsFavorites = () => {
       loop: true,
     },
   ];
-
+console.warn(tagList);
   return (
     <div className="taglist_container">
       <div className="carousel">
-        {tagList.length && (
+        {tagList.length && tagList.length ? (
           <Carousel
             cols={10}
-            rows={1}
+            rows={2}
             gap={10}
             responsiveLayout={tagsFavList}
             mobileBreakpoint={0}
             showDots
           >
-            {tagList.map((tags) => (
-              <Carousel.Item key={tags}>
+            {tagList.map((tags) => {
+              return (
+              <Carousel.Item key={tags.id}>
                 <div className="item">
                   <div>
                     <strong>{tags.tag}</strong>{" "}
+                    <button type="button" onClick={() => handleDeleteTag(tags.id)}>Supprimer</button>
                   </div>
                 </div>
               </Carousel.Item>
-            ))}
+            );
+            })}
           </Carousel>
+        ) : (
+          <div className="pasdefav">
+            <p>Pas de Tags</p>
+            </div>
         )}
-      </div>
+          </div>
       <form
         className="taglist_container_addtagtofavorites"
         onSubmit={(e) => handleAddTag(e)}

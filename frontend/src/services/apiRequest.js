@@ -524,29 +524,27 @@ const addTagsFavorites = (token, tag, userId, setState) => {
     });
 };
 
-// // const removeFromTagsFavorites = (setState) => {
-//   verifyConnexion();
+ const removeFromTagsFavorites = (token, usersId, tagId, setState) => {
+  verifyConnexion();
 
-//   axios
-//     .delete(
-//       `${BASE_URL}/tagsFavorites`,
-//       {
-//         id,
-//       },
-//       {
-//         withCredentials: true,
-//         headers: {
-//           "x-xsrf-token": `${token}`,
-//         },
-//       }
-//     )
-//     .then((res) => {
-//       setState(res.data);
-//     })
-//     .catch((err) => {
-//       console.warn(err);
-//     });
-// };
+  axios
+    .delete(
+      `${BASE_URL}/tagsFavorites?users_id=${usersId}&tags_id=${tagId}`,
+      {
+        withCredentials: true,
+        headers: {
+          "x-xsrf-token": `${token}`,
+        },
+      }
+    )
+    .then((res) => {
+      console.warn(res.data)
+      getTagsFavorites(token, usersId, setState);
+    })
+    .catch((err) => {
+      console.warn(err);
+    });
+};
 
 export {
   register,
@@ -575,5 +573,5 @@ export {
   getUsersByIds,
   getTagsFavorites,
   addTagsFavorites,
-  // removeFromTagsFavorites,
+  removeFromTagsFavorites,
 };
